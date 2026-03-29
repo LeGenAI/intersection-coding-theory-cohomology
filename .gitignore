@@ -7,5 +7,6 @@
 *.toc
 *.xdv
 *.log
+/docs
 /paper.tex
 /paper.pdf
