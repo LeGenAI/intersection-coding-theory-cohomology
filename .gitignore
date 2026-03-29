@@ -1,0 +1,11 @@
+.DS_Store
+.lake/
+.axle_*.json
+.local_*.log
+*.aux
+*.out
+*.toc
+*.xdv
+*.log
+/paper.tex
+/paper.pdf

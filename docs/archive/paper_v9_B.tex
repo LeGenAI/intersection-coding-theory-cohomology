@@ -1,0 +1,4307 @@
+\documentclass[12pt]{article}
+\usepackage{cite}
+\usepackage{amsmath,amssymb,amsfonts,mathtools}
+\usepackage{graphicx}
+\usepackage{textcomp}
+\usepackage{xcolor}
+\usepackage{amsthm}
+\usepackage{hyperref}
+\usepackage{caption}
+\usepackage{array}
+\usepackage{pgf,tikz,pgfplots}
+\usepackage{mathrsfs}
+\usepackage{lmodern}
+\usepackage{fontspec}
+\usepackage{listings}
+\usepackage{longtable}
+\usepackage{booktabs}
+\usepackage{enumitem}
+\usetikzlibrary{arrows}
+
+%\setmainfont[Scale=MatchLowercase]{Arial Unicode MS}
+
+% Lean code styling
+%\newfontfamily{\leanlistingfont}{Menlo}[Scale=MatchLowercase]
+
+\IfFontExistsTF{Menlo}
+  {\newfontfamily{\leanlistingfont}{Menlo}[Scale=MatchLowercase]}
+  {\newfontfamily{\leanlistingfont}{Latin Modern Mono}[Scale=MatchLowercase]}
+
+%\newfontfamily{\leanlistingfont}{Arial Unicode MS}[Scale=MatchLowercase]
+\lstdefinelanguage{Lean4}{
+  keywords={theorem, lemma, def, by, have, rw, simp, ring, native_decide, norm_num, omega, let, show, from, fun, exact, refine, intro, rintro, revert, constructor, ext, import, open, section, end, where, match, with, if, then, else, do, return, sorry, variable, instance, class, structure, namespace, noncomputable, deriving},
+  morecomment=[l]{--},
+  morecomment=[n]{/-}{-/},
+  morestring=[b]",
+  sensitive=true,
+}
+\lstset{
+  language=Lean4,
+  basicstyle=\small\leanlistingfont,
+  keywordstyle=\color{blue}\bfseries,
+  commentstyle=\color{gray}\itshape,
+  stringstyle=\color{red},
+  showstringspaces=false,
+  columns=fullflexible,
+  keepspaces=true,
+  breaklines=true,
+  frame=single,
+  backgroundcolor=\color{gray!10},
+  captionpos=t,
+  abovecaptionskip=0.8\baselineskip,
+  belowcaptionskip=0.6\baselineskip,
+  numbers=none,
+  xleftmargin=1em,
+  xrightmargin=1em,
+  literate=
+    {∀}{{$\forall$}}1
+    {∃}{{$\exists$}}1
+    {↔}{{$\leftrightarrow$}}1
+    {→}{{$\to$}}1
+    {←}{{$\leftarrow$}}1
+    {≤}{{$\le$}}1
+    {≥}{{$\ge$}}1
+    {≠}{{$\neq$}}1
+    {∈}{{$\in$}}1
+    {∉}{{$\notin$}}1
+    {⊆}{{$\subseteq$}}1
+    {⊂}{{$\subset$}}1
+    {∧}{{$\wedge$}}1
+    {∨}{{$\vee$}}1
+    {¬}{{$\neg$}}1
+    {⊢}{{$\vdash$}}1
+    {∑}{{$\sum$}}1
+    {ℕ}{{$\mathbb{N}$}}1
+    {ℤ}{{$\mathbb{Z}$}}1
+    {ℚ}{{$\mathbb{Q}$}}1
+    {ℝ}{{$\mathbb{R}$}}1
+    {ℂ}{{$\mathbb{C}$}}1
+    {𝔽}{{$\mathbb{F}$}}1
+    {σ}{{$\sigma$}}1
+    {μ}{{$\mu$}}1
+    {η}{{$\eta$}}1
+    {·}{{$\cdot$}}1
+    {⟨}{{$\langle$}}1
+    {⟩}{{$\rangle$}}1
+    {ᵀ}{{$^{\mathsf{T}}$}}1
+    {₀}{{$_0$}}1
+    {₁}{{$_1$}}1
+    {₂}{{$_2$}}1
+    {₃}{{$_3$}}1
+    {₄}{{$_4$}}1
+    {₅}{{$_5$}}1
+    {₆}{{$_6$}}1
+    {₇}{{$_7$}}1
+    {₈}{{$_8$}}1
+    {₉}{{$_9$}}1
+}
+\captionsetup[lstlisting]{
+  labelfont=bf,
+  textfont=bf,
+  singlelinecheck=false,
+  justification=raggedright,
+  skip=6pt
+}
+
+\usepackage{xpatch}
+\makeatletter
+\AtBeginDocument{\xpatchcmd{\@thm}{\thm@headpunct{.}}{\thm@headpunct{}}{}{}}
+\makeatother
+
+\setcounter{MaxMatrixCols}{20}
+\setlength{\parskip}{3mm}
+\topmargin=-30pt
+\textheight=648pt
+\oddsidemargin=0pt
+\textwidth=468pt
+
+\pagestyle{plain}
+\newtheorem{defn}{Definition}[section]
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{prop}[theorem]{Proposition}
+\newtheorem{cor}[theorem]{Corollary}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{question}[theorem]{Question}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\bbF}{\mathbb{F}}
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\GF}[1]{\ensuremath{\mathrm{GF}(#1)}}
+\newcommand{\ZMod}[1]{\Z/#1\Z}
+\newcommand{\ord}{\mathrm{ord}}
+\newcommand{\Aut}{\mathrm{Aut}}
+\newcommand{\Stab}{\mathrm{Stab}}
+\newcommand{\Mon}{\mathrm{Mon}}
+\newcommand{\St}{\mathrm{St}}
+\newcommand{\rank}{\mathrm{rank}}
+\newcommand{\Spec}{\mathrm{Spec}}
+\newcommand{\Br}{\mathrm{Br}}
+\newcommand{\wt}{\mathrm{wt}}
+\newcommand{\Span}{\mathrm{Span}}
+\newcommand{\et}{\mathrm{ét}}
+\newenvironment{blueblock}{\begingroup\color{blue}}{\endgroup}
+
+\begin{document}
+
+\title{Building-up constructions, cohomology, and \\ Lean~4 formalization of self-dual codes over finite fields}
+
+\author{
+Jae-Hyun Baek \\
+Department of Artificial Intelligence and \\
+Institute for Mathematical and Data Sciences \\
+Sogang University, Seoul, Korea
+\and
+Jon-Lark Kim\\
+Department of Mathematics and\\
+Institute for Mathematical and Data Sciences \\
+Sogang University, Seoul, Korea
+}
+
+\maketitle
+
+\begin{abstract}
+We develop a unified framework connecting the building-up construction of self-dual codes over $\F_q$ where $q \equiv 1 \pmod{4}$ with the cohomological theory governing their existence, structure, and classification.
+The condition that $-1$ is a square is shown to be the common algebraic root underlying both the \'etale-cohomological triviality and the self-orthogonality mechanism of the building-up construction.
+As applications, we give the complete classification of self-dual codes over $\GF{5}$ for lengths $2, 4, 6, 8$, including a two-type classification for $[6,3]$ codes and a three-type classification for the 53 inequivalent $[8,4]$ codes by weight enumerator. These structural statements are accompanied by a Lean~4 formalization of the algebraic core.
+\end{abstract}
+
+% \tableofcontents
+% \newpage
+
+
+
+%% ===========================================================================
+\section{Introduction}
+\label{sec:intro}
+%% ===========================================================================
+
+Coding theory is the study of reliable communication. It was started by Claude Shannon from his seminal paper~\cite{Sha}. Since then,
+various kinds of linear codes have been studied. In particular, famous linear codes including the binary Hamming code of length 8, the binary Golay code of length 24, and the ternary Golay code of length 12 are all self-dual, that is, $C = C^{\perp}$.
+Thus the classification or construction of self-dual codes has been one of the most active research problems~\cite{self-dual}.
+Self-dual codes have wide connection with several mathematical areas including $t$-design theory~\cite{BacGab}, group theory
+~\cite{ConSlo}, number theory~\cite{BaDou},~\cite{ConSlo},~\cite{ShiChoShaSol}. Furthermore, they have applications in quantum error-correcting codes~\cite{CRSS}.
+
+Kim~\cite{Kim2001} introduced ``building-up construction'' in order to construct many new binary self-dual codes. This construction starts from a binary self-dual code of length $2n$ and then add a vector of length $2n$ of odd weight to construct a binary self-dual code of length $2n+2$. Kim--Lee~\cite{KimLee2009,LeeKim} generalized this method to construct self-dual codes over finite fields $\mathbb F_q$, where $q$ is even or $q \equiv 1 \pmod{4}$.
+ In practice, this is the main constructive source of examples over split fields. However, the formula for the new generator rows is often presented as an ad hoc correction term. One of the central points of the present paper is that these correction terms are naturally organized by an isotropic line in a hyperbolic plane, and that the forward construction admits a precise row-wise and family-wise characterization in those terms.
+
+More specifically, let $q$ be an odd prime power with $q \equiv 1 \pmod 4$. Over $\F_q$, self-dual codes are maximal totally isotropic subspaces for the standard Euclidean bilinear form on $\F_q^{2n}$. In this split case the elementary identity $c^2=-1$ is the basic algebraic input behind both the classical building-up construction and the structural description of the ambient quadratic space: it produces an isotropic line in $\F_q^2$, identifies the Euclidean plane with a hyperbolic plane, and makes the norm form $x^2+y^2$ split. The purpose of this paper is to make that common mechanism explicit and to push it simultaneously in three directions: constructive building-up, cohomological interpretation, and machine-checked verification.
+
+We establish that each generator row of the building-up admits the isotropic line decomposition $r_i = -y_i \cdot (1, c, 0, \ldots, 0) + (0, 0, g_i)$, where $(1, c)$ spans an isotropic line in the hyperbolic plane. This decomposition provides a precise geometric interpretation of the correction terms in the building-up construction. We also give a constructive norm-form witness: once $c^2=-1$ and $2\neq 0$, every $a\in\F_q$ can be written explicitly as $a=x^2+y^2$, which in turn yields extension vectors of prescribed norm.
+
+The cohomological viewpoint explains why the split case is the correct one. Since $q \equiv 1 \pmod 4$, the element $-1$ is a square in $\F_q^\times$; equivalently, the Euclidean form is hyperbolic in every even dimension, and there is no arithmetic obstruction to the existence of self-dual codes. This viewpoint also interfaces naturally with monomial equivalence, maximal isotropic subspaces, and the combinatorics of Tits buildings~\cite{Abramenko,Solomon}.
+
+In the present paper, we use the above remarks not only as background motivation but as an organizing principle for the algebra carried out in the building-up section and for the small-length classification over $\GF{5}$.
+
+Our main contributions are as follows.
+\begin{enumerate}[label=(\arabic*)]
+
+\item We show that the building-up rows are controlled by an isotropic line and obtain both a one-step split building-up theorem and a recursive split boxed-form theorem, together with row-wise and family-wise characterization results and uniqueness of the child over a fixed parent (Section~\ref{sec:building-up}).
+
+\item We isolate a Lean-verified algebraic core of the split building-up construction: hyperbolic realization, constructive norm witnesses, seed-code self-duality, the theorem-level equivalence between row-wise orthogonality and Gram-matrix vanishing, and the split forward construction itself (Section~\ref{sec:building-up}).
+
+\item We develop a normalization theory for the reverse direction: nonzero head normalization, invariance of the generated code under row scaling and row permutation, pivot normalization, pivot-tail packages, and pure-tail representatives up to code equivalence (Section~\ref{sec:building-up}).
+
+\item We relate the split algebra to the broader cohomological picture through the existence of fourth roots of unity, vanishing Brauer obstructions, monomial orbit structure, and counting formulas for maximal isotropic subspaces; this discussion culminates in Theorem~\ref{thm:CZ_Kim_Lagrangian}.
+
+\item As a concrete application, we classify self-dual codes over $\GF{5}$ of lengths $2,4,6,8$, including the two-type classification of $[6,3]$ codes and the three-type classification of the 53 inequivalent $[8,4]$ codes by weight enumerator (Section~\ref{sec:classification}).
+
+\item The integrated Lean~4 development formalizes 247 theorems with zero \texttt{sorry} in a single file, including the forward split theory, the normalization front-end for the reverse direction, the head-alignment step, and the reverse theorem up to split-isometric equivalence (Section~\ref{sec:lean}).
+\end{enumerate}
+
+The paper is organized as follows. Section~\ref{sec:background} fixes notation and recalls the standard facts on self-dual codes, split quadratic forms, and hyperbolic planes that are used throughout. Section~\ref{sec:building-up} develops the algebraic core of the split building-up construction, proves the characterization and normalization theorems used later, and includes the cohomological and building-theoretic discussion culminating in Theorem~\ref{thm:CZ_Kim_Lagrangian}. Section~\ref{sec:classification} gives the constructive classification over $\GF{5}$. Section~\ref{sec:lean} summarizes the formalization, and Section~\ref{sec:conclusion} explains how the reverse theorem closes up to split-isometric equivalence and how this compares with the classical Lee--Kim wording.
+
+
+%% ===========================================================================
+\section{Preliminaries}
+\label{sec:background}
+%% ===========================================================================
+
+\subsection{Self-Dual Codes over Finite Fields}
+
+Throughout the paper, $q$ denotes an odd prime power satisfying $q \equiv 1 \pmod 4$, and $\F_q$ denotes the field with $q$ elements. We equip $\F_q^n$ with the Euclidean bilinear form
+\[
+\langle u,v\rangle := \sum_{i=1}^n u_i v_i.
+\]
+For a linear code $C \subseteq \F_q^n$, we write
+\[
+C^\perp := \{v \in \F_q^n : \langle v,c\rangle = 0 \text{ for all } c \in C\}.
+\]
+
+\begin{defn}[self-dual code]\label{def:sd}
+{\rm
+A linear code $C \subseteq \F_q^n$ is \textbf{self-dual} if $C = C^{\perp}$. Equivalently, $C$ is a maximal totally isotropic subspace of $(\F_q^n,\langle \cdot,\cdot\rangle)$.
+}
+\end{defn}
+
+\noindent
+If $C$ is self-dual, then necessarily $n$ is even and $\dim C = n/2$.
+ In particular, a self-dual code of length $2k$ is a Lagrangian subspace of the split quadratic space $\F_q^{2k}$~\cite{Mon}.
+
+\begin{prop}[Systematic form criterion]\label{prop:systematic-form}
+Let $C \subseteq \F_q^{2k}$ be generated by a matrix $G = [I_k \mid A]$ with $A \in M_k(\F_q)$. Then $C$ is self-dual if and only if
+\[
+AA^T = -I_k.
+\]
+\end{prop}
+
+\begin{proof}
+The rows of $G$ span a $k$-dimensional code. Hence self-duality is equivalent to pairwise orthogonality of the rows. The Gram matrix $GG^T$ of the rows is
+\[
+GG^T = I_k + AA^T = O,
+\]
+so the orthogonality condition is exactly $AA^T = -I_k$.
+\end{proof}
+
+\begin{defn}[Monomial Equivalence]\label{def:mon-equiv}
+{\rm
+Two codes $C_1, C_2 \subseteq \F_q^n$ are \textbf{monomially equivalent} if $C_2$ is obtained from $C_1$ by a permutation of coordinates followed by multiplication of each coordinate by a nonzero scalar. The monomial group is
+\[
+\Mon(n,q) = (\F_q^\times)^n \rtimes S_n,
+\]
+and its action preserves the Euclidean inner product up to the obvious transport of coordinates. In particular, self-duality is invariant under the monomial equivalence.
+}
+\end{defn}
+
+
+\subsection{Building-up Construction of Binary Self-Dual Codes}
+
+In 2001, Kim~\cite{Kim2001} proposed a building-up construction of binary self-dual codes in order to construct many self-dual codes of larger lengths from a self-dual code of a given length. An explicit form of the building-up construction is given below.
+
+\begin{theorem}(\cite[Theorem 1]{Kim2001}) \label{thm-binary-build-1}
+%Let $\mathbb F_q$ be a finite field with $q$ elements. Assume that $q \equiv 1 \pmod{4}$. Let $c$ be in $\mathbb F_q$ such that $c^2 = -1$.
+Let $G_0$ be a generator matrix of a binary self-dual code $C_0$ of length $2n$, whose rows are $g_1, \dots, g_n$. Let $\bf x$ be a binary vector in $\mathbb F_2^{2n}$ satisfying ${\bf x} \cdot {\bf x} = 1$. Suppose that $y_i ={\bf x} \cdot g_i$ for $1 \le i \le n$. Then the following matrix
+\[
+G=
+\begin{pmatrix}
+1 & 0 & ~~~~~ {\bf x} ~~~~~\\
+\hline
+y_1 &  y_1 & ~~~~~ g_1 ~~~~~\\
+\vdots & \vdots & ~~~~~ \vdots ~~~~~ \\
+y_{n} & y_{n} & ~~~~~ g_{n} ~~~~~
+\end{pmatrix}
+\]
+generates a binary self-dual code $C$ of length $2n+2$.
+\end{theorem}
+
+Then the converse of Theorem~\ref{thm-binary-build-1} was proved in~\cite{Kim2001} as follows.
+
+\begin{theorem} (\cite[Theorem 2]{Kim2001})  \label{thm-binary-build-2}
+ Any binary self-dual code $C$ of length $2n$ with minimum distance $d>2$ is obtained from some self-dual code $C_0$ of length
+$2n-2$ (up to equivalence) by the construction in Theorem~\ref{thm-binary-build-1}.
+\end{theorem}
+
+In 2012, Chinburg and Zhang~\cite{ChinburgZhang} proved that up to equivalence, all binary self-dual codes of length at least 4 arise from Hilbert pairings on rings of $S$-integers of $\mathbb Q$.
+
+\begin{theorem}(\cite[Theorem 1.5]{ChinburgZhang})  \label{thm-binary-hilbert-2}
+Up to equivalence, all binary self-dual codes of length at least 4 arise from Hilbert pairings on rings of $S$-integers of $K= \mathbb Q$. In fact, each such code arises up to equivalence from infinitely many different subsets $S$ of the places of $K=\mathbb Q$.
+\end{theorem}
+
+In the process of the proof, ChinburgZhang~\cite{ChinburgZhang} drew the following boxed code.
+
+\begin{center}
+\begin{tabular}{|l|lllll|}
+\toprule
+$S$-units $\backslash$  places & $W_{p_1}$  & $W_{p_2}$ & $\cdots$ & $W_2$  & $W_{\mathbb R}$ \\
+\midrule
+$p_1$  & 01   & 00/11  &  & 00/11 ~~1  &  0 \\
+$p_2$  & 11/00   & 01  &  & 00/11 ~~1  &  0 \\
+$\cdots$ & $\cdots$ &   &  $\ddots$ &   & $\vdots$ \\
+2  & 11/00   &   &   & 01 ~~~~~~~1  &  0 \\
+$-1$ & 11      & 11 & $\cdots$ & 11 ~~~~~~ 1 &  1 \\
+%-1  & 11   & 11  & $\cdots$ & 11~~1  &  0 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+The authors~\cite{ChinburgZhang} showed that (i) every binary self-dual code of length $2n$ can be written in this form, and (ii) by deleting the left most two columns of the boxed matrix and deleting the top row, a smaller self-orthogonal code of length $2n-2$ is also obtained.
+
+We have noticed the similarity between the matrix in Theorem~\ref{thm-binary-build-1} and the above boxed matrix. In fact, Theorem~\ref{thm-binary-build-1} is to build up binary self-dual codes from the trivial self-dual code of length 2 with generator matrix $[1~ 1]$ while Chinburg-Zhang's approach is to build down or decompose a given self-dual code into a shorter self-dual code.
+We return to this comparison later in both ordinary mathematical language and its Lean counterpart.
+
+%\begin{blueblock}
+\begin{theorem}\label{thm:binary-cz-kim}
+Up to code equivalence, Kim's building-up construction for binary self-dual codes and Chinburg--Zhang's boxed Hilbert-pairing construction describe the same recursion.
+\end{theorem}
+
+\begin{proof}
+In the boxed form, the distinguished row is $r_0=(1,0,x)$ and each successor row has the form
+\[
+r_i=(y_i,y_i,g_i).
+\]
+Over $\mathbb F_2$, orthogonality to $r_0$ forces
+\[
+y_i=\langle x,g_i\rangle,
+\]
+so the boxed family is exactly the Kim family
+\[
+\begin{pmatrix}
+~~~~~1, ~~~~~~~ 0, ~~~~ x  \\
+\langle x,g_i\rangle,\langle x,g_i\rangle, ~~~~g_i
+\end{pmatrix}
+\]
+
+Deleting the first row and the first hyperbolic coordinate pair recovers the shorter parent family, and rebuilding from a family in boxed/Kim normal form recovers the original family. Thus the Chinburg--Zhang reduction and the Kim extension are inverse descriptions of the same binary self-dual code family, up to the same equivalence operations used in both constructions. The arithmetic formulation is made precise later in Theorem~\ref{thm:CZ_Kim_Lagrangian}.
+\end{proof}
+
+\begin{lstlisting}[caption={Lean bundle for Theorem~\ref{thm:binary-cz-kim}.}]
+theorem boxedFamily_eq_buildRowsBin
+    (hY : ∀ i : Fin m, Y i = dot x (G i)) :
+    boxedFamily x Y G = buildRowsBin x G
+
+theorem deleteHyperbolicPair_buildRowsBin :
+    deleteHyperbolicPair (buildRowsBin x G) = G
+
+theorem rebuild_of_IsBoxedKimFamily
+    (hR : IsBoxedKimFamily x R) :
+    buildRowsBin x (deleteHyperbolicPair R) = R
+
+theorem sameCode_boxedFamily_buildRowsBin
+    (hY : ∀ i : Fin m, Y i = dot x (G i)) :
+    SameCode (boxedFamily x Y G) (buildRowsBin x G)
+
+theorem sameCode_rebuild_of_IsBoxedKimFamily
+    (hR : IsBoxedKimFamily x R) :
+    SameCode (buildRowsBin x (deleteHyperbolicPair R)) R
+
+theorem codeEquiv_rebuild_of_IsBoxedKimFamily
+    (hR : IsBoxedKimFamily x R) :
+    CodeEquiv (buildRowsBin x (deleteHyperbolicPair R)) R
+\end{lstlisting}
+%\end{blueblock}
+
+\subsection{Building-up Construction of Self-Dual Codes over $\mathbb F_q$ ($q \equiv 1 \pmod{4}$)}
+
+Motivated by the building-up construction of binary self-dual codes, Kim and Lee~\cite{LeeKim} generalized it to finite fields with $q$ elements where $q \equiv 1 \pmod{4}$ as follows.
+
+\begin{theorem}(\cite[Proposition 2.1]{LeeKim}) \label{thm-q-ary-build-1}
+Let $\mathbb F_q$ be a finite field with $q$ elements. Assume that $q \equiv 1 \pmod{4}$. Let $c$ be in $\mathbb F_q$ such that $c^2 = -1$. Let $G_0$ be a generator matrix of a Euclidean self-dual code $C_0$ over $\mathbb F_q$ of length $2n$, whose rows are $g_1, \dots, g_n$. Let $\bf x$ be a vector in $\mathbb F_q^{2n}$ satisfying ${\bf x} \cdot {\bf x} = 1$. Suppose that $y_i ={\bf x} \cdot g_i$ for $1 \le i \le n$. Then the following matrix
+\[
+G=
+\begin{pmatrix}
+1 & 0 & ~~~~~ {\bf x} ~~~~~\\
+\hline
+-y_1 & c y_1 & ~~~~~ g_1 ~~~~~\\
+\vdots & \vdots & ~~~~~ \vdots ~~~~~ \\
+-y_{n} & c y_{n} & ~~~~~ g_{n} ~~~~~
+\end{pmatrix}
+\]
+generates a self-dual code $C$ over $\mathbb F_q$ of length $2n+2$.
+\end{theorem}
+
+\begin{remark}
+\rm
+From this point on we use the equivalent normalization obtained by replacing $c$ with $-c$. Since $(-c)^2=-1$, this only changes the sign convention in the second correction coordinate. Accordingly, our internal formulas use rows of the form $(-y_i,-c y_i,g_i)$.
+\end{remark}
+
+ Then the converse of the above theorem was also stated and proved in \cite{LeeKim}.
+
+\begin{theorem}(\cite[Proposition 2.2]{LeeKim}) \label{thm-q-ary-build-2}
+Let $\mathbb F_q$ be a finite field with $q$ elements. Assume that $q \equiv 1 \pmod{4}$. Any Euclidean self-dual code $C$ over $\mathbb F_q$ of length $2n$ with minimum weight $d >2$ is obtained from some Euclidean self-dual code $C_0$ over $\mathbb F_q$ of length $2n-2$ (up to permutation equivalence) by the construction method in Theorem~\ref{thm-q-ary-build-1}.
+\end{theorem}
+
+One natural question is the following:
+
+Is there a  $q$-ary type of Chinburg-Zhang's approach for self-dual codes over $\mathbb F_q$ for $q \equiv 1 \pmod{4}$?
+
+We answer it positively by putting the construction into a split hyperbolic normal form in which both the forward building-up step and the reverse reduction become transparent.
+
+%\begin{blueblock}
+\begin{theorem}[Split Lagrangian reduction and building-up extension over $\mathbb{F}_q$]\label{thm:qary-building-up}
+Let $q$ be a prime power with $q \equiv 1 \pmod{4}$, and let $K=\mathbb{F}_q$.
+Fix $c \in K^\times$ such that $c^2=-1$.
+Let $W=K^{2n}$ be equipped with the standard Euclidean inner product
+\[
+\langle u,v\rangle = \sum_{i=1}^{2n} u_i v_i.
+\]
+Let $L \subset W$ be a self-dual code, i.e.\ $L=L^\perp$.
+
+After a monomial equivalence and row operations, we may assume that $L$ admits a generator matrix of the form
+\[
+M=
+\begin{pmatrix}
+1 & 0 & x\\
+-y_1 & -c y_1 & g_1\\
+\vdots & \vdots & \vdots\\
+-y_{n-1} & -c y_{n-1} & g_{n-1}
+\end{pmatrix},
+\]
+where $x \in K^{2n-2}$ and $g_i \in K^{2n-2}$ for $1 \le i \le n-1$.
+
+Let $W_0 = K^{2n-2}$ and define $L_0 := \langle g_1,\dots,g_{n-1}\rangle \subset W_0$.
+Then the following statements hold:
+\begin{enumerate}
+\item $W$ decomposes orthogonally as $W \cong H \perp W_0$, where $H \cong K^2$ is a hyperbolic plane.
+\item $L_0$ is self-dual in $W_0$.
+\item For each $i$, one has
+\[
+y_i = \langle x, g_i\rangle.
+\]
+\item Consequently,
+\[
+L = \operatorname{Span}\Bigl\{(1,0,x),\;
+(-\langle x,g_i\rangle,\,-c\langle x,g_i\rangle,\,g_i)\;:\;1 \le i \le n-1\Bigr\},
+\]
+so that $L$ is obtained from $L_0$ by a $q$-ary building-up construction.
+\item Conversely, two reverse statements hold:
+\begin{enumerate}[label=(5\alph*)]
+\item Let $L_0 \subset K^{2n-2}$ be self-dual, let $g_1,\dots,g_{n-1}$ be a basis of $L_0$, and let $x \in K^{2n-2}$ satisfy
+\[
+\langle x,x\rangle = -1,
+\]
+then the row family generated by
+\[
+r_0 = (1,0,x), \qquad
+r_i = (-\langle x,g_i\rangle,\,-c\langle x,g_i\rangle,\,g_i)
+\]
+is linearly independent and generates a self-dual code of length $2n$.
+\item More generally, if one starts from any generating family of a self-dual parent, the same formula always produces a self-orthogonal child family, and that child is self-dual as soon as its row span has dimension $n=\frac12 \dim W$.
+\end{enumerate}
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+Since $q \equiv 1 \pmod{4}$, the element $-1$ is a square in $K$, so there exists $c \in K^\times$ with $c^2=-1$.
+It follows that the Euclidean plane $K^2$ is isometric to a hyperbolic plane.
+Hence there exists an orthogonal decomposition
+\[
+W \cong H \perp W_0,
+\]
+where $\dim H = 2$ and $\dim W_0 = 2n-2$. This proves (1).
+
+We next prove (2). Since $L$ is self-dual, it is self-orthogonal.
+Let
+\[
+r_0 = (1,0,x), \qquad r_i = (-y_i,-c y_i,g_i).
+\]
+For $1 \le i,j \le n-1$, we compute
+\[
+\langle r_i,r_j\rangle
+= y_i y_j + c^2 y_i y_j + \langle g_i,g_j\rangle
+= (1 + c^2)y_i y_j + \langle g_i,g_j\rangle.
+\]
+Since $c^2 = -1$, the first term vanishes, and thus
+\[
+\langle r_i,r_j\rangle = \langle g_i,g_j\rangle.
+\]
+Because $L$ is self-orthogonal, $\langle r_i,r_j\rangle=0$, hence $\langle g_i,g_j\rangle=0$ for all $i,j$.
+Therefore $L_0$ is self-orthogonal.
+Since $\dim L = n$ and $r_0 \notin L_0$, we have $\dim L_0 = n-1 = \frac{1}{2}\dim W_0$.
+Thus $L_0$ is maximal totally isotropic, hence self-dual.
+
+For (3), using self-orthogonality again,
+\[
+0 = \langle r_0,r_i\rangle
+= \langle (1,0,x),(-y_i,-c y_i,g_i)\rangle
+= -y_i + \langle x,g_i\rangle,
+\]
+so $y_i = \langle x,g_i\rangle$.
+
+Substituting this into the expression for $r_i$ yields (4), showing that $L$ arises from $L_0$ by a building-up construction.
+
+Finally, we prove (5a) and (5b). Suppose $L_0$ is self-dual and $\langle x,x\rangle=-1$.
+Let $g_1,\dots,g_{n-1}$ generate $L_0$, and define $r_0,r_i$ as above.
+Then
+\[
+\langle r_0,r_0\rangle = 1 + \langle x,x\rangle = 0,
+\]
+\[
+\langle r_0,r_i\rangle = -\langle x,g_i\rangle + \langle x,g_i\rangle = 0,
+\]
+and
+\[
+\langle r_i,r_j\rangle
+= \langle g_i,g_j\rangle + (1+c^2)\langle x,g_i\rangle \langle x,g_j\rangle
+= 0,
+\]
+since $L_0$ is self-dual and $c^2=-1$.
+Thus the row span $C$ of these rows is always self-orthogonal.
+
+This proves the general self-orthogonality statement in (5b). Now assume in addition that $g_1,\dots,g_{n-1}$ is a basis of $L_0$. If
+\[
+\sum_{i=1}^{n-1} a_i r_i = 0,
+\]
+then comparing the last $2n-2$ coordinates gives
+\[
+\sum_{i=1}^{n-1} a_i g_i = 0.
+\]
+Since $g_1,\dots,g_{n-1}$ is a basis, all $a_i$ vanish. Hence the successor rows are linearly independent. Next, $r_0$ does not lie in their span. Indeed, if
+\[
+r_0=\sum_{i=1}^{n-1} a_i r_i,
+\]
+then the tail coordinates give
+\[
+x=\sum_{i=1}^{n-1} a_i g_i,
+\]
+and comparing the second coordinate yields
+\[
+0=\sum_{i=1}^{n-1} a_i\bigl(-c\langle x,g_i\rangle\bigr)
+=-c\Bigl\langle x,\sum_{i=1}^{n-1} a_i g_i\Bigr\rangle
+=-c\langle x,x\rangle
+=c,
+\]
+a contradiction. Therefore $r_0,r_1,\dots,r_{n-1}$ are linearly independent. Their span has dimension $n=\frac12\dim K^{2n}$, so maximality upgrades self-orthogonality to self-duality.
+
+This proves (5a), while the preceding orthogonality computation gives the weaker half-dimension criterion in (5b).
+\end{proof}
+
+Theorem~\ref{thm:qary-building-up} is the one-step split building-up statement. The next theorem is the recursive boxed-form version, designed to play for \(q\equiv 1\pmod 4\) the same structural role that boxed matrices play in the binary theorem of Chinburg--Zhang. The key difference is that in odd characteristic the last block of a non-final row can no longer be frozen to \(10\); instead it must vary through norm \(-1\) vectors in the distinguished split \(2\)-plane, with the last row and the off-diagonal isotropic blocks adjusted accordingly.
+
+\begin{theorem}[Split boxed form over \texorpdfstring{$\F_q$}{Fq}]
+\label{thm:split-boxed-form}
+Fix \(c\in K^\times\) with \(c^2=-1\). For \(1\le i\le n-1\), let
+\[
+\ell_i=(u_i,v_i)\in K^2,
+\qquad
+a_i\in K,
+\]
+and for distinct \(1\le i,j\le n-1\), let \(b_{ij}\in K\). Consider the \(n\times 2n\) generator matrix \(M\), viewed as an \(n\times n\) block matrix \(\widetilde M=(B_{ij})\) of \(1\times 2\) blocks, with
+\[
+B_{ii}=(0,1)\quad (1\le i\le n-1),\qquad B_{nn}=(1,c),
+\]
+\[
+B_{in}=\ell_i \quad (1\le i\le n-1),\qquad
+B_{ni}=a_i(1,c)\quad (1\le i\le n-1),
+\]
+and
+\[
+B_{ij}=b_{ij}(1,c)\qquad (1\le i\neq j\le n-1).
+\]
+Equivalently, \(\widetilde M\) has the split boxed shape
+\[
+\begingroup
+\setlength{\arraycolsep}{9pt}
+\renewcommand{\arraystretch}{1.72}
+\widetilde M=
+\left[
+\begin{array}{c|cccc|c}
+01 & b_{12}(1,c) & b_{13}(1,c) & \cdots & b_{1,n-1}(1,c) & \ell_1 \\
+\hline
+b_{21}(1,c) & 01 & b_{23}(1,c) & \cdots & b_{2,n-1}(1,c) & \ell_2 \\
+b_{31}(1,c) & b_{32}(1,c) & 01 & \cdots & b_{3,n-1}(1,c) & \ell_3 \\
+\vdots & \vdots & \vdots & \ddots & \vdots & \vdots \\
+b_{n-1,1}(1,c) & b_{n-1,2}(1,c) & b_{n-1,3}(1,c) & \cdots & 01 & \ell_{n-1} \\
+\hline
+a_1(1,c) & a_2(1,c) & a_3(1,c) & \cdots & a_{n-1}(1,c) & (1,c)
+\end{array}
+\right],
+\endgroup
+\]
+so the first block row and the first block column visibly isolate the first split building-up step, while the lower-right block package is the shorter parent.
+
+Expanding each \(1\times 2\) block into its two coordinates, the corresponding ordinary generator matrix \(M\) has the form
+\[
+\resizebox{\textwidth}{!}{$
+\begingroup
+\setlength{\arraycolsep}{4pt}
+\renewcommand{\arraystretch}{1.72}
+M=
+\left[
+\begin{array}{c!{\vrule width 1.2pt}c!{\vrule width 0.5pt}cccc!{\vrule width 0.8pt}c}
+\begin{matrix}
+0 & 1
+\end{matrix}
+&
+\begin{matrix}
+b_{12} & c b_{12}
+\end{matrix}
+&
+\begin{matrix}
+b_{13} & c b_{13}
+\end{matrix}
+&
+\begin{matrix}
+b_{14} & c b_{14}
+\end{matrix}
+&
+\begin{matrix}
+\cdots
+\end{matrix}
+&
+\begin{matrix}
+b_{1,n-1} & c b_{1,n-1}
+\end{matrix}
+&
+\begin{matrix}
+\ell_1
+\end{matrix}
+\\
+\noalign{\hrule height 1.2pt}
+\begin{matrix}
+b_{21} & c b_{21}
+\end{matrix}
+&
+\begin{matrix}
+0 & 1
+\end{matrix}
+&
+\begin{matrix}
+b_{23} & c b_{23}
+\end{matrix}
+&
+\begin{matrix}
+b_{24} & c b_{24}
+\end{matrix}
+&
+\begin{matrix}
+\cdots
+\end{matrix}
+&
+\begin{matrix}
+b_{2,n-1} & c b_{2,n-1}
+\end{matrix}
+&
+\begin{matrix}
+\ell_2
+\end{matrix}
+\\
+\noalign{\hrule height 0.5pt}
+\begin{matrix}
+b_{31} & c b_{31}
+\end{matrix}
+&
+\begin{matrix}
+b_{32} & c b_{32}
+\end{matrix}
+&
+\begin{matrix}
+0 & 1
+\end{matrix}
+&
+\begin{matrix}
+b_{34} & c b_{34}
+\end{matrix}
+&
+\begin{matrix}
+\cdots
+\end{matrix}
+&
+\begin{matrix}
+b_{3,n-1} & c b_{3,n-1}
+\end{matrix}
+&
+\begin{matrix}
+\ell_3
+\end{matrix}
+\\
+\vdots & \vdots & \vdots & \vdots & \ddots & \vdots & \vdots\\
+\begin{matrix}
+b_{n-1,1} & c b_{n-1,1}
+\end{matrix}
+&
+\begin{matrix}
+b_{n-1,2} & c b_{n-1,2}
+\end{matrix}
+&
+\begin{matrix}
+b_{n-1,3} & c b_{n-1,3}
+\end{matrix}
+&
+\begin{matrix}
+b_{n-1,4} & c b_{n-1,4}
+\end{matrix}
+&
+\begin{matrix}
+\cdots
+\end{matrix}
+&
+\begin{matrix}
+0 & 1
+\end{matrix}
+&
+\begin{matrix}
+\ell_{n-1}
+\end{matrix}
+\\
+\noalign{\hrule height 0.8pt}
+\begin{matrix}
+a_1 & c a_1
+\end{matrix}
+&
+\begin{matrix}
+a_2 & c a_2
+\end{matrix}
+&
+\begin{matrix}
+a_3 & c a_3
+\end{matrix}
+&
+\begin{matrix}
+a_4 & c a_4
+\end{matrix}
+&
+\begin{matrix}
+\cdots
+\end{matrix}
+&
+\begin{matrix}
+a_{n-1} & c a_{n-1}
+\end{matrix}
+&
+\begin{matrix}
+1 & c
+\end{matrix}
+\end{array}
+\right],
+\endgroup
+$}
+\]
+Here the final block column is still written in the shorthand \(\ell_i=(u_i,v_i)\) in order to match the boxed notation of \(\widetilde M\). The horizontal and vertical rules isolate the first split building-up row and column, while the final row and final column display the recursive attachment to the shorter parent package.
+Assume that
+\begin{equation}
+\label{eq:split-boxed-norm}
+u_i^2+v_i^2=-1
+\qquad (1\le i\le n-1),
+\end{equation}
+\begin{equation}
+\label{eq:split-boxed-last-row}
+u_i+c v_i=-c a_i
+\qquad (1\le i\le n-1),
+\end{equation}
+and
+\begin{equation}
+\label{eq:split-boxed-offdiag}
+c\,(b_{ij}+b_{ji})+\ell_i\cdot \ell_j=0
+\qquad (1\le i<j\le n-1),
+\end{equation}
+where \(\ell_i\cdot \ell_j=u_i u_j+v_i v_j\) is the Euclidean dot product on the distinguished \(2\)-plane. Then the rows of \(M\) are pairwise orthogonal and linearly independent. Therefore \(M\) generates a self-dual code of length \(2n\).
+\end{theorem}
+
+\begin{proof}
+For a non-final row \(R_i\), the only blocks contributing to \(\langle R_i,R_i\rangle\) are the diagonal block \((0,1)\), the final block \(\ell_i=(u_i,v_i)\), and the isotropic off-diagonal blocks \(b_{ij}(1,c)\). Hence
+\[
+\langle R_i,R_i\rangle
+=
+1+(u_i^2+v_i^2),
+\]
+which vanishes by \eqref{eq:split-boxed-norm}. The final row has the form
+\[
+\bigl(a_1(1,c),\dots,a_{n-1}(1,c),(1,c)\bigr),
+\]
+so it is isotropic because every block is a scalar multiple of the isotropic vector \((1,c)\).
+
+Next, for \(1\le i<j\le n-1\), the only nonzero contribution to \(\langle R_i,R_j\rangle\) comes from the pair of off-diagonal blocks \(B_{ij}=b_{ij}(1,c)\) and \(B_{ji}=b_{ji}(1,c)\), together with the final-column blocks \(\ell_i,\ell_j\). Therefore
+\[
+\langle R_i,R_j\rangle
+=
+c\,(b_{ij}+b_{ji})+\ell_i\cdot \ell_j,
+\]
+which is zero by \eqref{eq:split-boxed-offdiag}. Finally,
+\[
+\langle R_i,R_n\rangle
+=
+(0,1)\cdot a_i(1,c)+\ell_i\cdot (1,c)
+=
+c a_i + (u_i+c v_i),
+\]
+which vanishes by \eqref{eq:split-boxed-last-row}. Thus all rows are pairwise orthogonal.
+
+Subtracting from each non-final row a suitable linear combination of the preceding non-final rows eliminates the lower-left off-diagonal blocks without changing the row span. This reduces \(M\) to the upper-triangular gauge in which \(b_{ji}=0\) for \(i<j\). In that gauge the block matrix has nonzero diagonal blocks \((01),\dots,(01),(1,c)\), so the rows are linearly independent. Their span is therefore an \(n\)-dimensional totally isotropic subspace of \(K^{2n}\), and so it is self-dual.
+\end{proof}
+
+\begin{theorem}[Conditional boxed normalization from a distinguished isotropic-line row]
+\label{thm:conditional-split-boxed-normalization}
+Let \(C\subset K^{2n}\) be a self-dual code, and fix \(c\in K^\times\) with \(c^2=-1\). Assume that, after coordinate permutations preserving the \(2\)-block decomposition and elementary row operations, \(C\) admits a generator matrix whose last row is
+\[
+\bigl(a_1(1,c),\,a_2(1,c),\,\dots,\,a_{n-1}(1,c),\,(1,c)\bigr),
+\]
+and whose remaining rows \(R_1,\dots,R_{n-1}\) satisfy the following pivot-adapted conditions:
+\begin{enumerate}
+\item the \(i\)-th block of \(R_i\) is \(01\);
+\item the last block of \(R_i\) is \(\ell_i=(u_i,v_i)\);
+\item every other non-final block of \(R_i\) lies on the same \(c\)-isotropic line, so for each \(j\neq i,n\) one has
+\[
+B_{ij}=b_{ij}(1,c)
+\]
+for some scalar \(b_{ij}\in K\).
+\end{enumerate}
+Then this generator matrix is automatically a split boxed matrix of Theorem~\ref{thm:split-boxed-form}: the self-duality of \(C\) forces
+\[
+u_i^2+v_i^2=-1,
+\qquad
+u_i+c v_i=-c a_i,
+\qquad
+c(b_{ij}+b_{ji})+\ell_i\cdot \ell_j=0,
+\]
+and hence \(C\) is generated by a matrix of the displayed split boxed type.
+\end{theorem}
+
+\begin{proof}
+Write the adapted generator matrix in block form as
+\[
+\widetilde M=(B_{ij})_{1\le i,j\le n},
+\]
+with \(B_{ii}=01\) for \(1\le i\le n-1\), \(B_{in}=\ell_i\), \(B_{ni}=a_i(1,c)\), and \(B_{ij}=b_{ij}(1,c)\) for \(i\neq j<n\). Since \(C\) is self-dual, its generator rows are pairwise orthogonal.
+
+Applying self-orthogonality to a non-final row \(R_i\) gives
+\[
+0=\langle R_i,R_i\rangle
+=
+1+(u_i^2+v_i^2),
+\]
+because the diagonal block contributes \(1\), the final block contributes \(u_i^2+v_i^2\), and every other block is isotropic. Hence
+\[
+u_i^2+v_i^2=-1.
+\]
+
+Next, orthogonality of \(R_i\) with the distinguished last row gives
+\[
+0=\langle R_i,R_n\rangle
+=
+(0,1)\cdot a_i(1,c)+\ell_i\cdot(1,c)
+=
+c a_i+(u_i+c v_i),
+\]
+so
+\[
+u_i+c v_i=-c a_i.
+\]
+
+Finally, for \(1\le i<j\le n-1\), orthogonality of \(R_i\) and \(R_j\) gives
+\[
+0=\langle R_i,R_j\rangle
+=
+c(b_{ij}+b_{ji})+\ell_i\cdot\ell_j,
+\]
+because the only nonzero contributions come from the pair of \(c\)-isotropic off-diagonal blocks and the final-column blocks. These are exactly the boxed relations in Theorem~\ref{thm:split-boxed-form}.
+\end{proof}
+
+\begin{remark}
+\rm
+Theorem~\ref{thm:conditional-split-boxed-normalization} isolates the remaining gap in a full \(q\)-ary Chinburg--Zhang converse. The boxed equations themselves are no longer the obstruction: once a self-dual code admits a distinguished generator row on the \(c\)-isotropic line together with a pivot-adapted basis for the remaining rows, orthogonality forces the entire split boxed pattern automatically. Thus the universality problem is reduced to an adapted-basis existence problem rather than to any further local algebra in the head plane.
+\end{remark}
+
+\begin{theorem}[A sufficient criterion for split boxed normalizability]
+\label{thm:sufficient-boxed-normalizability}
+Let \(C\subset K^{2n}\) be a self-dual code, viewed with respect to a fixed ambient \(2\)-block decomposition. Fix \(c\in K^\times\) with \(c^2=-1\), and write
+\[
+\ell=(1,c),\qquad e=(0,1).
+\]
+Assume that \(C\) contains a distinguished row
+\[
+m=\bigl(a_1\ell,\ a_2\ell,\ \dots,\ a_{n-1}\ell,\ \ell\bigr)
+\]
+with \(a_i\neq 0\) for every \(1\le i\le n-1\). Let
+\[
+\Lambda_c=(K\ell)^n\subset K^{2n}
+\]
+be the subspace of vectors whose every \(2\)-block lies on the \(c\)-isotropic line, and assume
+\[
+C\cap \Lambda_c = K m.
+\]
+Then, after block-preserving coordinate permutations and elementary row operations, \(C\) admits a split boxed generator matrix of the form given in Theorem~\ref{thm:split-boxed-form}.
+\end{theorem}
+
+\begin{proof}
+For a vector \(v\in K^{2n}\), write its \(j\)-th \(2\)-block as \(z_j=(x_j,y_j)\), and define the blockwise \(e\)-coordinate
+\[
+\beta_c(z_j)=y_j-cx_j.
+\]
+Since
+\[
+z_j=x_j(1,c)+\bigl(y_j-cx_j\bigr)(0,1)=x_j\ell+\beta_c(z_j)e,
+\]
+the scalar \(\beta_c(z_j)\) measures the component of the \(j\)-th block transverse to the isotropic line \(K\ell\). Define
+\[
+\mathcal B:C\longrightarrow K^{n-1},
+\qquad
+\mathcal B(v)=\bigl(\beta_c(z_1),\dots,\beta_c(z_{n-1})\bigr),
+\]
+using only the first \(n-1\) blocks.
+
+The kernel of \(\mathcal B\) is exactly \(C\cap\Lambda_c\). By hypothesis this kernel is \(Km\), hence one-dimensional. Since \(C\) has dimension \(n\), it follows that \(\mathcal B(C)\) has dimension \(n-1\), so \(\mathcal B\) induces an isomorphism
+\[
+C/Km \;\cong\; K^{n-1}.
+\]
+Choose rows \(v_1,\dots,v_{n-1}\in C\) whose images under \(\mathcal B\) form the standard basis of \(K^{n-1}\). Then together with \(m\) they form a basis of \(C\), and each \(v_i\) has the property that, in its first \(n-1\) blocks, the \(i\)-th block has \(e\)-coordinate \(1\) while every other block has \(e\)-coordinate \(0\). Consequently, each such block may be written in the form
+\[
+\alpha_{ij}\ell+\delta_{ij}e
+\qquad (1\le j\le n-1),
+\]
+for suitable scalars \(\alpha_{ij}\in K\).
+
+Now replace \(v_i\) by
+\[
+v_i' = v_i - \frac{\alpha_{ii}}{a_i}\,m.
+\]
+Because \(a_i\neq 0\), this operation is valid, it preserves the span of the chosen basis, and it kills the \(\ell\)-component in the \(i\)-th block. Hence the \(i\)-th block of \(v_i'\) becomes exactly \(e=(0,1)\), while every other non-final block of \(v_i'\) remains a scalar multiple of \(\ell\). Write the last block of \(v_i'\) as \(\ell_i=(u_i,v_i)\). Thus the family
+\[
+v_1',\dots,v_{n-1}',m
+\]
+is a generator matrix of \(C\) in the pivot-adapted form required by Theorem~\ref{thm:conditional-split-boxed-normalization}. Applying that theorem shows that this matrix is automatically a split boxed matrix of the type displayed in Theorem~\ref{thm:split-boxed-form}.
+\end{proof}
+
+\begin{remark}
+\rm
+Theorem~\ref{thm:sufficient-boxed-normalizability} shows that the remaining universality problem has two distinct parts. The local algebra of the boxed equations is already settled by Theorem~\ref{thm:split-boxed-form}; what remains is the global existence of a distinguished isotropic-line row \(m\) with one-dimensional line-kernel \(C\cap\Lambda_c\). Proposition~\ref{prop:negative-master-row} below shows that this master-row property cannot hold in complete generality under block-preserving monomial equivalence alone. Thus the outstanding issue is no longer how to solve the boxed constraints, but rather how to isolate the correct subclass or the correct equivalence notion for a full \(q\)-ary Chinburg--Zhang theorem.
+\end{remark}
+
+\begin{prop}[Negative solution to the master-row problem]
+\label{prop:negative-master-row}
+Let \(K=\F_q\) with \(q\equiv 1 \pmod 4\), fix \(c\in K^\times\) with \(c^2=-1\), and let
+\[
+\Lambda_c=(K(1,c))^n \subset K^{2n}.
+\]
+Then for every \(n\ge 2\), the self-dual code \(C=\Lambda_c\) is a counterexample to the general master-row property. In particular, there need not exist, after a block-preserving monomial equivalence, a vector
+\[
+m=\bigl(a_1(1,c),\,a_2(1,c),\,\dots,\,a_{n-1}(1,c),\,(1,c)\bigr)\in C
+\]
+with all \(a_i\neq 0\) and
+\[
+C\cap (K(1,c))^n = K m?
+\]
+\end{prop}
+
+\begin{proof}
+Write \(\ell=(1,c)\). The code
+\[
+C=\Lambda_c=(K\ell)^n
+\]
+is totally isotropic of dimension \(n\), hence self-dual.
+
+Now let \(g\) be any block-preserving monomial equivalence. Because \(C\) is the direct sum of the \(n\) one-dimensional block codes supported on the individual \(2\)-blocks, the transformed code \(g(C)\) still has the form
+\[
+g(C)=K u_1 \oplus K u_2 \oplus \cdots \oplus K u_n,
+\]
+where each \(u_i\) is supported entirely on the \(i\)-th \(2\)-block after reindexing the blocks.
+
+Let \(L_i\subset K^{2n}\) denote the copy of \(K\ell\) in the \(i\)-th block, so that
+\[
+\Lambda_c=L_1\oplus\cdots\oplus L_n.
+\]
+Since the block supports are disjoint,
+\[
+g(C)\cap \Lambda_c
+=
+(Ku_1\cap L_1)\oplus\cdots\oplus (Ku_n\cap L_n).
+\]
+Each summand has dimension either \(0\) or \(1\).
+
+Assume that \(g(C)\cap \Lambda_c=Km\) for some vector
+\[
+m=(a_1\ell,\dots,a_{n-1}\ell,\ell)
+\]
+with all \(a_i\neq 0\). Since every block of \(m\) is nonzero, its \(i\)-th block lies in
+\[
+Ku_i\cap L_i\setminus\{0\},
+\]
+so \(Ku_i\cap L_i\neq 0\) for every \(i\). Hence each summand above is one-dimensional, and therefore
+\[
+\dim(g(C)\cap \Lambda_c)=n.
+\]
+Because \(n\ge 2\), this contradicts the assumption that \(g(C)\cap \Lambda_c=Km\) is one-dimensional. Thus no such master row can exist.
+\end{proof}
+
+\begin{remark}
+\rm
+Proposition~\ref{prop:negative-master-row} shows that a full \(q\)-ary Chinburg--Zhang theorem cannot hold in the form of a universal master-row statement under block-preserving monomial equivalence alone. The obstruction already appears for the completely split code \(\Lambda_c\): its blockwise direct-sum structure forces the intersection with the fixed isotropic-line space to decompose block by block, so a one-dimensional full-support line-kernel is impossible. Accordingly, any positive recursive boxed-normalization theorem in the split \(q\)-ary setting must either exclude such block-decomposable codes, weaken the conclusion \(C\cap\Lambda_c=Km\), or enlarge the allowed equivalence operations beyond block-preserving monomial equivalence.
+\end{remark}
+
+The preceding negative result suggests that the correct \(q\)-ary target is not a one-master-row normal form but a boxed form relative to the higher-rank isotropic piece cut out by a chosen split \(2\)-block decomposition. The next results record the corresponding multi-master-row construction and its reverse package.
+
+\begin{theorem}[Rank-\texorpdfstring{$r$}{r} split boxed construction]
+\label{thm:rank-r-split-boxed}
+Fix \(c\in K^\times\) with \(c^2=-1\), write \(\ell=(1,c)\), and let \(1\le r\le n\). Set
+\[
+k=n-r.
+\]
+For \(1\le i\le k\) and \(1\le t\le r\), let
+\[
+\lambda_{it}=(u_{it},v_{it})\in K^2,
+\qquad
+a_{ti}\in K,
+\]
+and for distinct \(1\le i,j\le k\), let \(b_{ij}\in K\). Consider the \(n\times 2n\) generator matrix \(M^{(r)}\), viewed as an \(n\times n\) block matrix \(\widetilde M^{(r)}=(B_{pq})\) of \(1\times 2\) blocks, with
+\[
+B_{ii}=(0,1)\quad (1\le i\le k),\qquad
+B_{ij}=b_{ij}\ell\quad (1\le i\neq j\le k),
+\]
+\[
+B_{i,k+t}=\lambda_{it}\quad (1\le i\le k,\ 1\le t\le r),
+\]
+\[
+B_{k+t,j}=a_{tj}\ell\quad (1\le t\le r,\ 1\le j\le k),
+\qquad
+B_{k+t,k+u}=\delta_{tu}\ell\quad (1\le t,u\le r).
+\]
+Equivalently,
+\[
+\widetilde M^{(r)}=
+\left[
+\begin{array}{c|c}
+\begin{array}{cccc}
+01 & b_{12}\ell & \cdots & b_{1k}\ell\\
+b_{21}\ell & 01 & \cdots & b_{2k}\ell\\
+\vdots & \vdots & \ddots & \vdots\\
+b_{k1}\ell & b_{k2}\ell & \cdots & 01
+\end{array}
+&
+\begin{array}{ccc}
+\lambda_{11} & \cdots & \lambda_{1r}\\
+\lambda_{21} & \cdots & \lambda_{2r}\\
+\vdots & \ddots & \vdots\\
+\lambda_{k1} & \cdots & \lambda_{kr}
+\end{array}
+\\
+\hline
+\begin{array}{cccc}
+a_{11}\ell & a_{12}\ell & \cdots & a_{1k}\ell\\
+a_{21}\ell & a_{22}\ell & \cdots & a_{2k}\ell\\
+\vdots & \vdots & \ddots & \vdots\\
+a_{r1}\ell & a_{r2}\ell & \cdots & a_{rk}\ell
+\end{array}
+&
+\begin{array}{ccc}
+\ell &        & 0\\
+     & \ddots &  \\
+0    &        & \ell
+\end{array}
+\end{array}
+\right].
+\]
+Assume that for every \(1\le i\le k\),
+\begin{equation}
+\label{eq:rank-r-boxed-norm}
+\sum_{t=1}^r (u_{it}^2+v_{it}^2)=-1,
+\end{equation}
+for every \(1\le i\le k\) and \(1\le t\le r\),
+\begin{equation}
+\label{eq:rank-r-boxed-master}
+u_{it}+cv_{it}=-c\,a_{ti},
+\end{equation}
+and for every \(1\le i<j\le k\),
+\begin{equation}
+\label{eq:rank-r-boxed-offdiag}
+c(b_{ij}+b_{ji})+\sum_{t=1}^r \lambda_{it}\cdot\lambda_{jt}=0,
+\end{equation}
+where \(\lambda_{it}\cdot\lambda_{jt}=u_{it}u_{jt}+v_{it}v_{jt}\). Then the rows of \(M^{(r)}\) are pairwise orthogonal and linearly independent. Hence \(M^{(r)}\) generates a self-dual code of length \(2n\).
+\end{theorem}
+
+\begin{proof}
+Let \(R_i\) denote the \(i\)-th row for \(1\le i\le k\), and let \(M_t\) denote the \((k+t)\)-th row for \(1\le t\le r\). Each master row \(M_t\) is isotropic because every one of its blocks is a scalar multiple of \(\ell=(1,c)\).
+
+For a pivot row \(R_i\), the only nonzero contributions to \(\langle R_i,R_i\rangle\) come from the diagonal block \((0,1)\) and the \(r\) terminal blocks \(\lambda_{it}\). Thus
+\[
+\langle R_i,R_i\rangle
+=
+1+\sum_{t=1}^r (u_{it}^2+v_{it}^2),
+\]
+which vanishes by \eqref{eq:rank-r-boxed-norm}.
+
+Next, for \(1\le i<j\le k\), the only nonzero contributions to \(\langle R_i,R_j\rangle\) come from the pair of off-diagonal blocks \(b_{ij}\ell\), \(b_{ji}\ell\), together with the \(r\) terminal blocks \(\lambda_{it},\lambda_{jt}\). Hence
+\[
+\langle R_i,R_j\rangle
+=
+c(b_{ij}+b_{ji})+\sum_{t=1}^r \lambda_{it}\cdot\lambda_{jt},
+\]
+which is zero by \eqref{eq:rank-r-boxed-offdiag}. Finally, for \(1\le i\le k\) and \(1\le t\le r\),
+\[
+\langle R_i,M_t\rangle
+=(0,1)\cdot a_{ti}\ell+\lambda_{it}\cdot \ell
+=
+ca_{ti}+(u_{it}+cv_{it}),
+\]
+which vanishes by \eqref{eq:rank-r-boxed-master}. Thus all rows are pairwise orthogonal.
+
+To prove linear independence, consider the blockwise transverse-coordinate map
+\[
+\beta_c(x,y)=y-cx,
+\qquad
+\mathcal B:(K^{2})^k\to K^k,
+\]
+applied only to the first \(k\) blocks. Every master row maps to \(0\), because all of its first \(k\) blocks lie on \(K\ell\). By contrast, the row \(R_i\) maps to the \(i\)-th standard basis vector of \(K^k\), since its \(i\)-th block is \((0,1)\) and its other first \(k\) blocks are scalar multiples of \(\ell\). Hence \(R_1,\dots,R_k\) are linearly independent modulo the span of \(M_1,\dots,M_r\).
+
+The master rows are themselves linearly independent because their last \(r\) blocks form the diagonal matrix \(\operatorname{diag}(\ell,\dots,\ell)\). Therefore all \(n=k+r\) rows are linearly independent. Their span is thus an \(n\)-dimensional totally isotropic subspace of \(K^{2n}\), hence self-dual.
+\end{proof}
+
+\begin{remark}
+\rm
+Theorem~\ref{thm:rank-r-split-boxed} interpolates between the two extreme cases. When \(r=1\), it recovers the one-master-row boxed construction of Theorem~\ref{thm:split-boxed-form}. When \(r=n\), there are no pivot rows and the theorem recovers the completely split code \(\Lambda_c=(K(1,c))^n\). This strongly suggests that the correct general split \(q\)-ary analogue of Chinburg--Zhang should be organized by the isotropic flag \(C\cap \Lambda_{c,\Pi}\) attached to a chosen oriented \(2\)-block decomposition \(\Pi\), rather than by a single distinguished line.
+\end{remark}
+
+\begin{theorem}[Conditional rank-\texorpdfstring{$r$}{r} boxed normalization]
+\label{thm:conditional-rank-r-boxed-normalization}
+Let \(C\subset K^{2n}\) be self-dual, viewed with respect to a fixed ambient \(2\)-block decomposition. Fix \(c\in K^\times\) with \(c^2=-1\), and let
+\[
+W=C\cap \Lambda_c,\qquad \dim W=r,\qquad k=n-r.
+\]
+Assume that, after block-preserving coordinate permutations and elementary row operations, \(C\) admits generator rows
+\[
+R_1,\dots,R_k,\ M_1,\dots,M_r
+\]
+with the following properties:
+\begin{enumerate}
+\item \(M_1,\dots,M_r\) form a basis of \(W\);
+\item for \(1\le t\le r\), the last \(r\) blocks of \(M_t\) are
+\[
+(0,\dots,0,\ell,0,\dots,0),
+\]
+with \(\ell=(1,c)\) in the \((k+t)\)-th position;
+\item for each \(1\le i\le k\), the \(i\)-th block of \(R_i\) is \(01\), every other block among the first \(k\) blocks of \(R_i\) lies on \(K\ell\), and the last \(r\) blocks of \(R_i\) are arbitrary vectors
+\[
+\lambda_{i1},\dots,\lambda_{ir}\in K^2.
+\]
+\end{enumerate}
+Then this generator matrix is automatically of rank-\(r\) split boxed type in the sense of Theorem~\ref{thm:rank-r-split-boxed}. More precisely, self-duality forces the relations
+\[
+\sum_{t=1}^r (u_{it}^2+v_{it}^2)=-1,
+\qquad
+u_{it}+cv_{it}=-c\,a_{ti},
+\qquad
+c(b_{ij}+b_{ji})+\sum_{t=1}^r \lambda_{it}\cdot\lambda_{jt}=0.
+\]
+\end{theorem}
+
+\begin{proof}
+Write the adapted generator matrix in block form as \(\widetilde M^{(r)}=(B_{pq})\), with the first \(k\) rows denoted by \(R_i\) and the last \(r\) rows by \(M_t\). Because each \(M_t\) lies in \(W\subset \Lambda_c\), every block of \(M_t\) is a scalar multiple of \(\ell\); write the first \(k\) blocks of \(M_t\) as
+\[
+a_{t1}\ell,\dots,a_{tk}\ell.
+\]
+Likewise, for \(i\le k\), write the non-pivot blocks of \(R_i\) among the first \(k\) columns as \(b_{ij}\ell\), and its last \(r\) blocks as \(\lambda_{it}=(u_{it},v_{it})\).
+
+Since \(C\) is self-dual, the generator rows are pairwise orthogonal. Applying self-orthogonality to \(R_i\) gives
+\[
+0=\langle R_i,R_i\rangle
+=
+1+\sum_{t=1}^r (u_{it}^2+v_{it}^2),
+\]
+because the pivot block contributes \(1\), the \(r\) terminal blocks contribute their Euclidean norms, and every other block lies on the isotropic line \(K\ell\). Hence
+\[
+\sum_{t=1}^r (u_{it}^2+v_{it}^2)=-1.
+\]
+
+Next, orthogonality of \(R_i\) with \(M_t\) gives
+\[
+0=\langle R_i,M_t\rangle
+=(0,1)\cdot a_{ti}\ell+\lambda_{it}\cdot \ell
+=
+ca_{ti}+(u_{it}+cv_{it}),
+\]
+so
+\[
+u_{it}+cv_{it}=-c\,a_{ti}.
+\]
+
+Finally, for \(1\le i<j\le k\), orthogonality of \(R_i\) and \(R_j\) yields
+\[
+0=\langle R_i,R_j\rangle
+=
+c(b_{ij}+b_{ji})+\sum_{t=1}^r \lambda_{it}\cdot\lambda_{jt},
+\]
+since the only nonzero contributions come from the paired off-diagonal \(K\ell\)-blocks and the last \(r\) blocks. These are exactly the boxed relations of Theorem~\ref{thm:rank-r-split-boxed}.
+\end{proof}
+
+\begin{theorem}[A sufficient criterion for rank-\texorpdfstring{$r$}{r} boxed normalizability]
+\label{thm:sufficient-rank-r-boxed-normalizability}
+Let \(C\subset K^{2n}\) be self-dual, viewed with respect to a fixed ambient \(2\)-block decomposition. Fix \(c\in K^\times\) with \(c^2=-1\), set
+\[
+\ell=(1,c),\qquad \Lambda_c=(K\ell)^n,\qquad W=C\cap \Lambda_c,
+\]
+and write
+\[
+r=\dim W,\qquad k=n-r.
+\]
+Assume that, after a block-preserving coordinate permutation, the following two conditions hold.
+\begin{enumerate}
+\item The projection of \(W\) onto the last \(r\) blocks is an isomorphism onto \((K\ell)^r\).
+\item For each of the first \(k\) blocks, the projection of \(W\) onto that block is nonzero.
+\end{enumerate}
+Then, after block-preserving coordinate permutations and elementary row operations, \(C\) admits a rank-\(r\) split boxed generator matrix of the form given in Theorem~\ref{thm:rank-r-split-boxed}.
+\end{theorem}
+
+\begin{proof}
+By the first hypothesis, one may choose a basis
+\[
+M_1,\dots,M_r
+\]
+of \(W\) whose last \(r\) blocks form the diagonal pattern
+\[
+(0,\dots,0,\ell,0,\dots,0).
+\]
+Since every vector of \(W\) lies in \(\Lambda_c\), all other blocks of each \(M_t\) are scalar multiples of \(\ell\).
+
+For a vector \(z=(x,y)\in K^2\), define the transverse coordinate
+\[
+\beta_c(z)=y-cx.
+\]
+Thus \(z\in K\ell\) if and only if \(\beta_c(z)=0\). For \(v\in C\), write its first \(k\) blocks as \(z_1,\dots,z_k\), and define
+\[
+\mathcal B(v)=\bigl(\beta_c(z_1),\dots,\beta_c(z_k)\bigr)\in K^k.
+\]
+We claim that \(\ker \mathcal B=W\). Indeed, if \(\mathcal B(v)=0\), then the first \(k\) blocks of \(v\) lie on \(K\ell\). Since \(v\in C=C^\perp\), it is orthogonal to each \(M_t\). But the first \(k\) blocks of \(M_t\) also lie on \(K\ell\), so their contribution to \(\langle v,M_t\rangle\) vanishes. The last \(r\) blocks of \(M_t\) are diagonal copies of \(\ell\), hence orthogonality to all \(M_t\) forces each of the last \(r\) blocks of \(v\) to be orthogonal to \(\ell\). In the split plane, \((K\ell)^\perp=K\ell\), so those blocks also lie on \(K\ell\). Therefore \(v\in \Lambda_c\), hence \(v\in C\cap\Lambda_c=W\).
+
+Thus \(\mathcal B\) induces an isomorphism
+\[
+C/W \;\cong\; K^k.
+\]
+Choose rows
+\[
+V_1,\dots,V_k\in C
+\]
+whose images under \(\mathcal B\) form the standard basis of \(K^k\). Then, in the first \(k\) blocks, the \(i\)-th block of \(V_i\) has transverse coordinate \(1\), while every other first-\(k\) block has transverse coordinate \(0\). Consequently, each such block may be written in the form
+\[
+\alpha_{ij}\ell+\delta_{ij}(0,1).
+\]
+
+By the second hypothesis, for each \(1\le i\le k\) there exists some vector \(w_i\in W\) whose \(i\)-th block is a nonzero scalar multiple of \(\ell\). Subtracting a suitable multiple of \(w_i\) from \(V_i\) kills the \(\ell\)-component in the \(i\)-th block without affecting the transverse coordinates of the first \(k\) blocks. After this adjustment, the \(i\)-th block becomes exactly \((0,1)\), every other first-\(k\) block remains a scalar multiple of \(\ell\), and the last \(r\) blocks become some vectors \(\lambda_{i1},\dots,\lambda_{ir}\in K^2\).
+
+The resulting generator rows
+\[
+R_1,\dots,R_k,\ M_1,\dots,M_r
+\]
+now satisfy the hypotheses of Theorem~\ref{thm:conditional-rank-r-boxed-normalization}. Applying that theorem shows that \(C\) admits a rank-\(r\) split boxed generator matrix of the required form.
+\end{proof}
+
+\begin{defn}[Oriented \texorpdfstring{$2$}{2}-block decomposition and coefficient subspace]
+\label{def:coefficient-subspace}
+An \emph{oriented \(2\)-block decomposition} of \(\{1,\dots,2n\}\) is a partition
+\[
+\Pi=\bigl((p_1,q_1),\dots,(p_n,q_n)\bigr)
+\]
+into ordered pairs. Such a choice identifies \(K^{2n}\) with \((K^2)^n\) by grouping the coordinates into the ordered blocks
+\[
+(v_{p_1},v_{q_1}),\dots,(v_{p_n},v_{q_n}).
+\]
+
+Fix \(\ell=(1,c)\) with \(c^2=-1\), and let \(\Pi\) be an oriented \(2\)-block decomposition. The map
+\[
+\iota_\ell:K^n\longrightarrow \Lambda_c,\qquad
+(\alpha_1,\dots,\alpha_n)\longmapsto (\alpha_1\ell,\dots,\alpha_n\ell)
+\]
+is then a vector-space isomorphism onto the \(\Pi\)-dependent isotropic-line space
+\[
+\Lambda_{c,\Pi}=(K\ell)^n\subset K^{2n}.
+\]
+For a self-dual code \(C\subset K^{2n}\), write
+\[
+W_{C,\Pi}=C\cap \Lambda_{c,\Pi}
+\]
+and define the associated coefficient subspace
+\[
+U_{C,\Pi}=\iota_\ell^{-1}(W_{C,\Pi})\le K^n.
+\]
+Thus \(\dim U_{C,\Pi}=\dim W_{C,\Pi}\), and the geometry of \(W_{C,\Pi}\subset \Lambda_{c,\Pi}\) may be studied inside the ordinary coordinate space \(K^n\).
+\end{defn}
+
+\begin{prop}[Coordinate-geometric form of the rank-\texorpdfstring{$r$}{r} criterion]
+\label{prop:coordinate-geometric-rank-r}
+Let \(C\subset K^{2n}\) be self-dual over a split field \(K\), fix \(c\in K^\times\) with \(c^2=-1\), and let
+\[
+U_{C,\Pi}\le K^n
+\]
+be the coefficient subspace attached to a chosen oriented \(2\)-block decomposition \(\Pi\) in Definition~\ref{def:coefficient-subspace}. Put
+\[
+r=\dim U_{C,\Pi},\qquad k=n-r.
+\]
+Assume that there exists a coordinate subset
+\[
+S\subset \{1,\dots,n\},\qquad |S|=r,
+\]
+such that
+\begin{enumerate}
+\item the coordinate projection \(\pi_S|_{U_{C,\Pi}}:U_{C,\Pi}\to K^S\) is an isomorphism;
+\item for every \(j\notin S\), the coordinate projection \(\pi_j|_{U_{C,\Pi}}:U_{C,\Pi}\to K\) is nonzero.
+\end{enumerate}
+Then, after a block-preserving coordinate permutation sending \(S\) to the last \(r\) blocks and after elementary row operations, \(C\) admits a rank-\(r\) split boxed generator matrix of the form given in Theorem~\ref{thm:rank-r-split-boxed}.
+\end{prop}
+
+\begin{proof}
+Transport \(U_{C,\Pi}\) to \(W_{C,\Pi}=C\cap \Lambda_{c,\Pi}\) via the isomorphism \(\iota_\ell\). After a block-preserving coordinate permutation, we may assume
+\[
+S=\{k+1,\dots,n\}.
+\]
+Condition (1) says exactly that the projection of \(W_{C,\Pi}\) onto the last \(r\) blocks is an isomorphism onto \((K\ell)^r\). Condition (2) says that, for each of the first \(k\) blocks, the projection of \(W_{C,\Pi}\) onto that block is nonzero. These are precisely the two hypotheses of Theorem~\ref{thm:sufficient-rank-r-boxed-normalizability}. Applying that theorem yields the desired rank-\(r\) split boxed form.
+\end{proof}
+
+\begin{remark}
+\rm
+Proposition~\ref{prop:coordinate-geometric-rank-r} shows that the remaining reverse problem is fundamentally a coordinate-geometry problem for the subspace \(U_{C,\Pi}\le K^n\) attached to a chosen oriented \(2\)-block decomposition \(\Pi\). The first condition says that \(U_{C,\Pi}\) admits an information set of size \(r\), while the second says that \(U_{C,\Pi}\) has full coordinate support outside that information set. Thus the obstruction to a full rank-\(r\) boxed normalization is no longer a problem in the local split plane, but a problem in the support geometry of the coefficient subspace \(U_{C,\Pi}\).
+\end{remark}
+
+\begin{lemma}[Information sets for coefficient subspaces]
+\label{lem:information-set}
+Let \(U\le K^n\) be an \(r\)-dimensional subspace. Then there exists a coordinate subset
+\[
+S\subset \{1,\dots,n\},\qquad |S|=r,
+\]
+such that the coordinate projection
+\[
+\pi_S|_U:U\to K^S
+\]
+is an isomorphism.
+\end{lemma}
+
+\begin{proof}
+Choose a basis of \(U\) and write it as the row space of an \(r\times n\) matrix \(A\) of rank \(r\). Put \(A\) into row-echelon form. The pivot columns determine a coordinate subset \(S\) of size \(r\), and the corresponding \(r\times r\) minor is nonsingular. Hence the restriction \(\pi_S|_U\) is injective, and since both domain and codomain have dimension \(r\), it is an isomorphism.
+\end{proof}
+
+\begin{cor}[Full-support coefficient criterion]
+\label{cor:full-support-rank-r-boxed}
+Let \(C\subset K^{2n}\) be self-dual over a split field \(K\), fix \(c\in K^\times\) with \(c^2=-1\), and let
+\[
+U_{C,\Pi}\le K^n
+\]
+be the coefficient subspace attached to a chosen oriented \(2\)-block decomposition \(\Pi\) in Definition~\ref{def:coefficient-subspace}. Assume that \(U_{C,\Pi}\) has full coordinate support, that is,
+\[
+\pi_j|_{U_{C,\Pi}}\neq 0
+\qquad\text{for every }1\le j\le n.
+\]
+Then \(C\) admits, after a block-preserving coordinate permutation and elementary row operations, a rank-\(r\) split boxed generator matrix of the form given in Theorem~\ref{thm:rank-r-split-boxed}, where \(r=\dim U_{C,\Pi}\).
+\end{cor}
+
+\begin{proof}
+By Lemma~\ref{lem:information-set}, the subspace \(U_{C,\Pi}\) admits an information set \(S\) of size \(r=\dim U_{C,\Pi}\). Since \(U_{C,\Pi}\) has full coordinate support, every coordinate outside \(S\) has nonzero projection on \(U_{C,\Pi}\). Thus the hypotheses of Proposition~\ref{prop:coordinate-geometric-rank-r} are satisfied, and the desired rank-\(r\) split boxed form follows.
+\end{proof}
+
+\begin{remark}
+\rm
+Corollary~\ref{cor:full-support-rank-r-boxed} shows that the essential coordinate-geometric issue is not the existence of an information set; that is automatic. The real question is whether, for some choice of oriented \(2\)-block decomposition \(\Pi\), the coefficient subspace \(U_{C,\Pi}\) has full support. In particular, the completely split code \(\Lambda_{c,\Pi}\) fits the corollary with \(U_{C,\Pi}=K^n\) and \(r=n\), while the small \(\GF{5}\) examples discussed later fit it in the rank-one sector for suitable choices of \(\Pi\).
+\end{remark}
+
+\begin{prop}[Fixed-pairing permutation invariance]
+\label{prop:fixed-pairing-permutation}
+Let \(C\subset K^{2n}\) be self-dual, let \(\Pi\) be an oriented \(2\)-block decomposition, and let
+\[
+U_{C,\Pi}\le K^n
+\]
+be the coefficient subspace of Definition~\ref{def:coefficient-subspace}. If \(\sigma\) is a block-preserving coordinate permutation relative to \(\Pi\), with induced permutation
+\[
+\bar\sigma\in S_n
+\]
+on the set of \(2\)-blocks, then
+\[
+U_{\sigma(C),\,\sigma(\Pi)}=\bar\sigma(U_{C,\Pi})\le K^n.
+\]
+In particular, full coordinate support, looplessness, and the column matroid \(M(U_{C,\Pi})\) are invariant under block-preserving coordinate permutations once the oriented pairing \(\Pi\) is fixed up to relabeling of blocks.
+\end{prop}
+
+\begin{proof}
+By construction, \(\sigma\) merely permutes the ordered \(2\)-blocks of \(\Pi\), so it carries the split isotropic-line space \(\Lambda_{c,\Pi}\) onto \(\Lambda_{c,\sigma(\Pi)}\). On coefficient vectors this action is exactly the coordinate permutation \(\bar\sigma\) of \(K^n\). Therefore
+\[
+\iota_\ell\bigl(\bar\sigma(U_{C,\Pi})\bigr)
+=
+\sigma\bigl(\iota_\ell(U_{C,\Pi})\bigr)
+=
+\sigma\bigl(C\cap \Lambda_{c,\Pi}\bigr)
+=
+\sigma(C)\cap \Lambda_{c,\sigma(\Pi)},
+\]
+which is precisely the defining image of \(U_{\sigma(C),\,\sigma(\Pi)}\). The invariance statements follow immediately.
+\end{proof}
+
+\begin{defn}[Boxing-admissible oriented pairing]
+\label{def:boxing-admissible-pairing}
+Let \(C\subset K^{2n}\) be self-dual. An oriented \(2\)-block decomposition \(\Pi\) is called \emph{boxing-admissible} for \(C\) if the associated coefficient subspace
+\[
+U_{C,\Pi}\le K^n
+\]
+has full coordinate support. In that case, the integer
+\[
+r_\Pi(C)=\dim U_{C,\Pi}
+\]
+is called the \emph{boxed rank of \(C\) relative to \(\Pi\)}.
+\end{defn}
+
+\begin{cor}[Pairing formulation of the reverse problem]
+\label{cor:pairing-formulation}
+Let \(C\subset K^{2n}\) be self-dual over a split field \(K\). If \(C\) admits a boxing-admissible oriented \(2\)-block decomposition \(\Pi\), then after a block-preserving coordinate permutation and elementary row operations relative to \(\Pi\), the code \(C\) admits a rank-\(r_\Pi(C)\) split boxed generator matrix of the form given in Theorem~\ref{thm:rank-r-split-boxed}.
+\end{cor}
+
+\begin{proof}
+This is exactly Corollary~\ref{cor:full-support-rank-r-boxed} applied to the coefficient subspace \(U_{C,\Pi}\).
+\end{proof}
+
+\begin{remark}
+\rm
+Corollary~\ref{cor:pairing-formulation} isolates the genuinely global step in the reverse theory. For a \emph{fixed} oriented pairing \(\Pi\), block-preserving coordinate permutations only relabel the coordinates of \(U_{C,\Pi}\), so they cannot create full support if it is absent. Thus the real issue is to choose an oriented \(2\)-block decomposition \(\Pi\) for which \(U_{C,\Pi}\) becomes boxing-admissible. The remaining reverse problem is therefore a pairing problem in the ambient coordinates, not merely a permutation problem for a fixed coefficient subspace.
+\end{remark}
+
+\begin{defn}[The oriented pairing problem]
+\label{def:oriented-pairing-problem}
+For a split self-dual code \(C\subset K^{2n}\), define
+\[
+\mathcal P_{\mathrm{box}}(C)=
+\bigl\{\Pi:\ \Pi \text{ is a boxing-admissible oriented 2-block decomposition for } C\bigr\}.
+\]
+The problem of determining whether
+\[
+\mathcal P_{\mathrm{box}}(C)\neq \varnothing
+\]
+will be called the \emph{oriented pairing problem} for \(C\). When \(\Pi\in \mathcal P_{\mathrm{box}}(C)\), the integer \(r_\Pi(C)\) records the rank of the resulting boxed normal form.
+\end{defn}
+
+\begin{remark}
+\rm
+Definitions~\ref{def:boxing-admissible-pairing} and \ref{def:oriented-pairing-problem} separate the remaining global reverse theory into two distinct stages:
+\begin{enumerate}
+\item choose an oriented pairing \(\Pi\) for which \(U_{C,\Pi}\) is boxing-admissible;
+\item apply Corollary~\ref{cor:pairing-formulation} to obtain a rank-\(r_\Pi(C)\) split boxed matrix.
+\end{enumerate}
+Thus the unresolved part of the split \(q\)-ary Chinburg--Zhang picture is no longer the local boxed algebra, but the existence and structure of the admissible pairing set \(\mathcal P_{\mathrm{box}}(C)\).
+\end{remark}
+
+\begin{defn}[Column matroid of the coefficient subspace]
+\label{def:coefficient-matroid}
+Let \(U\le K^n\) be an \(r\)-dimensional subspace, and choose an \(r\times n\) matrix \(A\) whose row space is \(U\). The \emph{column matroid} \(M(U)\) is the matroid on the ground set \(\{1,\dots,n\}\) whose independent sets are the subsets of columns of \(A\) that are linearly independent over \(K\). This does not depend on the choice of \(A\).
+\end{defn}
+
+\begin{prop}[Matroid-connected sufficient condition for boxing-admissibility]
+\label{prop:matroid-connected-rank-r}
+Let \(C\subset K^{2n}\) be self-dual over a split field \(K\), fix \(c\in K^\times\) with \(c^2=-1\), and choose an oriented \(2\)-block decomposition \(\Pi\). Let \(U_{C,\Pi}\le K^n\) be the coefficient subspace of Definition~\ref{def:coefficient-subspace}. If the column matroid \(M(U_{C,\Pi})\) is connected, then \(\Pi\) is boxing-admissible for \(C\). Consequently, \(C\) admits, after a block-preserving coordinate permutation and elementary row operations, a rank-\(r_\Pi(C)\) split boxed generator matrix of the form given in Theorem~\ref{thm:rank-r-split-boxed}.
+\end{prop}
+
+\begin{proof}
+If the projection \(\pi_j|_{U_{C,\Pi}}\) were zero for some coordinate \(j\), then the \(j\)-th column of any row-basis matrix for \(U_{C,\Pi}\) would be zero, so \(j\) would be a loop of the matroid \(M(U_{C,\Pi})\). A connected matroid has no loops. Therefore every coordinate projection \(\pi_j|_{U_{C,\Pi}}\) is nonzero, so \(U_{C,\Pi}\) has full coordinate support. Corollary~\ref{cor:full-support-rank-r-boxed} now gives the desired rank-\(r_\Pi(C)\) split boxed form.
+\end{proof}
+
+\begin{remark}
+\rm
+Proposition~\ref{prop:matroid-connected-rank-r} should be read as one strong structural sufficient condition, not as the essential core of the theory. Its proof uses connectedness only through the implication ``connected matroid \(\Rightarrow\) no loops,'' and hence through the resulting full-support property of \(U_{C,\Pi}\). Its role is therefore to exhibit one intrinsic coordinate-geometric hypothesis under which a chosen oriented pairing \(\Pi\) is boxing-admissible. It also explains why support-graph heuristics must be used with care: pairwise support patterns can change under linear recombination, whereas the column matroid of \(U_{C,\Pi}\) is intrinsic to the subspace itself.
+\end{remark}
+
+\begin{defn}[Decorated parent package of a rank-\texorpdfstring{$r$}{r} boxed matrix]
+\label{def:decorated-parent-package}
+Let \(M^{(r)}\) be a rank-\(r\) split boxed matrix as in Theorem~\ref{thm:rank-r-split-boxed}, and write \(k=n-r\). For each \(1\le i\le k\), let \(\bar R_i\in K^{2k}\) be the truncation of the \(i\)-th pivot row obtained by deleting the last \(r\) master blocks, and let
+\[
+\Lambda_i=(\lambda_{i1},\dots,\lambda_{ir})\in K^{2r}
+\]
+be the concatenation of the corresponding terminal correction blocks. The collection
+\[
+\mathcal P(M^{(r)})=\bigl((\bar R_1,\Lambda_1),\dots,(\bar R_k,\Lambda_k)\bigr)
+\]
+is called the \emph{decorated parent package} associated to \(M^{(r)}\).
+\end{defn}
+
+\begin{prop}[Gram relation for the decorated parent package]
+\label{prop:decorated-parent-gram}
+With the notation of Definition~\ref{def:decorated-parent-package}, one has
+\[
+\langle \bar R_i,\bar R_j\rangle_{K^{2k}}+
+\langle \Lambda_i,\Lambda_j\rangle_{K^{2r}}=0
+\qquad (1\le i,j\le k).
+\]
+In particular, deleting the master sector from a rank-\(r\) boxed matrix does not produce an ordinary shorter self-dual code; instead it produces a shorter package whose defect is measured exactly by the Gram matrix of the correction vectors \(\Lambda_i\).
+\end{prop}
+
+\begin{proof}
+For \(i=j\), the truncated pivot row \(\bar R_i\) has diagonal block \(01\) and all other blocks on the isotropic line \(K\ell\), so
+\[
+\langle \bar R_i,\bar R_i\rangle_{K^{2k}}=1.
+\]
+By \eqref{eq:rank-r-boxed-norm},
+\[
+\langle \Lambda_i,\Lambda_i\rangle_{K^{2r}}
+=\sum_{t=1}^r (u_{it}^2+v_{it}^2)=-1.
+\]
+Hence the claimed identity holds on the diagonal.
+
+For \(i\neq j\), the only nonzero contribution to \(\langle \bar R_i,\bar R_j\rangle_{K^{2k}}\) comes from the paired off-diagonal blocks \(b_{ij}\ell\) and \(b_{ji}\ell\), so
+\[
+\langle \bar R_i,\bar R_j\rangle_{K^{2k}}=c(b_{ij}+b_{ji}).
+\]
+On the other hand,
+\[
+\langle \Lambda_i,\Lambda_j\rangle_{K^{2r}}
+=\sum_{t=1}^r \lambda_{it}\cdot\lambda_{jt}.
+\]
+The rank-\(r\) boxed relation \eqref{eq:rank-r-boxed-offdiag} gives the required sum
+\[
+\langle \bar R_i,\bar R_j\rangle_{K^{2k}}+
+\langle \Lambda_i,\Lambda_j\rangle_{K^{2r}}=0.
+\]
+\end{proof}
+
+\begin{remark}
+\rm
+Proposition~\ref{prop:decorated-parent-gram} identifies the next recursive object suggested by the rank-\(r\) theory. The shorter structure left behind by a rank-\(r\) boxed matrix is not an ordinary parent code, but a decorated parent package equipped with a correction Gram matrix. Thus the natural recursive continuation of the Chinburg--Zhang picture in the split \(q\)-ary setting should be expected to proceed through such decorated parents, rather than through a bare shorter self-dual code.
+\end{remark}
+
+\begin{example}[The chain \texorpdfstring{$[4,2]\to[6,3]$}{[4,2] to [6,3]} over \texorpdfstring{$\GF{5}$}{GF(5)}]
+\label{ex:split-boxed-63}
+Take \(K=\GF{5}\) and \(c=2\), so \(c^2=-1\). Choosing
+\[
+\ell_1=(0,2),\qquad \ell_2=(2,0),
+\]
+gives \(u_i^2+v_i^2=-1\) for \(i=1,2\), and \eqref{eq:split-boxed-last-row} yields
+\[
+a_1=3,\qquad a_2=4.
+\]
+Since \(\ell_1\cdot\ell_2=0\), equation \eqref{eq:split-boxed-offdiag} gives \(b_{12}=0\). The resulting block matrix is
+\[
+\widetilde M_3=
+\begin{pmatrix}
+01 & 00 & 02\\
+00 & 01 & 20\\
+31 & 43 & 12
+\end{pmatrix},
+\]
+which therefore generates a self-dual \([6,3]\) code over \(\GF{5}\).
+\end{example}
+
+\begin{example}[The chain \texorpdfstring{$[6,3]\to[8,4]$}{[6,3] to [8,4]} over \texorpdfstring{$\GF{5}$}{GF(5)}]
+\label{ex:split-boxed-84}
+Again let \(K=\GF{5}\) and \(c=2\). Choosing
+\[
+\ell_1=(0,2),\qquad \ell_2=(2,0),\qquad \ell_3=(0,3)
+\]
+gives three norm \(-1\) final-column blocks. Equation \eqref{eq:split-boxed-last-row} yields
+\[
+a_1=3,\qquad a_2=4,\qquad a_3=2,
+\]
+while \eqref{eq:split-boxed-offdiag} gives
+\[
+b_{12}=0,\qquad b_{23}=0,\qquad b_{13}=2,
+\]
+because \(\ell_1\cdot\ell_2=0\), \(\ell_2\cdot\ell_3=0\), and \(\ell_1\cdot\ell_3=1\). Hence
+\[
+\widetilde M_4=
+\begin{pmatrix}
+01 & 00 & 24 & 02\\
+00 & 01 & 00 & 20\\
+00 & 00 & 01 & 03\\
+31 & 43 & 24 & 12
+\end{pmatrix}
+\]
+is a split boxed matrix of the above type, and therefore generates a self-dual \([8,4]\) code over \(\GF{5}\).
+\end{example}
+
+\begin{remark}[Empirical support for boxed normalizability over \texorpdfstring{$\GF{5}$}{GF(5)}]
+\label{rem:gf5-boxed-evidence}
+The small-length \(\GF{5}\) representatives considered later in the paper should now be interpreted as evidence for the low-rank sector of the general rank-\(r\) theory, rather than as evidence for a universal rank-one theorem. A direct exhaustive search over oriented pairings of the coordinates into \(2\)-blocks shows that each of the five representative codes displayed later in Proposition~\ref{prop:gf5-representatives} admits a block decomposition for which, with \(c=2\), the associated coefficient subspace
+\[
+U_{C,\Pi}\le \GF(5)^n
+\]
+has full coordinate support, and in the examples presently visible in the paper one even finds \(\dim U_{C,\Pi}=1\). Concretely, one may take the block decompositions
+\[
+G_A:\ (1,3)\mid(2,4)\mid(5,6),\qquad
+G_B:\ (1,2)\mid(3,4)\mid(5,6),
+\]
+and, for the three length-\(8\) representatives,
+\[
+\text{Type I and Type III}:\ (1,2)\mid(3,4)\mid(5,7)\mid(6,8),
+\]
+\[
+\text{Type II}:\ (1,2)\mid(4,3)\mid(6,5)\mid(7,8).
+\]
+Thus the \(\GF{5}\) classification naturally occupies a rank-one or otherwise low-rank portion of the general rank-\(r\) boxed theory. The point is not that all split self-dual codes should admit a one-master-row description. Rather, these computations show that whenever the coefficient subspace \(U_{C,\Pi}\) attached to a suitable \(2\)-block decomposition has the required support geometry, the general rank-\(r\) framework recovers the expected boxed normal forms.
+\end{remark}
+
+\begin{remark}[The remaining reverse problem is coordinate-geometric]
+\rm
+Proposition~\ref{prop:negative-master-row} shows that no universal rank-one master-row theorem can hold in the split \(q\)-ary setting. The rank-\(r\) boxed theory developed above indicates that the correct reverse problem is no longer to force a one-dimensional kernel line inside \(\Lambda_c\), but to understand the coordinate geometry of the coefficient subspace
+\[
+U_{C,\Pi}=\iota_\ell^{-1}(C\cap \Lambda_{c,\Pi})\le K^n
+\]
+attached to a chosen oriented \(2\)-block decomposition \(\Pi\). By Proposition~\ref{prop:coordinate-geometric-rank-r} and Corollary~\ref{cor:full-support-rank-r-boxed}, the key issue is whether \(U_{C,\Pi}\) has full coordinate support for some such choice of \(\Pi\). Thus any future positive theorem should be formulated in terms of structural conditions on \(U_{C,\Pi}\), such as coordinate indecomposability, connected support geometry, or related matroid-type connectedness properties, rather than in terms of a universal rank-one master row.
+\end{remark}
+
+
+\begin{lstlisting}[caption={Lean bundle for Theorem~\ref{thm:qary-building-up}.}]
+theorem buildRows_orthogonal
+    (hx : dot x x = (-1 : K))
+    (hc : c ^ 2 = (-1 : K))
+    (hG : ∀ i j : Fin m, dot (G i) (G j) = 0) :
+    ∀ i j : Fin (m + 1), dot (buildRows x c G i) (buildRows x c G j) = 0
+
+theorem buildRows_matrix_gram_zero
+    (hx : dot x x = (-1 : K))
+    (hc : c ^ 2 = (-1 : K))
+    (hG : ∀ i j : Fin m, dot (G i) (G j) = 0) :
+    rowMatrix (buildRows x c G) * (rowMatrix (buildRows x c G)).transpose = 0
+
+theorem buildRows_rowSpace_self_dual_of_finrank_half
+    (hx : dot x x = (-1 : K))
+    (hc : c ^ 2 = (-1 : K))
+    (hG : ∀ i j : Fin m, dot (G i) (G j) = 0)
+    (heven : Even n)
+    (hdim : Module.finrank K (rowSpace (buildRows x c G)) = (n + 2) / 2) :
+    rowSpace (buildRows x c G) =
+      (dotBilin (K := K) (n := 2 + n)).orthogonal
+        (rowSpace (buildRows x c G))
+
+theorem isSplitBuildFamily_iff_rowwise :
+    IsSplitBuildFamily x c R <->
+      R 0 = r0 x /\
+      ∀ i : Fin m, R (Fin.succ i) =
+        ri c (dot x (splitTail (R (Fin.succ i))))
+          (splitTail (R (Fin.succ i)))
+
+theorem splitBuildFamily_iff_rebuild :
+    IsSplitBuildFamily x c R <->
+      buildRows x c (deleteHyperbolicPairSplit R) = R
+
+theorem exists_unique_split_parent_of_IsSplitBuildFamily
+    (hR : IsSplitBuildFamily x c R) :
+    ∃! G : Fin m → Fin n → K, buildRows x c G = R
+
+theorem exists_unique_splitBuildFamily_of_parent :
+    ∃! R : Fin (m + 1) → Fin (2 + n) → K,
+      IsSplitBuildFamily x c R ∧ deleteHyperbolicPairSplit R = G
+
+theorem buildRows_linearIndependent_of_linearIndependent
+    (hc : c ^ 2 = (-1 : K))
+    (hGlin : LinearIndependent K G) :
+    LinearIndependent K (buildRows x c G)
+
+theorem buildRows_finrank_of_linearIndependent
+    (hlin : LinearIndependent K (buildRows x c G)) :
+    Module.finrank K (rowSpace (buildRows x c G)) = m + 1
+
+theorem buildRows_rowSpace_self_dual_of_self_dual_parent_basis
+    (hx : dot x x = (-1 : K))
+    (hc : c ^ 2 = (-1 : K))
+    (hG : ∀ i j : Fin m, dot (G i) (G j) = 0)
+    (hGlin : LinearIndependent K G)
+    (heven : Even n)
+    (hcard : m + 1 = (n + 2) / 2) :
+    rowSpace (buildRows x c G) =
+      (dotBilin (K := K) (n := 2 + n)).orthogonal
+        (rowSpace (buildRows x c G))
+\end{lstlisting}
+%\end{blueblock}
+
+\begin{remark}
+{\rm
+The stronger basis-version appearing in Theorem~\ref{thm:qary-building-up}(5) is the forward form used in the classification section. In Lean it is formalized by the linear-independence theorem for \texttt{buildRows}, the corresponding finrank computation, and the resulting self-duality theorem for basis-indexed parent data.
+}
+\end{remark}
+
+\medskip
+
+\begin{remark}[Relation with Chinburg--Zhang]
+{\rm
+The binary theorem of Chinburg--Zhang realizes a binary self-dual code as the image of an \'etale-cohomological map
+\[
+\Phi : H^1_{\et}(U,\mu_2) \longrightarrow \bigoplus_{v\in S} H^1_{\et}(K_v,\mu_2),
+\]
+where the image is Lagrangian with respect to the bilinear form induced by local cup products and the localization boundary map.
+The present theorem over $\mathbb{F}_q$ with $q \equiv 1 \pmod{4}$ does not assert a literal $\mu_2$-cohomological realization.
+Rather, it identifies the split quadratic mechanism that plays the same structural role: the existence of $c \in \mathbb{F}_q^\times$ with $c^2=-1$, the hyperbolic decomposition of the Euclidean plane, the isotropic-line description of correction terms, and the existence of vectors of prescribed norm.
+In this sense, the split $q$-ary building-up construction is the finite-field analogue of the Chinburg--Zhang Lagrangian reduction/extension principle.
+}
+\end{remark}
+
+
+
+\subsection{Arithmetic of \texorpdfstring{$\F_q$}{Fq} with \texorpdfstring{$q \equiv 1 \pmod{4}$}{q = 1 (mod 4)}}
+
+The condition $q \equiv 1 \pmod 4$ is equivalent to $-1$ being a square in $\F_q^\times$. We fix once and for all an element
+\[
+c \in \F_q^\times \qquad \text{with} \qquad c^2 = -1.
+\]
+This choice is used throughout the building-up formulas.
+
+\begin{prop}\label{prop:split-consequences}
+The existence of $c$ has the following consequences.
+\begin{enumerate}[label=(\roman*)]
+\item The element $c$ has multiplicative order $4$.
+\item The Euclidean plane $(\F_q^2,\langle \cdot,\cdot\rangle)$ is hyperbolic.
+\item For every $k \ge 1$, the matrix equation $AA^T = -I_k$ has the explicit solution $A=cI_k$.
+\item The binary norm form $x^2+y^2$ splits as
+\[
+x^2+y^2 = (x-cy)(x+cy),
+\]
+hence it represents every element of\/ $\F_q$.
+\end{enumerate}
+\end{prop}
+
+\subsection{Hyperbolic Planes and Isotropic Subspaces}
+
+\begin{defn}[Hyperbolic Plane]\label{def:hyp}
+{\rm
+A \textbf{hyperbolic plane} over $\F_q$ is a $2$-dimensional bilinear space with basis $\{e_1,e_2\}$ satisfying
+\[
+\langle e_1,e_1\rangle = \langle e_2,e_2\rangle = 0,
+\qquad
+\langle e_1,e_2\rangle = 1.
+\]
+Any $1$-dimensional totally isotropic subspace is called an \textbf{isotropic line}.
+}
+\end{defn}
+
+\begin{prop}\label{prop:eucl-hyp}
+Let $c^2=-1$. Then the vectors
+\[
+e_1=(1,c), \qquad e_2=(2^{-1},-2^{-1}c)
+\]
+form a hyperbolic basis of\/ $\F_q^2$. Equivalently, the line spanned by $(1,c)$ is isotropic and the Euclidean plane is split.
+\end{prop}
+
+\begin{proof}
+We compute
+\[
+\langle e_1,e_1\rangle = 1+c^2 = 0,
+\qquad
+\langle e_2,e_2\rangle = 2^{-2}(1+c^2)=0,
+\]
+and
+\[
+\langle e_1,e_2\rangle
+= 2^{-1}(1-c^2)
+= 2^{-1}(1-(-1))
+= 1.
+\]
+Thus $\{e_1,e_2\}$ is a hyperbolic basis.
+\end{proof}
+
+\subsection{Quadratic Forms over Finite Fields}
+
+Over a finite field of odd characteristic, the Witt decomposition classifies non-degenerate quadratic spaces by dimension, discriminant, and Witt index. In the present split situation, the Euclidean form
+\[
+x_1^2+\cdots+x_{2k}^2
+\]
+on $\F_q^{2k}$ is hyperbolic for every $k \ge 1$. Consequently, $\F_q^{2k}$ contains maximal totally isotropic subspaces of dimension $k$, so self-dual codes exist in every even length. The later building-up constructions should therefore be viewed as explicit coordinatizations of this split quadratic geometry rather than as isolated matrix identities.
+
+
+%% ===========================================================================
+\section{The Building-Up Construction}
+\label{sec:building-up}
+%% ===========================================================================
+
+\subsection{A Lean-verified algebraic core of the building-up construction}
+
+In this subsection, we isolate the algebraic core of the building-up construction in the split case, namely when $-1$ is a square. The corresponding symbolic verifications were carried out in Lean, and we record below both the mathematical statements and the successful Lean formalizations.
+
+\subsubsection{The split hyperbolic plane and its matrix realization}
+
+\begin{theorem}[Existence of a square root of $-1$ and hyperbolic realization]
+\label{thm:hyperbolic-realization}
+Let $F$ be a finite field such that $|F| \equiv 1 \pmod 4$. Then there exists an element $i \in F$ satisfying
+\[
+i^2 = -1.
+\]
+For such an $i$, define
+\[
+P_i =
+\begin{pmatrix}
+1 & 1\\
+i & -i
+\end{pmatrix},
+\qquad
+H_2 :=
+\begin{pmatrix}
+0 & 2\\
+2 & 0
+\end{pmatrix}.
+\]
+Then
+\[
+P_i^{\top} P_i = H_2,
+\]
+and moreover
+\[
+\det(P_i) \neq 0.
+\]
+Hence the standard Euclidean plane over $F$ is congruent to the split hyperbolic plane.
+\end{theorem}
+
+\begin{proof}
+Since $|F| \equiv 1 \pmod 4$, the standard criterion for finite fields implies that $-1$ is a square in $F$. Hence there exists $i \in F$ such that
+\[
+i^2 = -1.
+\]
+
+Now consider
+\[
+P_i =
+\begin{pmatrix}
+1 & 1\\
+i & -i
+\end{pmatrix}.
+\]
+A direct computation gives
+\[
+P_i^{\top} P_i
+=
+\begin{pmatrix}
+1+i^2 & 1-i^2\\
+1-i^2 & 1+i^2
+\end{pmatrix}.
+\]
+Substituting $i^2=-1$, we obtain
+\[
+1+i^2 = 1+(-1)=0,
+\qquad
+1-i^2 = 1-(-1)=2.
+\]
+Therefore
+\[
+P_i^{\top} P_i
+=
+\begin{pmatrix}
+0 & 2\\
+2 & 0
+\end{pmatrix}
+= H_2.
+\]
+
+Next,
+\[
+\det(P_i) = 1\cdot(-i)-1\cdot i = -2i.
+\]
+Since $i^2=-1$, we must have $i\neq 0$. Also, because $|F|\equiv 1 \pmod 4$, the field $F$ has odd characteristic, so $2\neq 0$. Hence
+\[
+-2i \neq 0,
+\]
+and thus $\det(P_i)\neq 0$.
+
+Therefore $P_i$ is invertible and transforms the standard Gram matrix to the hyperbolic Gram matrix $H_2$. This proves that the Euclidean plane over $F$ is split hyperbolic.
+\end{proof}
+
+\begin{lstlisting}[caption={Lean verification for Theorem~\ref{thm:hyperbolic-realization}.}]
+import Mathlib
+
+open FiniteField
+open Matrix
+
+section BuildingUpMatrixVersionDet
+
+theorem exists_sq_neg_one_of_card_mod_four_eq_one
+    {F : Type*} [Field F] [Fintype F]
+    (hF : Fintype.card F % 4 = 1) :
+    ∃ i : F, i ^ 2 = (-1 : F) := by
+  have hneq : Fintype.card F % 4 ≠ 3 := by
+    omega
+  have hsq : IsSquare (-1 : F) := by
+    exact (FiniteField.isSquare_neg_one_iff).2 hneq
+  rcases hsq with <i, hi>
+  refine <i, ?_>
+  simpa [pow_two, mul_comm] using hi.symm
+
+def H2 {K : Type*} [Field K] : Matrix (Fin 2) (Fin 2) K :=
+  !![0, (2 : K); (2 : K), 0]
+
+def P_of_root {K : Type*} [Field K] (i : K) : Matrix (Fin 2) (Fin 2) K :=
+  !![1, 1; i, -i]
+
+theorem transpose_mul_self_P_of_sq_eq_neg_one
+    {K : Type*} [Field K] {i : K}
+    (hi : i ^ 2 = (-1 : K)) :
+    (P_of_root i).transpose * P_of_root i = H2 := by
+  ext a b <;> fin_cases a <;> fin_cases b
+  ·
+    simp [P_of_root, H2, Matrix.mul_apply]
+    calc
+      (1 : K) + i * i = 1 + i ^ 2 := by rw [pow_two]
+      _ = 1 + (-1 : K) := by rw [hi]
+      _ = 0 := by ring
+  ·
+    simp [P_of_root, H2, Matrix.mul_apply]
+    calc
+      (1 : K) + -(i * i) = 1 - i ^ 2 := by rw [pow_two]; ring
+      _ = 1 - (-1 : K) := by rw [hi]
+      _ = (2 : K) := by ring
+  ·
+    simp [P_of_root, H2, Matrix.mul_apply]
+    calc
+      (1 : K) + -(i * i) = 1 - i ^ 2 := by rw [pow_two]; ring
+      _ = 1 - (-1 : K) := by rw [hi]
+      _ = (2 : K) := by ring
+  ·
+    simp [P_of_root, H2, Matrix.mul_apply]
+    calc
+      (1 : K) + i * i = 1 + i ^ 2 := by rw [pow_two]
+      _ = 1 + (-1 : K) := by rw [hi]
+      _ = 0 := by ring
+
+theorem det_P_of_root
+    {K : Type*} [Field K] (i : K) :
+    Matrix.det (P_of_root i) = -(2 : K) * i := by
+  simp [P_of_root, Matrix.det_fin_two]
+  ring
+
+theorem root_neg_one_ne_zero
+    {K : Type*} [Field K] {i : K}
+    (hi : i ^ 2 = (-1 : K)) :
+    i ≠ 0 := by
+  intro hiz
+  have hzero : (0 : K) = (-1 : K) := by
+    simpa [hiz, pow_two] using hi
+  exact (neg_ne_zero.mpr one_ne_zero) hzero.symm
+
+theorem det_P_of_root_ne_zero
+    {K : Type*} [Field K] [Fact ((2 : K) ≠ 0)] {i : K}
+    (hi : i ^ 2 = (-1 : K)) :
+    Matrix.det (P_of_root i) ≠ 0 := by
+  rw [det_P_of_root]
+  have h2 : -(2 : K) ≠ 0 := by
+    exact neg_ne_zero.mpr Fact.out
+  exact mul_ne_zero h2 (root_neg_one_ne_zero hi)
+
+theorem exists_nonsingular_matrix_hyperbolic_of_card_mod_four_eq_one
+    {F : Type*} [Field F] [Fintype F] [Fact ((2 : F) ≠ 0)]
+    (hF : Fintype.card F % 4 = 1) :
+    ∃ P : Matrix (Fin 2) (Fin 2) F,
+      P.transpose * P = H2 ∧ Matrix.det P ≠ 0 := by
+  rcases exists_sq_neg_one_of_card_mod_four_eq_one (F := F) hF with <i, hi>
+  refine <P_of_root i, ?_, ?_>
+  · exact transpose_mul_self_P_of_sq_eq_neg_one (K := F) hi
+  · exact det_P_of_root_ne_zero (K := F) hi
+
+end BuildingUpMatrixVersionDet
+\end{lstlisting}
+
+\subsubsection{Constructive norm witnesses and extension vectors}
+
+The survey draft aimed to make the existence input for the building-up construction completely explicit. In the current integrated development, this part is now formalized directly: once $c^2=-1$, the split norm form $x^2+y^2$ not only factors, but admits a closed-form witness for every target value.
+
+\begin{theorem}[Constructive norm witnesses from a square root of $-1$]
+\label{thm:norm-witness}
+Let $K$ be a field with $2\neq 0$, and let $c\in K$ satisfy $c^2=-1$. For any $a\in K$, define
+\[
+x_a:=\frac{1+a}{2},
+\qquad
+y_a:=\frac{1-a}{2}\,c.
+\]
+Then
+\[
+x_a^2+y_a^2=a.
+\]
+Consequently, the norm form $N(x,y)=x^2+y^2$ is surjective onto $K$. Equivalently, for every $n\ge 0$ there exists a vector
+\[
+v\in K^{n+2}
+\]
+with
+\[
+\langle v,v\rangle=a,
+\]
+and in particular there exists an extension vector of norm $-1$ in every ambient dimension at least~$2$.
+\end{theorem}
+
+\begin{proof}
+Using $c^2=-1$, one computes
+\[
+x_a^2+y_a^2
+=
+\left(\frac{1+a}{2}\right)^2+\left(\frac{1-a}{2}c\right)^2
+=
+\frac{(1+a)^2}{4}+\frac{(1-a)^2c^2}{4}
+=
+\frac{(1+a)^2-(1-a)^2}{4}
+=
+a.
+\]
+This gives an explicit witness for every target value $a$. Embedding $(x_a,y_a)$ into the first two coordinates and padding the remaining coordinates with zeros yields a vector of any larger even ambient length with the same self-dot-product.
+\end{proof}
+
+\begin{lstlisting}[caption={Lean verification for Theorem~\ref{thm:norm-witness}.}]
+section NormFormConstruction
+
+variable {K : Type*} [Field K] [Fact ((2 : K) ≠ 0)]
+
+theorem norm_form_witness
+    (a c : K) (hc : c ^ 2 = (-1 : K)) :
+    let x : K := (1 + a) / 2
+    let y : K := ((1 - a) / 2) * c
+    x ^ 2 + y ^ 2 = a := by
+  dsimp
+  have h2 : (2 : K) ≠ 0 := Fact.out
+  field_simp [h2]
+  rw [hc]
+  ring
+
+theorem exists_norm_pair
+    (a c : K) (hc : c ^ 2 = (-1 : K)) :
+    ∃ x y : K, x ^ 2 + y ^ 2 = a := by
+  refine <(1 + a) / 2, ((1 - a) / 2) * c, ?_>
+  simpa using norm_form_witness (K := K) a c hc
+
+theorem exists_dot_eq_in_two_coordinates
+    {n : ℕ} (a c : K) (hc : c ^ 2 = (-1 : K)) :
+    ∃ v : Fin (2 + n) → K, dot v v = a := by
+  rcases exists_norm_pair (K := K) a c hc with <x, y, hxy>
+  refine <prepend2 x y (0 : Fin n → K), ?_>
+  rw [dot_prepend2_prepend2]
+  simp [dot]
+  simpa [pow_two] using hxy
+
+theorem exists_extension_vector_neg_one
+    {n : ℕ} (c : K) (hc : c ^ 2 = (-1 : K)) :
+    ∃ v : Fin (2 + n) → K, dot v v = (-1 : K) := by
+  simpa using exists_dot_eq_in_two_coordinates (K := K) (n := n) (-1 : K) c hc
+
+end NormFormConstruction
+\end{lstlisting}
+
+\subsubsection{Hyperbolic pairs and standard seed rows}
+
+To prepare the eventual completeness and induction arguments, it is useful to isolate two more minimal ingredients. First, the isotropic line generated by $(1,c)$ comes with its opposite partner $(1,-c)$, forming a hyperbolic pair. Second, the standard self-dual seed rows
+\[
+s_i=(e_i,\; c e_i)\in K^{n+n},
+\qquad i=1,\dots,n,
+\]
+already form a pairwise orthogonal row family as soon as $c^2=-1$. In fact, their row span already gives the canonical split self-dual base code of length $2n$. These are the smallest reusable blocks for building base codes in the split case.
+
+\begin{prop}[Hyperbolic pair from a square root of $-1$]
+\label{prop:hyperbolic-pair}
+Let $K$ be a field, let $c\in K$ satisfy $c^2=-1$, and write
+\[
+e_+=(1,c,0,\ldots,0),
+\qquad
+e_-=(1,-c,0,\ldots,0)\in K^{2+n}.
+\]
+Then both $e_+$ and $e_-$ are isotropic, and
+\[
+\langle e_+,e_-\rangle = 2.
+\]
+Thus the two vectors form a hyperbolic pair in the split plane.
+\end{prop}
+
+\begin{proof}
+The self-pairings are
+\[
+\langle e_+,e_+\rangle = 1+c^2 = 0,
+\qquad
+\langle e_-,e_-\rangle = 1+(-c)^2 = 1+c^2 = 0.
+\]
+For the mixed pairing,
+\[
+\langle e_+,e_-\rangle = 1+c(-c)=1-c^2=1-(-1)=2.
+\]
+\end{proof}
+
+\begin{prop}[Standard split seed rows]
+\label{prop:seed-rows}
+Let $K$ be a field and let $c\in K$ satisfy $c^2=-1$. For each $i\in\{1,\dots,n\}$, let
+\[
+s_i=(e_i,\; c e_i)\in K^{n+n},
+\]
+where $e_i$ is the $i$-th standard basis vector of $K^n$. Then
+\[
+\langle s_i,s_j\rangle = 0
+\qquad
+\text{for all } i,j.
+\]
+Equivalently, the matrix with rows $s_1,\dots,s_n$ has Gram matrix zero, and its row span is self-orthogonal.
+\end{prop}
+
+\begin{proof}
+If $i\neq j$, then the supports are disjoint in both halves, so $\langle s_i,s_j\rangle=0$. If $i=j$, then
+\[
+\langle s_i,s_i\rangle = 1 + c^2 = 0.
+\]
+Hence the whole family is pairwise orthogonal. The Gram-matrix and row-span statements follow from bilinearity exactly as in the building-up family.
+\end{proof}
+
+\begin{lstlisting}[caption={Lean verification for Propositions~\ref{prop:hyperbolic-pair} and~\ref{prop:seed-rows}.}]
+def IsIsotropic {n : ℕ} (v : Fin n → K) : Prop :=
+  dot v v = 0
+
+def PairwiseOrthogonal {m n : ℕ} (R : Fin m → Fin n → K) : Prop :=
+  ∀ i j : Fin m, dot (R i) (R j) = 0
+
+def hyperbolicVecPlus {n : ℕ} (c : K) : Fin (2 + n) → K :=
+  prepend2 1 c 0
+
+def hyperbolicVecMinus {n : ℕ} (c : K) : Fin (2 + n) → K :=
+  prepend2 1 (-c) 0
+
+theorem hyperbolicVecPlus_isotropic
+    {n : ℕ} {c : K} (hc : c ^ 2 = (-1 : K)) :
+    IsIsotropic (K := K) (hyperbolicVecPlus (n := n) c) := ...
+
+theorem hyperbolicVecMinus_isotropic
+    {n : ℕ} {c : K} (hc : c ^ 2 = (-1 : K)) :
+    IsIsotropic (K := K) (hyperbolicVecMinus (n := n) c) := ...
+
+theorem dot_hyperbolicVecPlus_hyperbolicVecMinus
+    {n : ℕ} {c : K} (hc : c ^ 2 = (-1 : K)) :
+    dot (hyperbolicVecPlus (K := K) (n := n) c)
+        (hyperbolicVecMinus (K := K) (n := n) c) = (2 : K) := ...
+
+def seedRow {n : ℕ} (c : K) (i : Fin n) : Fin (n + n) → K :=
+  Fin.append (Pi.single i 1) (Pi.single i c)
+
+def seedRows {n : ℕ} (c : K) : Fin n → Fin (n + n) → K :=
+  fun i => seedRow c i
+
+theorem seedRows_orthogonal
+    {n : ℕ} {c : K} (hc : c ^ 2 = (-1 : K)) :
+    PairwiseOrthogonal (K := K) (seedRows (K := K) (n := n) c) := ...
+
+theorem seedRows_matrix_gram_zero
+    {n : ℕ} {c : K} (hc : c ^ 2 = (-1 : K)) :
+    rowMatrix (seedRows (K := K) (n := n) c) *
+      (rowMatrix (seedRows (K := K) (n := n) c)).transpose = 0 := ...
+\end{lstlisting}
+
+\begin{theorem}[Standard split seed code is self-dual]
+\label{thm:split-seed-self-dual}
+Let $K$ be a field and let $c\in K$ satisfy $c^2=-1$. Then the row span of the seed rows
+\[
+s_i=(e_i,\; c e_i)\in K^{n+n}
+\]
+is equal to its Euclidean orthogonal complement in $K^{n+n}$.
+\end{theorem}
+
+\begin{proof}
+The inclusion $C\subseteq C^\perp$ follows from Proposition~\ref{prop:seed-rows}. For the reverse inclusion, write any vector $v\in K^{n+n}$ as $v=(a,b)$ with left and right halves $a,b\in K^n$. Orthogonality to every seed row $s_i=(e_i,ce_i)$ implies
+\[
+0=\langle v,s_i\rangle = a_i + c b_i
+\qquad\text{for all }i,
+\]
+and multiplying by $c$ gives $b_i = c a_i$ because $c^2=-1$. Hence $v=(a,ca)$, so $v$ lies in the span of the seed rows. Therefore $C^\perp\subseteq C$, and thus $C=C^\perp$.
+\end{proof}
+
+\begin{lstlisting}[caption={Lean verification for Theorem~\ref{thm:split-seed-self-dual}.}]
+def seedEmbedding {n : ℕ} (c : K) (u : Fin n → K) : Fin (n + n) → K :=
+  Fin.append u (c • u)
+
+theorem seedEmbedding_eq_sum_seedRows
+    {n : ℕ} (c : K) (u : Fin n → K) :
+    seedEmbedding (K := K) c u =
+      ∑ i, u i • seedRows (K := K) (n := n) c i := ...
+
+theorem seedEmbedding_mem_rowSpace
+    {n : ℕ} (c : K) (u : Fin n → K) :
+    seedEmbedding (K := K) c u ∈
+      rowSpace (seedRows (K := K) (n := n) c) := ...
+
+theorem seedRows_rowSpace_eq_orthogonal
+    {n : ℕ} {c : K} (hc : c ^ 2 = (-1 : K)) :
+    rowSpace (seedRows (K := K) (n := n) c) =
+      (dotBilin (K := K) (n := n + n)).orthogonal
+        (rowSpace (seedRows (K := K) (n := n) c)) := ...
+
+theorem split_seed_code_self_dual
+    {n : ℕ} {c : K} (hc : c ^ 2 = (-1 : K)) :
+    rowSpace (seedRows (K := K) (n := n) c) =
+      (dotBilin (K := K) (n := n + n)).orthogonal
+        (rowSpace (seedRows (K := K) (n := n) c)) := ...
+\end{lstlisting}
+
+\subsubsection{The building-up rows}
+
+\begin{defn}[Dot product and building-up rows~\cite{Kim2001}]
+\label{def:buildrows}
+Let $K$ be a field. For vectors $u=(u_1,\dots,u_n)$ and $v=(v_1,\dots,v_n)$ in $K^n$, define
+\[
+\langle u,v\rangle := \sum_{j=1}^n u_j v_j.
+\]
+Let $x\in K^n$, let $c\in K$, and let
+\[
+G=\{G_1,\dots,G_m\}\subset K^n
+\]
+be a family of row vectors. For each $i$, define
+\[
+y_i := \langle x,G_i\rangle.
+\]
+The associated building-up rows in $K^{n+2}$ are
+\[
+r_0 := (1,0,x),
+\qquad
+r_i := (-y_i,\,-c y_i,\,G_i)
+\qquad (1\le i\le m).
+\]
+\end{defn}
+
+\begin{lemma}[Decomposition of the dot product after adjoining two coordinates]
+\label{lem:prepend-dot}
+For any $a,b,a',b'\in K$ and any $u,v\in K^n$,
+\[
+\langle (a,b,u),(a',b',v)\rangle
+=
+aa' + bb' + \langle u,v\rangle.
+\]
+\end{lemma}
+
+\begin{proof}
+This follows immediately by splitting the coordinate sum into the first two coordinates and the remaining $n$ coordinates. Indeed,
+\[
+\langle (a,b,u),(a',b',v)\rangle
+=
+aa' + bb' + \sum_{j=1}^n u_j v_j
+=
+aa' + bb' + \langle u,v\rangle.
+\]
+
+\end{proof}
+
+\begin{lemma}[Orthogonality relations among the building-up rows]
+\label{lem:row-orthogonality}
+Assume that
+\[
+\langle x,x\rangle = -1,
+\qquad
+c^2 = -1,
+\qquad
+\langle G_i,G_j\rangle = 0 \quad \text{for all } i,j.
+\]
+Then the building-up rows satisfy:
+\begin{align*}
+\langle r_0,r_0\rangle &= 0,\\
+\langle r_0,r_i\rangle &= 0 \quad (1\le i\le m),\\
+\langle r_i,r_j\rangle &= 0 \quad (1\le i,j\le m).
+\end{align*}
+\end{lemma}
+
+\begin{proof}
+By Lemma~\ref{lem:prepend-dot},
+\[
+\langle r_0,r_0\rangle
+=
+1^2 + 0^2 + \langle x,x\rangle
+=
+1+(-1)=0.
+\]
+
+Next, using $y_i=\langle x,G_i\rangle$,
+\[
+\langle r_0,r_i\rangle
+=
+1\cdot(-y_i)+0\cdot(-c y_i)+\langle x,G_i\rangle
+=
+-y_i+y_i=0.
+\]
+
+Finally,
+\[
+\langle r_i,r_j\rangle
+=
+(-y_i)(-y_j)+(-c y_i)(-c y_j)+\langle G_i,G_j\rangle.
+\]
+Since $\langle G_i,G_j\rangle=0$, this becomes
+\[
+\langle r_i,r_j\rangle
+=
+y_i y_j + c^2 y_i y_j.
+\]
+Using $c^2=-1$, we obtain
+\[
+\langle r_i,r_j\rangle
+=
+y_i y_j + (-1)y_i y_j
+=
+0.
+\]
+This proves all three identities.
+\end{proof}
+
+\begin{lstlisting}[caption={Lean verification for Lemma~\ref{lem:row-orthogonality}.}]
+import Mathlib
+
+open FiniteField
+open Matrix
+open BigOperators
+
+section BuildingUpRows
+
+variable {K : Type*} [Field K]
+
+def dot {n : ℕ} (u v : Fin n → K) : K :=
+  ∑ j, u j * v j
+
+def head2 (a b : K) : Fin 2 → K
+  | <0, _> => a
+  | <1, _> => b
+
+def prepend2 {n : ℕ} (a b : K) (u : Fin n → K) : Fin (2 + n) → K :=
+  Fin.append (head2 a b) u
+
+def r0 {n : ℕ} (x : Fin n → K) : Fin (2 + n) → K :=
+  prepend2 1 0 x
+
+def ri {n : ℕ} (c yi : K) (g : Fin n → K) : Fin (2 + n) → K :=
+  prepend2 (-yi) (-(c * yi)) g
+
+theorem dot_prepend2_prepend2
+    {n : ℕ} (a b a' b' : K) (u v : Fin n → K) :
+    dot (prepend2 a b u) (prepend2 a' b' v)
+      = a * a' + b * b' + dot u v := by
+  unfold dot prepend2
+  rw [Fin.sum_univ_add]
+  simp [head2, Fin.sum_univ_two, add_assoc]
+
+theorem dot_r0_r0
+    {n : ℕ} {x : Fin n → K}
+    (hx : dot x x = (-1 : K)) :
+    dot (r0 x) (r0 x) = 0 := by
+  rw [r0, dot_prepend2_prepend2]
+  rw [hx]
+  ring
+
+theorem dot_r0_ri
+    {n : ℕ} {x g : Fin n → K} {c yi : K}
+    (hyi : yi = dot x g) :
+    dot (r0 x) (ri c yi g) = 0 := by
+  rw [r0, ri, dot_prepend2_prepend2]
+  rw [hyi]
+  ring
+
+theorem dot_ri_ri
+    {n : ℕ} {g h : Fin n → K} {c yi yj : K}
+    (hc : c ^ 2 = (-1 : K))
+    (hgh : dot g h = 0) :
+    dot (ri c yi g) (ri c yj h) = 0 := by
+  rw [ri, ri, dot_prepend2_prepend2]
+  rw [hgh]
+  calc
+    (-yi) * (-yj) + (-(c * yi)) * (-(c * yj)) + 0
+        = yi * yj + (c * yi) * (c * yj) := by ring
+    _ = yi * yj + (c ^ 2) * (yi * yj) := by
+        rw [pow_two]
+        ring
+    _ = yi * yj + (-1 : K) * (yi * yj) := by rw [hc]
+    _ = 0 := by ring
+
+end BuildingUpRows
+\end{lstlisting}
+
+\subsubsection{From rowwise orthogonality to a self-orthogonal generator matrix}
+
+\begin{defn}[The building-up row family]
+\label{def:buildRows-family}
+Let $x\in K^n$ and $c\in K$. Let $G\subset K^n$ be the family $\{G_1,\dots,G_m\}$ introduced above. Define the row family
+\[
+R=\{R_0,R_1,\dots,R_m\}\subset K^{n+2}
+\]
+by
+\[
+R_0:=r_0,
+\qquad
+R_i:=r_i \quad (1\le i\le m).
+\]
+Equivalently, $R$ is obtained by taking the distinguished row $(1,0,x)$ and adjoining the corrected rows $(-y_i,-c y_i,G_i)$.
+\end{defn}
+
+\begin{theorem}[Pairwise orthogonality of the building-up family]
+\label{thm:buildrows-orth}
+Assume that
+\[
+\langle x,x\rangle=-1,
+\qquad
+c^2=-1,
+\qquad
+\langle G_i,G_j\rangle=0 \quad \text{for all } i,j.
+\]
+Then
+\[
+\langle R_p,R_q\rangle = 0
+\qquad
+\text{for all } 0\le p,q\le m.
+\]
+\end{theorem}
+
+\begin{proof}
+By Lemma~\ref{lem:row-orthogonality}, we already know that
+\[
+\langle r_0,r_0\rangle=0,\qquad
+\langle r_0,r_i\rangle=0,\qquad
+\langle r_i,r_j\rangle=0
+\]
+for all $i,j$. Since the family $R$ consists exactly of $r_0$ together with the $r_i$, all pairwise inner products among the $R_p$ vanish.
+\end{proof}
+
+\begin{lstlisting}[caption={Lean verification for Theorem~\ref{thm:buildrows-orth}.}]
+import Mathlib
+
+open FiniteField
+open Matrix
+open BigOperators
+
+section BuildingUpFamily
+
+variable {K : Type*} [Field K]
+
+def dot {n : ℕ} (u v : Fin n → K) : K :=
+ ∑ j, u j * v j
+
+theorem dot_comm {n : ℕ} (u v : Fin n → K) :
+ dot u v = dot v u := by
+ unfold dot
+ apply Finset.sum_congr rfl
+ intro j hj
+ ring
+
+def head2 (a b : K) : Fin 2 → K
+| <0, _> => a
+| <1, _> => b
+
+def prepend2 {n : ℕ} (a b : K) (u : Fin n → K) : Fin (2 + n) → K :=
+ Fin.append (head2 a b) u
+
+def r0 {n : ℕ} (x : Fin n → K) : Fin (2 + n) → K :=
+ prepend2 1 0 x
+
+def ri {n : ℕ} (c yi : K) (g : Fin n → K) : Fin (2 + n) → K :=
+ prepend2 (-yi) (-(c * yi)) g
+
+theorem dot_prepend2_prepend2
+ {n : ℕ} (a b a' b' : K) (u v : Fin n → K) :
+ dot (prepend2 a b u) (prepend2 a' b' v)
+ = a * a' + b * b' + dot u v := by
+ unfold dot prepend2
+ rw [Fin.sum_univ_add]
+ simp [head2, Fin.sum_univ_two, add_assoc]
+
+theorem dot_r0_r0
+ {n : ℕ} {x : Fin n → K}
+ (hx : dot x x = (-1 : K)) :
+ dot (r0 x) (r0 x) = 0 := by
+ rw [r0, dot_prepend2_prepend2]
+ rw [hx]
+ ring
+
+theorem dot_r0_ri
+ {n : ℕ} {x g : Fin n → K} {c yi : K}
+ (hyi : yi = dot x g) :
+ dot (r0 x) (ri c yi g) = 0 := by
+ rw [r0, ri, dot_prepend2_prepend2]
+ rw [hyi]
+ ring
+
+theorem dot_ri_ri
+ {n : ℕ} {g h : Fin n → K} {c yi yj : K}
+ (hc : c ^ 2 = (-1 : K))
+ (hgh : dot g h = 0) :
+ dot (ri c yi g) (ri c yj h) = 0 := by
+ rw [ri, ri, dot_prepend2_prepend2]
+ rw [hgh]
+ calc
+ (-yi) * (-yj) + (-(c * yi)) * (-(c * yj)) + 0
+ = yi * yj + (c * yi) * (c * yj) := by ring
+ _ = yi * yj + (c ^ 2) * (yi * yj) := by
+ rw [pow_two]
+ ring
+ _ = yi * yj + (-1 : K) * (yi * yj) := by rw [hc]
+ _ = 0 := by ring
+
+def buildRows {m n : ℕ} (x : Fin n → K) (c : K) (G : Fin m → Fin n → K) :
+ Fin (m + 1) → Fin (2 + n) → K :=
+ Fin.cases (r0 x) (fun i => ri c (dot x (G i)) (G i))
+
+theorem buildRows_zero_zero
+ {m n : ℕ} {x : Fin n → K} {c : K} {G : Fin m → Fin n → K}
+ (hx : dot x x = (-1 : K)) :
+ dot (buildRows x c G 0) (buildRows x c G 0) = 0 := by
+ simp [buildRows]
+ exact dot_r0_r0 hx
+
+theorem buildRows_zero_succ
+ {m n : ℕ} {x : Fin n → K} {c : K} {G : Fin m → Fin n → K} (i : Fin m) :
+ dot (buildRows x c G 0) (buildRows x c G (Fin.succ i)) = 0 := by
+ simp [buildRows]
+ exact dot_r0_ri rfl
+
+theorem buildRows_succ_zero
+ {m n : ℕ} {x : Fin n → K} {c : K} {G : Fin m → Fin n → K} (i : Fin m) :
+ dot (buildRows x c G (Fin.succ i)) (buildRows x c G 0) = 0 := by
+ rw [dot_comm]
+ exact buildRows_zero_succ i
+
+theorem buildRows_succ_succ
+ {m n : ℕ} {x : Fin n → K} {c : K} {G : Fin m → Fin n → K}
+ (hc : c ^ 2 = (-1 : K))
+ (hG : ∀ i j : Fin m, dot (G i) (G j) = 0)
+ (i j : Fin m) :
+ dot (buildRows x c G (Fin.succ i)) (buildRows x c G (Fin.succ j)) = 0 := by
+ simp [buildRows]
+ exact dot_ri_ri (hc := hc) (hgh := hG i j)
+
+theorem buildRows_orthogonal
+ {m n : ℕ} {x : Fin n → K} {c : K} {G : Fin m → Fin n → K}
+ (hx : dot x x = (-1 : K))
+ (hc : c ^ 2 = (-1 : K))
+ (hG : ∀ i j : Fin m, dot (G i) (G j) = 0) :
+ ∀ i j : Fin (m + 1), dot (buildRows x c G i) (buildRows x c G j) = 0 := by
+ intro i j
+rcases Fin.eq_zero_or_eq_succ i with rfl | <i, rfl>
+· rcases Fin.eq_zero_or_eq_succ j with rfl | <j, rfl>
+ · exact buildRows_zero_zero hx
+ · exact buildRows_zero_succ j
+· rcases Fin.eq_zero_or_eq_succ j with rfl | <j, rfl>
+ · exact buildRows_succ_zero i
+ · exact buildRows_succ_succ (hc := hc) (hG := hG) i j
+
+end BuildingUpFamily
+\end{lstlisting}
+
+\begin{defn}[The building-up matrix]
+\label{def:buildrows-matrix}
+Let
+\[
+A=
+\begin{pmatrix}
+R_0\\
+R_1\\
+\vdots\\
+R_m
+\end{pmatrix}
+\in M_{m+1,n+2}(K)
+\]
+be the matrix whose rows are the building-up family.
+\end{defn}
+
+\begin{lemma}[Entries of the Gram matrix]
+\label{lem:gram-entry-dot}
+Let $A$ be any matrix over $K$ with rows $R_0,\dots,R_m$. Then the $(p,q)$-entry of $AA^\top$ is
+\[
+(AA^\top)_{pq} = \langle R_p,R_q\rangle.
+\]
+\end{lemma}
+
+\begin{proof}
+By matrix multiplication,
+\[
+(AA^\top)_{pq}
+=
+\sum_k A_{pk}(A^\top)_{kq}
+=
+\sum_k A_{pk}A_{qk}.
+\]
+But this is precisely the dot product of the $p$-th and $q$-th rows of $A$.
+\end{proof}
+
+\begin{theorem}[Vanishing of the Gram matrix]
+\label{thm:gram-zero}
+Assume that
+\[
+\langle x,x\rangle=-1,
+\qquad
+c^2=-1,
+\qquad
+\langle G_i,G_j\rangle=0 \quad \text{for all } i,j.
+\]
+Let $A$ be the building-up matrix. Then
+\[
+AA^\top = 0.
+\]
+\end{theorem}
+
+\begin{proof}
+By Lemma~\ref{lem:gram-entry-dot}, every entry of $AA^\top$ is the dot product of two rows of $A$. By Theorem~\ref{thm:buildrows-orth}, every such dot product is zero. Hence each entry of $AA^\top$ vanishes, so
+\[
+AA^\top = 0.
+\]
+
+\end{proof}
+
+\begin{lstlisting}[caption={Lean verification for Theorem~\ref{thm:gram-zero}.}]
+import Mathlib
+
+open FiniteField
+open Matrix
+open BigOperators
+
+section BuildingUpMatrixGram
+
+variable {K : Type*} [Field K]
+
+def dot {n : ℕ} (u v : Fin n → K) : K :=
+  ∑ j, u j * v j
+
+theorem dot_comm {n : ℕ} (u v : Fin n → K) :
+    dot u v = dot v u := by
+  unfold dot
+  apply Finset.sum_congr rfl
+  intro j hj
+  ring
+
+def head2 (a b : K) : Fin 2 → K
+  | <0, _> => a
+  | <1, _> => b
+
+def prepend2 {n : ℕ} (a b : K) (u : Fin n → K) : Fin (2 + n) → K :=
+  Fin.append (head2 a b) u
+
+def r0 {n : ℕ} (x : Fin n → K) : Fin (2 + n) → K :=
+  prepend2 1 0 x
+
+def ri {n : ℕ} (c yi : K) (g : Fin n → K) : Fin (2 + n) → K :=
+  prepend2 (-yi) (-(c * yi)) g
+
+theorem dot_prepend2_prepend2
+    {n : ℕ} (a b a' b' : K) (u v : Fin n → K) :
+    dot (prepend2 a b u) (prepend2 a' b' v)
+      = a * a' + b * b' + dot u v := by
+  unfold dot prepend2
+  rw [Fin.sum_univ_add]
+  simp [head2, Fin.sum_univ_two, add_assoc]
+
+theorem dot_r0_r0
+    {n : ℕ} {x : Fin n → K}
+    (hx : dot x x = (-1 : K)) :
+    dot (r0 x) (r0 x) = 0 := by
+  rw [r0, dot_prepend2_prepend2]
+  rw [hx]
+  ring
+
+theorem dot_r0_ri
+    {n : ℕ} {x g : Fin n → K} {c yi : K}
+    (hyi : yi = dot x g) :
+    dot (r0 x) (ri c yi g) = 0 := by
+  rw [r0, ri, dot_prepend2_prepend2]
+  rw [hyi]
+  ring
+
+theorem dot_ri_ri
+    {n : ℕ} {g h : Fin n → K} {c yi yj : K}
+    (hc : c ^ 2 = (-1 : K))
+    (hgh : dot g h = 0) :
+    dot (ri c yi g) (ri c yj h) = 0 := by
+  rw [ri, ri, dot_prepend2_prepend2]
+  rw [hgh]
+  calc
+    (-yi) * (-yj) + (-(c * yi)) * (-(c * yj)) + 0
+        = yi * yj + (c * yi) * (c * yj) := by ring
+    _ = yi * yj + (c ^ 2) * (yi * yj) := by
+        rw [pow_two]
+        ring
+    _ = yi * yj + (-1 : K) * (yi * yj) := by rw [hc]
+    _ = 0 := by ring
+
+def buildRows {m n : ℕ} (x : Fin n → K) (c : K) (G : Fin m → Fin n → K) :
+    Fin (m + 1) → Fin (2 + n) → K :=
+  Fin.cases (r0 x) (fun i => ri c (dot x (G i)) (G i))
+
+theorem buildRows_zero_zero
+    {m n : ℕ} {x : Fin n → K} {c : K} {G : Fin m → Fin n → K}
+    (hx : dot x x = (-1 : K)) :
+    dot (buildRows x c G 0) (buildRows x c G 0) = 0 := by
+  simp [buildRows]
+  exact dot_r0_r0 hx
+
+theorem buildRows_zero_succ
+    {m n : ℕ} {x : Fin n → K} {c : K} {G : Fin m → Fin n → K} (i : Fin m) :
+    dot (buildRows x c G 0) (buildRows x c G (Fin.succ i)) = 0 := by
+  simp [buildRows]
+  exact dot_r0_ri rfl
+
+theorem buildRows_succ_zero
+    {m n : ℕ} {x : Fin n → K} {c : K} {G : Fin m → Fin n → K} (i : Fin m) :
+    dot (buildRows x c G (Fin.succ i)) (buildRows x c G 0) = 0 := by
+  rw [dot_comm]
+  exact buildRows_zero_succ i
+
+theorem buildRows_succ_succ
+    {m n : ℕ} {x : Fin n → K} {c : K} {G : Fin m → Fin n → K}
+    (hc : c ^ 2 = (-1 : K))
+    (hG : ∀ i j : Fin m, dot (G i) (G j) = 0)
+    (i j : Fin m) :
+    dot (buildRows x c G (Fin.succ i)) (buildRows x c G (Fin.succ j)) = 0 := by
+  simp [buildRows]
+  exact dot_ri_ri (hc := hc) (hgh := hG i j)
+
+theorem buildRows_orthogonal
+    {m n : ℕ} {x : Fin n → K} {c : K} {G : Fin m → Fin n → K}
+    (hx : dot x x = (-1 : K))
+    (hc : c ^ 2 = (-1 : K))
+    (hG : ∀ i j : Fin m, dot (G i) (G j) = 0) :
+    ∀ i j : Fin (m + 1), dot (buildRows x c G i) (buildRows x c G j) = 0 := by
+  intro i j
+  rcases Fin.eq_zero_or_eq_succ i with rfl | <i, rfl>
+  · rcases Fin.eq_zero_or_eq_succ j with rfl | <j, rfl>
+    · exact buildRows_zero_zero hx
+    · exact buildRows_zero_succ j
+  · rcases Fin.eq_zero_or_eq_succ j with rfl | <j, rfl>
+    · exact buildRows_succ_zero i
+    · exact buildRows_succ_succ (hc := hc) (hG := hG) i j
+
+def rowMatrix {m n : ℕ} (R : Fin m → Fin n → K) : Matrix (Fin m) (Fin n) K :=
+  fun i j => R i j
+
+theorem rowMatrix_mul_transpose_apply
+    {m n : ℕ} (R : Fin m → Fin n → K) (i j : Fin m) :
+    (rowMatrix R * (rowMatrix R).transpose) i j = dot (R i) (R j) := by
+  unfold rowMatrix dot
+  rw [Matrix.mul_apply]
+  simp
+
+theorem buildRows_matrix_gram_zero
+    {m n : ℕ} {x : Fin n → K} {c : K} {G : Fin m → Fin n → K}
+    (hx : dot x x = (-1 : K))
+    (hc : c ^ 2 = (-1 : K))
+    (hG : ∀ i j : Fin m, dot (G i) (G j) = 0) :
+    rowMatrix (buildRows x c G) * (rowMatrix (buildRows x c G)).transpose = 0 := by
+  ext i j
+  rw [rowMatrix_mul_transpose_apply]
+  exact buildRows_orthogonal (hx := hx) (hc := hc) (hG := hG) i j
+
+end BuildingUpMatrixGram
+\end{lstlisting}
+
+\begin{cor}[Self-orthogonality of the row span]
+\label{cor:self-orthogonal-row-span}
+Under the hypotheses of Theorem~\ref{thm:gram-zero}, the row span of the building-up matrix $A$ is a self-orthogonal linear code in $K^{n+2}$.
+\end{cor}
+
+\begin{proof}
+Since $AA^\top=0$, every pair of rows of $A$ is orthogonal. By bilinearity of the dot product, any two linear combinations of the rows are again orthogonal. Hence the row span of $A$ is a self-orthogonal subspace of $K^{n+2}$.
+\end{proof}
+
+\begin{cor}[Self-duality in the maximal-dimension case]
+\label{cor:self-dual-maximal}
+Assume the hypotheses of Theorem~\ref{thm:gram-zero}, and suppose in addition that the row span of the building-up matrix $A$ has dimension
+\[
+\frac{n+2}{2}.
+\]
+Then the row span of $A$ is self-dual.
+\end{cor}
+
+\begin{proof}
+By Corollary~\ref{cor:self-orthogonal-row-span}, the row span $C$ of $A$ satisfies
+\[
+C \subseteq C^\perp.
+\]
+Taking dimensions in the ambient space $K^{n+2}$ yields
+\[
+\dim C + \dim C^\perp = n+2.
+\]
+If $\dim C = \frac{n+2}{2}$, then necessarily
+\[
+\dim C^\perp = \frac{n+2}{2} = \dim C.
+\]
+Since $C\subseteq C^\perp$ and both spaces have the same dimension, we conclude that
+\[
+C=C^\perp.
+\]
+Thus $C$ is self-dual.
+\end{proof}
+
+\begin{prop}[Normalization of a nonzero isotropic head]
+\label{prop:head-normalization}
+Let
+\[
+v=(a,b,g)\in K^{n+2}
+\]
+with $a\neq 0$ and
+\[
+a^2+b^2=0.
+\]
+Then, setting
+\[
+c=\frac{b}{a},
+\qquad
+g' = a^{-1} g,
+\]
+one has
+\[
+c^2=-1
+\]
+and
+\[
+v = a\,(1,c,g').
+\]
+Equivalently, every row whose first two coordinates form a nonzero isotropic vector is obtained from a row in normalized split-head form by multiplication by a nonzero scalar.
+\end{prop}
+
+\begin{proof}
+Since $a\neq 0$, the quotient $c=b/a$ is defined. Dividing the identity $a^2+b^2=0$ by $a^2$ gives
+\[
+1+\left(\frac{b}{a}\right)^2 = 0,
+\]
+hence $c^2=-1$. Writing $g=a g'$ with $g'=a^{-1}g$, we obtain
+\[
+(a,b,g)
+=
+\left(a,\,a\frac{b}{a},\,a(a^{-1}g)\right)
+=
+a\,(1,c,g').
+\]
+Thus the head is normalized after rescaling by the nonzero scalar $a^{-1}$.
+\end{proof}
+
+\begin{cor}[Orthogonal normalization relative to the distinguished row]
+\label{cor:head-normalization-orthogonal}
+Let
+\[
+R_0=(1,0,x)\in K^{n+2},
+\qquad
+v=(a,b,g)\in K^{n+2},
+\]
+with $a\neq 0$, $a^2+b^2=0$, and
+\[
+\langle R_0,v\rangle = 0.
+\]
+Then there exists $c\in K$ and a normalized tail vector
+\[
+g' = a^{-1}g
+\]
+such that
+\[
+c^2=-1,
+\qquad
+v=a\,(1,c,g'),
+\qquad
+\langle x,g'\rangle = -1.
+\]
+\end{cor}
+
+\begin{proof}
+By Proposition~\ref{prop:head-normalization}, taking $c=b/a$ gives $c^2=-1$ and
+\[
+v=a\,(1,c,g')
+\qquad\text{with}\qquad
+g'=a^{-1}g.
+\]
+Now
+\[
+0=\langle R_0,v\rangle
+=
+\left\langle (1,0,x),\,a(1,c,g')\right\rangle
+=
+a\bigl(1+\langle x,g'\rangle\bigr).
+\]
+Since $a\neq 0$, we conclude that
+\[
+\langle x,g'\rangle = -1.
+\]
+\end{proof}
+
+\begin{cor}[Canonical split-row form after normalization]
+\label{cor:scaled-ri-normalization}
+Under the hypotheses of Corollary~\ref{cor:head-normalization-orthogonal}, the row $v$ can be written as
+\[
+v = a\,r_i(c,g')
+\]
+where
+\[
+r_i(c,g')
+=
+\bigl(-\langle x,g'\rangle,\,-c\langle x,g'\rangle,\,g'\bigr)
+=
+(1,c,g')
+\]
+because $\langle x,g'\rangle=-1$.
+\end{cor}
+
+\begin{proof}
+The identity
+\[
+v=a\,(1,c,g')
+\]
+from Corollary~\ref{cor:head-normalization-orthogonal} gives
+\[
+v=a\,r_i(c,g')
+\]
+once one substitutes $\langle x,g'\rangle=-1$ into the defining formula
+\[
+r_i(c,g')
+=
+\bigl(-\langle x,g'\rangle,\,-c\langle x,g'\rangle,\,g'\bigr).
+\]
+\end{proof}
+
+\begin{cor}[Familywise scaled canonical split form]
+\label{cor:familywise-scaled-ri}
+Fix $x\in K^n$ and $c\in K$ with $c^2=-1$, and let
+\[
+R=\{R_0,R_1,\dots,R_m\}\subset K^{n+2}
+\]
+be a row family with
+\[
+R_0=(1,0,x).
+\]
+Assume that for each $i\ge 1$ the successor row has the form
+\[
+R_i=(a_i,c a_i,g_i)
+\]
+with $a_i\neq 0$, and is orthogonal to $R_0$. Then for each $i\ge 1$ there exists a normalized tail vector $g_i'\in K^n$ such that
+\[
+\langle x,g_i'\rangle=-1
+\qquad\text{and}\qquad
+R_i = a_i\,r_i(c,g_i').
+\]
+\end{cor}
+
+\begin{proof}
+Apply Corollary~\ref{cor:scaled-ri-normalization} to each successor row separately. The hypothesis
+\[
+R_i=(a_i,c a_i,g_i)
+\]
+already puts the head on the fixed $c$-isotropic line. The orthogonality condition
+\[
+\langle R_0,R_i\rangle=0
+\]
+forces the normalized tail to satisfy $\langle x,g_i'\rangle=-1$. Hence every successor row is a nonzero scalar multiple of the canonical split row determined by its normalized tail.
+\end{proof}
+
+\begin{prop}[Rowwise nonzero scaling preserves the generated code]
+\label{prop:row-scaling-same-code}
+Let
+\[
+R=\{R_1,\dots,R_m\}\subset K^n
+\]
+be a row family, and let $\lambda_1,\dots,\lambda_m\in K^\times$. Define a new family $R'=\{R_1',\dots,R_m'\}$ by
+\[
+R_i'=\lambda_i R_i \qquad (1\le i\le m).
+\]
+Then the row spans of $R$ and $R'$ are equal.
+\end{prop}
+
+\begin{proof}
+Each row $R_i'$ belongs to the span of $R$, so the row span of $R'$ is contained in the row span of $R$. Conversely,
+\[
+R_i=\lambda_i^{-1}R_i'
+\]
+for every $i$, since each $\lambda_i$ is nonzero. Hence each row of $R$ belongs to the row span of $R'$, and the reverse inclusion follows.
+\end{proof}
+
+\begin{prop}[Row permutation preserves the generated code]
+\label{prop:row-permutation-same-code}
+Let
+\[
+R=\{R_1,\dots,R_m\}\subset K^n
+\]
+be a row family, and let $\sigma\in S_m$. Define
+\[
+R_i' = R_{\sigma(i)} \qquad (1\le i\le m).
+\]
+Then the row spans of $R$ and $R'=\{R_1',\dots,R_m'\}$ are equal.
+\end{prop}
+
+\begin{proof}
+Each row of $R'$ is one of the rows of $R$, so the row span of $R'$ is contained in the row span of $R$. Conversely, since $\sigma$ is a permutation, every row $R_i$ occurs as some row $R'_{\sigma^{-1}(i)}$ of the reordered family. Hence every row of $R$ belongs to the row span of $R'$, and the reverse inclusion follows.
+\end{proof}
+
+\begin{prop}[Pivot normalization by row operations]
+\label{prop:pivot-normalization-row-ops}
+Let
+\[
+R=\{R_0,\dots,R_m\}\subset K^{n+2},
+\]
+and choose an index $j$ such that
+\[
+R_j=(a,c a,g)
+\]
+with $a\neq 0$. Form a new family $R'$ by first permuting rows so that $R_j$ becomes the first row, and then multiplying this first row by $a^{-1}$ while leaving all other rows unchanged. Then:
+\begin{enumerate}
+\item the row spans of $R$ and $R'$ are equal;
+\item the first row of $R'$ is
+\[
+(1,c,a^{-1}g).
+\]
+\end{enumerate}
+\end{prop}
+
+\begin{proof}
+The equality of row spans follows by combining Propositions~\ref{prop:row-scaling-same-code} and~\ref{prop:row-permutation-same-code}. For the first row, permutation places $R_j$ in the initial position, and multiplying by $a^{-1}$ yields
+\[
+a^{-1}(a,c a,g)=(1,c,a^{-1}g).
+\]
+\end{proof}
+
+\begin{prop}[Orthogonality to a normalized isotropic pivot]
+\label{prop:orthogonal-normalized-isotropic-pivot}
+Fix $c\in K$ with $c^2=-1$, and let
+\[
+u=(1,c,x),\qquad v=(a,c a,g)
+\]
+be two rows in $K^{n+2}$. Then
+\[
+\langle u,v\rangle = \langle x,g\rangle.
+\]
+In particular,
+\[
+\langle u,v\rangle = 0
+\qquad\Longleftrightarrow\qquad
+\langle x,g\rangle = 0.
+\]
+\end{prop}
+
+\begin{proof}
+Expanding the dot product gives
+\[
+\langle u,v\rangle
+=
+a+c(ca)+\langle x,g\rangle
+=
+a(1+c^2)+\langle x,g\rangle.
+\]
+Since $c^2=-1$, the first term vanishes, leaving
+\[
+\langle u,v\rangle=\langle x,g\rangle.
+\]
+The equivalence follows immediately.
+\end{proof}
+
+\begin{prop}[Tail orthogonality after pivot normalization]
+\label{prop:tail-orthogonality-pivot-normalized}
+Fix $c\in K$ with $c^2=-1$, and let
+\[
+R=\{R_0,R_1,\dots,R_m\}\subset K^{n+2}
+\]
+be a row family with
+\[
+R_0=(1,c,x),
+\qquad
+R_i=(a_i,c a_i,g_i)\quad (1\le i\le m).
+\]
+Assume that the rows of $R$ are pairwise orthogonal. Then:
+\begin{enumerate}
+\item for every $i\ge 1$, one has
+\[
+\langle x,g_i\rangle=0;
+\]
+\item for every $i,j\ge 1$, one has
+\[
+\langle g_i,g_j\rangle=0.
+\]
+\end{enumerate}
+Equivalently, deleting the first hyperbolic coordinate pair from the successor rows produces a pairwise orthogonal tail family in $K^n$, each of whose rows is orthogonal to the pivot tail $x$.
+\end{prop}
+
+\begin{proof}
+Applying Proposition~\ref{prop:orthogonal-normalized-isotropic-pivot} to the pair $(R_0,R_i)$ gives
+\[
+\langle R_0,R_i\rangle=\langle x,g_i\rangle.
+\]
+Since the left-hand side vanishes by hypothesis, $\langle x,g_i\rangle=0$ for every $i\ge 1$. Likewise, for $i,j\ge 1$,
+\[
+\langle R_i,R_j\rangle
+=
+a_i a_j(1+c^2)+\langle g_i,g_j\rangle
+=
+\langle g_i,g_j\rangle,
+\]
+because $c^2=-1$. Hence pairwise orthogonality of the rows of $R$ implies pairwise orthogonality of the tail family.
+\end{proof}
+
+\begin{cor}[Orthogonal tail-family package after pivot normalization]
+\label{cor:pivot-normalized-tail-package}
+Under the hypotheses of Proposition~\ref{prop:tail-orthogonality-pivot-normalized}, the tail family
+\[
+G=\{g_1,\dots,g_m\}\subset K^n
+\]
+satisfies
+\[
+\langle x,g_i\rangle=0 \qquad (1\le i\le m)
+\]
+and is pairwise orthogonal.
+\end{cor}
+
+\begin{proof}
+This is exactly the pair of conclusions established in Proposition~\ref{prop:tail-orthogonality-pivot-normalized}, rewritten in terms of the deleted-tail family $G$.
+\end{proof}
+
+\begin{theorem}[Rowwise characterization of pivot-normalized orthogonal families]
+\label{thm:pivot-normalized-rowwise-characterization}
+Fix $c\in K$ with $c^2=-1$, a pivot tail $x\in K^n$, nonzero-index scalars $a_1,\dots,a_m\in K$, and tails $g_1,\dots,g_m\in K^n$. Define
+\[
+R_0=(1,c,x),
+\qquad
+R_i=(a_i,c a_i,g_i)\quad (1\le i\le m).
+\]
+Then the row family $R=\{R_0,R_1,\dots,R_m\}$ is pairwise orthogonal if and only if
+\[
+\langle x,x\rangle=0,
+\qquad
+\langle x,g_i\rangle=0 \ \text{for all } i,
+\qquad
+\langle g_i,g_j\rangle=0 \ \text{for all } i,j.
+\]
+\end{theorem}
+
+\begin{proof}
+If $R$ is pairwise orthogonal, then applying orthogonality to $(R_0,R_0)$ gives
+\[
+0=\langle R_0,R_0\rangle = 1+c^2+\langle x,x\rangle = \langle x,x\rangle,
+\]
+because $c^2=-1$. Applying Proposition~\ref{prop:tail-orthogonality-pivot-normalized} then yields
+\[
+\langle x,g_i\rangle=0
+\qquad\text{and}\qquad
+\langle g_i,g_j\rangle=0
+\]
+for all relevant indices.
+
+Conversely, assume
+\[
+\langle x,x\rangle=0,
+\qquad
+\langle x,g_i\rangle=0,
+\qquad
+\langle g_i,g_j\rangle=0.
+\]
+Then
+\[
+\langle R_0,R_0\rangle = 1+c^2+\langle x,x\rangle = 0.
+\]
+For each $i\ge 1$, Proposition~\ref{prop:orthogonal-normalized-isotropic-pivot} gives
+\[
+\langle R_0,R_i\rangle=\langle x,g_i\rangle=0.
+\]
+For $i,j\ge 1$, the same expansion as in Proposition~\ref{prop:tail-orthogonality-pivot-normalized} yields
+\[
+\langle R_i,R_j\rangle
+=
+a_i a_j(1+c^2)+\langle g_i,g_j\rangle
+=
+0.
+\]
+Hence all rows are pairwise orthogonal.
+\end{proof}
+
+\begin{theorem}[Pivot normalization produces a pivot-tail package]
+\label{thm:pivot-normalization-tail-package}
+Fix $c\in K$ with $c^2=-1$, and let
+\[
+R=\{R_0,\dots,R_m\}\subset K^{n+2}
+\]
+be a pairwise orthogonal row family. Choose an index $j$ and assume
+\[
+R_j=(a,c a,g)
+\qquad\text{with}\qquad
+a\neq 0.
+\]
+Assume further that every row of $R$ lies on the same $c$-isotropic line, that is, for each $k$ there exist $\lambda_k\in K$ and $h_k\in K^n$ such that
+\[
+R_k=(\lambda_k,c\lambda_k,h_k).
+\]
+Let $R'$ be obtained from $R$ by moving the pivot row $R_j$ to the first position and multiplying that first row by $a^{-1}$. Then:
+\begin{enumerate}
+\item $R$ and $R'$ have the same row span;
+\item the first row of $R'$ is
+\[
+(1,c,a^{-1}g);
+\]
+\item after deleting the first hyperbolic coordinate pair from the successor rows of $R'$, one obtains a tail family
+\[
+G'=\{g_1',\dots,g_m'\}\subset K^n
+\]
+such that
+\[
+\langle a^{-1}g,a^{-1}g\rangle=0,
+\qquad
+\langle a^{-1}g,g_i'\rangle=0 \ \text{for all } i,
+\qquad
+\langle g_i',g_j'\rangle=0 \ \text{for all } i,j.
+\]
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+The equality of row spans is Proposition~\ref{prop:pivot-normalization-row-ops}. The formula for the first row is the same proposition applied to the chosen pivot row.
+
+Because row permutation and nonzero row scaling preserve pairwise orthogonality, the normalized family $R'$ is still pairwise orthogonal. By construction its first row is $(1,c,a^{-1}g)$, and every successor row still has head on the same $c$-isotropic line. Therefore Theorem~\ref{thm:pivot-normalized-rowwise-characterization} applies to $R'$. Its conclusion is exactly that the deleted successor-tail family satisfies the displayed isotropy and orthogonality conditions.
+\end{proof}
+
+\begin{cor}[Existence of a pivot-normalized representative]
+\label{cor:existence-pivot-normalized-representative}
+Under the hypotheses of Theorem~\ref{thm:pivot-normalization-tail-package}, there exists a row family
+\[
+R'=\{R_0',\dots,R_m'\}\subset K^{n+2}
+\]
+such that:
+\begin{enumerate}
+\item $R'$ has the same row span as $R$;
+\item $R_0'=(1,c,x')$ for some $x'\in K^n$;
+\item every successor row of $R'$ has the form
+\[
+R_i'=(a_i',c a_i',g_i');
+\]
+\item deleting the first hyperbolic coordinate pair from the successor rows yields a pivot-tail package relative to $x'$.
+\end{enumerate}
+\end{cor}
+
+\begin{proof}
+Take $R'$ to be the pivot-normalized family constructed in Theorem~\ref{thm:pivot-normalization-tail-package}. The first three conclusions are part of that theorem's construction, and the last is exactly its tail-package conclusion.
+\end{proof}
+
+\begin{cor}[Existence of an explicit pivotRows representative]
+\label{cor:existence-explicit-pivotrows-representative}
+Under the hypotheses of Theorem~\ref{thm:pivot-normalization-tail-package}, there exist a pivot tail $x'\in K^n$, scalars $a_1',\dots,a_m'\in K$, and a tail family
+\[
+G'=\{g_1',\dots,g_m'\}\subset K^n
+\]
+such that the row family
+\[
+\widetilde{R}
+=
+\{(1,c,x'),\ (a_1',c a_1',g_1'),\ \dots,\ (a_m',c a_m',g_m')\}
+\]
+has the same row span as $R$, is pairwise orthogonal, and the tail data satisfy
+\[
+\langle x',x'\rangle=0,
+\qquad
+\langle x',g_i'\rangle=0 \ \text{for all } i,
+\qquad
+\langle g_i',g_j'\rangle=0 \ \text{for all } i,j.
+\]
+\end{cor}
+
+\begin{proof}
+By Corollary~\ref{cor:existence-pivot-normalized-representative}, there is a same-row-span pivot-normalized representative $R'$. Writing its successor rows explicitly as
+\[
+R_i'=(a_i',c a_i',g_i')
+\]
+produces a family $\widetilde{R}$ of the displayed form. The pairwise orthogonality and the tail-package identities then follow from Theorem~\ref{thm:pivot-normalized-rowwise-characterization} applied to $R'$.
+\end{proof}
+
+\begin{prop}[Pure-tail normal form for a pivotRows representative]
+\label{prop:pivotrows-pure-tail-normal-form}
+Let
+\[
+\widetilde{R}
+=
+\{(1,c,x),\ (a_1,c a_1,g_1),\dots,(a_m,c a_m,g_m)\}
+\]
+be a pivotRows family. Define residual tails
+\[
+h_i = g_i - a_i x \qquad (1\le i\le m),
+\]
+and form the pure-tail family
+\[
+\widetilde{R}^{\mathrm{pure}}
+=
+\{(1,c,x),\ (0,0,h_1),\dots,(0,0,h_m)\}.
+\]
+Then $\widetilde{R}$ and $\widetilde{R}^{\mathrm{pure}}$ have the same row span. If, in addition,
+\[
+\langle x,x\rangle=0,\qquad \langle x,g_i\rangle=0,\qquad \langle g_i,g_j\rangle=0,
+\]
+then the residual tails satisfy
+\[
+\langle x,h_i\rangle=0
+\qquad\text{and}\qquad
+\langle h_i,h_j\rangle=0
+\]
+for all $i,j$, so $\widetilde{R}^{\mathrm{pure}}$ is again pairwise orthogonal.
+\end{prop}
+
+\begin{proof}
+Each successor row decomposes as
+\[
+(a_i,c a_i,g_i) = a_i(1,c,x) + (0,0,g_i-a_i x).
+\]
+Hence every row of $\widetilde{R}$ lies in the span of $\widetilde{R}^{\mathrm{pure}}$, and conversely each pure-tail row is the difference of a successor row and a scalar multiple of the pivot row, so the row spans agree.
+
+If the pivot-tail package identities hold, then
+\[
+\langle x,h_i\rangle
+=
+\langle x,g_i\rangle - a_i\langle x,x\rangle
+=
+0,
+\]
+and similarly
+\[
+\langle h_i,h_j\rangle
+=
+\langle g_i,g_j\rangle
+- a_j\langle g_i,x\rangle
+- a_i\langle x,g_j\rangle
++ a_i a_j \langle x,x\rangle
+=
+0.
+\]
+Therefore the pure tails remain pairwise orthogonal and orthogonal to the pivot tail.
+\end{proof}
+
+\begin{cor}[Existence of a same-code pure-tail representative]
+\label{cor:existence-pure-tail-representative}
+Under the hypotheses of Theorem~\ref{thm:pivot-normalization-tail-package}, there exist a pivot tail $x'\in K^n$, scalars $a_1',\dots,a_m'\in K$, and tails $g_1',\dots,g_m'\in K^n$ such that the family
+\[
+R^{\mathrm{pure}}
+=
+\{(1,c,x'),\ (0,0,g_1'),\dots,(0,0,g_m')\}
+\]
+has the same row span as the original family $R$, is pairwise orthogonal, and its deleted tail family satisfies
+\[
+\langle x',g_i'\rangle=0
+\qquad\text{and}\qquad
+\langle g_i',g_j'\rangle=0
+\]
+for all $i,j$.
+\end{cor}
+
+\begin{proof}
+By Corollary~\ref{cor:existence-explicit-pivotrows-representative}, $R$ admits a same-row-span pivotRows representative
+\[
+\widetilde{R}
+=
+\{(1,c,x'),\ (a_1',c a_1',h_1),\dots,(a_m',c a_m',h_m)\}
+\]
+whose deleted tail family is a pivot-tail package. Applying Proposition~\ref{prop:pivotrows-pure-tail-normal-form} to $\widetilde{R}$ replaces it, without changing the row span, by the pure-tail family
+\[
+\{(1,c,x'),\ (0,0,h_1-a_1' x'),\dots,(0,0,h_m-a_m' x')\},
+\]
+and the same proposition gives the required orthogonality statements for the deleted tail family.
+\end{proof}
+
+\begin{blueblock}
+\begin{prop}[Obstruction to a naive exact same-code converse]
+\label{prop:pure-tail-obstruction}
+Let
+\[
+R^{\mathrm{pure}}
+=
+\{(1,c,x),\ (0,0,h_1),\dots,(0,0,h_m)\}
+\]
+with $c\neq 0$. Then every vector in the row span of $R^{\mathrm{pure}}$ has first two coordinates of the form $(\alpha,c\alpha)$. In particular, no vector of the form $(1,0,*)$ lies in the same row span. Consequently, a pure-tail representative cannot already be an exact split \texttt{buildRows} family in the original coordinates.
+\end{prop}
+
+\begin{proof}
+Every generator row of $R^{\mathrm{pure}}$ has first two coordinates either $(1,c)$ or $(0,0)$, so every linear combination has first two coordinates of the form $(\alpha,c\alpha)$. Since $c\neq 0$, such a vector can never equal $(1,0,*)$.
+\end{proof}
+
+\begin{theorem}[Head alignment to exact split building-up form]
+\label{thm:head-alignment-buildrows}
+Let $R^{\mathrm{pure}}$ be a pairwise orthogonal pure-tail representative
+\[
+R^{\mathrm{pure}}
+=
+\{(1,c,x),\ (0,0,h_1),\dots,(0,0,h_m)\}.
+\]
+After applying the explicit head transform
+\[
+(v_0,v_1,\mathrm{tail})\longmapsto
+\left(\frac{v_0-cv_1}{2},\frac{v_0+cv_1}{2},\mathrm{tail}\right),
+\]
+the family becomes an exact split \texttt{buildRows} family with the same deleted tail package. In particular, the obstruction in Proposition~\ref{prop:pure-tail-obstruction} is a coordinate obstruction, not an existential obstruction.
+\end{theorem}
+
+\begin{proof}
+The chosen head transform sends $(1,c)$ to $(1,0)$ and fixes the zero head $(0,0)$. Hence the distinguished row becomes $(1,0,x)$, while every remaining row keeps the same tail $h_i$. Because the pure-tail family is pairwise orthogonal, each $h_i$ satisfies $\langle x,h_i\rangle=0$, so the aligned successor rows acquire exactly the zero head prescribed by the \texttt{buildRows} formula. Therefore the transformed family is precisely the normalized split \texttt{buildRows} family attached to $x$ and the deleted tail package.
+\end{proof}
+
+\begin{theorem}[Reverse theorem up to split-isometric equivalence]
+\label{thm:reverse-up-to-split-isometry}
+Let $R$ be a pairwise orthogonal family whose rows all lie on the $c$-isotropic line, and assume one row has nonzero head. Then, after passing to a same-code pivot-normalized representative and then to a pure-tail representative, there exist $x$, correction scalars $a_i$, and a tail family $G$ such that $R$ is split-isometrically equivalent to an exact split \texttt{buildRows} family
+\[
+\texttt{buildRows}(x,c,H),
+\qquad
+H=\texttt{pivotResidualTails}(x,a,G).
+\]
+Equivalently, the reverse direction is formally valid up to the explicit split-isometry relation carried by the hyperbolic head plane.
+\end{theorem}
+
+\begin{proof}
+The normalization front end produces a same-code pure-tail representative. Proposition~\ref{prop:pure-tail-obstruction} shows why one cannot stop there in the original coordinates, and Theorem~\ref{thm:head-alignment-buildrows} supplies the missing head alignment. The corresponding split isometry acts only on the distinguished head hyperbolic plane and preserves the ambient bilinear form, so self-orthogonality, self-duality, and the predecessor-successor relation are unchanged under this replacement. The resulting existence statement is exactly the split-isometric reverse theorem formalized in Lean; the ambient-linear-equivalence version is obtained as a corollary.
+\end{proof}
+\end{blueblock}
+
+\begin{blueblock}
+\begin{theorem}[Comparison with the classical Lee--Kim wording]
+\label{thm:split-isometry-comparison}
+Fix \(c \in K^\times\) with \(c^2=-1\), and let
+\[
+T_c(v_0,v_1,\mathrm{tail})
+=
+\left(\frac{v_0-cv_1}{2},\frac{v_0+cv_1}{2},\mathrm{tail}\right).
+\]
+Then \(T_c\) fixes the tail coordinates, sends the hyperbolic head pair
+\[
+(1,c,\mathrm{tail}) \longmapsto (1,0,\mathrm{tail}),
+\qquad
+(1,-c,\mathrm{tail}) \longmapsto (0,1,\mathrm{tail}),
+\]
+and is a split isometry from the Euclidean form on the distinguished \(2\)-plane to the split hyperbolic form \(H_2\). Consequently, the Lean theorem proving existence of a split \texttt{buildRows} representative up to \texttt{SplitIsometryCodeEquiv} is precisely the reverse building-up theorem in Lee--Kim style after a fixed hyperbolic basis change on the first coordinate pair.
+\end{theorem}
+
+\begin{proof}
+The first statement is exactly the explicit formula defining the head transform: the isotropic vector \((1,c)\) is sent to the standard pivot row head \((1,0)\), while the opposite hyperbolic partner \((1,-c)\) is sent to \((0,1)\). The same linear map is also proved to be a split isometry for the hyperbolic head form. Therefore the formal reverse theorem says precisely that, after the fixed hyperbolic basis change \(T_c\) on the distinguished \(2\)-plane, the reverse direction lands in the standard \texttt{buildRows} normal form. This is the Lee--Kim converse rewritten in the hyperbolic basis language isolated in the present paper.
+\end{proof}
+\end{blueblock}
+
+\begin{theorem}[Rowwise characterization of normalized split build families]
+\label{thm:split-rowwise-characterization}
+Fix $x \in K^n$ and $c \in K$, and let
+\[
+R=\{R_0,R_1,\dots,R_m\}\subset K^{n+2}
+\]
+be a row family with $R_0=(1,0,x)$. Let
+\[
+\tau : K^{n+2}\to K^n,\qquad \tau(a,b,g)=g
+\]
+denote deletion of the first two coordinates. Then the following are equivalent:
+\begin{enumerate}
+\item For every $i\ge 1$, the row $R_i$ has a $c$-isotropic head and is orthogonal to $R_0$, that is,
+\[
+R_i=(a_i,c a_i,g_i)
+\quad\text{for some } a_i\in K,\ g_i\in K^n,
+\qquad
+\langle R_0,R_i\rangle=0.
+\]
+\item For every $i\ge 1$, the row $R_i$ is exactly the canonical building-up row determined by its tail:
+\[
+R_i
+=
+\bigl(-\langle x,\tau(R_i)\rangle,\,-c\langle x,\tau(R_i)\rangle,\,\tau(R_i)\bigr).
+\]
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+Suppose first that $R_i=(a_i,c a_i,g_i)$ and $\langle R_0,R_i\rangle=0$. Since $R_0=(1,0,x)$, expanding the dot product gives
+\[
+0=\langle R_0,R_i\rangle = a_i+\langle x,g_i\rangle.
+\]
+Hence $a_i=-\langle x,g_i\rangle$, so
+\[
+R_i=(-\langle x,g_i\rangle,\,-c\langle x,g_i\rangle,\,g_i).
+\]
+Since $g_i=\tau(R_i)$, this is precisely the stated canonical form.
+
+Conversely, if
+\[
+R_i=
+\bigl(-\langle x,\tau(R_i)\rangle,\,-c\langle x,\tau(R_i)\rangle,\,\tau(R_i)\bigr),
+\]
+then $R_i$ has a $c$-isotropic head by construction, and
+\[
+\langle R_0,R_i\rangle
+=
+-\langle x,\tau(R_i)\rangle+\langle x,\tau(R_i)\rangle
+=0.
+\]
+Thus the two conditions are equivalent.
+\end{proof}
+
+\begin{prop}[Unique parent and unique child in normalized split form]
+\label{prop:split-parent-child-unique}
+Fix $x\in K^n$, $c\in K$, and a parent row family
+\[
+G=\{G_1,\dots,G_m\}\subset K^n.
+\]
+Then there exists a unique normalized split build family
+\[
+R=\{R_0,R_1,\dots,R_m\}\subset K^{n+2}
+\]
+such that
+\[
+R_0=(1,0,x)
+\qquad\text{and}\qquad
+\tau(R_i)=G_i \quad (1\le i\le m).
+\]
+It is given explicitly by
+\[
+R_0=(1,0,x),
+\qquad
+R_i=\bigl(-\langle x,G_i\rangle,\,-c\langle x,G_i\rangle,\,G_i\bigr)
+\quad (1\le i\le m).
+\]
+Conversely, every normalized split build family $R$ has a unique parent family, namely the tail family $\tau(R_i)$ obtained by deleting the first row and the first hyperbolic coordinate pair.
+\end{prop}
+
+\begin{proof}
+For existence, define $R$ by the displayed formula. This is the building-up prescription, so $R$ is a normalized split build family with parent $G$. For uniqueness, let $R'$ be any normalized split build family with the same parent $G$. By Theorem~\ref{thm:split-rowwise-characterization}, each successor row of $R'$ is uniquely determined by its tail:
+\[
+R'_i
+=
+\bigl(-\langle x,\tau(R'_i)\rangle,\,-c\langle x,\tau(R'_i)\rangle,\,\tau(R'_i)\bigr)
+=
+\bigl(-\langle x,G_i\rangle,\,-c\langle x,G_i\rangle,\,G_i\bigr).
+\]
+Hence $R'=R$. For the converse, deleting the first row and the first hyperbolic coordinate pair produces a row family $G$, and this $G$ is uniquely determined by the rows of $R$.
+\end{proof}
+
+\begin{remark}
+\rm
+The Lean file \texttt{BuildingUpFormalization.lean} certifies four layers of the split theory: the split arithmetic of the head plane and the norm form, the forward building-up theorem through self-duality, the normalized reverse chain through pure-tail reduction and the naive-converse obstruction, and the explicit head-alignment step yielding the reverse theorem under \texttt{SplitIsometryCodeEquiv}. Thus the formalization certifies the reverse existence statement in the precise split-isometric sense used in this paper.
+\end{remark}
+
+\begin{blueblock}
+\begin{theorem}[One-step cohomological comparison between Lagrangian reduction and binary building-up]
+\label{thm:CZ_Kim_Lagrangian}
+Let
+\[
+W=\bigoplus_{v\in S} H^1_{\et}(K_v,\mu_2)
+\]
+be the Chinburg--Zhang ambient space, equipped with the bilinear form induced by the
+local cup products followed by the localization boundary map
+\[
+\delta_2:\bigoplus_{v\in S} H^2_{\et}(K_v,\mu_2)\longrightarrow H^3_c(U,\mu_2)\cong \mathbb F_2.
+\]
+Assume we are in the binary Euclidean case of Corollary~1.4, so that after choosing a Euclidean basis
+we may identify \(W\cong \mathbb F_2^{2n}\). Let
+\[
+L:=\operatorname{im}\Phi \subset W
+\]
+be the associated arithmetic self-dual code.
+
+Suppose \(L\) is represented, up to equivalence, by a boxed generator matrix \(\widetilde M\), and that
+\(\widetilde M\) is written in the block form
+\[
+\widetilde M=
+\begin{pmatrix}
+01 & u\\
+w & M'
+\end{pmatrix},
+\]
+where \(w\) consists only of identical pairs and \(M'\) generates a self-dual code
+\(L' \subset \mathbb F_2^{2n-2}\).
+
+Then the following hold.
+
+\begin{enumerate}
+\item There is an orthogonal decomposition
+\[
+W \cong H \perp W',
+\]
+where \(H\cong \mathbb F_2^2\) is the hyperbolic plane corresponding to the first block-pair
+and \(W'\cong \mathbb F_2^{2n-2}\) is the complementary Euclidean space.
+
+\item Under this decomposition, \(L'\subset W'\) is a Lagrangian subspace.
+
+\item Writing the first row of \(\widetilde M\) as
+\[
+r_0=(1,0,x), \qquad x\in W',
+\]
+and the remaining rows as
+\[
+r_i=(y_i,y_i,g_i), \qquad g_i\in L',\ y_i\in \mathbb F_2,
+\]
+one has
+\[
+y_i=\langle x,g_i\rangle
+\qquad \text{for all }i.
+\]
+
+\item Consequently,
+\[
+L=\Span\{\,r_0,\ r_i\ (1\le i\le n-1)\,\}
+\]
+is obtained from \(L'\) by one Kim building-up step. Equivalently, the Chinburg--Zhang boxed reduction
+\[
+L \rightsquigarrow L'
+\]
+is the inverse, up to equivalence, of the Kim building-up extension
+\[
+L' \rightsquigarrow L.
+\]
+\end{enumerate}
+
+In particular, after boxed normalization, the Chinburg--Zhang reduction and the Kim extension identify the same one-step predecessor-successor relation on binary Lagrangian codes after the associated equivalence operations.
+\end{theorem}
+
+\begin{proof}
+By Chinburg--Zhang Theorem~1.1~\cite{ChinburgZhang}, the image
+\[
+L=\operatorname{im}\Phi \subset W
+\]
+is its own orthogonal complement with respect to the bilinear form coming from the local cup products
+and the boundary map \(\delta_2\). Hence \(L\) is a maximal isotropic subspace of \(W\), i.e. a
+Lagrangian.
+
+Now choose a Euclidean basis as in Corollary~1.4 and identify \(W\cong \mathbb F_2^{2n}\).
+By the proof of Chinburg--Zhang Theorem~1.5, after row operations and coordinate permutations
+one may assume that the boxed matrix has the block form
+\[
+\widetilde M=
+\begin{pmatrix}
+01 & u\\
+w & M'
+\end{pmatrix},
+\]
+where \(w\) consists only of identical pairs and \(M'\) generates a self-dual code of length \(2n-2\).
+Let \(H\subset W\) be the span of the first block-pair and let \(W'\) be the span of the remaining
+coordinates. Since the ambient basis is Euclidean, the first block-pair has Gram matrix
+\[
+\begin{pmatrix}
+0&1\\
+1&0
+\end{pmatrix},
+\]
+so \(H\) is a hyperbolic plane and
+\[
+W\cong H\perp W'.
+\]
+
+Because \(M'\) generates a self-dual code of length \(2n-2\), its row span \(L'\subset W'\) is again
+maximal isotropic, hence Lagrangian. This proves (1) and (2).
+
+Write the first row of \(\widetilde M\) as
+\[
+r_0=(1,0,x), \qquad x\in W',
+\]
+and write every other row in the form
+\[
+r_i=(y_i,y_i,g_i),
+\]
+which is possible because \(w\) consists only of identical pairs. Since \(L\) is self-orthogonal,
+for each \(i\) we have
+\[
+0=\langle r_0,r_i\rangle.
+\]
+Expanding this inner product gives
+\[
+0=\langle (1,0,x),(y_i,y_i,g_i)\rangle
+   = y_i+\langle x,g_i\rangle.
+\]
+Over \(\mathbb F_2\), this implies
+\[
+y_i=\langle x,g_i\rangle.
+\]
+Thus every row \(r_i\) has the form
+\[
+r_i=(\langle x,g_i\rangle,\ \langle x,g_i\rangle,\ g_i).
+\]
+
+But this is exactly the binary Kim building-up pattern: starting from the shorter self-dual code
+\(L'\subset W'\) with generator rows \(g_i\), and adjoining the extra row
+\[
+r_0=(1,0,x),
+\]
+the remaining rows are corrected by the scalars
+\[
+y_i=\langle x,g_i\rangle
+\]
+to produce a self-dual code in \(H\perp W'\cong \mathbb F_2^{2n}\).
+Therefore \(L\) is obtained from \(L'\) by one building-up extension step.
+
+Hence the Chinburg--Zhang boxed reduction
+\[
+L \rightsquigarrow L'
+\]
+and the Kim building-up construction
+\[
+L' \rightsquigarrow L
+\]
+match at the one-step level after boxed normalization and the same equivalence operations used in both theories. This is the precise comparison asserted in the theorem.
+\end{proof}
+
+\begin{cor}
+After boxed normalization, the Chinburg--Zhang boxed-matrix induction and the Kim building-up construction may be identified at the one-step level as top-down and bottom-up descriptions of the same predecessor-successor relation.
+\end{cor}
+
+\begin{remark}
+\rm
+The point of Theorem~\ref{thm:CZ_Kim_Lagrangian} is not that Chinburg--Zhang and Kim--Lee produce different binary recursion laws. Rather, they encode the same one-step predecessor-successor mechanism in two directions. Kim--Lee is the direct bottom-up extension rule, whereas Chinburg--Zhang packages the same step in a boxed top-down normal form that exposes the predecessor code, the distinguished hyperbolic pair, and the normalization data simultaneously. In that sense the boxed language is structurally stronger for complexity questions: recursive search, equivalence reduction, and orbit branching can be organized at the parent level before rebuilding the child. The split boxed theorem above is designed precisely to carry this structural advantage from the binary setting to the split \(q\)-ary setting.
+\end{remark}
+\end{blueblock}
+
+\begin{lstlisting}[caption={Lean verification for Theorem~\ref{thm:CZ_Kim_Lagrangian}.}]
+import Mathlib
+
+open Matrix
+open BigOperators
+
+section Base
+
+variable {K : Type*} [Field K]
+
+/-!
+Core binary building-up / boxed-reduction infrastructure.
+The characteristic-2 assumptions are only used in the orthogonality part.
+-/
+
+def dot {n : ℕ} (u v : Fin n → K) : K :=
+  ∑ j, u j * v j
+
+theorem dot_comm {n : ℕ} (u v : Fin n → K) :
+    dot u v = dot v u := by
+  unfold dot
+  apply Finset.sum_congr rfl
+  intro j hj
+  ring
+
+def head2 (a b : K) : Fin 2 → K
+  | <0, _> => a
+  | <1, _> => b
+
+def prepend2 {n : ℕ} (a b : K) (u : Fin n → K) : Fin (2 + n) → K :=
+  Fin.append (head2 a b) u
+
+def r0 {n : ℕ} (x : Fin n → K) : Fin (2 + n) → K :=
+  prepend2 1 0 x
+
+def riBin {n : ℕ} (yi : K) (g : Fin n → K) : Fin (2 + n) → K :=
+  prepend2 yi yi g
+
+/-- A boxed-reduction family with explicit coefficients `Y i`. -/
+def boxedFamily {m n : ℕ}
+    (x : Fin n → K) (Y : Fin m → K) (G : Fin m → Fin n → K) :
+    Fin (m + 1) → Fin (2 + n) → K :=
+  Fin.cases (r0 x) (fun i => riBin (Y i) (G i))
+
+/-- The Kim building-up family, where the coefficient is `dot x (G i)`. -/
+def buildRowsBin {m n : ℕ}
+    (x : Fin n → K) (G : Fin m → Fin n → K) :
+    Fin (m + 1) → Fin (2 + n) → K :=
+  Fin.cases (r0 x) (fun i => riBin (dot x (G i)) (G i))
+
+theorem boxedFamily_eq_buildRowsBin
+    {m n : ℕ}
+    {x : Fin n → K} {Y : Fin m → K} {G : Fin m → Fin n → K}
+    (hY : ∀ i : Fin m, Y i = dot x (G i)) :
+    boxedFamily x Y G = buildRowsBin x G := by
+  funext i
+  rcases Fin.eq_zero_or_eq_succ i with rfl | <j, rfl>
+  · simp [boxedFamily, buildRowsBin]
+  · simp [boxedFamily, buildRowsBin, hY j]
+
+/-- Tail of a vector in `K^(2+n)` obtained by deleting the first two coordinates. -/
+def tailVec {n : ℕ} (v : Fin (2 + n) → K) : Fin n → K :=
+  fun j => v (Fin.natAdd 2 j)
+
+/-- Delete the first row and the first hyperbolic coordinate pair. -/
+def deleteHyperbolicPair {m n : ℕ}
+    (R : Fin (m + 1) → Fin (2 + n) → K) : Fin m → Fin n → K :=
+  fun i => tailVec (R (Fin.succ i))
+
+theorem tailVec_prepend2
+    {n : ℕ} (a b : K) (u : Fin n → K) :
+    tailVec (prepend2 a b u) = u := by
+  funext j
+  simp [tailVec, prepend2]
+
+theorem tailVec_r0
+    {n : ℕ} (x : Fin n → K) :
+    tailVec (r0 x) = x := by
+  simpa [r0] using tailVec_prepend2 (K := K) 1 0 x
+
+theorem tailVec_riBin
+    {n : ℕ} (yi : K) (g : Fin n → K) :
+    tailVec (riBin yi g) = g := by
+  simpa [riBin] using tailVec_prepend2 (K := K) yi yi g
+
+theorem buildRowsBin_zero
+    {m n : ℕ} (x : Fin n → K) (G : Fin m → Fin n → K) :
+    buildRowsBin x G 0 = r0 x := by
+  simp [buildRowsBin]
+
+theorem buildRowsBin_succ
+    {m n : ℕ} (x : Fin n → K) (G : Fin m → Fin n → K) (i : Fin m) :
+    buildRowsBin x G (Fin.succ i) = riBin (dot x (G i)) (G i) := by
+  simp [buildRowsBin]
+
+/-- Deleting the distinguished hyperbolic pair from a Kim building-up family
+recovers the original shorter family. -/
+theorem deleteHyperbolicPair_buildRowsBin
+    {m n : ℕ} (x : Fin n → K) (G : Fin m → Fin n → K) :
+    deleteHyperbolicPair (buildRowsBin x G) = G := by
+  funext i
+  funext j
+  rw [deleteHyperbolicPair]
+  simp [tailVec, buildRowsBin, riBin, prepend2]
+
+/-- If a family has the Kim/boxed pattern row-by-row, then rebuilding from its
+deleted hyperbolic pair recovers the original family. -/
+theorem buildRowsBin_deleteHyperbolicPair_eq
+    {m n : ℕ} {x : Fin n → K} {R : Fin (m + 1) → Fin (2 + n) → K}
+    (h0 : R 0 = r0 x)
+    (hs : ∀ i : Fin m,
+      R (Fin.succ i) = riBin (dot x (tailVec (R (Fin.succ i)))) (tailVec (R (Fin.succ i)))) :
+    buildRowsBin x (deleteHyperbolicPair R) = R := by
+  funext i
+  rcases Fin.eq_zero_or_eq_succ i with rfl | <j, rfl>
+  ·
+    rw [buildRowsBin_zero]
+    exact h0.symm
+  ·
+    rw [buildRowsBin_succ]
+    change
+      riBin (dot x (tailVec (R (Fin.succ j)))) (tailVec (R (Fin.succ j))) =
+        R (Fin.succ j)
+    exact (hs j).symm
+
+/-- A row family is in boxed/Kim normal form if its zero-th row is `r0 x` and each
+successor row is of the form `(dot x g, dot x g, g)`. -/
+def IsBoxedKimFamily {m n : ℕ}
+    (x : Fin n → K) (R : Fin (m + 1) → Fin (2 + n) → K) : Prop :=
+  R 0 = r0 x ∧
+  ∀ i : Fin m,
+    R (Fin.succ i) =
+      riBin (dot x (tailVec (R (Fin.succ i)))) (tailVec (R (Fin.succ i)))
+
+theorem rebuild_of_IsBoxedKimFamily
+    {m n : ℕ} {x : Fin n → K} {R : Fin (m + 1) → Fin (2 + n) → K}
+    (hR : IsBoxedKimFamily x R) :
+    buildRowsBin x (deleteHyperbolicPair R) = R := by
+  rcases hR with <h0, hs>
+  exact buildRowsBin_deleteHyperbolicPair_eq h0 hs
+
+/-- The linear code generated by the rows of `R`. -/
+def rowSpace {m n : ℕ} (R : Fin m → Fin n → K) : Submodule K (Fin n → K) :=
+  Submodule.span K (Set.range R)
+
+/-- Permute coordinates of a vector. -/
+def permuteVec {n : ℕ} (σ : Equiv.Perm (Fin n)) (v : Fin n → K) : Fin n → K :=
+  fun j => v (σ j)
+
+/-- Permute coordinates of every row in a row family. -/
+def permuteFamily {m n : ℕ} (σ : Equiv.Perm (Fin n)) (R : Fin m → Fin n → K) :
+    Fin m → Fin n → K :=
+  fun i => permuteVec σ (R i)
+
+/-- Two row families generate the same code. -/
+def SameCode {m₁ m₂ n : ℕ}
+    (R : Fin m₁ → Fin n → K) (S : Fin m₂ → Fin n → K) : Prop :=
+  rowSpace R = rowSpace S
+
+/-- Code equivalence: equality of row spaces up to a coordinate permutation. -/
+def CodeEquiv {m₁ m₂ n : ℕ}
+    (R : Fin m₁ → Fin n → K) (S : Fin m₂ → Fin n → K) : Prop :=
+  ∃ σ : Equiv.Perm (Fin n), SameCode (permuteFamily σ R) S
+
+theorem permuteVec_refl {n : ℕ} (v : Fin n → K) :
+    permuteVec (Equiv.refl (Fin n)) v = v := by
+  funext j
+  rfl
+
+theorem permuteFamily_refl {m n : ℕ} (R : Fin m → Fin n → K) :
+    permuteFamily (Equiv.refl (Fin n)) R = R := by
+  funext i
+  exact permuteVec_refl (R i)
+
+theorem sameCode_refl {m n : ℕ} (R : Fin m → Fin n → K) : SameCode R R := rfl
+
+theorem sameCode_of_eq
+    {m n : ℕ} {R S : Fin m → Fin n → K} (h : R = S) :
+    SameCode R S := by
+  cases h
+  rfl
+
+theorem codeEquiv_of_sameCode
+    {m₁ m₂ n : ℕ}
+    {R : Fin m₁ → Fin n → K} {S : Fin m₂ → Fin n → K}
+    (h : SameCode R S) : CodeEquiv R S := by
+  refine <Equiv.refl (Fin n), ?_>
+  simpa [CodeEquiv, SameCode, permuteFamily, permuteVec] using h
+
+theorem codeEquiv_refl {m n : ℕ} (R : Fin m → Fin n → K) : CodeEquiv R R := by
+  exact codeEquiv_of_sameCode (sameCode_refl R)
+
+theorem sameCode_delete_buildRowsBin
+    {m n : ℕ} (x : Fin n → K) (G : Fin m → Fin n → K) :
+    SameCode (deleteHyperbolicPair (buildRowsBin x G)) G := by
+  apply sameCode_of_eq
+  exact deleteHyperbolicPair_buildRowsBin x G
+
+theorem codeEquiv_delete_buildRowsBin
+    {m n : ℕ} (x : Fin n → K) (G : Fin m → Fin n → K) :
+    CodeEquiv (deleteHyperbolicPair (buildRowsBin x G)) G := by
+  exact codeEquiv_of_sameCode (sameCode_delete_buildRowsBin x G)
+
+theorem sameCode_rebuild_of_IsBoxedKimFamily
+    {m n : ℕ} {x : Fin n → K} {R : Fin (m + 1) → Fin (2 + n) → K}
+    (hR : IsBoxedKimFamily x R) :
+    SameCode (buildRowsBin x (deleteHyperbolicPair R)) R := by
+  apply sameCode_of_eq
+  exact rebuild_of_IsBoxedKimFamily hR
+
+theorem codeEquiv_rebuild_of_IsBoxedKimFamily
+    {m n : ℕ} {x : Fin n → K} {R : Fin (m + 1) → Fin (2 + n) → K}
+    (hR : IsBoxedKimFamily x R) :
+    CodeEquiv (buildRowsBin x (deleteHyperbolicPair R)) R := by
+  exact codeEquiv_of_sameCode (sameCode_rebuild_of_IsBoxedKimFamily hR)
+
+theorem sameCode_boxedFamily_buildRowsBin
+    {m n : ℕ}
+    {x : Fin n → K} {Y : Fin m → K} {G : Fin m → Fin n → K}
+    (hY : ∀ i : Fin m, Y i = dot x (G i)) :
+    SameCode (boxedFamily x Y G) (buildRowsBin x G) := by
+  apply sameCode_of_eq
+  exact boxedFamily_eq_buildRowsBin hY
+
+theorem codeEquiv_boxedFamily_buildRowsBin
+    {m n : ℕ}
+    {x : Fin n → K} {Y : Fin m → K} {G : Fin m → Fin n → K}
+    (hY : ∀ i : Fin m, Y i = dot x (G i)) :
+    CodeEquiv (boxedFamily x Y G) (buildRowsBin x G) := by
+  exact codeEquiv_of_sameCode (sameCode_boxedFamily_buildRowsBin hY)
+
+end Base
+
+section CharTwoPart
+
+variable {K : Type*} [Field K] [CharP K 2]
+
+theorem dot_prepend2_prepend2
+    {n : ℕ} (a b a' b' : K) (u v : Fin n → K) :
+    dot (prepend2 a b u) (prepend2 a' b' v)
+      = a * a' + b * b' + dot u v := by
+  unfold dot prepend2
+  rw [Fin.sum_univ_add]
+  simp [head2, Fin.sum_univ_two, add_assoc]
+
+theorem two_eq_zero : (2 : K) = 0 := by
+  exact CharP.cast_eq_zero (R := K) 2
+
+theorem dot_r0_r0_bin
+    {n : ℕ} {x : Fin n → K}
+    (hx : dot x x = (1 : K)) :
+    dot (r0 x) (r0 x) = 0 := by
+  rw [r0, dot_prepend2_prepend2, hx]
+  calc
+    (1 : K) * 1 + 0 * 0 + 1 = (2 : K) := by ring
+    _ = 0 := two_eq_zero
+
+theorem dot_r0_riBin
+    {n : ℕ} {x g : Fin n → K} {yi : K}
+    (hyi : yi = dot x g) :
+    dot (r0 x) (riBin yi g) = 0 := by
+  rw [r0, riBin, dot_prepend2_prepend2, hyi]
+  calc
+    (1 : K) * dot x g + 0 * dot x g + dot x g = (2 : K) * dot x g := by ring
+    _ = 0 := by rw [two_eq_zero, zero_mul]
+
+theorem dot_riBin_riBin
+    {n : ℕ} {g h : Fin n → K} {yi yj : K}
+    (hgh : dot g h = 0) :
+    dot (riBin yi g) (riBin yj h) = 0 := by
+  rw [riBin, riBin, dot_prepend2_prepend2, hgh]
+  calc
+    yi * yj + yi * yj + 0 = (2 : K) * (yi * yj) := by ring
+    _ = 0 := by rw [two_eq_zero, zero_mul]
+
+theorem buildRowsBin_zero_zero
+    {m n : ℕ} {x : Fin n → K} {G : Fin m → Fin n → K}
+    (hx : dot x x = (1 : K)) :
+    dot (buildRowsBin x G 0) (buildRowsBin x G 0) = 0 := by
+  simp [buildRowsBin]
+  exact dot_r0_r0_bin hx
+
+theorem buildRowsBin_zero_succ
+    {m n : ℕ} {x : Fin n → K} {G : Fin m → Fin n → K}
+    (i : Fin m) :
+    dot (buildRowsBin x G 0) (buildRowsBin x G (Fin.succ i)) = 0 := by
+  simp [buildRowsBin]
+  exact dot_r0_riBin rfl
+
+theorem buildRowsBin_succ_zero
+    {m n : ℕ} {x : Fin n → K} {G : Fin m → Fin n → K}
+    (i : Fin m) :
+    dot (buildRowsBin x G (Fin.succ i)) (buildRowsBin x G 0) = 0 := by
+  rw [dot_comm]
+  exact buildRowsBin_zero_succ i
+
+theorem buildRowsBin_succ_succ
+    {m n : ℕ} {x : Fin n → K} {G : Fin m → Fin n → K}
+    (hG : ∀ i j : Fin m, dot (G i) (G j) = 0)
+    (i j : Fin m) :
+    dot (buildRowsBin x G (Fin.succ i)) (buildRowsBin x G (Fin.succ j)) = 0 := by
+  simp [buildRowsBin]
+  exact dot_riBin_riBin (hgh := hG i j)
+
+theorem buildRowsBin_orthogonal
+    {m n : ℕ} {x : Fin n → K} {G : Fin m → Fin n → K}
+    (hx : dot x x = (1 : K))
+    (hG : ∀ i j : Fin m, dot (G i) (G j) = 0) :
+    ∀ i j : Fin (m + 1), dot (buildRowsBin x G i) (buildRowsBin x G j) = 0 := by
+  intro i j
+  rcases Fin.eq_zero_or_eq_succ i with rfl | <i, rfl>
+  · rcases Fin.eq_zero_or_eq_succ j with rfl | <j, rfl>
+    · exact buildRowsBin_zero_zero hx
+    · exact buildRowsBin_zero_succ j
+  · rcases Fin.eq_zero_or_eq_succ j with rfl | <j, rfl>
+    · exact buildRowsBin_succ_zero i
+    · exact buildRowsBin_succ_succ (hG := hG) i j
+
+def rowMatrix {m n : ℕ} (R : Fin m → Fin n → K) : Matrix (Fin m) (Fin n) K :=
+  fun i j => R i j
+
+theorem rowMatrix_mul_transpose_apply
+    {m n : ℕ} (R : Fin m → Fin n → K) (i j : Fin m) :
+    (rowMatrix R * (rowMatrix R).transpose) i j = dot (R i) (R j) := by
+  unfold rowMatrix dot
+  rw [Matrix.mul_apply]
+  simp
+
+theorem buildRowsBin_matrix_gram_zero
+    {m n : ℕ} {x : Fin n → K} {G : Fin m → Fin n → K}
+    (hx : dot x x = (1 : K))
+    (hG : ∀ i j : Fin m, dot (G i) (G j) = 0) :
+    rowMatrix (buildRowsBin x G) * (rowMatrix (buildRowsBin x G)).transpose = 0 := by
+  ext i j
+  rw [rowMatrix_mul_transpose_apply]
+  exact buildRowsBin_orthogonal (hx := hx) (hG := hG) i j
+
+theorem boxedFamily_matrix_gram_zero
+    {m n : ℕ}
+    {x : Fin n → K} {Y : Fin m → K} {G : Fin m → Fin n → K}
+    (hx : dot x x = (1 : K))
+    (hY : ∀ i : Fin m, Y i = dot x (G i))
+    (hG : ∀ i j : Fin m, dot (G i) (G j) = 0) :
+    rowMatrix (boxedFamily x Y G) * (rowMatrix (boxedFamily x Y G)).transpose = 0 := by
+  rw [boxedFamily_eq_buildRowsBin hY]
+  exact buildRowsBin_matrix_gram_zero (hx := hx) (hG := hG)
+
+end CharTwoPart
+\end{lstlisting}
+
+
+
+%% ===========================================================================
+\section{Constructive Classification over \texorpdfstring{$\GF{5}$}{GF(5)}}
+\label{sec:classification}
+%% ===========================================================================
+
+The computational results over $\GF{5}$ should be read constructively, not merely statistically. The building-up procedure produces explicit child codes from a parent code and an extension vector, and the small-length classification records how this mechanism behaves in practice.
+
+\subsection{Complete classification up to length $8$}
+
+\begin{blueblock}
+\begin{theorem}[Complete classification over $\GF{5}$ up to length $8$]
+\label{thm:gf5-classification}
+Up to monomial equivalence, the self-dual codes over $\GF{5}$ of lengths $2$, $4$, $6$, and $8$ are classified as follows:
+\begin{center}
+\setlength{\tabcolsep}{4.5pt}
+\small
+\begin{tabular}{ccccc}
+\toprule
+Length & Parameters & \# Weight-Enumerator Types & \# Inequiv.\ Classes & Minimum Distances \\
+\midrule
+2 & $[2,1]$ & 1 & 1 & $d = 2$ \\
+4 & $[4,2]$ & 1 & 1 & $d = 2$ \\
+6 & $[6,3]$ & 2 & 2 & $d = 2,4$ \\
+8 & $[8,4]$ & 3 & 53 & $d = 2,4$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+For lengths $2$ and $4$, each weight-enumerator type consists of a single equivalence class. For length $6$, the two weight-enumerator types each form a single equivalence class. For length $8$, the $53$ inequivalent classes split into three weight-enumerator types of sizes $5$, $16$, and $32$.
+\end{theorem}
+
+\begin{proof}
+The length-$2$ and length-$4$ cases are unique up to monomial equivalence. For length $6$, the reverse theory developed in Section~\ref{sec:building-up} reduces the search to the unique self-dual $[4,2]$ parent together with all admissible extension vectors $x\in \GF{5}^4$ satisfying $\langle x,x\rangle=-1$. There are exactly $120$ such vectors. Exhaustive building-up on those $120$ inputs, followed by grouping by minimum distance and weight enumerator, leaves a finite candidate list. Exact monomial equivalence is then tested inside each bucket by explicit orbit reduction under the finite monomial group generated by coordinate permutations and nonzero coordinate scalings, so the final step is exact rather than heuristic. This leaves exactly two classes.
+
+For length $8$, one starts from the two classified self-dual $[6,3]$ parents and again exhausts all admissible extension vectors. In this case each parent admits exactly $3100$ such vectors, so the search processes $6200$ generated children before reduction. Grouping first by minimum distance and weight enumerator again leaves finitely many buckets, and exact monomial equivalence is tested inside each bucket by the same explicit orbit reduction under coordinate permutations and nonzero coordinate scalings. This yields exactly $53$ inequivalent classes, split into the three announced weight-enumerator types of sizes $5$, $16$, and $32$. Since every admissible parent-extension pair is inspected and the final reduction step is exact, the listed counts are complete.
+\end{proof}
+\end{blueblock}
+
+\subsection{Constructive interpretation}
+
+The formal and computational picture can be summarized very briefly. Choose $c \in \F_q$ with $c^2=-1$, start from a self-dual parent code $C_0=\Span(G_0)$ of length $2n$, pick an extension vector $x$ with $\langle x,x\rangle=-1$, compute $y_i=\langle x,g_i\rangle$ for the rows $g_i$ of $G_0$, and output the child family with distinguished row $(1,0,x)$ and successor rows $(-y_i,-cy_i,g_i)$. Over $\GF{5}$ this recipe produces all observed codes in the small-length classification.
+
+At length $6$, the unique $[4,2]$ parent yields exactly two inequivalent self-dual $[6,3]$ codes from the $120$ valid extension vectors: a $d=2$ type obtained from $40$ vectors and a $d=4$ type obtained from $80$ vectors. At length $8$, the two inequivalent self-dual $[6,3]$ parents yield the $53$ inequivalent self-dual $[8,4]$ codes, partitioned into three weight-enumerator types of sizes $5$, $16$, and $32$. Thus each observed type is constructively accessible through explicit parent and extension-vector data, even when we suppress the full representative lists in the submission version.
+
+\begin{blueblock}
+\begin{prop}[Compact representative data for the $\GF{5}$ types]
+\label{prop:gf5-representatives}
+For the two self-dual $[6,3]$ codes over $\GF{5}$, one may take the representatives
+\[
+G_A=
+\begin{pmatrix}
+1 & 2 & 0 & 0 & 0 & 0\\
+0 & 0 & 1 & 0 & 0 & 2\\
+0 & 0 & 1 & 2 & 1 & 2
+\end{pmatrix},
+\qquad
+G_B=
+\begin{pmatrix}
+1 & 0 & 0 & 1 & 2 & 3 \\
+1 & 2 & 1 & 0 & 2 & 0 \\
+3 & 1 & 0 & 1 & 0 & 2
+\end{pmatrix}.
+\]
+Their weight enumerators are
+\[
+W_A(z)=1+12z^2+48z^4+64z^6,
+\qquad
+W_B(z)=1+60z^4+24z^5+40z^6.
+\]
+For the three self-dual $[8,4]$ weight-enumerator types, one may take standard-form representatives $G=[I_4\mid A]$ with
+\[
+A_I =
+\begin{pmatrix}
+0&0&0&2\\
+0&0&2&0\\
+0&2&0&0\\
+2&0&0&0
+\end{pmatrix},
+\qquad
+A_{II} =
+\begin{pmatrix}
+0&0&0&2\\
+1&2&2&0\\
+2&1&3&0\\
+2&3&1&0
+\end{pmatrix},
+\qquad
+A_{III} =
+\begin{pmatrix}
+0&1&2&2\\
+1&0&2&3\\
+2&2&4&0\\
+2&3&0&1
+\end{pmatrix}.
+\]
+Their weight enumerators are
+\[
+W_I(z)=1+16z^2+96z^4+256z^6+256z^8,
+\]
+\[
+W_{II}(z)=1+4z^2+60z^4+24z^5+280z^6+96z^7+160z^8,
+\]
+\[
+W_{III}(z)=1+48z^4+32z^5+288z^6+128z^7+128z^8.
+\]
+Here Type~I is decomposable, Type~II is indecomposable with $d=2$, and Type~III is the optimal $d=4$ family.
+\end{prop}
+
+\begin{proof}
+For the length-$6$ matrices, a direct Gram-matrix computation shows that both $G_A$ and $G_B$ generate self-dual codes. Moreover, $G_A$ is decomposable, while $G_B$ has minimum distance $4$; equivalently, their displayed weight enumerators are different, so the two codes are inequivalent and represent the two length-$6$ classes.
+
+For length $8$, each displayed standard-form matrix $G=[I_4\mid A]$ satisfies $AA^T=-I_4$, hence generates a self-dual code. The three displayed weight enumerators are pairwise different, so the corresponding codes are pairwise inequivalent. Since Theorem~\ref{thm:gf5-classification} shows that there are exactly three weight-enumerator types at length $8$, the matrices $A_I,A_{II},A_{III}$ represent those three types.
+\end{proof}
+
+\begin{remark}[Computational verification protocol]
+\label{rem:gf5-protocol}
+The classification counts are produced by the following finite procedure. For each parent code we enumerate all extension vectors $x$ with $\langle x,x\rangle=-1$, generate the child codes by the building-up construction, group them first by cheap invariants such as minimum distance and weight enumerator, and then perform exact monomial-equivalence reduction inside each bucket by explicit orbit reduction under coordinate permutations and nonzero coordinate scalings. Thus the numbers $2$, $53$, $40/80$, and $300/1200/1600$, $0/600/2500$ come from exhaustive generation plus exact equivalence testing rather than from heuristic sampling. In the present submission we do not claim a separate mass-formula or automorphism-orbit proof, only this exhaustive protocol together with the representative data displayed above.
+\end{remark}
+\end{blueblock}
+
+\subsection{Branching law}
+
+\begin{blueblock}
+\begin{prop}[Branching law for building-up over $\GF{5}$]
+\label{prop:branching-gf5}
+Let $C_1$ and $C_2$ denote the two inequivalent self-dual $[6,3]$ codes over $\GF{5}$, with minimum distances $2$ and $4$, respectively. Among the $3100$ valid extension vectors for each parent, the child types are distributed as follows:
+\begin{center}
+\begin{tabular}{lccc}
+\toprule
+Parent code & Type~I & Type~II & Type~III \\
+\midrule
+$C_1$ ($[6,3,2]$) & 300 & 1200 & 1600 \\
+$C_2$ ($[6,3,4]$) & 0 & 600 & 2500 \\
+\bottomrule
+\end{tabular}
+\end{center}
+Thus Type~I occurs only from the $d=2$ parent, whereas Type~III occurs from both parents and dominates the output. In particular, minimum distance is not monotone under building-up: a $d=4$ parent can produce both $d=2$ and $d=4$ children.
+\end{prop}
+
+\begin{proof}
+The table is obtained by exhaustive enumeration of all valid extension vectors for each parent and sorting the resulting $[8,4]$ children by weight-enumerator type. The vanishing of the Type~I column for the $d=4$ parent shows parent sensitivity, while the large Type~III counts for both parents show that optimal children are robustly accessible.
+\end{proof}
+
+\begin{remark}
+{\rm
+This branching law is the key constructive feature of the $\GF{5}$ computation: the building-up construction is not merely an existence tool, but a nontrivial transition mechanism on code types. The disappearance of Type~I descendants from the $d=4$ parent is consistent with the absence of the low-weight decomposable configuration needed to create a decomposable child under split extension. By contrast, the $d=2$ parent admits such low-weight patterns, which explains the observed asymmetry in the branching table while leaving the optimal Type~III family accessible from both parents. We record this as a structural heuristic rather than as an independent theorem.
+}
+\end{remark}
+\end{blueblock}
+
+\paragraph{Other split fields.}
+The same norm-witness and building-up pipeline also produces explicit self-dual examples over larger split fields such as $\GF{13}$, $\GF{17}$, and $\GF{29}$. We omit the corresponding matrices here, since the present submission uses these computations only as supporting evidence that the split-field mechanism persists uniformly beyond $\GF{5}$.
+
+%% ===========================================================================
+\section{Lean Formalization Summary}
+\label{sec:lean}
+%% ===========================================================================
+
+The current formalization is integrated in the single file \texttt{BuildingUpFormalization.lean}. It contains 247 kernel-certified theorems with zero \texttt{sorry}. On the forward side it formalizes the split arithmetic, the build-up rows, the linear-independence package for basis-indexed parent data, and the resulting self-duality theorem. On the reverse side it formalizes normalization, pure-tail reduction, the obstruction to a naive exact same-code converse, the explicit head-alignment step, and the reverse existence theorem up to split-isometric equivalence.
+
+The GF(5) tables in Section~\ref{sec:classification} remain computational outputs, but the constructive framework used to interpret them is now theorem-level Lean material.
+
+%% ===========================================================================
+\section{Conclusion}
+\label{sec:conclusion}
+%% ===========================================================================
+
+We have studied self-dual codes over split finite fields $\F_q$ with $q\equiv 1 \pmod 4$ from three complementary viewpoints: the classical building-up construction, the hyperbolic geometry forced by the split condition $-1\in (K^\times)^2$, and a theorem-level Lean~4 formalization of the resulting algebraic infrastructure. On the computational side, this yields the complete $\GF{5}$ classification for lengths $2,4,6,8$ together with the branching law from length six to length eight. On the formal side, the integrated development now contains $247$ kernel-certified theorems with zero \texttt{sorry}.
+
+The single arithmetic fact $-1\in (K^\times)^2$ governs the whole picture: it makes the distinguished Euclidean $2$-plane hyperbolic, splits the norm form $x^2+y^2$, explains the correction rows as motion along isotropic lines, removes the basic existence obstruction for the extension vectors, and supplies the head-alignment map used in the reverse theorem. In that sense the building-up construction is not an isolated recipe but the visible coding-theoretic manifestation of the split hyperbolic geometry.
+
+For the reverse direction, the formalization establishes the normalization front end, the pure-tail reduction, the obstruction to a naive exact same-code converse, the explicit head-alignment step, and the resulting exact \texttt{buildRows} representative after the correct hyperbolic basis change. More conceptually, the paper shows that the naive rank-one \(q\)-ary Chinburg--Zhang target is not the right general object. The correct split target is the rank-\(r\) isotropic-flag boxed form governed, after choosing an oriented \(2\)-block decomposition \(\Pi\), by
+\[
+ C\cap \Lambda_{c,\Pi},
+\]
+or equivalently, after choosing an oriented \(2\)-block decomposition \(\Pi\), by the coefficient subspace \(U_{C,\Pi}\le K^n\). The remaining reverse problem is therefore not a local problem in the split head plane, but a coordinate-geometric problem for \(U_{C,\Pi}\): one must determine when some choice of \(\Pi\) makes \(U_{C,\Pi}\) carry the support structure needed for rank-\(r\) boxed normalization.
+
+Conceptually, the paper isolates a single predecessor-successor mechanism viewed from two complementary directions. Kim--Lee gives the direct bottom-up extension rule. Chinburg--Zhang gives the more rigid top-down normalization in which the predecessor code, the ambient hyperbolic pair, and the recursive bookkeeping are visible simultaneously. This is why the Chinburg--Zhang language is structurally better suited to complexity questions such as normalization, equivalence reduction, and branching analysis. By contrast, the Kim--Lee language remains the most direct constructive recipe for producing explicit children from a chosen parent.
+
+More broadly, the present work shows that the building-up construction is not merely an existence method. It is a constructive mechanism whose algebraic constraints, classification output, and normalization behavior can be expressed at theorem level and checked by the Lean kernel. In particular, the failure of the naive rank-one converse should not be read as a failure of the split boxed algebra itself. Rather, it shows that the correct general object is the decomposition-dependent isotropic flag \(C\cap \Lambda_{c,\Pi}\), or equivalently the coefficient subspace \(U_{C,\Pi}\le K^n\), and that the remaining problem is structural: to understand which support conditions on \(U_{C,\Pi}\) force rank-\(r\) boxed normalizability. That combination of explicit code-theoretic computation with machine-verified structural algebra is the main outcome of the paper.
+
+
+%% ===========================================================================
+\section*{Acknowledgments}
+%% ===========================================================================
+
+The Lean~4 formalization was developed using Mathlib (leanprover/lean4:v4.28.0-rc1). The exhaustive enumeration of self-dual codes was performed by computational scripts. The integrated file \texttt{BuildingUpFormalization.lean} contains 247 kernel-certified theorems with zero \texttt{sorry}.
+
+
+\bibliographystyle{ieeetr}
+\begin{thebibliography}{99}
+
+\bibitem{Sha}
+C. Shannon, ``Communication Theory of Secrecy Systems,'' \textit{Bell System Technical Journal}, vol.~28, no.~4, pp.~ 656--715, 1949.
+
+\bibitem{self-dual}
+ E. Rains and N. J. A Sloane, Self-dual codes, in: V. S. Pless, W. C. Huffman (Eds.),
+Handbook of Coding Theory, Elsevier, Amsterdam. The Netherlands. (1998)
+
+
+\bibitem{BacGab} C. Bachoc and P. Gaborit, ``Designs and self-dual codes with long shadows,'' \textit{J. Combin.
+Theory Ser. A,} 2004, 105(1): 15-34.
+
+\bibitem{BaDou}
+ E. Bannai, S. T. Dougherty, M. Harada, and M. Oura, Type II codes, ``even unimodular
+lattices, and invariant rings,'' \textit{IEEE Trans. Inf. Theory,} 1999, 45(4): 1194-1205.
+
+\bibitem{ConSlo}
+J. H. Conway, N. J. A. Sloane, Sphere Packings, Lattices and Groups, 3rd edn.
+Springer, New York (1998).
+
+\bibitem{ShiChoShaSol}
+ M, Shi, Y. J. Choie, A. Sharma, and P. Sol´e. Codes and Modular Forms: A Dictionary. World Scientific, 2020.
+
+\bibitem{CRSS}
+A. R. Calderbank, E. M. Rains, P. M. Shor, and N. J. A. Sloane, Quantum error
+correction via codes over GF(4), IEEE Trans. Inf. Theory, 1998, 44(4): 1369-1387.
+
+
+\bibitem{Kim2001}
+J.-L. Kim,
+``New extremal self-dual codes of lengths 36, 38, and 58,''
+\textit{IEEE Trans.\ Inform.\ Theory}, vol.~47, no.~1, pp.~386--393, 2001.
+
+\bibitem{LeeKim}
+J.-L.~Kim and Y.~Lee, ``Euclidean and Hermitian self-dual MDS codes over large finite fields.'' J. Combin. Theory Ser. A 105(1):79-95, 2004.
+
+
+\bibitem{KimLee2009}
+J.-L. Kim and Y.~Lee,
+``Self-dual codes using the building-up construction,''
+\textit{IEEE Int.\ Symp.\ Inform.\ Theory}, Seoul, Korea (South), 2009, pp. 2400--2402.
+
+\bibitem{Mon}
+H. Montani, ``Lagrangian and orthogonal splittings, quasitriangular Lie bialgebras and almost complex product structures,'' \textit{J. Math. Phys.,} 64, 053505 (2023), arXiv:2208.09996v3.
+
+
+\bibitem{ChinburgZhang}
+T.~Chinburg and Y.~Zhang,
+``Every binary self-dual code arises from Hilbert symbols,''
+\textit{Homology, Homotopy Appl.}, vol.~14, no.~2, pp.~189--196, 2012.
+
+\bibitem{KreckPuppe}
+M.~Kreck and V.~Puppe,
+``Involutions on 3-manifolds and self-dual, binary codes,''
+\textit{Homology, Homotopy Appl.}, vol.~10, no.~2, pp.~139--148, 2008.
+
+\bibitem{LeonPlessSloane}
+J.~S.~Leon, V.~Pless, and N.~J.~A.~Sloane,
+``Self-dual codes over GF(5),''
+\textit{J.\ Combin.\ Theory Ser.~A}, vol.~32, no.~2, pp.~178--194, 1982.
+
+\bibitem{HaradaOstergard}
+M.~Harada and P.~R.~J.~\"Osterg\r{a}rd,
+``On the classification of self-dual codes over $\mathbb{F}_5$,''
+\textit{Graphs Combin.}, vol.~19, no.~2, pp.~203--214, 2003.
+
+\bibitem{KimChoi2021}
+J.-L. Kim and W.-H.~Choi,
+``Self-dual codes, symmetric matrices, and eigenvectors,''
+\textit{IEEE Access}, vol.~9, pp.~104294--104303, 2021.
+
+\bibitem{Abramenko}
+P.~Abramenko and K.~S.~Brown,
+\textit{Buildings: Theory and Applications},
+Graduate Texts in Mathematics, vol.~248, Springer, 2008.
+
+\bibitem{Pless1965}
+V.~Pless,
+``The number of isotropic subspaces in a finite geometry,''
+\textit{Atti Accad.\ Naz.\ Lincei Rend.}, vol.~39, pp.~418--421, 1965.
+
+\bibitem{Solomon}
+L.~Solomon,
+``The Steinberg character of a finite group with BN-pair,''
+\textit{Theory of Finite Groups}, Benjamin, 1969, pp.~213--221.
+
+\bibitem{Essert}
+J.~Essert,
+``Buildings, group homology and lattices,''
+\textit{Groups Geom.\ Dyn.}, vol.~6, no.~2, pp.~247--278, 2012.
+
+\bibitem{HuffmanPless}
+W.~C.~Huffman and V.~Pless,
+\textit{Fundamentals of Error-Correcting Codes},
+Cambridge University Press, 2003.
+
+\end{thebibliography}
+
+\end{document}
