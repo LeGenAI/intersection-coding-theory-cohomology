@@ -1,0 +1,13 @@
+import Formalization.Components.NormForm
+
+open BuildingUpFormalization.Components.NormForm
+
+#print axioms root_neg_one_orderOf
+#print axioms scalar_identity_mul_transpose
+#print axioms splitE1_splitE2_hyperbolicPair
+#print axioms splitE1_splitE2_linearIndependent
+#print axioms norm_form_splitting_paper_order
+#print axioms norm_form_witness_factors
+#print axioms exists_norm_pair_with_paper_factors
+#print axioms paper_split_consequences_exact
+#print axioms paper_euclidean_plane_hyperbolic_basis_exact

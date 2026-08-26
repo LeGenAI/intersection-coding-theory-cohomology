@@ -1,0 +1,13 @@
+{
+  "challenge_module": "Formalization.Verification.Comparator.BinaryRankOneNormalizationChallenge",
+  "solution_module": "Formalization.Verification.Comparator.BinaryRankOneNormalizationSolution",
+  "theorem_names": [
+    "BuildingUpFormalization.Components.BinaryRankOneNormalization.every_binary_selfDualCode_has_rankOne_normalForm"
+  ],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ],
+  "enable_nanoda": false
+}

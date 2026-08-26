@@ -1,0 +1,6 @@
+import Formalization.Components.BinaryTwoCoordinateReduction
+
+#print axioms BuildingUpFormalization.Components.BinaryRankOneNormalization.mem_binaryReducedCode_iff
+#print axioms BuildingUpFormalization.Components.BinaryRankOneNormalization.paper_binary_twoCoordinateReduction_exact
+#print axioms BuildingUpFormalization.Components.BinaryRankOneNormalization.paper_binary_reconstruction_from_reduction_exact
+

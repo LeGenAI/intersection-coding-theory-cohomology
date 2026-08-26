@@ -1,0 +1,4 @@
+import Formalization.Components.ConditionalBoxed
+
+#print axioms BuildingUpFormalization.Components.SplitBoxed.paper_conditional_boxed_normalization_exact
+

@@ -1,0 +1,12 @@
+{
+  "challenge_module": "Formalization.Verification.Comparator.RepeatedStepChallenge",
+  "solution_module": "Formalization.Verification.Comparator.RepeatedStepSolution",
+  "theorem_names": [
+    "BuildingUpFormalization.Components.RepeatedStep.one_step_normalization_exact",
+    "BuildingUpFormalization.Components.RepeatedStep.zero_column_exact",
+    "BuildingUpFormalization.Components.RepeatedStep.one_step_kim_lee_iff",
+    "BuildingUpFormalization.Components.RepeatedStep.binary_normalization_exact"
+  ],
+  "permitted_axioms": ["propext", "Quot.sound", "Classical.choice"],
+  "enable_nanoda": false
+}

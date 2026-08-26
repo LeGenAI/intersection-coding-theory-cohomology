@@ -1,0 +1,14 @@
+{
+  "challenge_module": "Formalization.Verification.Comparator.ConditionalBoxedChallenge",
+  "solution_module": "Formalization.Verification.Comparator.ConditionalBoxedSolution",
+  "theorem_names": [
+    "BuildingUpFormalization.Components.SplitBoxed.paper_conditional_boxed_normalization_exact"
+  ],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ],
+  "enable_nanoda": false
+}
+

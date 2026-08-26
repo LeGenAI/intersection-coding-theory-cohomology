@@ -1,0 +1,24 @@
+{
+  "challenge_module": "Formalization.Verification.Comparator.SplitBoxedChallenge",
+  "solution_module": "Formalization.Verification.Comparator.SplitBoxedSolution",
+  "theorem_names": [
+    "BuildingUpFormalization.Components.SplitBoxed.blockDefect_isotropicLineBlock",
+    "BuildingUpFormalization.Components.SplitBoxed.blockDefect_splitDiagonalBlock",
+    "BuildingUpFormalization.Components.SplitBoxed.blockDefectLinear_isotropicLineBlock",
+    "BuildingUpFormalization.Components.SplitBoxed.blockDefectLinear_splitDiagonalBlock",
+    "BuildingUpFormalization.Components.SplitBoxed.splitBoxedReadout_splitBoxedRows",
+    "BuildingUpFormalization.Components.SplitBoxed.splitBoxedRows_linearIndependent",
+    "BuildingUpFormalization.Components.SplitBoxed.splitBlockRowInner_comm",
+    "BuildingUpFormalization.Components.SplitBoxed.splitBlockRowBilin_isRefl",
+    "BuildingUpFormalization.Components.SplitBoxed.splitBlockRowBilin_separatingLeft",
+    "BuildingUpFormalization.Components.SplitBoxed.splitBlockRowBilin_separatingRight",
+    "BuildingUpFormalization.Components.SplitBoxed.splitBlockRowBilin_nondegenerate",
+    "BuildingUpFormalization.Components.SplitBoxed.splitBoxedRows_rowSpace_finrank"
+  ],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ],
+  "enable_nanoda": false
+}

@@ -1,0 +1,21 @@
+{
+  "challenge_module": "Formalization.Verification.Comparator.NormFormChallenge",
+  "solution_module": "Formalization.Verification.Comparator.NormFormSolution",
+  "theorem_names": [
+    "BuildingUpFormalization.Components.NormForm.root_neg_one_orderOf",
+    "BuildingUpFormalization.Components.NormForm.scalar_identity_mul_transpose",
+    "BuildingUpFormalization.Components.NormForm.splitE1_splitE2_hyperbolicPair",
+    "BuildingUpFormalization.Components.NormForm.splitE1_splitE2_linearIndependent",
+    "BuildingUpFormalization.Components.NormForm.norm_form_splitting_paper_order",
+    "BuildingUpFormalization.Components.NormForm.norm_form_witness_factors",
+    "BuildingUpFormalization.Components.NormForm.exists_norm_pair_with_paper_factors",
+    "BuildingUpFormalization.Components.NormForm.paper_split_consequences_exact",
+    "BuildingUpFormalization.Components.NormForm.paper_euclidean_plane_hyperbolic_basis_exact"
+  ],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ],
+  "enable_nanoda": false
+}

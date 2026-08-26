@@ -1,0 +1,25 @@
+import Formalization.Components.QaryForward
+
+open BuildingUpFormalization.Components.QaryForward
+
+#print axioms buildSuccLinear_apply
+#print axioms splitTailLinear_buildSuccLinear
+#print axioms buildRows_succ_eq_buildSuccLinear
+#print axioms buildRows_tail_linearIndependent
+#print axioms buildRows_linearIndependent_iff
+#print axioms dot_ri_ri_eq_dot
+#print axioms buildRows_tail_pairwiseOrthogonal
+#print axioms buildRows_pairwiseOrthogonal_iff
+#print axioms paper_qary_kim_lee_building_up_exact
+#print axioms rowSpace_finrank_of_linearIndependent
+#print axioms buildRows_tail_finrank_of_linearIndependent
+#print axioms buildRows_tail_independent_orthogonal_finrank
+#print axioms buildRows_tail_paperLagrangianSubspace
+#print axioms dot_r0_r0_eq_zero_iff
+#print axioms dot_r0_ri_eq_zero_iff
+#print axioms qaryAdaptedFamily_extension_vector_norm
+#print axioms qaryAdaptedFamily_coefficient_eq_dot
+#print axioms qaryAdaptedFamily_eq_buildRows
+#print axioms qaryAdaptedFamily_linearIndependent_of_paperSelfDualCode
+#print axioms qaryAdaptedFamily_tail_paperSelfDualCode
+#print axioms paper_qary_adapted_reduction

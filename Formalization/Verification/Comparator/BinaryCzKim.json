@@ -1,0 +1,30 @@
+{
+  "challenge_module": "Formalization.Verification.Comparator.BinaryCzKimChallenge",
+  "solution_module": "Formalization.Verification.Comparator.BinaryCzKimSolution",
+  "theorem_names": [
+    "BuildingUpFormalization.Components.BinaryCzKim.binaryDiagonalHead_apply_zero",
+    "BuildingUpFormalization.Components.BinaryCzKim.binaryDiagonalHead_apply_one",
+    "BuildingUpFormalization.Components.BinaryCzKim.standardEuclideanPlaneForm_binaryDiagonalHead_self",
+    "BuildingUpFormalization.Components.BinaryCzKim.standardEuclideanPlaneForm_planeE0_binaryDiagonalHead",
+    "BuildingUpFormalization.Components.BinaryCzKim.standardEuclideanPlane_head_not_hyperbolicPair",
+    "BuildingUpFormalization.Components.BinaryCzKim.dot_r0_riBin_eq_zero_iff",
+    "BuildingUpFormalization.Components.BinaryCzKim.boxedFamily_coefficient_eq_dot",
+    "BuildingUpFormalization.Components.BinaryCzKim.dot_riBin_riBin_eq_dot",
+    "BuildingUpFormalization.Components.BinaryCzKim.boxedFamily_tail_pairwiseOrthogonal",
+    "BuildingUpFormalization.Components.BinaryCzKim.buildSuccBinLinear_apply",
+    "BuildingUpFormalization.Components.BinaryCzKim.buildRowsBin_succ_eq_buildSuccBinLinear",
+    "BuildingUpFormalization.Components.BinaryCzKim.buildRowsBin_tail_linearIndependent",
+    "BuildingUpFormalization.Components.BinaryCzKim.buildRows_one_eq_buildRowsBin",
+    "BuildingUpFormalization.Components.BinaryCzKim.paper_binary_kim_building_up_exact",
+    "BuildingUpFormalization.Components.BinaryCzKim.isSelfOrthogonal_map_of_isFormIsometry",
+    "BuildingUpFormalization.Components.BinaryCzKim.boxedFamily_linearIndependent_of_paperSelfDualCode",
+    "BuildingUpFormalization.Components.BinaryCzKim.boxedFamily_tail_paperSelfDualCode",
+    "BuildingUpFormalization.Components.BinaryCzKim.paper_binary_cz_kim_corrected"
+  ],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ],
+  "enable_nanoda": false
+}

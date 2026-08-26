@@ -1,76 +1,65 @@
-# Artifact Map
+# Manuscript-to-formalization map
 
-This file records the correspondence between the current paper and the Lean
-artifact.
+The stable labels in `paper.tex` and Lean declaration names identify the results.
+Definition, Lemma, Remark and Example have independent section counters.
+Theorem, Proposition and Corollary share the theorem counter.
 
-## Core Files
+| Current result | Content | Principal exact declaration / suite |
+|---|---|---|
+| Definitions 2.1--2.2 | Self-duality, Lagrangians, parity | Foundations (22 goals) |
+| Proposition 2.1 | Systematic Gram criterion | `paper_systematic_form_criterion_exact` |
+| Definition 2.3 | Permutation equivalence | PermutationEquivalence (5) |
+| Propositions 2.2--2.3 | Split norm and hyperbolic basis, with 2 nonzero | NormForm (9) |
+| Theorems 3.1--3.4 | Cited Kim and Kim--Lee results | BinaryCzKim / QaryForward prove the algebraic forward and adapted-reduction interfaces; the cited converses are not new Lean axioms |
+| Theorem 3.5 | Exact self-duality criterion for arbitrary parent matrix | `paper_qary_free_core_boxed_equivalence`; QaryEquivalence (1), QaryForward (21) |
+| Theorem 3.6 | Universal rank-r representation, actual code equality | `every_qary_selfDualCode_has_rankBoxed_normalForm`; QaryRankBoxedNormalization (1) |
+| Theorem 3.6, restriction and specialization | Same-D restriction, terminal row space, rank-one bridge | RankBoxedStructure (3) |
+| Lemma 3.1 | Arbitrary repeatable extension with fixed D | `paper_rankBoxed_buildingUp_exact`; RankBoxedExtension (1) |
+| Lemmas 3.2--3.3 | Fixed-parent Kim--Lee iff, direct sum, converse | RepeatedStep (4), RepeatedBox (6) |
+| Example 3.1 | Dense GF(5) rank-two code and both extension steps | `Verification/Examples/RankTwoGF5.lean`, four separate kernel certificates |
+| Theorem 3.7 | Chinburg--Zhang arithmetic realization | Cited published Theorem 1.5; not formalized here |
+| Lemma 3.4 | Two-coordinate reduction and exact reconstruction | BinaryTwoCoordinateReduction (3) |
+| Theorem 3.8 | Universal binary rank-one representation | `binarySelfDualCode_has_rankOneNormalForm`; BinaryRankOneNormalization (1) |
+| Theorem 3.9 | Transport and exact binary comparison | `paper_binary_cz_kim_corrected`; BinaryCzKim (18) |
+| Corollary 3.10 | Explicit normalized rank-one box | SplitBoxed (12), SplitBoxedOrthogonality (12) |
+| Theorem 3.11 | Conditional boxed coefficient theorem | `paper_conditional_boxed_normalization_exact`; ConditionalBoxed (1) |
+| Explicit change of form in Section 2 | Different named forms, not a Euclidean self-isometry | SplitFormTransport (3) |
+| Propositions 3.12--3.16 | Five finite-field applications | `applications.json`, `check_applications.py`, generated TeX and full distributions; external computation, not Lean certificates |
 
-- Paper source: `paper.tex`
-- Paper PDF: `paper.pdf`
-- Lean artifact: `BuildingUpFormalization.lean`
+The suite inventory contains **17 suites / 123 distinct declarations**.
+Principal declarations are under `BuildingUpFormalization.Components`.
+The historical identifiers containing `free_core` are retained to preserve
+proof and receipt identities; the manuscript introduces no such terminology.
 
-## Formalized vs. External
+## Entry points and proof boundaries
 
-### Formalized in Lean
+`Formalization.Sections.All` imports the section API. Implementations live
+in `Formalization/Components/`. Shared definitions still import the frozen
+`Formalization/Archive/SubmittedBaseline.lean`; archival placement is not
+proof-dependency removal. The 260 baseline theorems are not counted as
+260 additional independently compared manuscript goals.
 
-- self-dual / Lagrangian interface
-- nondegeneracy of the Euclidean bilinear form
-- split hyperbolic background
-- binary Kim building-up interface
-- binary Chinburg–Zhang / Kim equivalence theorem
-- adapted split `q`-ary building-up theorem
-- split boxed forward theorem
-- conditional reverse theorem up to split-isometric equivalence
+The universal q-ary Challenge fixes a coordinate pairing, requires
+`r = finrank (C ⊓ U_c)`, permits a whole-block permutation, and concludes
+literal equality with a rank-r generator row space. The binary Challenge
+permits scalar-coordinate permutations. Neither substitutes an arbitrary
+ambient linear isomorphism for code equivalence.
 
-### External Computation
+The arithmetic comparison takes the cohomological image and form isometry as
+explicit inputs. Étale cohomology, arithmetic duality and general q-ary
+arithmetic realization are outside this artifact's proved claims.
 
-- exhaustive GF(5) classification outputs
-- explicit GF(13) code searches
-- external minimum-distance computations for application examples
+## Numerical data
 
-## Paper-to-Lean Map
+`applications.json` generates the parameters, scalar matrices, witness words
+and table in Section 3.5. `applications_results.json` records every weight
+multiplicity, rank and Gram checks. The [12,6,6] example has b53=11, b54=0.
+No optimality claim is made for that example.
 
-### Preliminaries
+The separate rank-two kernel example has no minimum-distance claim.
 
-- Definitions `self-dual code`, `Lagrangian subspace`
-  - `paperSelfDualCode`
-  - `paperLagrangianSubspace`
-  - `paper_self_dual_iff_lagrangian`
-  - `paper_dotBilin_nondegenerate`
+## Historical numbering
 
-- Split hyperbolic preliminaries
-  - `paperHyperbolicPair`
-  - `splitE1`
-  - `splitE2`
-
-### Binary Section
-
-- Theorem `thm:binary-cz-kim` / `thm:CZ_Kim_Lagrangian`
-  - `paper_binary_cz_kim_equivalence`
-  - `boxedFamily_eq_buildRowsBin`
-  - `deleteHyperbolicPair_buildRowsBin`
-
-### Split q-ary Section
-
-- Theorem `thm:qary-building-up`
-  - `paper_qary_building_up_rebuild`
-  - `paper_qary_building_up_forward_self_dual`
-  - `splitBuildFamily_iff_rebuild`
-  - `exists_unique_split_parent_of_IsSplitBuildFamily`
-
-- Theorem `thm:split-boxed-form`
-  - `paper_split_boxed_form_forward_core`
-
-- Theorem `thm:conditional-split-boxed-normalization`
-  - `paper_conditional_split_boxed_normalization_core`
-
-## Verification Status
-
-Whole-file AXLE check:
-
-- `okay: true`
-- `failed_declarations: []`
-- `error_count: 0`
-
-Theorem-level AXLE verification was run for the paper-facing wrappers in the
-binary and split `q`-ary theorem spine.
+Submitted Theorem 3.9 corresponds to the corrected criterion, now Theorem 3.5;
+submitted Theorem 3.12 corresponds to Corollary 3.10. Older dated receipts
+may use intermediate numbering. Resolve them by stable declaration names.

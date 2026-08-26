@@ -1,0 +1,5 @@
+import Formalization.Components.QaryEquivalence
+
+open BuildingUpFormalization.Components.QaryEquivalence
+
+#print axioms paper_qary_free_core_boxed_equivalence

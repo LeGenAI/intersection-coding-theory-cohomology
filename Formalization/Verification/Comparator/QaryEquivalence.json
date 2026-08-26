@@ -1,0 +1,13 @@
+{
+  "challenge_module": "Formalization.Verification.Comparator.QaryEquivalenceChallenge",
+  "solution_module": "Formalization.Verification.Comparator.QaryEquivalenceSolution",
+  "theorem_names": [
+    "BuildingUpFormalization.Components.QaryEquivalence.paper_qary_free_core_boxed_equivalence"
+  ],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ],
+  "enable_nanoda": false
+}

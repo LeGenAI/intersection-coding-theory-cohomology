@@ -1,0 +1,16 @@
+import Formalization.Components.SplitBoxed
+
+open BuildingUpFormalization.Components.SplitBoxed
+
+#print axioms blockDefect_isotropicLineBlock
+#print axioms blockDefect_splitDiagonalBlock
+#print axioms blockDefectLinear_isotropicLineBlock
+#print axioms blockDefectLinear_splitDiagonalBlock
+#print axioms splitBoxedReadout_splitBoxedRows
+#print axioms splitBoxedRows_linearIndependent
+#print axioms splitBlockRowInner_comm
+#print axioms splitBlockRowBilin_isRefl
+#print axioms splitBlockRowBilin_separatingLeft
+#print axioms splitBlockRowBilin_separatingRight
+#print axioms splitBlockRowBilin_nondegenerate
+#print axioms splitBoxedRows_rowSpace_finrank

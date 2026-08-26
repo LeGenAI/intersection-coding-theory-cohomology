@@ -1,0 +1,16 @@
+import Formalization.Components.SplitBoxedOrthogonality
+
+open BuildingUpFormalization.Components.SplitBoxed
+
+#print axioms splitBlockInner_isotropicLine_isotropicLine
+#print axioms splitBlockInner_diagonal_isotropicLine
+#print axioms splitBlockInner_isotropicLine_diagonal
+#print axioms splitBoxed_offDiagonal_two_block_contribution
+#print axioms splitBoxedRows_nonfinal_inner
+#print axioms splitBoxedRows_nonfinal_self
+#print axioms splitBoxedRows_final_self
+#print axioms splitBoxedRows_nonfinal_final_inner
+#print axioms splitBoxedRows_pairwiseOrthogonal
+#print axioms splitBoxedRowSpace_le_orthogonal
+#print axioms splitBoxedRows_rowSpace_selfDual
+#print axioms paper_split_boxed_form_exact

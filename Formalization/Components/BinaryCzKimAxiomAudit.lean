@@ -1,0 +1,22 @@
+import Formalization.Components.BinaryCzKim
+
+open BuildingUpFormalization.Components.BinaryCzKim
+
+#print axioms binaryDiagonalHead_apply_zero
+#print axioms binaryDiagonalHead_apply_one
+#print axioms standardEuclideanPlaneForm_binaryDiagonalHead_self
+#print axioms standardEuclideanPlaneForm_planeE0_binaryDiagonalHead
+#print axioms standardEuclideanPlane_head_not_hyperbolicPair
+#print axioms dot_r0_riBin_eq_zero_iff
+#print axioms boxedFamily_coefficient_eq_dot
+#print axioms dot_riBin_riBin_eq_dot
+#print axioms boxedFamily_tail_pairwiseOrthogonal
+#print axioms buildSuccBinLinear_apply
+#print axioms buildRowsBin_succ_eq_buildSuccBinLinear
+#print axioms buildRowsBin_tail_linearIndependent
+#print axioms buildRows_one_eq_buildRowsBin
+#print axioms paper_binary_kim_building_up_exact
+#print axioms isSelfOrthogonal_map_of_isFormIsometry
+#print axioms boxedFamily_linearIndependent_of_paperSelfDualCode
+#print axioms boxedFamily_tail_paperSelfDualCode
+#print axioms paper_binary_cz_kim_corrected

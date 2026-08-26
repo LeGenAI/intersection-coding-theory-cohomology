@@ -1,0 +1,9 @@
+import Formalization.Components.PermutationEquivalence
+
+open BuildingUpFormalization.Components.PermutationEquivalence
+
+#print axioms coordinatePermuteLinearEquiv_apply
+#print axioms dot_coordinatePermuteLinearEquiv
+#print axioms rowSpace_permuteFamily_eq_permutedCode
+#print axioms paperSelfDualCode_permutedCode
+#print axioms codeEquiv_preserves_paperSelfDualCode

@@ -1,0 +1,64 @@
+GF(5) rank-two worked example: kernel verification
+=================================================
+Historical record. Current 17-suite / 123-goal verification is documented
+in ../Comparator/RESULTS.md; the totals below describe the dated older run.
+
+Date: 2026-08-26, updated for [8,4] -> [10,5] -> [12,6]
+Lean: v4.29.0-rc6
+Mathlib: 1f3cdaa7a7f82a2e521d285b11e261110e1e1962
+Linux snapshot: /home/cicago/buildingup-afm-extension-20260826-hhaU6T
+
+File: Formalization/Verification/Examples/RankTwoGF5.lean
+SHA-256: c5b205d2f2fed486e6f47e65565aae79ce2a8027786c275d0a70746d56e5e8b5
+
+Local and Linux command (both exit 0):
+  lake env lean Formalization/Verification/Examples/RankTwoGF5.lean
+
+All four certificates print only [propext, Classical.choice, Quot.sound]:
+  numerical_certificate
+  selfDual_chain
+  extension_numerical_certificate
+  buildingUp_chain
+No sorryAx, custom axiom, or native_decide is used. Finite equalities use
+ordinary kernel-checked decide; self-duality is proved algebraically using
+orthogonality and dimension, not decided by an external computation.
+
+Identical stdout SHA-256, local and Linux:
+7d18fe2f6d8d61c52c3816a6da54a0943beabb92a912a020f977f2bb67abf647
+
+Coverage
+--------
+- GG^T=0 and a nonzero 4-by-4 minor;
+- invertible row transformation and bijective whole-block permutation;
+- literal equality T G_sigma = R;
+- the defect matrix and its two identity pivots;
+- literal equality of the retained [6,3] and [4,2] matrices;
+- determinant of D and both initial coefficient relations;
+- Euclidean self-duality of G and the three downward block row spaces;
+- exact general-extension formulas for R3 and R4, using the SAME original R;
+- exact rank-two coefficient presentations with unchanged D;
+- x1=(3,1,1,2,3,2,1,0) and x2=(3,1,1,2,2,4,1,0,2,3), both of norm -1;
+- normalizeFirst R3 = buildRows x1 2 R;
+- normalizeFirst R4 = buildRows x2 2 R3;
+- both one-step inverse restrictions and the direct [12,6] -> [8,4] restriction;
+- Euclidean self-duality of R, R3, R4 in SCALAR coordinates.
+The internal buildRows convention c=2 matches the manuscript's Kim--Lee
+parameter c=3=-2. normalizeFirst multiplies only the first GENERATOR ROW
+by 3; no coordinate transformation or bilinear-form change is used.
+
+The intrinsic r=2 follows by rank-nullity from the certified boxed/defect
+presentations. The matrix D is literally the same in every presentation.
+No minimum-distance assertion is included.
+
+This standalone example is not itself a Comparator suite. The general
+extension theorem has its own new one-goal RankBoxedExtension suite and
+Linux/default-kernel receipt; total Comparator coverage is now 15 suites /
+113 declarations (the previous 112 plus that new declaration).
+
+Historical pre-extension run
+---------------------------
+The earlier two-certificate version had source SHA-256:
+04c91d005f9aa767b9560153a719ca3dba73fad2f796ac2a4d4d9b64396d5acc
+and identical local/Linux stdout SHA-256:
+8148726a01bce1549bef4a3ab0e1a07a7ea5aecd4e689fc075bf548814960770
+Its coverage stopped at the downward [8,4] -> [6,3] -> [4,2] chain.

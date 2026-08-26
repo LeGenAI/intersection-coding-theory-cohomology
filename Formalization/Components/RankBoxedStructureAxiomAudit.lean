@@ -1,0 +1,7 @@
+import Formalization.Components.RankBoxedStructure
+
+open BuildingUpFormalization.Components.RankBoxedStructure
+
+#print axioms paper_rankBoxed_pivot_restriction_exact
+#print axioms paper_rankBoxed_terminal_exact
+#print axioms paper_rankOne_split_specialization_exact

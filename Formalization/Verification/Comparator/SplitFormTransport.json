@@ -1,0 +1,16 @@
+{
+  "challenge_module": "Formalization.Verification.Comparator.SplitFormTransportChallenge",
+  "solution_module": "Formalization.Verification.Comparator.SplitFormTransportSolution",
+  "theorem_names": [
+    "BuildingUpFormalization.Components.SplitFormTransport.split_form_transport_exact",
+    "BuildingUpFormalization.Components.SplitFormTransport.split_isometry_code_equiv_exact",
+    "BuildingUpFormalization.Components.SplitFormTransport.head_alignment_not_euclidean_isometry"
+  ],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ],
+  "enable_nanoda": false
+}
+

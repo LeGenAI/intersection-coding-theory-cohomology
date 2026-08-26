@@ -1,0 +1,17 @@
+{
+  "challenge_module": "Formalization.Verification.Comparator.PermutationEquivalenceChallenge",
+  "solution_module": "Formalization.Verification.Comparator.PermutationEquivalenceSolution",
+  "theorem_names": [
+    "BuildingUpFormalization.Components.PermutationEquivalence.coordinatePermuteLinearEquiv_apply",
+    "BuildingUpFormalization.Components.PermutationEquivalence.dot_coordinatePermuteLinearEquiv",
+    "BuildingUpFormalization.Components.PermutationEquivalence.rowSpace_permuteFamily_eq_permutedCode",
+    "BuildingUpFormalization.Components.PermutationEquivalence.paperSelfDualCode_permutedCode",
+    "BuildingUpFormalization.Components.PermutationEquivalence.codeEquiv_preserves_paperSelfDualCode"
+  ],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ],
+  "enable_nanoda": false
+}

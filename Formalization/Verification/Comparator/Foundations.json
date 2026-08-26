@@ -1,0 +1,34 @@
+{
+  "challenge_module": "Formalization.Verification.Comparator.FoundationsChallenge",
+  "solution_module": "Formalization.Verification.Comparator.FoundationsSolution",
+  "theorem_names": [
+    "BuildingUpFormalization.Components.Foundations.standardEuclideanPlaneForm_apply",
+    "BuildingUpFormalization.Components.Foundations.alternatingHyperbolicPlaneForm_apply",
+    "BuildingUpFormalization.Components.Foundations.standardEuclideanPlaneForm_gram",
+    "BuildingUpFormalization.Components.Foundations.alternatingHyperbolicPlaneForm_gram",
+    "BuildingUpFormalization.Components.Foundations.standardEuclideanPlaneForm_not_isAlt",
+    "BuildingUpFormalization.Components.Foundations.alternatingHyperbolicPlaneForm_isAlt",
+    "BuildingUpFormalization.Components.Foundations.isAlt_of_isFormIsometry",
+    "BuildingUpFormalization.Components.Foundations.no_isometry_standardEuclideanPlane_alternatingHyperbolicPlane",
+    "BuildingUpFormalization.Components.Foundations.selfOrthogonal_isTotallyIsotropic",
+    "BuildingUpFormalization.Components.Foundations.selfOrthogonal_isMaximalTotallyIsotropic",
+    "BuildingUpFormalization.Components.Foundations.selfOrthogonal_iff_totallyIsotropic_and_finrank_half",
+    "BuildingUpFormalization.Components.Foundations.selfOrthogonal_even_finrank",
+    "BuildingUpFormalization.Components.Foundations.selfOrthogonal_iff_maximalTotallyIsotropic_and_finrank_half",
+    "BuildingUpFormalization.Components.Foundations.paperLagrangianSubspace_iff_totallyIsotropic_and_finrank_half",
+    "BuildingUpFormalization.Components.Foundations.paperSelfDualCode_iff_totallyIsotropic_and_finrank_half",
+    "BuildingUpFormalization.Components.Foundations.paperLagrangianSubspace_even_length",
+    "BuildingUpFormalization.Components.Foundations.paperSelfDualCode_even_length",
+    "BuildingUpFormalization.Components.Foundations.systematicRows_linearIndependent",
+    "BuildingUpFormalization.Components.Foundations.dot_systematicRows",
+    "BuildingUpFormalization.Components.Foundations.systematicRows_pairwiseOrthogonal_iff",
+    "BuildingUpFormalization.Components.Foundations.systematicRows_selfDual_iff_pairwiseOrthogonal",
+    "BuildingUpFormalization.Components.Foundations.paper_systematic_form_criterion_exact"
+  ],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ],
+  "enable_nanoda": false
+}

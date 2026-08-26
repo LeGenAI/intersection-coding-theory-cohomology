@@ -1,0 +1,26 @@
+import Formalization.Components.Foundations
+
+open BuildingUpFormalization.Components.Foundations
+
+#print axioms standardEuclideanPlaneForm_apply
+#print axioms alternatingHyperbolicPlaneForm_apply
+#print axioms standardEuclideanPlaneForm_gram
+#print axioms alternatingHyperbolicPlaneForm_gram
+#print axioms standardEuclideanPlaneForm_not_isAlt
+#print axioms alternatingHyperbolicPlaneForm_isAlt
+#print axioms isAlt_of_isFormIsometry
+#print axioms no_isometry_standardEuclideanPlane_alternatingHyperbolicPlane
+#print axioms selfOrthogonal_isTotallyIsotropic
+#print axioms selfOrthogonal_isMaximalTotallyIsotropic
+#print axioms selfOrthogonal_iff_totallyIsotropic_and_finrank_half
+#print axioms selfOrthogonal_even_finrank
+#print axioms selfOrthogonal_iff_maximalTotallyIsotropic_and_finrank_half
+#print axioms paperLagrangianSubspace_iff_totallyIsotropic_and_finrank_half
+#print axioms paperSelfDualCode_iff_totallyIsotropic_and_finrank_half
+#print axioms paperLagrangianSubspace_even_length
+#print axioms paperSelfDualCode_even_length
+#print axioms systematicRows_linearIndependent
+#print axioms dot_systematicRows
+#print axioms systematicRows_pairwiseOrthogonal_iff
+#print axioms systematicRows_selfDual_iff_pairwiseOrthogonal
+#print axioms paper_systematic_form_criterion_exact

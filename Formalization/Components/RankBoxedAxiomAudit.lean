@@ -1,0 +1,23 @@
+import Formalization.Components.RankBoxedConstruction
+
+open BuildingUpFormalization.Components.RankBoxed
+
+#print axioms splitBlockInner_splitAffineBlock
+#print axioms rankBoxRowInner_pivot_pivot
+#print axioms rankBoxRowInner_pivot_master
+#print axioms rankBoxRowInner_master_master
+#print axioms rankBoxedRows_pairwiseOrthogonal
+#print axioms rankBoxedReadout_rankBoxedRows
+#print axioms rankBoxedReadoutRows_linearIndependent
+#print axioms rankBoxedRows_linearIndependent_of_core_fullRank
+#print axioms rankBoxedRows_core_fullRank_of_linearIndependent
+#print axioms rankBoxedRows_linearIndependent_iff_core_fullRank
+#print axioms rankBoxRowBilin_nondegenerate
+#print axioms rankBoxedRows_rowSpace_selfDual
+#print axioms rankBoxedRows_forward_selfDual_of_linearIndependent
+#print axioms rankBoxedRows_forward_selfDual
+#print axioms binaryCzRankOneRows_exact_block_form
+#print axioms binaryCzRankOneRows_pairwiseOrthogonal
+#print axioms rankOne_core_fullRank_iff
+#print axioms rankOne_unit_core_fullRank
+#print axioms binaryCzRankOne_core_fullRank

@@ -1,0 +1,22 @@
+import Formalization.Components.BinaryRankOneNormalizationInduction
+
+open BuildingUpFormalization.Components.BinaryRankOneNormalization
+
+#print axioms dot_flattenRankBoxRow
+#print axioms flattenRankBoxedRows_linearIndependent
+#print axioms sum_eq_zero_of_dot_self_eq_zero
+#print axioms allOnes_mem_of_paperSelfDualCode
+#print axioms exists_mem_with_unequal_coordinates
+#print axioms exists_mem_with_zero_one_coordinates
+#print axioms binarySelfDualCode_exists_zero_one_pivot
+#print axioms pairToHeadPerm_apply_zero
+#print axioms pairToHeadPerm_apply_one
+#print axioms pairToHeadPerm_orients_pivot
+#print axioms binaryCzRankOneFinRows_paperSelfDualCode
+#print axioms binaryShorteningMap_injective
+#print axioms binaryShortenedCode_paperSelfDualCode
+#print axioms orientedPivot_reconstructs_from_shortening
+#print axioms binarySelfDualCode_has_rankOneNormalForm_lengthTwo
+#print axioms binaryCorrectedExtensionRows_eq_binaryCz
+#print axioms castBuildRowsBin_codeEquiv_binaryCz
+#print axioms binarySelfDualCode_has_rankOneNormalForm

@@ -1,0 +1,25 @@
+import Formalization.Components.BinaryCzKimAxiomAudit
+import Formalization.Components.BinaryRankOneNormalizationAxiomAudit
+import Formalization.Components.FoundationsAxiomAudit
+import Formalization.Components.NormFormAxiomAudit
+import Formalization.Components.PermutationEquivalenceAxiomAudit
+import Formalization.Components.QaryForwardAxiomAudit
+import Formalization.Components.QaryEquivalenceAxiomAudit
+import Formalization.Components.QaryRankBoxedNormalizationAxiomAudit
+import Formalization.Components.RankBoxedAxiomAudit
+import Formalization.Components.RankBoxedStructureAxiomAudit
+import Formalization.Components.RankBoxedExtensionAxiomAudit
+import Formalization.Components.RepeatedStepAxiomAudit
+import Formalization.Components.RepeatedBoxAxiomAudit
+import Formalization.Components.SplitBoxedAxiomAudit
+import Formalization.Components.SplitBoxedOrthogonalityAxiomAudit
+import Formalization.Components.BinaryTwoCoordinateReductionAxiomAudit
+import Formalization.Components.ConditionalBoxedAxiomAudit
+import Formalization.Components.SplitFormTransportAxiomAudit
+
+/-!
+# Complete theorem axiom audit
+
+Building this module runs the transitive `#print axioms` audit for every
+completed component suite and for the trusted part of the M6 normalization.
+-/

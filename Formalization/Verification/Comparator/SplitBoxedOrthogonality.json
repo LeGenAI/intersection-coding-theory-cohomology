@@ -1,0 +1,24 @@
+{
+  "challenge_module": "Formalization.Verification.Comparator.SplitBoxedOrthogonalityChallenge",
+  "solution_module": "Formalization.Verification.Comparator.SplitBoxedOrthogonalitySolution",
+  "theorem_names": [
+    "BuildingUpFormalization.Components.SplitBoxed.splitBlockInner_isotropicLine_isotropicLine",
+    "BuildingUpFormalization.Components.SplitBoxed.splitBlockInner_diagonal_isotropicLine",
+    "BuildingUpFormalization.Components.SplitBoxed.splitBlockInner_isotropicLine_diagonal",
+    "BuildingUpFormalization.Components.SplitBoxed.splitBoxed_offDiagonal_two_block_contribution",
+    "BuildingUpFormalization.Components.SplitBoxed.splitBoxedRows_nonfinal_inner",
+    "BuildingUpFormalization.Components.SplitBoxed.splitBoxedRows_nonfinal_self",
+    "BuildingUpFormalization.Components.SplitBoxed.splitBoxedRows_final_self",
+    "BuildingUpFormalization.Components.SplitBoxed.splitBoxedRows_nonfinal_final_inner",
+    "BuildingUpFormalization.Components.SplitBoxed.splitBoxedRows_pairwiseOrthogonal",
+    "BuildingUpFormalization.Components.SplitBoxed.splitBoxedRowSpace_le_orthogonal",
+    "BuildingUpFormalization.Components.SplitBoxed.splitBoxedRows_rowSpace_selfDual",
+    "BuildingUpFormalization.Components.SplitBoxed.paper_split_boxed_form_exact"
+  ],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ],
+  "enable_nanoda": false
+}

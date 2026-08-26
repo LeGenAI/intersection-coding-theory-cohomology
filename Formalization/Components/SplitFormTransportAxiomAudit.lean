@@ -1,0 +1,6 @@
+import Formalization.Components.SplitFormTransport
+
+#print axioms BuildingUpFormalization.Components.SplitFormTransport.split_form_transport_exact
+#print axioms BuildingUpFormalization.Components.SplitFormTransport.split_isometry_code_equiv_exact
+#print axioms BuildingUpFormalization.Components.SplitFormTransport.head_alignment_not_euclidean_isometry
+

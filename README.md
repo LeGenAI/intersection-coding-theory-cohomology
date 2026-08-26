@@ -1,65 +1,44 @@
-# Building-Up Formalization Submission Package
+# Building-up constructions of self-dual codes
 
-This directory contains the submission package for the paper
-`Formalizing the intersection of Coding Theory and Cohomology in Lean`.
+Lean 4 artifact accompanying *Formalizing building-up construction of self-dual
+codes through isotropic lines in Lean*.
 
-The package is organized around a single Lean 4 development file,
-`BuildingUpFormalization.lean`, together with the LaTeX source
-`paper.tex` and the generated PDF `paper.pdf`.
+The manuscript proves universal rank-r boxed representations over split odd
+fields, recursive restrictions and extensions, a fixed-parent correspondence
+with Kim--Lee building-up, and an independent binary rank-one normalization.
+It distinguishes these algebraic results from the cited arithmetic realization
+theorem of Chinburg--Zhang.
 
-## Scope
+## Artifact layout
 
-The formalized core covers the theorem spine of the current paper:
+- `paper.tex`, `paper.pdf`: manuscript and compiled PDF.
+- `Formalization.lean`: default entry point importing the section API.
+- `Formalization/Sections/`: mathematical section entry points.
+- `Formalization/Components/`: definitions and proofs.
+- `Formalization/Archive/SubmittedBaseline.lean`: frozen baseline supplying
+  shared infrastructure; its 260 theorems are not additional current exact goals.
+- `Formalization/Verification/Comparator/`: 17 independent suites / 123 goals.
+- `Formalization/Verification/Examples/`: kernel-checked rank-two example and
+  reproducible application data, generators and complete weight distributions.
+- `comparator/verify_manuscript.py`: current build, trust audit and Linux replay.
+- `ARTIFACT_MAP.md`, `BUILD.md`: theorem map and reproduction instructions.
 
-- self-dual and Lagrangian interfaces for Euclidean code spaces
-- split hyperbolic background for fields with `q ≡ 1 (mod 4)`
-- binary Kim building-up and the Chinburg–Zhang boxed comparison
-- adapted split `q`-ary building-up
-- split boxed forward theorem
-- conditional reverse theorem up to split-isometric equivalence
+Lean is pinned to `v4.29.0-rc6`; Mathlib is pinned to
+`1f3cdaa7a7f82a2e521d285b11e261110e1e1962`.
+The only permitted foundational axioms are `propext`, `Quot.sound` and
+`Classical.choice`. NanoDA is disabled. Placeholder proofs occur only in
+statement-side Challenges, not in completed Solutions or their proof dependencies.
 
-The explicit GF(5) and GF(13) applications in the paper are supported by
-external computation. Their mathematical interpretation appears in the
-paper, but the searches and exhaustive distance checks are not part of the
-Lean artifact.
+## Reproduce
 
-## Pinned Environment
+```sh
+lake exe cache get
+lake build
+python3 comparator/verify_manuscript.py --output tmp/local-check
+python3 Formalization/Verification/Examples/check_applications.py --check
+```
 
-- Lean toolchain: `leanprover/lean4:v4.29.0-rc6`
-- Lake: `5.0.0-src+00659f8`
-- Mathlib: commit `1f3cdaa7a7f82a2e521d285b11e261110e1e1962`
-
-The exact Mathlib commit is pinned in `lakefile.lean` and
-`lake-manifest.json`. This artifact is intentionally maintained as a
-paper-specific Lean development. It does **not** require any upstream merge
-into Mathlib.
-
-## Files
-
-- `paper.tex`: current LaTeX source
-- `paper.pdf`: current compiled paper
-- `BuildingUpFormalization.lean`: single-file Lean development
-- `BUILD.md`: reproducible build instructions
-- `ARTIFACT_MAP.md`: paper-to-artifact map
-- `SUBMISSION_CHECKLIST.md`: public release and AFM submission checklist
-
-## Quick Start
-
-To build the Lean artifact and the paper, see:
-
-- [BUILD.md](./BUILD.md)
-- [ARTIFACT_MAP.md](./ARTIFACT_MAP.md)
-
-## Public Release Notes
-
-For AFM submission, this package should be placed in a public repository or
-public archive snapshot together with:
-
-- a clear open-source license
-- reproducible build instructions
-- the pinned Lean/Mathlib versions already recorded here
-- a permanent archive identifier for the paper preprint
-- a Software Heritage identifier (SWHID) for the released code snapshot
-
-The repository can remain completely independent of Mathlib upstream while
-still satisfying these requirements.
+The verification output directory must not already exist.
+See [BUILD.md](BUILD.md) for the full procedure and
+[RESULTS.md](Formalization/Verification/Comparator/RESULTS.md) for dated evidence.
+The finite-field distance computations are not Lean proofs.

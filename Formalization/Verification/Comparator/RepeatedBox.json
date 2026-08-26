@@ -1,0 +1,14 @@
+{
+  "challenge_module": "Formalization.Verification.Comparator.RepeatedBoxChallenge",
+  "solution_module": "Formalization.Verification.Comparator.RepeatedBoxSolution",
+  "theorem_names": [
+    "BuildingUpFormalization.Components.RepeatedBox.extension_dictionary_exact",
+    "BuildingUpFormalization.Components.RepeatedBox.extension_zero_column_iff",
+    "BuildingUpFormalization.Components.RepeatedBox.repeated_step_selfDual_exact",
+    "BuildingUpFormalization.Components.RepeatedBox.repeated_step_normalization_exact",
+    "BuildingUpFormalization.Components.RepeatedBox.repeated_step_kim_lee_iff",
+    "BuildingUpFormalization.Components.RepeatedBox.kim_lee_to_repeated_exact"
+  ],
+  "permitted_axioms": ["propext", "Quot.sound", "Classical.choice"],
+  "enable_nanoda": false
+}

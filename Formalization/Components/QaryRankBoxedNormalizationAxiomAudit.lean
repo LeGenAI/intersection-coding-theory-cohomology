@@ -1,0 +1,5 @@
+import Formalization.Components.QaryRankBoxedNormalization
+
+open BuildingUpFormalization.Components.QaryRankBoxedNormalization
+
+#print axioms every_qary_selfDualCode_has_rankBoxed_normalForm
