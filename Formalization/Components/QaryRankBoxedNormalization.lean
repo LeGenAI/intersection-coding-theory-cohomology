@@ -1,4 +1,5 @@
 import Formalization.Components.QaryRankBoxedNormalizationDefinitions
+import Formalization.Components.RankBoxedConstruction
 import Mathlib.LinearAlgebra.Basis.VectorSpace
 import Mathlib.LinearAlgebra.Dual.Lemmas
 import Mathlib.LinearAlgebra.Dimension.Free
@@ -244,6 +245,7 @@ theorem exists_coordinatePivotBasisData {n : ℕ}
 set_option maxHeartbeats 800000 in
 theorem every_qary_selfDualCode_has_rankBoxed_normalForm
     {n : ℕ} (c : K) (hc : c ^ 2 = (-1 : K))
+    (h2 : (2 : K) ≠ 0)
     {C : Submodule K (QaryBlockRow K (Fin n))}
     (hC : QaryBlockSelfDualCode C) :
     HasQaryRankBoxedNormalForm c C := by
@@ -524,7 +526,46 @@ theorem every_qary_selfDualCode_has_rankBoxed_normalForm
       relabelBlockCode (K := K) data.sigma C =
         rankBoxedRowSpace (determinedRankBoxedRows c P H Q D) := by
     simpa [determinedRankBoxedRows, hA] using hcode_eq
+  let ell : Fin k → Fin r → SplitBlock K :=
+    fun i t => splitAffineBlock c (H i t) (Q i t)
+  let b : Fin k → Fin k → K := P
+  have hellFirst : terminalFirst ell = H := by
+    funext i t
+    simp [ell, terminalFirst, splitAffineBlock, head2]
+  have hellDefect : terminalDefect c ell = Q := by
+    funext i t
+    simp [ell, terminalDefect]
+  have hterminal (i j : Fin k) :
+      terminalInner ell i j =
+        ∑ t, (c * (H i t * Q j t + Q i t * H j t) +
+          Q i t * Q j t) := by
+    rw [← terminalInner_identity c ell hc_mul i j, hellFirst, hellDefect]
+  have hoff : PaperOffDiagonalRelations c b ell := by
+    intro i j hij
+    have h := hpp i j
+    simp only [if_neg hij] at h
+    rw [hterminal i j]
+    simpa only [zero_add, b] using h
+  have hdiag (i : Fin k) :
+      P i i = forcedPivotDiagonal c ell i := by
+    have h := hpp i i
+    simp only [if_pos] at h
+    rw [← hterminal i i] at h
+    rw [forcedPivotDiagonal]
+    field_simp [h2]
+    linear_combination -c * h + (P i i + P i i) * hc_mul
+  have hP : paperPivotCoefficients c b ell = P := by
+    funext i j
+    by_cases hij : i = j
+    · subst j
+      simp [paperPivotCoefficients, b, hdiag]
+    · simp [paperPivotCoefficients, b, hij]
+  have hcode_paper :
+      relabelBlockCode (K := K) data.sigma C =
+        rankBoxedRowSpace (paperRankBoxedRows c b ell D) := by
+    simpa [paperRankBoxedRows, hP, hellFirst, hellDefect] using
+      hcode_determined
   exact ⟨k, r, hr_intrinsic, data.k_add_r, data.sigma,
-    P, H, Q, D, hD, hpp, hcode_determined⟩
+    b, ell, D, hD, hoff, hcode_paper⟩
 
 end BuildingUpFormalization.Components.QaryRankBoxedNormalization

@@ -12,9 +12,9 @@ Theorem, Proposition and Corollary share the theorem counter.
 | Propositions 2.2--2.3 | Split norm and hyperbolic basis, with 2 nonzero | NormForm (9) |
 | Theorems 3.1--3.4 | Cited Kim and Kim--Lee results | BinaryCzKim / QaryForward prove the algebraic forward and adapted-reduction interfaces; the cited converses are not new Lean axioms |
 | Theorem 3.5 | Exact self-duality criterion for arbitrary parent matrix | `paper_qary_free_core_boxed_equivalence`; QaryEquivalence (1), QaryForward (21) |
-| Theorem 3.6 | Universal rank-r representation, actual code equality | `every_qary_selfDualCode_has_rankBoxed_normalForm`; QaryRankBoxedNormalization (1) |
+| Theorem 3.6 | Universal rank-r representation, actual code equality | `paperRankBoxedRows_forward_selfDual`, `every_qary_selfDualCode_has_rankBoxed_normalForm`; QaryRankBoxedNormalization (2) |
 | Theorem 3.6, restriction and specialization | Same-D restriction, terminal row space, rank-one bridge | RankBoxedStructure (3) |
-| Lemma 3.1 | Arbitrary repeatable extension with fixed D | `paper_rankBoxed_buildingUp_exact`; RankBoxedExtension (1) |
+| Lemma 3.1 | Arbitrary repeatable extension with fixed D | `paper_rankBoxed_buildingUp_minimal_exact`; RankBoxedExtension (2) |
 | Lemmas 3.2--3.3 | Fixed-parent Kim--Lee iff, its forced-coefficient specialization, direct sum, converse | RepeatedStep (4), RepeatedBox (7) |
 | Example 3.1 | Dense GF(5) rank-two code and both extension steps | `Verification/Examples/RankTwoGF5.lean`, four separate kernel certificates |
 | Theorem 3.7 | Chinburg--Zhang arithmetic realization | Cited published Theorem 1.5; not formalized here |
@@ -28,7 +28,7 @@ Theorem, Proposition and Corollary share the theorem counter.
 | Table 2 | Three largest repeated boxed presentations: binary $[24,12,8]$, GF(5) $[24,12,9]$, and GF(13) $[22,11,10]$, together with their certified parents | `check_golay_lineage.py`, `check_gf5_repeated_top.py`, `check_gf13_repeated_lineage.py`, and their linked certificates |
 | Proposition 4.1 | Universal rank-one realization of a self-dual MDS $[14,7,8]$ code over $\mathrm{GF}(13)$ | `Examples/LargeGF13.lean` (Gram, normalization, readout, parent, unique correction and reconstruction certificates); `large_applications.json` and `check_large_applications.py` (all $\binom{14}{7}$ minors and exhaustive projective enumeration) |
 
-The suite inventory contains **17 suites / 124 distinct declarations**.
+The suite inventory contains **17 suites / 126 distinct declarations**.
 Principal declarations are under `BuildingUpFormalization.Components`.
 The historical identifiers containing `free_core` are retained to preserve
 proof and receipt identities; the manuscript introduces no such terminology.

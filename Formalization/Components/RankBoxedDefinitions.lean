@@ -117,6 +117,54 @@ def determinedRankBoxedRows {k r : ℕ}
     RankBoxIndex k r → RankBoxRow K k r :=
   rankBoxedRows c P H Q (forcedMasterCoefficients Q D) D
 
+/-- Euclidean inner product of two terminal block-rows. -/
+def terminalRowInner {r : ℕ}
+    (ell ell' : Fin r → SplitBlock K) : K :=
+  ∑ t, splitBlockInner (ell t) (ell' t)
+
+/-- Inner product of two indexed terminal rows in the paper form. -/
+def terminalInner {k r : ℕ}
+    (ell : Fin k → Fin r → SplitBlock K) (i j : Fin k) : K :=
+  terminalRowInner (ell i) (ell j)
+
+/-- First coordinates of the terminal blocks. -/
+def terminalFirst {k r : ℕ}
+    (ell : Fin k → Fin r → SplitBlock K) : Fin k → Fin r → K :=
+  fun i t => ell i t 0
+
+/-- Transverse coordinates of the terminal blocks. -/
+def terminalDefect {k r : ℕ} (c : K)
+    (ell : Fin k → Fin r → SplitBlock K) : Fin k → Fin r → K :=
+  fun i t => blockDefectLinear c (ell i t)
+
+/-- The pivot diagonal forced by self-orthogonality in odd characteristic. -/
+def forcedPivotDiagonal {k r : ℕ} (c : K)
+    (ell : Fin k → Fin r → SplitBlock K) (i : Fin k) : K :=
+  c / 2 * (1 + terminalInner ell i i)
+
+/-- Pivot coefficients in the minimal paper parametrization.  Only the
+off-diagonal values of `b` are used; the diagonal is forced by `ell`. -/
+def paperPivotCoefficients {k r : ℕ} (c : K)
+    (b : Fin k → Fin k → K)
+    (ell : Fin k → Fin r → SplitBlock K) : Fin k → Fin k → K :=
+  fun i j => if i = j then forcedPivotDiagonal c ell i else b i j
+
+/-- The universal rank-boxed rows in the paper parametrization
+`G(c;b,ell,D)`. -/
+def paperRankBoxedRows {k r : ℕ} (c : K)
+    (b : Fin k → Fin k → K)
+    (ell : Fin k → Fin r → SplitBlock K)
+    (D : Fin r → Fin r → K) :
+    RankBoxIndex k r → RankBoxRow K k r :=
+  determinedRankBoxedRows c (paperPivotCoefficients c b ell)
+    (terminalFirst ell) (terminalDefect c ell) D
+
+/-- The sole Gram condition in the minimal paper parametrization. -/
+def PaperOffDiagonalRelations {k r : ℕ} (c : K)
+    (b : Fin k → Fin k → K)
+    (ell : Fin k → Fin r → SplitBlock K) : Prop :=
+  ∀ i j, i ≠ j → c * (b i j + b j i) + terminalInner ell i j = 0
+
 /-- The pivot--pivot Gram relation.  Under `c² = -1` it is exactly
 
 `I + c(P + Pᵀ) + c(HQᵀ + QHᵀ) + QQᵀ = 0`.

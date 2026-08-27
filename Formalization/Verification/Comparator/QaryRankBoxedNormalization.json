@@ -2,6 +2,7 @@
   "challenge_module": "Formalization.Verification.Comparator.QaryRankBoxedNormalizationChallenge",
   "solution_module": "Formalization.Verification.Comparator.QaryRankBoxedNormalizationSolution",
   "theorem_names": [
+    "BuildingUpFormalization.Components.RankBoxed.paperRankBoxedRows_forward_selfDual",
     "BuildingUpFormalization.Components.QaryRankBoxedNormalization.every_qary_selfDualCode_has_rankBoxed_normalForm"
   ],
   "permitted_axioms": [

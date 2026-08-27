@@ -11,9 +11,9 @@ axiom audits and independent Challenge/Solution pairs.
 | Split norm form and exact preliminary propositions | `NormForm*` | 9 |
 | Binary building-up | `BinaryCzKim*` | 18 |
 | Universal binary rank-one normalization | `BinaryRankOneNormalization*` | 1 |
-| Universal q-ary rank-`r` normalization | `QaryRankBoxedNormalization*` | 1 |
+| Universal q-ary rank-`r` normalization | `QaryRankBoxedNormalization*` | 2 |
 | Repeated boxed structure and exact rank-one specialization | `RankBoxedStructure*` | 3 |
-| Repeatable rank-boxed building-up with fixed D | `RankBoxedExtension*` | 1 |
+| Repeatable rank-boxed building-up with fixed D | `RankBoxedExtension*` | 2 |
 | One-step Kim--Lee normalization, exception and binary specialization | `RepeatedStep*` | 4 |
 | Fixed-parent repeated-box correspondence in both directions | `RepeatedBox*` | 7 |
 | Split q-ary forward and adapted reduction | `QaryForward*` | 21 |
@@ -23,11 +23,11 @@ axiom audits and independent Challenge/Solution pairs.
 | Binary two-coordinate reduction and reconstruction | `BinaryTwoCoordinateReduction*` | 3 |
 | Change of bilinear form | `SplitFormTransport*` | 3 |
 | Exact conditional coefficient theorem | `ConditionalBoxed*` | 1 |
-| **Total** | | **124** |
+| **Total** | | **126** |
 
 Every completed family has a separate statement-only Comparator Challenge, completed
 Solution, JSON configuration, and transitive axiom-audit module.
-All 124 goals in seventeen suites passed a fresh complete Linux Comparator
+All 126 goals in seventeen suites passed a fresh complete Linux Comparator
 replay on 2026-08-27, including default-kernel and transitive axiom checks.
 This final run supersedes the earlier incremental coverage records.
 The dated current verification record is in
@@ -38,7 +38,7 @@ The universal q-ary rank-`r` existence theorem for Theorem 3.6 (formerly 3.12) i
 in `Components/QaryRankBoxedNormalization.lean`.  Its exact statement-only
 Challenge, completed Solution, JSON configuration, transitive axiom audit,
 Linux build, and default-kernel Comparator replay all pass.  It is included in
-the current 124-declaration inventory.
+the current 126-declaration inventory.
 
 ## Rank-boxed construction
 

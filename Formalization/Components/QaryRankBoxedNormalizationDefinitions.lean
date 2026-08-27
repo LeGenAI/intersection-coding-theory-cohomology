@@ -1,4 +1,4 @@
-import Formalization.Components.RankBoxedConstruction
+import Formalization.Components.RankBoxedDefinitions
 
 set_option autoImplicit false
 
@@ -79,25 +79,21 @@ def relabelBlockCode {ι κ : Type*} (σ : ι ≃ κ)
     Submodule K (QaryBlockRow K ι) :=
   Submodule.map (blockRelabelLinearEquiv (K := K) σ).toLinearMap C
 
-/-- Exact universal rank-`r` boxed normal-form goal.
-
-The lower-right `r × r` core is free but full rank.  The master-by-pivot
-coefficients have been substituted from their forced value `-D Qᵀ`, so the
-only remaining Gram condition is the pivot relation.  The conclusion uses
-only a permutation of whole two-coordinate blocks and equality of code
-submodules. -/
+/-- Exact universal rank-`r` boxed normal-form goal in the minimal paper
+parametrization.  The inputs are only the off-diagonal coefficients `b`, the
+terminal block-rows `ell`, and the nonsingular terminal core `D`. -/
 def HasQaryRankBoxedNormalForm {n : ℕ} (c : K)
     (C : Submodule K (QaryBlockRow K (Fin n))) : Prop :=
   ∃ k r : ℕ,
     r = Module.finrank K ↥(C ⊓ qaryIsotropicLineCode (K := K) c) ∧
     k + r = n ∧
     ∃ (σ : RankBoxIndex k r ≃ Fin n)
-      (P : Fin k → Fin k → K)
-      (H Q : Fin k → Fin r → K)
+      (b : Fin k → Fin k → K)
+      (ell : Fin k → Fin r → SplitBlock K)
       (D : Fin r → Fin r → K),
       RankBoxCoreFullRank D ∧
-      PivotGramRelations c P H Q ∧
+      PaperOffDiagonalRelations c b ell ∧
       relabelBlockCode (K := K) σ C =
-        rankBoxedRowSpace (determinedRankBoxedRows c P H Q D)
+        rankBoxedRowSpace (paperRankBoxedRows c b ell D)
 
 end BuildingUpFormalization.Components.QaryRankBoxedNormalization

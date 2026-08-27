@@ -549,6 +549,76 @@ theorem determinedRankBoxedRows_forward_selfDual {k r : ℕ}
     simp [forcedMasterCoefficients]
   · exact hpp
 
+/-- Reconstruct the inner product of two terminal blocks from their first
+coordinates and transverse coordinates. -/
+theorem terminalBlock_identity (c : K) (u v : SplitBlock K)
+    (hc : c * c = -1) :
+    c * (u 0 * blockDefectLinear c v + blockDefectLinear c u * v 0) +
+        blockDefectLinear c u * blockDefectLinear c v =
+      splitBlockInner u v := by
+  change c * (u 0 * blockDefect c v + blockDefect c u * v 0) +
+      blockDefect c u * blockDefect c v = dot u v
+  simp only [blockDefect, dot, Fin.sum_univ_two]
+  linear_combination -(u 0 * v 0) * hc
+
+theorem terminalRowInner_comm {r : ℕ}
+    (ell ell' : Fin r → SplitBlock K) :
+    terminalRowInner ell ell' = terminalRowInner ell' ell := by
+  unfold terminalRowInner
+  apply Finset.sum_congr rfl
+  intro t _
+  exact dot_comm _ _
+
+theorem terminalInner_identity {k r : ℕ} (c : K)
+    (ell : Fin k → Fin r → SplitBlock K) (hc : c * c = -1)
+    (i j : Fin k) :
+    (∑ t, (c * (terminalFirst ell i t * terminalDefect c ell j t +
+          terminalDefect c ell i t * terminalFirst ell j t) +
+        terminalDefect c ell i t * terminalDefect c ell j t)) =
+      terminalInner ell i j := by
+  apply Finset.sum_congr rfl
+  intro t _
+  exact terminalBlock_identity c (ell i t) (ell j t) hc
+
+/-- The matrix Gram relation follows from the single off-diagonal relation
+once the diagonal is substituted from terminal self-products. -/
+theorem paperPivotGramRelations {k r : ℕ} (c : K)
+    (b : Fin k → Fin k → K)
+    (ell : Fin k → Fin r → SplitBlock K)
+    (hc : c * c = -1) (h2 : (2 : K) ≠ 0)
+    (hoff : PaperOffDiagonalRelations c b ell) :
+    PivotGramRelations c (paperPivotCoefficients c b ell)
+      (terminalFirst ell) (terminalDefect c ell) := by
+  intro i j
+  rw [terminalInner_identity c ell hc i j]
+  by_cases hij : i = j
+  · subst j
+    simp only [paperPivotCoefficients, if_pos, forcedPivotDiagonal]
+    field_simp [h2]
+    rw [show c ^ 2 = -1 by simpa [pow_two] using hc]
+    ring
+  · simp only [paperPivotCoefficients, if_neg hij, if_neg (Ne.symm hij)]
+    simpa only [zero_add] using hoff i j hij
+
+/-- Forward self-duality theorem in the minimal paper parametrization
+`G(c;b,ell,D)`. -/
+theorem paperRankBoxedRows_forward_selfDual {k r : ℕ} (c : K)
+    (b : Fin k → Fin k → K)
+    (ell : Fin k → Fin r → SplitBlock K)
+    (D : Fin r → Fin r → K)
+    (hc : c * c = -1) (h2 : (2 : K) ≠ 0)
+    (hD : RankBoxCoreFullRank D)
+    (hoff : PaperOffDiagonalRelations c b ell) :
+    RankBoxedPairwiseOrthogonal (paperRankBoxedRows c b ell D) ∧
+      LinearIndependent K (paperRankBoxedRows c b ell D) ∧
+      rankBoxedRowSpace (paperRankBoxedRows c b ell D) =
+        (rankBoxRowBilin (K := K) (k := k) (r := r)).orthogonal
+          (rankBoxedRowSpace (paperRankBoxedRows c b ell D)) := by
+  apply determinedRankBoxedRows_forward_selfDual c
+    (paperPivotCoefficients c b ell) (terminalFirst ell)
+    (terminalDefect c ell) D hc hD
+  exact paperPivotGramRelations c b ell hc h2 hoff
+
 theorem binaryCzRankOneRows_pivot_diagonal [CharP K 2]
     {k : ℕ} (b : Fin k → Fin k → K) (i : Fin k) (hdiag : b i i = 0) :
     binaryCzRankOneRows b (.inl i) (.inl i) = splitDiagonalBlock := by

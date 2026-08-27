@@ -26,7 +26,7 @@ python3 comparator/verify_manuscript.py --output tmp/local-check
 
 This builds the 17 Solutions, checks their local import closure for forbidden
 proof tokens, verifies dependency revisions and clean tracked dependency
-sources, and prints the transitive axioms of all 124 exact goals. It also
+sources, and prints the transitive axioms of all 126 exact goals. It also
 compiles the rank-two GF(5) certificates and reruns the application catalogue,
 the large GF(13) computation, and the length-20-centered binary Golay lineage. The output
 directory must be new. A local audit is not a Comparator replay.
@@ -111,7 +111,7 @@ python3 comparator/generate_challenge.py
 python3 comparator/generate_challenge.py --check
 ```
 
-These historical challenges are not the current 124-goal inventory.
+These historical challenges are not the current 126-goal inventory.
 
 ## PDF
 

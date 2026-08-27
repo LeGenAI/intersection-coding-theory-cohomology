@@ -2,7 +2,8 @@
   "challenge_module": "Formalization.Verification.Comparator.RankBoxedExtensionChallenge",
   "solution_module": "Formalization.Verification.Comparator.RankBoxedExtensionSolution",
   "theorem_names": [
-    "BuildingUpFormalization.Components.RankBoxedExtension.paper_rankBoxed_buildingUp_exact"
+    "BuildingUpFormalization.Components.RankBoxedExtension.paper_rankBoxed_buildingUp_exact",
+    "BuildingUpFormalization.Components.RankBoxedExtension.paper_rankBoxed_buildingUp_minimal_exact"
   ],
   "permitted_axioms": [
     "propext",

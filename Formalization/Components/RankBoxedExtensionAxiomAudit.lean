@@ -1,3 +1,4 @@
 import Formalization.Components.RankBoxedExtension
 
 #print axioms BuildingUpFormalization.Components.RankBoxedExtension.paper_rankBoxed_buildingUp_exact
+#print axioms BuildingUpFormalization.Components.RankBoxedExtension.paper_rankBoxed_buildingUp_minimal_exact

@@ -6,7 +6,7 @@ Solution. All 17 suites permit only `propext`, `Quot.sound` and
 Challenges intentionally contain proof placeholders. A Solution must not import
 a Challenge, and no completed proof may depend on `sorryAx`.
 
-The 124 distinct declarations include the universal q-ary and binary goals,
+The 126 distinct declarations include the universal q-ary and binary goals,
 the exact building-up iff, same-D recursive restriction and extension, and
 both fixed-parent directions of the repeated-box/Kim--Lee correspondence.
 The zero correction column is treated explicitly as a direct-sum case.
@@ -25,4 +25,4 @@ to stable Lean names.
 
 The binary arithmetic wrapper does not prove the cited arithmetic realization
 theorem. The distance computations are external certificates. Neither is
-silently included in the 124-goal count.
+silently included in the 126-goal count.

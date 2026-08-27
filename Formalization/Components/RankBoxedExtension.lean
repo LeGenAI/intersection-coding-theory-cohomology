@@ -7,6 +7,7 @@ namespace BuildingUpFormalization.Components.RankBoxedExtension
 
 open BuildingUpFormalization.Components.RankBoxed
 open BuildingUpFormalization.Components.RankBoxedStructure
+open BuildingUpFormalization.Components.SplitBoxed
 
 variable {K : Type*} [Field K]
 
@@ -81,5 +82,82 @@ theorem paper_rankBoxed_buildingUp_exact {k r : ℕ} (c : K)
     | inr i => cases j <;> rfl
   · exact rankBoxedRows_forward_selfDual c _ _ _ _ D
       (by simpa [pow_two] using hc) hD hpm' hpp'
+
+/-- Exact building-up theorem in the minimal paper parametrization. -/
+theorem paper_rankBoxed_buildingUp_minimal_exact {k r : ℕ} (c : K)
+    (b : Fin k → Fin k → K)
+    (ell : Fin k → Fin r → SplitBlock K)
+    (D : Fin r → Fin r → K)
+    (ell0 : Fin r → SplitBlock K) (u : Fin k → K)
+    (hc : c * c = -1) (h2 : (2 : K) ≠ 0)
+    (hD : RankBoxCoreFullRank D)
+    (hoff : PaperOffDiagonalRelations c b ell) :
+    let b' := extendPaperB c b ell ell0 u
+    let ell' := extendPaperEll ell ell0
+    PaperOffDiagonalRelations c b' ell' ∧
+      restrictRankBoxRows (Fin.succEmb k) (paperRankBoxedRows c b' ell' D) =
+        paperRankBoxedRows c b ell D ∧
+      RankBoxedPairwiseOrthogonal (paperRankBoxedRows c b' ell' D) ∧
+      LinearIndependent K (paperRankBoxedRows c b' ell' D) ∧
+      rankBoxedRowSpace (paperRankBoxedRows c b' ell' D) =
+        (rankBoxRowBilin (K := K) (k := k + 1) (r := r)).orthogonal
+          (rankBoxedRowSpace (paperRankBoxedRows c b' ell' D)) := by
+  classical
+  dsimp only
+  have hoff' : PaperOffDiagonalRelations c
+      (extendPaperB c b ell ell0 u) (extendPaperEll ell ell0) := by
+    intro i j
+    revert j
+    refine Fin.cases ?_ (fun i => ?_) i
+    · intro j
+      refine Fin.cases ?_ (fun j => ?_) j
+      · intro hij
+        exact (hij rfl).elim
+      · intro _
+        rw [show terminalInner (extendPaperEll ell ell0) 0 (Fin.succ j) =
+              terminalRowInner ell0 (ell j) by
+            simp [terminalInner, extendPaperEll]]
+        rw [terminalRowInner_comm ell0 (ell j)]
+        simp only [extendPaperB, Fin.cons_zero, Fin.cons_succ]
+        linear_combination (terminalRowInner (ell j) ell0) * hc
+    · intro j
+      refine Fin.cases ?_ (fun j => ?_) j
+      · intro _
+        rw [show terminalInner (extendPaperEll ell ell0) (Fin.succ i) 0 =
+              terminalRowInner (ell i) ell0 by
+            simp [terminalInner, extendPaperEll]]
+        simp only [extendPaperB, Fin.cons_zero, Fin.cons_succ]
+        linear_combination (terminalRowInner (ell i) ell0) * hc
+      · intro hij
+        have hij' : i ≠ j := by
+          intro h
+          apply hij
+          simpa [h]
+        simpa [extendPaperB, extendPaperEll, terminalInner] using
+          hoff i j hij'
+  refine ⟨hoff', ?_, paperRankBoxedRows_forward_selfDual c _ _ D hc h2 hD hoff'⟩
+  funext i j
+  cases i with
+  | inl i =>
+      cases j with
+      | inl j =>
+          simp [restrictRankBoxRows, keepRankBoxIndex, paperRankBoxedRows,
+            determinedRankBoxedRows, rankBoxedRows, paperPivotCoefficients,
+            forcedPivotDiagonal, forcedMasterCoefficients, extendPaperB,
+            extendPaperEll, terminalInner, terminalRowInner, terminalFirst,
+            terminalDefect]
+      | inr j =>
+          simp [restrictRankBoxRows, keepRankBoxIndex, paperRankBoxedRows,
+            determinedRankBoxedRows, rankBoxedRows, paperPivotCoefficients,
+            forcedPivotDiagonal, forcedMasterCoefficients, extendPaperB,
+            extendPaperEll, terminalInner, terminalRowInner, terminalFirst,
+            terminalDefect]
+  | inr i =>
+      cases j <;>
+        simp [restrictRankBoxRows, keepRankBoxIndex, paperRankBoxedRows,
+          determinedRankBoxedRows, rankBoxedRows, paperPivotCoefficients,
+          forcedPivotDiagonal, forcedMasterCoefficients, extendPaperB,
+          extendPaperEll, terminalInner, terminalRowInner, terminalFirst,
+          terminalDefect]
 
 end BuildingUpFormalization.Components.RankBoxedExtension

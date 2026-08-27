@@ -20,28 +20,24 @@ in~\cite{BetsumiyaEtAl}. Put the columns of \(G_{14}\) in the order
 \[
 \sigma=\AppThirteenFourteenCoordinateOrder
 \]
-and group consecutive coordinates into seven two-coordinate blocks. A
-row-equivalent universal generator is obtained from
+and group consecutive coordinates into seven two-coordinate blocks. Put
 \begin{equation}
-P=\AppThirteenFourteenP,
+b=\begin{pmatrix}
+*&0&1&12&12&5\\
+6&*&4&10&11&4\\
+9&0&*&4&2&3\\
+0&0&6&*&0&9\\
+9&0&9&0&*&0\\
+5&0&1&4&0&*
+\end{pmatrix},
 \qquad
-H=\AppThirteenFourteenH,
-\qquad
-Q=\AppThirteenFourteenQ.
+(\ell_i)_{i=1}^6=((5,2),(2,6),(5,8),(9,6),(6,4),(1,5)),
 \label{eq:gf13-14-coefficients}
 \end{equation}
-Let \(\delta_{ij}\) denote the Kronecker delta.  In the notation of
-Theorem~\ref{thm:universal-rank-boxed},
+where the diagonal symbols in \(b\) are unused.  In the notation of
+Theorem~\ref{thm:universal-rank-boxed}, a row-equivalent universal generator is
 \begin{equation}
-\widehat G_{14}=G(5;P,H,Q,(1))
-=\left[
-\begin{array}{c|c}
-\bigl((P_{ij},5P_{ij}+\delta_{ij})\bigr)_{1\le i,j\le6}
-  & \bigl((H_i,5H_i+Q_i)\bigr)_{1\le i\le6}\\
-\hline
-\bigl(-Q_j(1,5)\bigr)_{1\le j\le6} & (1,5)
-\end{array}
-\right].
+\widehat G_{14}=G(5;b,\ell,(1))=\AppThirteenFourteenUniversal.
 \label{eq:gf13-14-structured-generator}
 \end{equation}
 It has \(k=6\), \(r=1\), and \(D=(1)\).  Deleting its first block row and
@@ -90,7 +86,8 @@ and exact multiplication gives
 \]
 Thus \(\rank(\partial\widehat G_{14})=6\), while its last row lies in
 \(U_5\) and ends in \((1,5)\); hence \(r=1\) and \(D=(1)\).
-The universal Gram relation holds for \(P,H,Q\), so
+The six forced diagonal identities and the off-diagonal relations
+\(5(b_{ij}+b_{ji})+\ell_i\cdot\ell_j=0\) hold, so
 Theorem~\ref{thm:universal-rank-boxed} gives self-duality both before and
 after the simultaneous row-and-block deletion.
 

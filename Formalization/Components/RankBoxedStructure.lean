@@ -1,4 +1,5 @@
 import Formalization.Components.RankBoxedStructureDefinitions
+import Formalization.Components.RankBoxedConstruction
 
 set_option autoImplicit false
 

@@ -5,6 +5,7 @@ set_option autoImplicit false
 namespace BuildingUpFormalization.Components.RankBoxedExtension
 
 open BuildingUpFormalization.Components.RankBoxed
+open BuildingUpFormalization.Components.SplitBoxed
 
 variable {K : Type*} [Field K]
 
@@ -33,5 +34,21 @@ def extendedRows {k r : ℕ} (c : K)
     RankBoxIndex (k + 1) r → RankBoxRow K (k + 1) r :=
   rankBoxedRows c (extendP c P H Q h q u) (Fin.cons h H) (Fin.cons q Q)
     (extendA A D q) D
+
+/-- Prepend one terminal row in the minimal paper parametrization. -/
+def extendPaperEll {k r : ℕ}
+    (ell : Fin k → Fin r → SplitBlock K) (ell0 : Fin r → SplitBlock K) :
+    Fin (k + 1) → Fin r → SplitBlock K :=
+  Fin.cons ell0 ell
+
+/-- Prepend one pivot in the minimal paper parametrization.  The upper
+off-diagonal coefficients are free and the lower ones are forced by the
+single off-diagonal Gram relation.  Diagonal values are unused. -/
+def extendPaperB {k r : ℕ} (c : K)
+    (b : Fin k → Fin k → K) (ell : Fin k → Fin r → SplitBlock K)
+    (ell0 : Fin r → SplitBlock K) (u : Fin k → K) :
+    Fin (k + 1) → Fin (k + 1) → K :=
+  Fin.cons (Fin.cons 0 u)
+    (fun i => Fin.cons (c * terminalRowInner (ell i) ell0 - u i) (b i))
 
 end BuildingUpFormalization.Components.RankBoxedExtension
