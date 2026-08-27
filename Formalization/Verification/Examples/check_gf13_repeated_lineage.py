@@ -207,7 +207,10 @@ def build_outputs():
             (1, r"$C_{20}^{(13)}$", c20,
              r"$\mathcal B_5(G_{18}^{(13)},x_{18}^{(13)})$")]:
         n, k, d = code["parameters"]
-        rows.append(f"{level} & {name} & $[{n},{k},{d}]$ & {code['a_d']:,} & {relation} \\\\")
+        a_d = f"{code['a_d']:,}"
+        if n == 20:
+            a_d = f"$\\mathbf{{{a_d}}}$"
+        rows.append(f"{level} & {name} & $[{n},{k},{d}]$ & {a_d} & {relation} \\\\")
 
     benchmark_by_length = {item["length"]: item for item in source["published_benchmarks"]}
     catalogue_rows = []
@@ -215,8 +218,11 @@ def build_outputs():
         n, k, d = code["parameters"]
         benchmark = benchmark_by_length[n]
         link = f"\\href{{{REPOSITORY}}}{{${symbol}$}}"
+        a_d = f"{code['a_d']:,}"
+        if code["a_d"] == benchmark["a_d"]:
+            a_d = f"\\mathbf{{{a_d}}}"
         catalogue_rows.append(
-            f"{link} & 13 & $[{n},{k},{d}];\\,{code['a_d']:,}$ & "
+            f"{link} & 13 & $[{n},{k},{d}];\\,{a_d}$ & "
             f"$({benchmark['distance']};\\,{benchmark['a_d']:,})$ & "
             f"{benchmark['reference']} \\\\"
         )

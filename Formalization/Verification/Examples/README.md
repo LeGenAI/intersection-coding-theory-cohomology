@@ -23,13 +23,15 @@ row.  It records the exact parent identifier separately from the historical
 distance and weight-enumerator benchmark; a benchmark $A_d$ is not treated as
 an extremal quantity when several optimal weight enumerators exist.
 
-In Table 1, bold $A_d$ values have a deliberately narrow meaning.  For the
-binary rows they agree with the minimum at the best distance in the complete
+In Table 1, bold $A_d$ values match the smallest coefficient in the public
+comparisons cited there.  For the binary rows they agree with the minimum at
+the best distance in the complete
 [online binary classification](https://www.math.is.tohoku.ac.jp/~mharada/research/codes/sd2.htm),
 and the two short quinary rows agree with the corresponding minima in the
 complete [GF(5) classification](https://www.math.is.tohoku.ac.jp/~mharada/research/codes/sd5.htm).
-The GF(13) MDS values are fixed by the MDS weight enumerator.  No bold claim is
-made for an unclassified length.  In particular, exact Magma enumeration of
+The GF(13) MDS values are fixed by the MDS weight enumerator.  At unclassified
+lengths, bold means equality with the smallest public coefficient located in
+the cited comparison, not a global minimum claim.  In particular, exact Magma enumeration of
 the public Kim--Choi generator of a self-dual `[18,9,8]` code over `GF(13)`
 gives $A_8=1752$, below both our value 1896 and the earlier published value
 2484.  The GF(13) replay verifies this comparison together with our code.
