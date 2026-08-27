@@ -16,6 +16,7 @@ open BuildingUpFormalization.Components.RankBoxed
 #print axioms rankBoxedRows_rowSpace_selfDual
 #print axioms rankBoxedRows_forward_selfDual_of_linearIndependent
 #print axioms rankBoxedRows_forward_selfDual
+#print axioms determinedRankBoxedRows_forward_selfDual
 #print axioms binaryCzRankOneRows_exact_block_form
 #print axioms binaryCzRankOneRows_pairwiseOrthogonal
 #print axioms rankOne_core_fullRank_iff

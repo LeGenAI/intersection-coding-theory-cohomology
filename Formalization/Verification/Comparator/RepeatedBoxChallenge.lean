@@ -75,6 +75,20 @@ theorem repeated_step_kim_lee_iff {k r : ℕ} (c : K)
       ¬ (q = 0 ∧ ∀ i, u i = -(∑ t, Q i t * h t)) := by
   sorry
 
+theorem determined_repeated_step_kim_lee_iff {k r : ℕ} (c : K)
+    (P : Fin k → Fin k → K) (H Q : Fin k → Fin r → K)
+    (D : Fin r → Fin r → K)
+    (hc : c ^ 2 = (-1 : K)) (h2 : (2 : K) ≠ 0)
+    (hD : RankBoxCoreFullRank D) (hpp : PivotGramRelations c P H Q)
+    (h q : Fin r → K) (u : Fin k → K) :
+    (∃ x, dot x x = -1 ∧
+      rowSpace (readSuccessor
+        (extendedRows c P H Q (forcedMasterCoefficients Q D) D h q u)) =
+      rowSpace (buildRows x c
+        (flattenRows (determinedRankBoxedRows c P H Q D)))) ↔
+      ¬ (q = 0 ∧ ∀ i, u i = -(∑ t, Q i t * h t)) := by
+  sorry
+
 theorem kim_lee_to_repeated_exact {k r : ℕ} (c : K)
     (P : Fin k → Fin k → K) (H Q : Fin k → Fin r → K)
     (A : Fin r → Fin k → K) (D : Fin r → Fin r → K)

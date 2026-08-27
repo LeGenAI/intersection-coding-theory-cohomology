@@ -528,6 +528,27 @@ theorem rankBoxedRows_forward_selfDual {k r : ℕ}
   exact rankBoxedRows_forward_selfDual_of_linearIndependent c P H Q A D hc
     (rankBoxedRows_linearIndependent_of_core_fullRank c P H Q A D hD) hpm hpp
 
+/-- After substituting the forced master coefficients, the pivot--master
+relation is automatic; only the core rank and pivot Gram relation remain. -/
+theorem determinedRankBoxedRows_forward_selfDual {k r : ℕ}
+    (c : K)
+    (P : Fin k → Fin k → K)
+    (H Q : Fin k → Fin r → K)
+    (D : Fin r → Fin r → K)
+    (hc : c * c = -1)
+    (hD : RankBoxCoreFullRank D)
+    (hpp : PivotGramRelations c P H Q) :
+    RankBoxedPairwiseOrthogonal (determinedRankBoxedRows c P H Q D) ∧
+      LinearIndependent K (determinedRankBoxedRows c P H Q D) ∧
+      rankBoxedRowSpace (determinedRankBoxedRows c P H Q D) =
+        (rankBoxRowBilin (K := K) (k := k) (r := r)).orthogonal
+          (rankBoxedRowSpace (determinedRankBoxedRows c P H Q D)) := by
+  apply rankBoxedRows_forward_selfDual c P H Q
+    (forcedMasterCoefficients Q D) D hc hD
+  · intro s i
+    simp [forcedMasterCoefficients]
+  · exact hpp
+
 theorem binaryCzRankOneRows_pivot_diagonal [CharP K 2]
     {k : ℕ} (b : Fin k → Fin k → K) (i : Fin k) (hdiag : b i i = 0) :
     binaryCzRankOneRows b (.inl i) (.inl i) = splitDiagonalBlock := by

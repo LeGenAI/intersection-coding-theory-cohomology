@@ -7,6 +7,7 @@
     "BuildingUpFormalization.Components.RepeatedBox.repeated_step_selfDual_exact",
     "BuildingUpFormalization.Components.RepeatedBox.repeated_step_normalization_exact",
     "BuildingUpFormalization.Components.RepeatedBox.repeated_step_kim_lee_iff",
+    "BuildingUpFormalization.Components.RepeatedBox.determined_repeated_step_kim_lee_iff",
     "BuildingUpFormalization.Components.RepeatedBox.kim_lee_to_repeated_exact"
   ],
   "permitted_axioms": ["propext", "Quot.sound", "Classical.choice"],

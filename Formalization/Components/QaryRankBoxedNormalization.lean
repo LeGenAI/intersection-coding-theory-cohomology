@@ -516,7 +516,15 @@ theorem every_qary_selfDualCode_has_rankBoxed_normalForm
       relabelBlockCode (K := K) data.sigma C =
         rankBoxedRowSpace (rankBoxedRows c P H Q A D) := by
     rw [← hrows_boxed, hrowSpace_eq]
+  have hA : A = forcedMasterCoefficients Q D := by
+    funext s i
+    change A s i = -(∑ t, Q i t * D s t)
+    exact eq_neg_of_add_eq_zero_left (hpm s i)
+  have hcode_determined :
+      relabelBlockCode (K := K) data.sigma C =
+        rankBoxedRowSpace (determinedRankBoxedRows c P H Q D) := by
+    simpa [determinedRankBoxedRows, hA] using hcode_eq
   exact ⟨k, r, hr_intrinsic, data.k_add_r, data.sigma,
-    P, H, Q, A, D, hD, hpm, hpp, hcode_eq⟩
+    P, H, Q, D, hD, hpp, hcode_determined⟩
 
 end BuildingUpFormalization.Components.QaryRankBoxedNormalization

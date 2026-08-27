@@ -101,6 +101,22 @@ def PivotMasterRelations {k r : ℕ}
     (D : Fin r → Fin r → K) : Prop :=
   ∀ s i, A s i + ∑ t, Q i t * D s t = 0
 
+/-- The master-by-pivot coefficients forced by pivot--master
+orthogonality.  They are not independent data. -/
+def forcedMasterCoefficients {k r : ℕ}
+    (Q : Fin k → Fin r → K)
+    (D : Fin r → Fin r → K) : Fin r → Fin k → K :=
+  fun s i => -(∑ t, Q i t * D s t)
+
+/-- The rank-boxed rows with the forced master coefficients substituted. -/
+def determinedRankBoxedRows {k r : ℕ}
+    (c : K)
+    (P : Fin k → Fin k → K)
+    (H Q : Fin k → Fin r → K)
+    (D : Fin r → Fin r → K) :
+    RankBoxIndex k r → RankBoxRow K k r :=
+  rankBoxedRows c P H Q (forcedMasterCoefficients Q D) D
+
 /-- The pivot--pivot Gram relation.  Under `c² = -1` it is exactly
 
 `I + c(P + Pᵀ) + c(HQᵀ + QHᵀ) + QQᵀ = 0`.

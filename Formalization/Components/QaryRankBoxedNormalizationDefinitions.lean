@@ -81,9 +81,11 @@ def relabelBlockCode {ι κ : Type*} (σ : ι ≃ κ)
 
 /-- Exact universal rank-`r` boxed normal-form goal.
 
-The lower-right `r × r` core is free but full rank.  The conclusion uses only
-a permutation of whole two-coordinate blocks and equality of code submodules.
-The two Gram relations are included explicitly. -/
+The lower-right `r × r` core is free but full rank.  The master-by-pivot
+coefficients have been substituted from their forced value `-D Qᵀ`, so the
+only remaining Gram condition is the pivot relation.  The conclusion uses
+only a permutation of whole two-coordinate blocks and equality of code
+submodules. -/
 def HasQaryRankBoxedNormalForm {n : ℕ} (c : K)
     (C : Submodule K (QaryBlockRow K (Fin n))) : Prop :=
   ∃ k r : ℕ,
@@ -92,12 +94,10 @@ def HasQaryRankBoxedNormalForm {n : ℕ} (c : K)
     ∃ (σ : RankBoxIndex k r ≃ Fin n)
       (P : Fin k → Fin k → K)
       (H Q : Fin k → Fin r → K)
-      (A : Fin r → Fin k → K)
       (D : Fin r → Fin r → K),
       RankBoxCoreFullRank D ∧
-      PivotMasterRelations Q A D ∧
       PivotGramRelations c P H Q ∧
       relabelBlockCode (K := K) σ C =
-        rankBoxedRowSpace (rankBoxedRows c P H Q A D)
+        rankBoxedRowSpace (determinedRankBoxedRows c P H Q D)
 
 end BuildingUpFormalization.Components.QaryRankBoxedNormalization

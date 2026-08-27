@@ -235,4 +235,24 @@ theorem repeated_step_kim_lee_iff {k r : ℕ} (c : K)
     rw [heq]
     rfl
 
+/-- Exact fixed-parent criterion after removing the redundant
+master-by-pivot coefficient matrix. -/
+theorem determined_repeated_step_kim_lee_iff {k r : ℕ} (c : K)
+    (P : Fin k → Fin k → K) (H Q : Fin k → Fin r → K)
+    (D : Fin r → Fin r → K)
+    (hc : c ^ 2 = (-1 : K)) (h2 : (2 : K) ≠ 0)
+    (hD : RankBoxCoreFullRank D) (hpp : PivotGramRelations c P H Q)
+    (h q : Fin r → K) (u : Fin k → K) :
+    (∃ x, dot x x = -1 ∧
+      rowSpace (readSuccessor
+        (extendedRows c P H Q (forcedMasterCoefficients Q D) D h q u)) =
+      rowSpace (buildRows x c
+        (flattenRows (determinedRankBoxedRows c P H Q D)))) ↔
+      ¬ (q = 0 ∧ ∀ i, u i = -(∑ t, Q i t * h t)) := by
+  apply repeated_step_kim_lee_iff c P H Q
+    (forcedMasterCoefficients Q D) D hc h2 hD
+  · intro s i
+    simp [forcedMasterCoefficients]
+  · exact hpp
+
 end BuildingUpFormalization.Components.RepeatedBox

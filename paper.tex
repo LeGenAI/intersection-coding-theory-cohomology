@@ -207,8 +207,9 @@ Our main contributions are as follows.
 \item In the $q$-ary case, we refine the classical building-up construction
 into an exact self-duality criterion and prove
 a universal rank-$r$ boxed normal form.  Its lower-right block is specified
-by a nonsingular $r\times r$ matrix $D$, subject to the displayed Gram
-relations.  Simultaneous pivot-row and block-column
+by a nonsingular $r\times r$ matrix $D$; orthogonality forces the opposite
+block to be \(-DQ^{\mathsf T}\), leaving only one Gram relation among the
+independent coefficients.  Simultaneous pivot-row and block-column
 deletion preserves the form and self-duality
 (Theorem~\ref{thm:universal-rank-boxed}); its rank-one specialization with
 zero pivot diagonal recovers the explicit split boxed construction
@@ -968,7 +969,7 @@ r\coloneqq\dim(C\cap U_c),
 Then, after a permutation of the \(n\) two-coordinate blocks and elementary
 row operations, \(C\) has a generator matrix of the following repeated form.
 Its first \(k\) rows are the pivot rows, and its last \(r\) rows form a basis
-of \(C\cap U_c\). Write \(G(c;P,H,Q,A,D)\) for this matrix and set
+of \(C\cap U_c\). Write \(G(c;P,H,Q,D)\) for this matrix and set
 \[
 L_i=\bigl((H_{it},\,cH_{it}+Q_{it})\bigr)_{t=1}^r.
 \]
@@ -986,30 +987,29 @@ P_{21}(1,c) & (P_{22},cP_{22}+1) & \cdots & P_{2k}(1,c) & L_2\\
 \vdots & \vdots & \ddots & \vdots & \vdots\\
 P_{k1}(1,c) & P_{k2}(1,c) & \cdots & (P_{kk},cP_{kk}+1) & L_k\\
 \hline
-A_{\bullet1}(1,c) & A_{\bullet2}(1,c) & \cdots & A_{\bullet k}(1,c)
+-(DQ^{\mathsf T})_{\bullet1}(1,c) &
+-(DQ^{\mathsf T})_{\bullet2}(1,c) & \cdots &
+-(DQ^{\mathsf T})_{\bullet k}(1,c)
   & \bigl(D_{st}(1,c)\bigr)_{r\times r}
 \end{array}
 \right],
 \endgroup
 \end{equation}
 where the upper-left block has entries \((P_{ij},cP_{ij}+\delta_{ij})\)
-and \(A_{\bullet j}(1,c)\) denotes the column of blocks
-\(A_{sj}(1,c)\), \(1\leq s\leq r\). Here
-\(P\in M_k(K)\), \(H,Q\in M_{k\times r}(K)\),
-\(A\in M_{r\times k}(K)\), and the terminal block is specified by
+and \(-(DQ^{\mathsf T})_{\bullet j}(1,c)\) denotes the column of blocks
+\(-(DQ^{\mathsf T})_{sj}(1,c)\), \(1\leq s\leq r\). Here
+\(P\in M_k(K)\), \(H,Q\in M_{k\times r}(K)\), and the terminal block is specified by
 \(D\in M_r(K)\), which satisfies
 \begin{equation}
 \label{eq:universal-rank-core}
 \det D\ne0.
 \end{equation}
-The coefficients satisfy exactly
-\begin{align}
- A+DQ^{\mathsf T}&=0,
- \label{eq:universal-rank-pm}\\
+The remaining coefficients satisfy exactly
+\begin{equation}
  I_k+c(P+P^{\mathsf T})
- +c(HQ^{\mathsf T}+QH^{\mathsf T})+QQ^{\mathsf T}&=0.
+ +c(HQ^{\mathsf T}+QH^{\mathsf T})+QQ^{\mathsf T}=0.
  \label{eq:universal-rank-pp}
-\end{align}
+\end{equation}
 Since \(c^{-1}=-c\), the second relation is equivalently
 \[
 P+P^{\mathsf T}=c(I_k+QQ^{\mathsf T})
@@ -1018,8 +1018,8 @@ P+P^{\mathsf T}=c(I_k+QQ^{\mathsf T})
 For fixed \(H,Q\), it determines the symmetric part of \(P\), while its
 skew-symmetric part remains arbitrary.
 Conversely, for every \(k,r\geq0\), every matrix
-\(G(c;P,H,Q,A,D)\) satisfying
-\eqref{eq:universal-rank-core}--\eqref{eq:universal-rank-pp} has
+\(G(c;P,H,Q,D)\) satisfying
+\eqref{eq:universal-rank-core} and \eqref{eq:universal-rank-pp} has
 \(k+r\) linearly independent, pairwise orthogonal rows and therefore
 generates a Euclidean self-dual code of length \(2(k+r)\).
 
@@ -1028,7 +1028,7 @@ and their corresponding block columns.  More precisely, for any ordered
 subset \(I\subseteq\{1,\ldots,k\}\) of size \(l\), the retained matrix is
 \begin{equation}
 \label{eq:rank-boxed-restriction}
-G_I=G(c;P_{I,I},H_{I,*},Q_{I,*},A_{*,I},D),
+G_I=G(c;P_{I,I},H_{I,*},Q_{I,*},D),
 \end{equation}
 and it generates a self-dual code of length \(2(l+r)\), with the same terminal matrix
 \(D\).  At \(I=\varnothing\), its row space is exactly
@@ -1069,9 +1069,21 @@ a basis of \(C\): applying \(\partial\) annihilates the \(S_s\) and determines
 all pivot coefficients, after which independence of the \(S_s\) determines
 the remaining coefficients.
 
-Reading the first coordinates and the differences \(\beta_j\) of these rows produces matrices
-\(P,H,Q,A,D\) and gives \eqref{eq:universal-rank-box}.  It remains to prove
-that the terminal matrix \(D\) is nonsingular.  For \(S\in\ker\partial\), write
+Reading the first coordinates and the differences \(\beta_j\) of the pivot
+rows produces \(P,H,Q\), while the terminal first coordinates of the
+\(S_s\) produce \(D\).  Let \(a_{sj}\) be the first coordinate of the
+\(j\)-th pivot block of \(S_s\).  The block identity
+\[
+(\alpha,c\alpha+\beta)\cdot(\gamma,c\gamma+\delta)
+=c(\alpha\delta+\beta\gamma)+\beta\delta
+\]
+and \(g_i\cdot S_s=0\) give
+\[
+a_{si}+\sum_{t=1}^r Q_{it}D_{st}=0.
+\]
+Thus \(a_{si}=-(DQ^{\mathsf T})_{si}\), which gives
+\eqref{eq:universal-rank-box} without an additional coefficient matrix.
+It remains to prove that \(D\) is nonsingular.  For \(S\in\ker\partial\), write
 \(S=(a_1(1,c),\dots,a_n(1,c))\) and put \(a(S)=(a_1,\dots,a_n)\). Since
 \[
 (1,c)\cdot(s,t)=s+ct=c(t-cs),
@@ -1092,28 +1104,24 @@ Thus projection of \((\operatorname{im}\partial)^\perp\) onto the complementary
 \(r\) coordinates is an isomorphism.  In the bases \(S_1,\dots,S_r\), its
 matrix is precisely \(D\), proving \(\det D\ne0\).
 
-Finally, the block identity
-\[
-(\alpha,c\alpha+\beta)\cdot(\gamma,c\gamma+\delta)
-=c(\alpha\delta+\beta\gamma)+\beta\delta
-\]
-shows that orthogonality between the rows \(g_i\) and \(S_s\) is exactly
-\eqref{eq:universal-rank-pm}, while pivot--pivot orthogonality is exactly
-\eqref{eq:universal-rank-pp}; products between the \(S_s\) vanish identically.
-This proves the existence direction.  Conversely, these two relations give
-pairwise orthogonality.  Applying the linear functional \((s,t)\mapsto t-cs\) blockwise to the first
+Finally, pivot--pivot orthogonality is exactly
+\eqref{eq:universal-rank-pp}, while products between the \(S_s\) vanish
+identically.  This proves the existence direction.  Conversely, the chosen
+lower-left coefficients make pivot--terminal products vanish identically,
+and \eqref{eq:universal-rank-pp} gives the remaining products.  Applying the
+linear functional \((s,t)\mapsto t-cs\) blockwise to the first
 \(k\) block columns reads off the pivot coefficients; after they vanish, the
 remaining relation among the last \(r\) rows is killed by the invertibility of \(D\).
 Thus all \(k+r\) rows are independent.  Their span is a totally isotropic
 subspace of half the ambient dimension, hence is self-dual.
 
 For the recursive assertion, put
-\(P'=P_{I,I}\), \(H'=H_{I,*}\), \(Q'=Q_{I,*}\), and \(A'=A_{*,I}\).
+\(P'=P_{I,I}\), \(H'=H_{I,*}\), and \(Q'=Q_{I,*}\).
 The entries of the retained matrix give \eqref{eq:rank-boxed-restriction}
-literally.  Restricting \eqref{eq:universal-rank-pm} to columns in \(I\), and
-\eqref{eq:universal-rank-pp} to rows and columns in \(I\), gives
+literally because the retained lower-left block is
+\(-D(Q')^{\mathsf T}\).  Restricting \eqref{eq:universal-rank-pp} to rows
+and columns in \(I\) gives
 \[
-A'+D(Q')^{\mathsf T}=0,\qquad
 I_l+c(P'+(P')^{\mathsf T})
  +c(H'(Q')^{\mathsf T}+Q'(H')^{\mathsf T})+Q'(Q')^{\mathsf T}=0.
 \]
@@ -1136,7 +1144,8 @@ G_{k,r}\longrightarrow G_{k-1,r}
 \longrightarrow\cdots\longrightarrow G_{0,r}=(D_{st}(1,c)).
 \]
 Here \(\rho_1=(P_{12}(1,c),\ldots,P_{1k}(1,c),L_1)\) and
-\(\gamma_1=(P_{21},\ldots,P_{k1},A_{11},\ldots,A_{r1})^{\mathsf T}\).
+\(\gamma_1=(P_{21},\ldots,P_{k1},
+-(DQ^{\mathsf T})_{11},\ldots,-(DQ^{\mathsf T})_{r1})^{\mathsf T}\).
 Each arrow deletes a pivot row together with its two-coordinate block
 column; it is not puncturing the whole code.  Each retained row space is
 self-dual.  This is the repeated boxed structure, with the same nonsingular
@@ -1145,13 +1154,16 @@ terminal block at every step.
 The integer \(r\) records \(C\cap U_c\) for the fixed coordinate pairing.
 The entries of \(D\), however, depend on the chosen basis of \(C\cap U_c\):
 multiplication on the left by \(\operatorname{diag}(I_k,D^{-1})\) replaces
-\((A,D)\) by \((D^{-1}A,I_r)\) without changing the code.  Universality
+the terminal blocks \((-DQ^{\mathsf T},D)\) by
+\((-Q^{\mathsf T},I_r)\) without changing the code.  We retain \(D\) only
+to display the terminal basis carried unchanged through every repeated step.
+Universality
 therefore requires variable \(r\) and the unrestricted pivot and terminal
 coefficients, not a nonidentity choice of \(D\).
 
 \begin{lemma}[Building-up with fixed terminal matrix]
 \label{lem:rank-boxed-building-up}
-Let \(P,H,Q,A,D\) satisfy the hypotheses of the converse in
+Let \(P,H,Q,D\) satisfy the hypotheses of the converse in
 Theorem~\ref{thm:universal-rank-boxed}. Choose any row vectors
 \(h,q\in K^r\) and \(u\in K^k\), and put
 \[
@@ -1164,8 +1176,7 @@ Then the coefficients
 \[
 P^+=\begin{pmatrix}p&u\\v&P\end{pmatrix},\qquad
 H^+=\begin{pmatrix}h\\H\end{pmatrix},\qquad
-Q^+=\begin{pmatrix}q\\Q\end{pmatrix},\qquad
-A^+=\begin{pmatrix}-Dq^{\mathsf T}&A\end{pmatrix}
+Q^+=\begin{pmatrix}q\\Q\end{pmatrix}
 \]
 and the same \(D\) define a matrix \(G_{k+1,r}\) whose row space
 is self-dual.
@@ -1175,12 +1186,14 @@ many times, keeping \(r\) and \(D\) fixed.
 \end{lemma}
 
 \begin{proof}
-Since \(K\) has odd characteristic, \(2\) is invertible. First,
+Since \(K\) has odd characteristic, \(2\) is invertible.  The forced
+master-by-pivot block is
 \[
-A^++D(Q^+)^{\mathsf T}
-=\begin{pmatrix}0&A+DQ^{\mathsf T}\end{pmatrix}=0.
+-D(Q^+)^{\mathsf T}
+=\begin{pmatrix}-Dq^{\mathsf T}&-DQ^{\mathsf T}\end{pmatrix},
 \]
-For the other Gram relation, use its equivalent symmetric-part identity.
+so its old columns are unchanged.  For the Gram relation, use its equivalent
+symmetric-part identity.
 The old lower-right block is unchanged, while the new diagonal and
 off-diagonal blocks satisfy
 \[
@@ -1195,7 +1208,7 @@ P^++(P^+)^{\mathsf T}
 \]
 Theorem~\ref{thm:universal-rank-boxed} now gives independence and
 self-duality. Restricting to the old rows and paired columns recovers
-\(P,H,Q,A,D\) entry by entry. The resulting coefficients again satisfy
+\(P,H,Q,D\) entry by entry. The resulting coefficients again satisfy
 all the hypotheses, so the construction can be repeated. Finally, the defect
 map on the \((k+1+r)\)-dimensional code has rank \(k+1\), so its kernel has
 dimension~\(r\).
@@ -1364,18 +1377,19 @@ permutation can change the parent reduction; no obstruction to such a
 different presentation is asserted.
 
 \begin{lstlisting}[caption={Exact fixed-parent criterion in Lemma~\ref{lem:repeated-kim-lee}.}]
-theorem repeated_step_kim_lee_iff {k r : Nat} (c : K)
+theorem determined_repeated_step_kim_lee_iff {k r : Nat} (c : K)
     (P : Fin k -> Fin k -> K) (H Q : Fin k -> Fin r -> K)
-    (A : Fin r -> Fin k -> K) (D : Fin r -> Fin r -> K)
+    (D : Fin r -> Fin r -> K)
     (hc : c ^ 2 = (-1 : K)) (h2 : Not ((2 : K) = 0))
     (hD : RankBoxCoreFullRank D)
-    (hpm : PivotMasterRelations Q A D)
     (hpp : PivotGramRelations c P H Q)
     (h q : Fin r -> K) (u : Fin k -> K) :
     Iff
       (Exists fun x => And (dot x x = -1)
-        (rowSpace (readSuccessor (extendedRows c P H Q A D h q u)) =
-          rowSpace (buildRows x c (flattenRows (rankBoxedRows c P H Q A D)))))
+        (rowSpace (readSuccessor (extendedRows c P H Q
+            (forcedMasterCoefficients Q D) D h q u)) =
+          rowSpace (buildRows x c
+            (flattenRows (determinedRankBoxedRows c P H Q D)))))
       (Not (And (q = 0)
         (forall i, u i = -(Finset.univ.sum fun t => Q i t * h t))))
 \end{lstlisting}
@@ -1430,16 +1444,15 @@ H=\begin{pmatrix}2&3\\2&0\end{pmatrix},\qquad
 Q=\begin{pmatrix}2&2\\4&2\end{pmatrix},
 \]
 \[
-A=\begin{pmatrix}1&4\\4&2\end{pmatrix},\qquad
-D=\begin{pmatrix}1&1\\1&2\end{pmatrix},\qquad \det D=1.
+D=\begin{pmatrix}1&1\\1&2\end{pmatrix},\qquad
+-DQ^{\mathsf T}=\begin{pmatrix}1&4\\4&2\end{pmatrix},\qquad \det D=1.
 \]
 For example, the four upper-left blocks have first coordinates
 \(4,2,4,3\), which are exactly the entries of \(P\). Its diagonal blocks
 are \((4,2\cdot4+1)=(4,4)\) and \((3,2\cdot3+1)=(3,2)\),
 whereas its off-diagonal blocks are \(2(1,2)\) and \(4(1,2)\).
 In particular, \(P\) is neither symmetric nor triangular and has nonzero
-diagonal. The displayed coefficients satisfy
-\eqref{eq:universal-rank-pm}--\eqref{eq:universal-rank-pp}.
+diagonal. The displayed coefficients satisfy \eqref{eq:universal-rank-pp}.
 
 Applying \((s,t)\mapsto t-2s\) to each block of \(G_{2,2}\) gives
 \[
@@ -1544,7 +1557,8 @@ Kim--Lee extension of either parent.
 The same matrix formula also applies over \(\F_2\).  For positive length,
 Theorem~\ref{thm:binary-universal-rank-one} gives a scalar-coordinate
 permutation with \(r=1\), \(D=(1)\), zero pivot diagonal, and
-\(H_{i1}=Q_{i1}=A_{1i}=1\).  With \(c=1\), the terminal pivot block is then
+\(H_{i1}=Q_{i1}=1\); the forced lower-left coefficient is also (1).
+With \(c=1\), the terminal pivot block is then
 \((1,1+1)=(1,0)\), so \eqref{eq:universal-rank-box} is the literal binary box.
 This permutation may change the original pairing of coordinates; it does
 not assert \(r=1\) for every fixed pairing.
@@ -1947,7 +1961,7 @@ not a consequence of \(r=1\).  The exact coefficient correspondence is
 \begin{equation}
 \label{eq:rank-one-split-dictionary}
 P_{ij}=b_{ij}\ (i\ne j),\qquad
-H_{i1}=u_i,\qquad Q_{i1}=v_i-cu_i,\qquad A_{1i}=a_i.
+H_{i1}=u_i,\qquad Q_{i1}=v_i-cu_i.
 \end{equation}
 
 \begin{cor}[Normalized rank-one split boxed form over \texorpdfstring{$\F_q$}{Fq}]
@@ -2013,10 +2027,10 @@ Since
 \bigl(u_i,cu_i+(v_i-cu_i)\bigr)=(u_i,v_i)=\ell_i,
 \]
 the matrix in the corollary is literally
-\(G(c;P,H,Q,A,(1))\), with the final row and block column placed
-last.  Write \(Q_i=v_i-cu_i\).  The equation in
-\eqref{eq:universal-rank-pm} becomes \(a_i+Q_i=0\); because \(c\ne0\) and
-\(c^2=-1\), this is equivalent to
+\(G(c;P,H,Q,(1))\), with the final row and block column placed
+last, precisely when its forced lower coefficient
+\(-Q_i=cu_i-v_i\) equals \(a_i\).  Because \(c\ne0\) and
+\(c^2=-1\), this equality is equivalent to
 \[
 c(a_i+Q_i)=ca_i+u_i+cv_i=0,
 \]
@@ -2187,7 +2201,7 @@ Let \(K=\mathbb F_q\), where \(q\equiv1\pmod4\), choose \(c\in K\)
 with \(c^2=-1\), and fix a pairing of the \(2n\) coordinates.
 Put \(U_c=\bigoplus_{j=1}^n K(1,c)\). For every
 \(C=C^\perp\subseteq K^{2n}\), Theorem~\ref{thm:universal-rank-boxed}
-gives a generator \(G(c;P,H,Q,A,D)\), after a permutation of the
+gives a generator \(G(c;P,H,Q,D)\), after a permutation of the
 two-coordinate blocks, with
 \[
 r=\dim(C\cap U_c),\qquad k=n-r,\qquad \det D\ne0.
@@ -2204,16 +2218,21 @@ self-duality implies precisely these three coefficient relations.
 
 \section{Applications}\label{sec:applications}
 
-The applications below separate reproducible catalogue entries, repeated
-parent--child lineages, and the universal realization used in the main
-argument.
-
-\subsection{Verified application catalogue}
 \input{Formalization/Verification/Examples/application_catalog_data.tex}
 \input{Formalization/Verification/Examples/large_applications_data.tex}
 \input{Formalization/Verification/Examples/golay_lineage_data.tex}
 \input{Formalization/Verification/Examples/gf5_repeated_top_data.tex}
 \input{Formalization/Verification/Examples/gf13_repeated_lineage_data.tex}
+
+The applications begin with an explicit realization of an optimal code in
+the universal form and the correction search exposed by its exact parent.
+The verified catalogue then compares the resulting codes with published
+benchmarks, and the final subsection displays the largest repeated
+parent--child realizations.
+
+\input{sections/application_universal_gf13.tex}
+
+\subsection{Certified application catalogue}
 
 For earlier results on self-dual codes over these fields, see
 \cite{LeonPlessSloane,BetsumiyaEtAl,KimChoi2021}.  For a displayed generator
@@ -2316,14 +2335,30 @@ x_{22}&=\GolayTwentyTwoCorrection,\\
 \]
 Here \(x_{22}^{(2)}=x_{22}\) in
 \eqref{eq:three-largest-repeated-boxes}.
-The complete normalized generator is
-\[
+The parent in each of Figures~\ref{fig:binary-largest-repeated}--
+\ref{fig:gf13-largest-repeated} is itself put in the universal form
+\(G(c;P,H,Q,D)\), rather than left as an arbitrary generator.  Within the
+parent, the teal rows and paired columns display
+\(P_{ij}(1,c)+\delta_{ij}(0,1)\); the violet terminal rows and columns display
+the invertible core \(D_{st}(1,c)\), with the remaining violet block forced to
+be \(-DQ^T(1,c)\).  Blue is the newly adjoined row and orange is the newly
+adjoined coordinate pair.  The outer thick rules mark the building-up border,
+whereas the inner thick rules separate the \(P\)-part from the \(D\)-part of
+the universal parent.
+For the binary endpoint the displayed parent has
+\(\BinaryLargestParentParameters\).  A permutation within each binary pivot
+pair orients every diagonal pair as \((0,1)\); equivalently, \(P_{ii}=0\) for
+all \(i\), exactly as in the normal form of Theorem~\ref{thm:binary-cz-kim}.
+\begin{figure}[htbp]
+\centering
 \resizebox{\textwidth}{!}{$
 \widetilde G_{24}^{(2)}=\BinaryLargestRepeatedMatrix .
 $}
-\]
-The vertical rules delimit the twelve two-coordinate blocks; they are not
-additional entries of the matrix.
+\caption{Binary repeated realization \(C_{22}^{(2)}\longleftrightarrow
+\mathcal G_{24}\) with universal parent.}
+\label{fig:binary-largest-repeated}
+\end{figure}
+\FloatBarrier
 Thus length~20 is the center of the requested two-level picture:
 \[
 C_{16}\longleftarrow C_{18}\longleftarrow C_{20}
@@ -2354,11 +2389,20 @@ has norm \(-1\), and
   (G_{22}^{(5)},x_{22}^{(5)})=C_{24}^{(5)}.
 \]
 In the same paired coordinate order, the complete normalized generator is
-\[
+the parent--child figure; here the universal parent has
+\(\GFFiveLargestParentParameters\).  Thus it is literally the rank-one split
+box of Corollary~\ref{thm:split-boxed-form}: every diagonal block is \(01\),
+the off-diagonal blocks are \(b_{ij}(1,2)\), and the final block is \((1,2)\).
+\begin{figure}[htbp]
+\centering
 \resizebox{\textwidth}{!}{$
 \widetilde G_{24}^{(5)}=\GFFiveLargestRepeatedMatrix .
 $}
-\]
+\caption{Repeated realization over \(\GF{5}\):
+\(C_{22}^{(5)}\longleftrightarrow C_{24}^{(5)}\), with universal parent.}
+\label{fig:gf5-largest-repeated}
+\end{figure}
+\FloatBarrier
 The checker verifies the literal matrix in
 \eqref{eq:three-largest-repeated-boxes}, its parent row space, and the complete
 weight distribution of \(C_{22}^{(5)}\); the exhaustive Magma audit finds
@@ -2395,11 +2439,20 @@ row-space identities
 \end{aligned}
 \]
 The complete normalized generator at the largest level is
-\[
+formed from the universal parent with
+\(\GFThirteenLargestParentParameters\).  It likewise has the literal
+Corollary~\ref{thm:split-boxed-form} pattern, with diagonal blocks \(01\),
+off-diagonal blocks \(b_{ij}(1,5)\), and final block \((1,5)\):
+\begin{figure}[htbp]
+\centering
 \resizebox{\textwidth}{!}{$
 \widetilde G_{22}^{(13)}=\GFThirteenLargestRepeatedMatrix .
 $}
-\]
+\caption{Repeated realization over \(\GF{13}\):
+\(C_{20}^{(13)}\longleftrightarrow C_{22}^{(13)}\), with universal parent.}
+\label{fig:gf13-largest-repeated}
+\end{figure}
+\FloatBarrier
 Consequently these are not separately selected examples but one
 bidirectional lineage
 \[
@@ -2437,141 +2490,6 @@ Level & Code & Parameters & \(A_d\) & Exact upward relation\\
 \caption{Repeated boxed lineages over \(\GF{2}\), \(\GF{5}\), and \(\GF{13}\).}
 \label{tab:repeated-lineages}
 \end{table}
-
-\FloatBarrier
-\subsection{A universal rank-one MDS realization over \texorpdfstring{$\GF{13}$}{GF(13)}}
-
-\begin{prop}
-\label{prop:universal-mds-137}
-\rm
-Let \(K=\GF{13}\), let \(c=5\), and let
-\[
-G_{14}=\left[I_7\ \middle|\
-\operatorname{circ}(2,9,10,9,2,1,1)\right].
-\]
-This is the pure double-circulant self-dual MDS \([14,7,8]\) code recorded
-in~\cite{BetsumiyaEtAl}. Put the columns of \(G_{14}\) in the order
-\[
-\sigma=\AppThirteenFourteenCoordinateOrder
-\]
-and group consecutive coordinates into seven two-coordinate blocks. A
-row-equivalent universal generator is obtained from the coefficient matrix
-\begin{equation}
-P=\AppThirteenFourteenP
-\label{eq:gf13-14-coefficient-p}
-\end{equation}
-and
-\[
-H=\AppThirteenFourteenH,
-\qquad
-Q=\AppThirteenFourteenQ,
-\qquad
-A=\AppThirteenFourteenA=-Q^{\mathsf T},
-\qquad D=(1).
-\]
-Let \(\delta_{ij}\) denote the Kronecker delta: \(\delta_{ij}=1\) when
-\(i=j\), and \(\delta_{ij}=0\) otherwise.  It records the identity readout
-in the second coordinate of the \(j\)-th pivot block; explicitly,
-\[
-(P_{ij},5P_{ij}+\delta_{ij})=
-\begin{cases}
-(P_{ii},5P_{ii}+1),&i=j,\\
-(P_{ij},5P_{ij}),&i\ne j.
-\end{cases}
-\]
-In the notation of Theorem~\ref{thm:universal-rank-boxed}, this gives
-\begin{equation}
-\widehat G_{14}=G(5;P,H,Q,A,D)
-=\left[
-\begin{array}{c|c}
-\bigl((P_{ij},5P_{ij}+\delta_{ij})\bigr)_{1\le i,j\le6}
-  & \bigl((H_i,5H_i+Q_i)\bigr)_{1\le i\le6}\\
-\hline
-\bigl(A_j(1,5)\bigr)_{1\le j\le6} & (1,5)
-\end{array}
-\right].
-\label{eq:gf13-14-structured-generator}
-\end{equation}
-Thus the six pivot rows have exactly the pattern of
-Theorem~\ref{thm:universal-rank-boxed}, while every block of the terminal row
-is a multiple of \((1,5)\). It has \(k=6\), \(r=1\), and \(D=(1)\).
-Deleting its first block row and
-first block column gives a self-dual \([12,6,6]\) parent. For this displayed
-parent, the projective correction classes satisfying the necessary
-weight-six/seven lifting condition form the singleton
-\[
-\Lambda_8=\{\AppThirteenFourteenSurvivor\}.
-\]
-The correction column of \(\widehat G_{14}\) is
-\(\gamma=\AppThirteenFourteenGamma\), whose projective class is the displayed
-element of \(\Lambda_8\); rebuilding recovers \(\widehat G_{14}\).
-\end{prop}
-
-\begin{proof}
-Direct calculation gives \(G_{14}G_{14}^{\mathsf T}=0\) and
-\(\rank G_{14}=7\). Every one of its
-\(\binom{14}{7}=3432\) seven-column submatrices has rank~7. Hence every
-seven columns are an information set, so the generated code is MDS and has
-parameters \([14,7,8]\).
-
-For the asserted row equivalence, if \(G_{14}^{\sigma}\) denotes the stated
-column reordering, then
-\[
-T=\begin{pmatrix}
-12&8&12&5&8&10&0\\
-10&11&11&4&3&6&0\\
-4&7&2&3&10&9&0\\
-9&7&0&9&0&0&0\\
-0&0&9&0&7&9&0\\
-4&7&0&9&0&5&0\\
-0&0&0&0&0&10&7
-\end{pmatrix},
-\qquad \det T=5,
-\]
-and exact multiplication gives
-\(TG_{14}^{\sigma}=\widehat G_{14}\), with \(\widehat G_{14}\) as in
-\eqref{eq:gf13-14-structured-generator}. Applying
-\(\partial(s,t)=t-5s\) blockwise makes the rank-one structure visible:
-\[
-\partial\widehat G_{14}=\AppThirteenFourteenReadout.
-\]
-Thus \(\rank(\partial\widehat G_{14})=6\), while its last row lies in
-\(U_5\) and ends in \((1,5)\); hence \(r=1\) and \(D=(1)\).
-The universal Gram relations hold for the extracted \(P,H,Q,A,D\), so
-Theorem~\ref{thm:universal-rank-boxed} gives self-duality both before and
-after the stated simultaneous row-and-block deletion.
-
-The parent has \(A_j=0\) for \(1\le j<6\), \(A_6=960\), and
-\(A_7=3744\). After projectivizing its weight-six and weight-seven
-coefficient vectors, there are \(\AppThirteenFourteenLowLines\) classes.
-Exact enumeration of \(\mathbf P^5(\F_{13})\) shows that precisely
-\(\AppThirteenFourteenSurvivor\) is nonorthogonal to every one of them.
-Finally,
-\[
-[\AppThirteenFourteenGamma]=\AppThirteenFourteenSurvivor,
-\]
-and the lower six rows of \eqref{eq:gf13-14-structured-generator}, after deleting their
-first block, are literally the parent generator. Reattaching that block and
-the first row therefore recovers \(\widehat G_{14}\).
-\end{proof}
-
-This exact parent--child pair suggests a fixed-seed measure of the
-construction.  Let \(C_0=\langle G_{14}\rangle\), and for \(m\ge0\) define
-\[
-\begin{aligned}
-\delta_m(G_{14})=\max\{d(C_m):\;&C_{i+1}\text{ is obtained from }C_i\\
- &\text{by one non-direct-sum step of
- Lemma~\ref{lem:rank-boxed-building-up}}\}.
-\end{aligned}
-\]
-The computational question is whether \(\delta_m(G_{14})\) reaches the
-best possible minimum distance of a self-dual code of length \(14+2m\).
-The correction-space search first rejects projective correction classes that
-are orthogonal to a low-weight coefficient line of the fixed parent; exact
-minimum distance is computed only for the survivors.  Any continuation from
-\texttt{GF13-14} will be recorded in a separate lineage certificate, so that
-Table~\ref{tab:application-distances} remains a comparison with the published
-history rather than mixing benchmark and ancestry data.
 
 \section{Conclusion}
 \label{sec:conclusion}

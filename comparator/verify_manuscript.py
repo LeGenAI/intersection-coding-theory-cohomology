@@ -59,7 +59,7 @@ def main():
     args = parser.parse_args()
     configs = [(p, json.loads(p.read_text())) for p in sorted(CONFIGS.glob("*.json"))]
     names = [name for _, c in configs for name in c["theorem_names"]]
-    require(len(configs) == 17 and len(names) == len(set(names)) == 123, "suite/goal inventory")
+    require(len(configs) == 17 and len(names) == len(set(names)) == 124, "suite/goal inventory")
     for path, c in configs:
         require(set(c["permitted_axioms"]) == AXIOMS and c["enable_nanoda"] is False,
                 f"trust configuration: {path.name}")
@@ -103,7 +103,7 @@ def main():
             tools[name] = expected
         env["PATH"] = str(tool_dir) + os.pathsep + env["PATH"]
     report = dict(status="RUNNING", started_utc=datetime.now(timezone.utc).isoformat(),
-                  platform=platform.system(), suite_count=17, goal_count=123,
+                  platform=platform.system(), suite_count=17, goal_count=124,
                   production_file_count=len(production), forbidden_token_scan="PASS",
                   comparator_replayed=replay, tool_sha256=tools, inputs=hashes, steps=[])
 
@@ -173,7 +173,7 @@ def main():
     finally:
         report["finished_utc"] = datetime.now(timezone.utc).isoformat()
         save()
-    print("PASS: 17 suites / 123 axiom reports" + (" / 123 Linux Comparator goals" if replay else " (local audit)"))
+    print("PASS: 17 suites / 124 axiom reports" + (" / 124 Linux Comparator goals" if replay else " (local audit)"))
 
 
 if __name__ == "__main__":

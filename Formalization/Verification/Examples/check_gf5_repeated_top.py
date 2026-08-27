@@ -7,7 +7,11 @@ import json
 from pathlib import Path
 
 from check_gf13_repeated_lineage import (
-    certify_matrix, kim_reduction, matrix_tex, row_space_equal, tuple_tex,
+    certify_matrix, kim_reduction, row_space_equal, tuple_tex,
+)
+from universal_display import (
+    kim_build, matrix_small_tex, matrix_tex, permute_vector,
+    universal_normalize,
 )
 
 
@@ -43,6 +47,32 @@ def build_outputs():
     c22 = certify_matrix(g22, p, reduction["parent_parameters"],
                          reduction["parent_weight_distribution"])
 
+    # This deterministic pairing admits the literal Corollary 3.10
+    # normalization. Entries are Kim-parent coordinates, not child coordinates.
+    parent_pairs_one_based = [
+        (22, 8), (9, 13), (5, 12), (19, 18), (10, 17), (11, 16),
+        (6, 4), (2, 3), (20, 14), (1, 15), (21, 7),
+    ]
+    parent_pairs = [(a - 1, b - 1) for a, b in parent_pairs_one_based]
+    display_parent = universal_normalize(
+        step["parent_matrix"], parent_pairs, c, p,
+        rank_one_split_normalize=True)
+    display_x = permute_vector(
+        step["x"], display_parent["coordinate_order_zero_based"])
+    display_child = kim_build(display_parent["matrix"], display_x, c, p)
+    child_order = [0, 1] + [2 + j for j in
+                            display_parent["coordinate_order_zero_based"]]
+    if not row_space_equal(
+            display_child,
+            [[row[j] for j in child_order]
+             for row in step["child_kim_matrix"]], p):
+        raise ValueError("GF(5) child with universal parent")
+    display = {
+        "parent": display_parent, "correction": display_x,
+        "child_matrix": display_child,
+        "child_row_space_verified": True,
+    }
+
     certificate = {
         "schema_version": 1,
         "artifact_id": "GF5-REPEATED-22-24",
@@ -53,6 +83,7 @@ def build_outputs():
         ),
         "levels_ascending": [c22, c24],
         "step": step,
+        "largest_universal_display": display,
         "magma_audit": {
             **source["magma_audit"],
             "replay": "Formalization/Verification/Examples/gf5_repeated_top.m",
@@ -80,9 +111,14 @@ def build_outputs():
     tex += "\\newcommand{\\GFFiveRepeatedLineageRows}{%\n" + rows + "\n}\n"
     tex += "\\newcommand{\\GFFiveRepeatedCatalogueRows}{%\n" + catalogue + "\n}\n"
     tex += ("\\newcommand{\\GFFiveLargestRepeatedMatrix}{"
-            + matrix_tex(step["child_kim_matrix"]) + "}\n")
+            + matrix_tex(display_child, display_parent["k"],
+                         display_parent["r"], split_corollary=True) + "}\n")
+    tex += ("\\newcommand{\\GFFiveLargestParentParameters}"
+            f"{{c={c},\\; k={display_parent['k']},\\; "
+            f"r={display_parent['r']},\\; "
+            f"D={matrix_small_tex(display_parent['D'])}}}\n")
     tex += ("\\newcommand{\\GFFiveTwentyTwoCorrection}{"
-            + tuple_tex(step["x"]) + "}\n")
+            + tuple_tex(display_x) + "}\n")
     tex += ("\\newcommand{\\GFFiveRepeatedCertificate}{\\href{" + REPOSITORY
             + "}{$C_{24}^{(5)}$}}\n")
     return {

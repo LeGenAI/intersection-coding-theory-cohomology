@@ -17,7 +17,7 @@ theorem of Chinburg--Zhang.
 - `Formalization/Components/`: definitions and proofs.
 - `Formalization/Archive/SubmittedBaseline.lean`: frozen baseline supplying
   shared infrastructure; its 260 theorems are not additional current exact goals.
-- `Formalization/Verification/Comparator/`: 17 independent suites / 123 goals.
+- `Formalization/Verification/Comparator/`: 17 independent suites / 124 goals.
 - `Formalization/Verification/Examples/`: kernel-checked rank-two example,
   reproducible application data, a public historical catalogue, the exact
   length-20-centered Golay lineage, linked certificates, generators and complete weight

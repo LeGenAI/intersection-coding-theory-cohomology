@@ -1,0 +1,127 @@
+\subsection{Universal realization and correction search over
+\texorpdfstring{$\GF{13}$}{GF(13)}}
+
+The first application starts from an optimal code and asks whether the
+universal form exposes a useful parent.  The answer is exact: a known MDS
+code has a rank-one realization, its two-coordinate reduction is self-dual,
+and only one projective correction class over that parent can restore the MDS
+distance.
+
+\begin{prop}
+\label{prop:universal-mds-137}
+\rm
+Let \(K=\GF{13}\), let \(c=5\), and let
+\[
+G_{14}=\left[I_7\ \middle|\
+\operatorname{circ}(2,9,10,9,2,1,1)\right].
+\]
+This is the pure double-circulant self-dual MDS \([14,7,8]\) code recorded
+in~\cite{BetsumiyaEtAl}. Put the columns of \(G_{14}\) in the order
+\[
+\sigma=\AppThirteenFourteenCoordinateOrder
+\]
+and group consecutive coordinates into seven two-coordinate blocks. A
+row-equivalent universal generator is obtained from
+\begin{equation}
+P=\AppThirteenFourteenP,
+\qquad
+H=\AppThirteenFourteenH,
+\qquad
+Q=\AppThirteenFourteenQ.
+\label{eq:gf13-14-coefficients}
+\end{equation}
+Let \(\delta_{ij}\) denote the Kronecker delta.  In the notation of
+Theorem~\ref{thm:universal-rank-boxed},
+\begin{equation}
+\widehat G_{14}=G(5;P,H,Q,(1))
+=\left[
+\begin{array}{c|c}
+\bigl((P_{ij},5P_{ij}+\delta_{ij})\bigr)_{1\le i,j\le6}
+  & \bigl((H_i,5H_i+Q_i)\bigr)_{1\le i\le6}\\
+\hline
+\bigl(-Q_j(1,5)\bigr)_{1\le j\le6} & (1,5)
+\end{array}
+\right].
+\label{eq:gf13-14-structured-generator}
+\end{equation}
+It has \(k=6\), \(r=1\), and \(D=(1)\).  Deleting its first block row and
+first block column gives a self-dual \([12,6,6]\) parent.  For this parent,
+the projective correction classes satisfying the necessary weight-six/seven
+lifting condition form the singleton
+\[
+\Lambda_8=\{\AppThirteenFourteenSurvivor\}.
+\]
+The correction column of \(\widehat G_{14}\) is
+\(\gamma=\AppThirteenFourteenGamma\), whose projective class is this unique
+element; rebuilding recovers \(\widehat G_{14}\).
+\end{prop}
+
+\begin{proof}
+Direct calculation gives \(G_{14}G_{14}^{\mathsf T}=0\) and
+\(\rank G_{14}=7\). Every one of its
+\(\binom{14}{7}=3432\) seven-column submatrices has rank~7. Hence every
+seven columns are an information set, so the generated code is MDS and has
+parameters \([14,7,8]\).  In particular, its minimum-weight coefficient is
+the MDS value
+\[
+A_8=(13-1)\binom{14}{8}=36036.
+\]
+
+For the asserted row equivalence, if \(G_{14}^{\sigma}\) denotes the stated
+column reordering, then
+\[
+T=\begin{pmatrix}
+12&8&12&5&8&10&0\\
+10&11&11&4&3&6&0\\
+4&7&2&3&10&9&0\\
+9&7&0&9&0&0&0\\
+0&0&9&0&7&9&0\\
+4&7&0&9&0&5&0\\
+0&0&0&0&0&10&7
+\end{pmatrix},
+\qquad \det T=5,
+\]
+and exact multiplication gives
+\(TG_{14}^{\sigma}=\widehat G_{14}\), with \(\widehat G_{14}\) as in
+\eqref{eq:gf13-14-structured-generator}. Applying
+\(\partial(s,t)=t-5s\) blockwise gives
+\[
+\partial\widehat G_{14}=\AppThirteenFourteenReadout.
+\]
+Thus \(\rank(\partial\widehat G_{14})=6\), while its last row lies in
+\(U_5\) and ends in \((1,5)\); hence \(r=1\) and \(D=(1)\).
+The universal Gram relation holds for \(P,H,Q\), so
+Theorem~\ref{thm:universal-rank-boxed} gives self-duality both before and
+after the simultaneous row-and-block deletion.
+
+The parent has \(A_j=0\) for \(1\le j<6\), \(A_6=960\), and
+\(A_7=3744\). After projectivizing its weight-six and weight-seven
+coefficient vectors, there are \(\AppThirteenFourteenLowLines\) classes.
+Exact enumeration of \(\mathbf P^5(\F_{13})\) shows that precisely
+\(\AppThirteenFourteenSurvivor\) is nonorthogonal to every one of them.
+Finally,
+\[
+[\AppThirteenFourteenGamma]=\AppThirteenFourteenSurvivor,
+\]
+and the lower six rows of \eqref{eq:gf13-14-structured-generator}, after
+deleting their first block, are literally the parent generator. Reattaching
+that block and the first row therefore recovers \(\widehat G_{14}\).
+\end{proof}
+
+This calculation supplies a search principle rather than a claim that the
+known MDS code itself is new.  Starting from a fixed parent, low-weight
+coefficient lines eliminate projective corrections before full minimum
+distance is computed.  Here the filter is sharp: exactly one projective class
+survives and it reconstructs the optimal child.  For \(m\ge0\), one may
+therefore study
+\[
+\delta_m(G_{14})=\max\{d(C_m): C_{i+1}\text{ is obtained from }C_i
+\text{ by a non-direct-sum step of
+Lemma~\ref{lem:rank-boxed-building-up}}\}.
+\]
+The question is whether this fixed-seed search reaches the best possible
+minimum distance at length \(14+2m\).  The catalogue and the repeated
+lineages below separate the verified outcomes from this forward search
+question.
+
+\FloatBarrier

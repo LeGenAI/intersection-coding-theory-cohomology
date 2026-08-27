@@ -88,7 +88,6 @@ def P : Matrix (Fin 6) (Fin 6) F :=
 
 def H : Matrix (Fin 6) (Fin 1) F := !![5;2;5;9;6;1]
 def Q : Matrix (Fin 6) (Fin 1) F := !![3;9;9;0;0;0]
-def A : Matrix (Fin 1) (Fin 6) F := !![10,4,4,0,0,0]
 def D : Matrix (Fin 1) (Fin 1) F := !![1]
 def gamma : Fin 6 → F := ![6,9,0,9,5,10]
 
@@ -107,10 +106,10 @@ theorem normalization_certificate :
     Tinv * T = 1 ∧ T * Tinv = 1 ∧ T * Mpaired = R ∧ Tinv * R = Mpaired := by decide
 
 theorem universal_rows_certificate :
-    blockView (k := 6) (r := 1) R = rankBoxedRows 5 P H Q A D := by decide
+    blockView (k := 6) (r := 1) R = determinedRankBoxedRows 5 P H Q D := by decide
 
 theorem universal_relations_certificate :
-    Matrix.det D = 1 ∧ A + D * Q.transpose = 0 ∧
+    Matrix.det D = 1 ∧
     (1 : Matrix (Fin 6) (Fin 6) F) +
       5 • (P + P.transpose) +
       5 • (H * Q.transpose + Q * H.transpose) + Q * Q.transpose = 0 := by
@@ -140,14 +139,14 @@ theorem selfDual_baseline_and_parent :
         (rankBoxedRowSpace (blockView (k := 5) (r := 1) Parent)) := by
   constructor
   · rw [universal_rows_certificate]
-    exact (rankBoxedRows_forward_selfDual 5 P H Q A D
+    exact (determinedRankBoxedRows_forward_selfDual 5 P H Q D
       (by decide) (by unfold RankBoxCoreFullRank; decide)
-      (by unfold PivotMasterRelations; decide)
       (by unfold PivotGramRelations; decide)).2.2
   · rw [parent_restriction_certificate, universal_rows_certificate]
-    exact (paper_rankBoxed_pivot_restriction_exact keepFive 5 P H Q A D
+    exact (paper_rankBoxed_pivot_restriction_exact keepFive 5 P H Q
+      (forcedMasterCoefficients Q D) D
       (by decide) (by unfold RankBoxCoreFullRank; decide)
-      (by unfold PivotMasterRelations; decide)
+      (by intro s i; simp [forcedMasterCoefficients])
       (by unfold PivotGramRelations; decide)).2.2.2.2.2
 
 #print axioms baseline_gram_certificate

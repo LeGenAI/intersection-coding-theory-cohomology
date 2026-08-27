@@ -7,4 +7,5 @@ open BuildingUpFormalization.Components.RepeatedBox
 #print axioms repeated_step_selfDual_exact
 #print axioms repeated_step_normalization_exact
 #print axioms repeated_step_kim_lee_iff
+#print axioms determined_repeated_step_kim_lee_iff
 #print axioms kim_lee_to_repeated_exact

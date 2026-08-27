@@ -7,6 +7,10 @@ import json
 from pathlib import Path
 
 from check_applications import distribution, dot, macwilliams, rank, require
+from universal_display import (
+    kim_build, matrix_small_tex, matrix_tex, permute_vector,
+    universal_normalize,
+)
 
 
 HERE = Path(__file__).resolve().parent
@@ -109,15 +113,6 @@ def bit_string(vector):
     return "".join(map(str, vector))
 
 
-def matrix_tex(matrix):
-    require(len(matrix[0]) % 2 == 0, "paired display requires even length")
-    column_spec = "|".join(["cc"] * (len(matrix[0]) // 2))
-    rows = " \\\\\n".join(" & ".join(str(value) for value in row)
-                         for row in matrix)
-    return ("\\left(\\begin{array}{" + column_spec + "}\n" + rows
-            + "\n\\end{array}\\right)")
-
-
 def build_outputs():
     source_bytes = (HERE / "golay_lineage.json").read_bytes()
     source = json.loads(source_bytes)
@@ -138,6 +133,28 @@ def build_outputs():
     require([code["parameters"][2] for code in (c22, c20, c18, c16)] ==
             [6, 4, 4, 4], "four Golay reductions")
 
+    top_step = steps_descending[0]
+    parent_pairs = [(2 * i, 2 * i + 1)
+                    for i in range(len(top_step["parent_matrix"]))]
+    display_parent = universal_normalize(
+        top_step["parent_matrix"], parent_pairs, 1, 2,
+        zero_binary_pivot_diagonal=True)
+    display_x = permute_vector(
+        top_step["x"], display_parent["coordinate_order_zero_based"])
+    display_child = kim_build(display_parent["matrix"], display_x, 1, 2)
+    child_order = [0, 1] + [2 + j for j in
+                            display_parent["coordinate_order_zero_based"]]
+    require(row_space_equal(
+        display_child,
+        [[row[j] for j in child_order]
+         for row in top_step["child_kim_matrix"]]),
+        "Golay child with universal parent")
+    display = {
+        "parent": display_parent, "correction": display_x,
+        "child_matrix": display_child,
+        "child_row_space_verified": True,
+    }
+
     certificate = {
         "schema_version": 1,
         "artifact_id": "BINARY-GOLAY-16-24",
@@ -150,6 +167,7 @@ def build_outputs():
         ),
         "levels_ascending": list(reversed(levels_descending)),
         "steps_ascending": list(reversed(steps_descending)),
+        "largest_universal_display": display,
     }
     results = {
         "input_sha256": certificate["source_sha256"],
@@ -180,8 +198,14 @@ def build_outputs():
         )
     tex += "\\newcommand{\\GolayCatalogueRows}{%\n" + "\n".join(catalogue_rows) + "\n}\n"
     tex += ("\\newcommand{\\BinaryLargestRepeatedMatrix}{"
-            + matrix_tex(steps_descending[0]["child_kim_matrix"]) + "}\n")
+            + matrix_tex(display_child, display_parent["k"],
+                         display_parent["r"]) + "}\n")
+    tex += ("\\newcommand{\\BinaryLargestParentParameters}"
+            f"{{c=1,\\; k={display_parent['k']},\\; "
+            f"r={display_parent['r']},\\; "
+            f"D={matrix_small_tex(display_parent['D'])}}}\n")
     corrections = {len(step["x"]): step["x"] for step in steps_descending}
+    corrections[22] = display_x
     for length, word in ((16, "Sixteen"), (18, "Eighteen"),
                          (20, "Twenty"), (22, "TwentyTwo")):
         tex += (f"\\newcommand{{\\Golay{word}Correction}}{{\\texttt{{" +
