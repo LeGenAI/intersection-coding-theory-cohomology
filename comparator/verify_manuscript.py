@@ -71,11 +71,12 @@ def main():
                 f"forbidden production token: {path.relative_to(ROOT)}")
         require(not path.name.endswith("Challenge.lean"), "Solution imports a Challenge")
     inputs = production | closure([c["challenge_module"] for _, c in configs])
-    inputs |= closure(["Formalization", "Formalization.Verification.Examples.RankTwoGF5"])
+    inputs |= closure(["Formalization", "Formalization.Verification.Examples.RankTwoGF5",
+                       "Formalization.Verification.Examples.LargeGF13"])
     inputs |= {p for p, _ in configs}
     inputs |= {ROOT / n for n in ["lakefile.lean", "lake-manifest.json", "lean-toolchain",
                                   "comparator/verify_manuscript.py", "comparator/generate_challenge.py"]}
-    inputs |= set((ROOT / "Formalization/Verification/Examples").glob("applications*"))
+    inputs |= set((ROOT / "Formalization/Verification/Examples").glob("*applications*"))
     inputs.add(ROOT / "Formalization/Verification/Examples/check_applications.py")
     hashes = {str(p.relative_to(ROOT)): sha(p) for p in sorted(inputs)}
     out = Path(args.output).resolve()
@@ -146,7 +147,10 @@ def main():
         require(all(set(values) <= AXIOMS for values in found.values()), "unpermitted transitive axiom")
         report["axioms"] = found
         run("rank-two-gf5", ["lake", "env", "lean", "Formalization/Verification/Examples/RankTwoGF5.lean"])
+        run("large-gf13", ["lake", "env", "lean", "Formalization/Verification/Examples/LargeGF13.lean"])
         run("applications", ["python3", "Formalization/Verification/Examples/check_applications.py", "--check"])
+        run("large-applications",
+            ["python3", "Formalization/Verification/Examples/check_large_applications.py", "--check"])
         require(all(sha(ROOT / p) == h for p, h in hashes.items()), "input changed during verification")
         report.update(status="PASS", inputs_unchanged=True)
     except Exception as error:

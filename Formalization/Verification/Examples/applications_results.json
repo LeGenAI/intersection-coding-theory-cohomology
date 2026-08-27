@@ -1,5 +1,5 @@
 {
-  "input_sha256": "d7addb36b57260c07c0c8c28c0f7fcd36bedaf908f3a0fb374096fe937217170",
+  "input_sha256": "70bac850a7f2148195230b8183eea044103447c855682e9d7bdd438b7cd5f795",
   "method": "complete base-p enumeration; independent rank, Gram and MacWilliams checks",
   "lean_certificate": false,
   "examples": [

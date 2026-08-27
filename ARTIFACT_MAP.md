@@ -24,7 +24,8 @@ Theorem, Proposition and Corollary share the theorem counter.
 | Corollary 3.10 | Explicit normalized rank-one box | SplitBoxed (12), SplitBoxedOrthogonality (12) |
 | Theorem 3.11 | Conditional boxed coefficient theorem | `paper_conditional_boxed_normalization_exact`; ConditionalBoxed (1) |
 | Explicit change of form in Section 2 | Different named forms, not a Euclidean self-isometry | SplitFormTransport (3) |
-| Propositions 3.12--3.16 | Five finite-field applications | `applications.json`, `check_applications.py`, generated TeX and full distributions; external computation, not Lean certificates |
+| Propositions 3.12--3.15 | Four finite-field applications | `applications.json`, `check_applications.py`, generated TeX and full distributions |
+| Proposition 3.16 | Universal rank-one realization of a self-dual MDS $[14,7,8]$ code over $\mathrm{GF}(13)$ | `Examples/LargeGF13.lean` (Gram, normalization, readout, parent, unique correction and reconstruction certificates); `large_applications.json` and `check_large_applications.py` (all $\binom{14}{7}$ minors and exhaustive projective enumeration) |
 
 The suite inventory contains **17 suites / 123 distinct declarations**.
 Principal declarations are under `BuildingUpFormalization.Components`.
@@ -51,10 +52,13 @@ arithmetic realization are outside this artifact's proved claims.
 
 ## Numerical data
 
-`applications.json` generates the parameters, scalar matrices, witness words
-and table in Section 3.5. `applications_results.json` records every weight
-multiplicity, rank and Gram checks. The [12,6,6] example has b53=11, b54=0.
-No optimality claim is made for that example.
+`applications.json` generates the four smaller examples and their table rows in
+Section 3.5. `applications_results.json` records every weight multiplicity,
+rank and Gram check.  The separate large-example pipeline starts from the known
+self-dual MDS $[14,7,8]$ code, checks all $\binom{14}{7}=3432$ maximal minors,
+normalizes it to the manuscript's rank-one universal form, and exhaustively
+checks the unique projective correction class used to reconstruct it from its
+$[12,6,6]$ two-coordinate parent.
 
 The separate rank-two kernel example has no minimum-distance claim.
 

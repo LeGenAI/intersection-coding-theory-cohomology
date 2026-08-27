@@ -169,7 +169,7 @@ Sogang University, Seoul, Korea
 \begin{abstract}
 We study building-up constructions of Euclidean self-dual codes through isotropic lines and formalize their algebraic structure in Lean~4. For \(q\equiv1\pmod4\), we prove that every self-dual code over \(\F_q\) has a repeated rank-\(r\) boxed generator after a permutation of two-coordinate blocks. The terminal \(r\times r\) matrix is nonsingular, and explicit Gram equations characterize self-duality. Simultaneous removal of pivot rows and coordinate blocks preserves this form; conversely, an explicit extension can be iterated while keeping the terminal matrix fixed. We determine precisely when such an extension is a Kim--Lee step over the same parent, and identify the complementary direct-sum case.
 In the binary case, we give an independent formal proof of the Chinburg--Zhang rank-one boxed representation and compare its reduction with Kim's construction. The arithmetic pairing is transported through a specified orthonormal-basis isometry; the distinguished Euclidean coordinate plane has Gram matrix \(I_2\), not the alternating hyperbolic Gram matrix. The arithmetic realization theorem remains a cited input.
-Applications include optimal self-dual \([6,3,4]\) and \([8,4,4]\) codes over \(\GF{5}\), MDS self-dual \([8,4,5]\) and \([10,5,6]\) codes over \(\GF{13}\), and a further self-dual \([12,6,6]\) example without an optimality claim. Reproducible finite-field computations accompany these examples; they are separate from the kernel-checked algebraic proofs.
+Applications include optimal self-dual \([6,3,4]\) and \([8,4,4]\) codes over \(\GF{5}\), together with MDS self-dual codes over \(\GF{13}\).  In particular, a known pure double-circulant \([14,7,8]\) code is put into an explicit universal rank-one box; its two-coordinate reduction gives a self-dual \([12,6,6]\) parent with a unique projective correction capable of restoring distance~8. Reproducible finite-field computations accompany these examples; they are separate from the kernel-checked algebraic proofs.
 \end{abstract}
 
 
@@ -217,7 +217,7 @@ Lemmas~\ref{lem:repeated-kim-lee}--\ref{lem:kim-lee-repeated}
 identify their fixed-parent correspondence with Kim--Lee steps, including
 the direct-sum exception.
 
-\item As concrete applications, we obtain explicit optimal self-dual codes \([6,3,4]\) and \([8,4,4]\) over \(\GF{5}\), explicit optimal self-dual codes \([8,4,5]\) and \([10,5,6]\) over \(\GF{13}\), and an explicit self-dual \([12,6,6]\) code over \(\GF{13}\), all arising from the split boxed construction (Section~\ref{sec:applications}).
+\item As concrete applications, we obtain explicit optimal self-dual codes \([6,3,4]\) and \([8,4,4]\) over \(\GF{5}\) and MDS self-dual codes over \(\GF{13}\).  For a known pure double-circulant \([14,7,8]\) code, we give an exact universal rank-one generator, its \([12,6,6]\) two-coordinate parent, and the unique projective correction that can restore distance~8 over this parent (Section~\ref{sec:applications}).
 
 \item We formalize the algebraic results in Lean~4, including the
 self-duality criteria, binary two-coordinate reduction, the universal
@@ -2189,30 +2189,37 @@ self-duality implies precisely these three coefficient relations.
 
 \medskip
 
-The applications below use Corollary~\ref{thm:split-boxed-form} to give
+The applications below use the boxed forms developed above to give
 explicit self-dual codes over \(\GF{5}\) and \(\GF{13}\).
 
 \subsection{Applications}\label{sec:applications}
 \input{Formalization/Verification/Examples/applications_data.tex}
+\input{Formalization/Verification/Examples/large_applications_data.tex}
 
 For earlier results on self-dual codes over these fields, see
 \cite{LeonPlessSloane,KimChoi2021}. All residues below are represented by
 integers between \(0\) and \(p-1\), where \(p=5\) or \(13\).
-The parameters, matrices, and witness codewords are generated from the
-single data file \texttt{applications.json} in the accompanying artifact.
-Its standard-library Python script \texttt{check\_applications.py}
+The parameters, matrices, and witness codewords for the first four rows of
+Table~\ref{tab:application-distances} are generated from
+\texttt{applications.json} in the accompanying artifact.
+The standard-library Python script \texttt{check\_applications.py}
 checks the boxed relations, full row rank, and \(GG^{\mathsf T}=0\).
 It also enumerates all \(p^k\) coefficient vectors for each \(k\times2k\)
 matrix \(G\), recording
 \[
 A_j=\#\{a\in\mathbb F_p^k:\operatorname{wt}(aG)=j\}.
 \]
-Table~\ref{tab:application-distances} gives the resulting minimum distance
-\(d=\min\{j>0:A_j\ne0\}\) and \(A_d\).
-In every row, \(A_0=1\) and \(A_j=0\) for \(0<j<d\).
+For the final row, \texttt{check\_large\_applications.py} verifies all
+\(\binom{14}{7}=3432\) seven-column information sets and the exact universal
+normalization. Table~\ref{tab:application-distances} gives the resulting
+minimum distance \(d\) and \(A_d\); in each row,
+\(A_0=1\) and \(A_j=0\) for \(0<j<d\).
 The complete distributions, which also satisfy the MacWilliams identity,
-are recorded in \texttt{applications\_results.json}.
-These are reproducible exhaustive computations, not Lean certificates.
+are recorded in \texttt{applications\_results.json}; the large normalization
+and parent data are recorded in \texttt{large\_applications\_results.json}.
+These distance computations are reproducible exact computations, not Lean
+certificates. The Gram, normalization, deletion, and self-duality identities
+for the large example are checked separately by the Lean kernel.
 
 \begin{table}[htbp]
 \centering
@@ -2222,9 +2229,10 @@ These are reproducible exhaustive computations, not Lean certificates.
 Proposition & \(p\) & Parameters & Nonzero vectors & \(d\) & \(A_d\)\\
 \midrule
 \AppDistanceTable
+\AppThirteenFourteenDistanceRow
 \bottomrule
 \end{tabular}
-\caption{Exhaustive minimum-distance computations for the application matrices.}
+\caption{Exact minimum-distance data for the application matrices. The first four rows use complete coefficient enumeration; the final row uses the MDS minor criterion.}
 \label{tab:application-distances}
 \end{table}
 
@@ -2348,39 +2356,88 @@ for \(1\le j<6\), so \(d=6\). The Singleton bound is
 \(d\le10-5+1=6\), proving optimality among all linear \([10,5]\) codes.
 \end{proof}
 
-\begin{prop}[An explicit self-dual \texorpdfstring{$[12,6,6]$}{[12,6,6]} code over \texorpdfstring{$\GF{13}$}{GF(13)}]
-\label{ex:split-boxed-136}
+\begin{prop}[A universal rank-one realization of a self-dual MDS \texorpdfstring{$[14,7,8]$}{[14,7,8]} code over \texorpdfstring{$\GF{13}$}{GF(13)}]
+\label{prop:universal-mds-137}
 \rm
-Let \(K=\GF{13}\), \(c=5\), and choose
-\AppThirteenTwelveParameters
-The corresponding generator is
+Let \(K=\GF{13}\), let \(c=5\), and let
 \[
-G_{12}=\AppThirteenTwelveMatrix.
+G_{14}=\left[I_7\ \middle|\
+\operatorname{circ}(2,9,10,9,2,1,1)\right].
 \]
-It generates a self-dual \([12,6,6]\) code.
+This is the pure double-circulant self-dual MDS \([14,7,8]\) code recorded
+in~\cite{BetsumiyaEtAl}. Put the columns of \(G_{14}\) in the order
+\[
+\sigma=\AppThirteenFourteenCoordinateOrder
+\]
+and group consecutive coordinates into seven two-coordinate blocks. A
+row-equivalent universal generator is
+\begin{equation}
+\widehat G_{14}=\AppThirteenFourteenUniversal.
+\label{eq:gf13-14-universal}
+\end{equation}
+It has \(k=6\), \(r=1\), and \(D=(1)\). Deleting its first block row and
+first block column gives a self-dual \([12,6,6]\) parent. For this displayed
+parent, the projective correction classes satisfying the necessary
+weight-six/seven lifting condition form the singleton
+\[
+\Lambda_8=\{\AppThirteenFourteenSurvivor\}.
+\]
+The correction column of \(\widehat G_{14}\) is
+\(\gamma=\AppThirteenFourteenGamma\), whose projective class is the displayed
+element of \(\Lambda_8\); rebuilding recovers \(\widehat G_{14}\).
 \end{prop}
 
 \begin{proof}
-The boxed relations give self-duality by Corollary~\ref{thm:split-boxed-form}.
-The coefficient vector \(\AppThirteenTwelveWitness\) produces
-\[
-\AppThirteenTwelveWord,
-\]
-of weight \(6\). The enumeration of all \(13^6-1\) nonzero coefficient
-vectors gives \(A_j=0\) for \(1\le j<6\), as recorded in
-Table~\ref{tab:application-distances}. Hence \(d=6\).
-\end{proof}
+Direct calculation gives \(G_{14}G_{14}^{\mathsf T}=0\) and
+\(\rank G_{14}=7\). Every one of its
+\(\binom{14}{7}=3432\) seven-column submatrices has rank~7. Hence every
+seven columns are an information set, so the generated code is MDS and has
+parameters \([14,7,8]\).
 
-\begin{remark}
-\label{rem:minimum-distance-scope}
-\rm
-The \([8,4,5]\) and \([10,5,6]\) examples over \(\GF{13}\) are optimal, whereas the \([12,6,6]\) example establishes the stated minimum distance without an optimality claim. These computations do not assert that the construction always maximizes minimum distance.
-\end{remark}
+For the asserted row equivalence, if \(G_{14}^{\sigma}\) denotes the stated
+column reordering, then
+\[
+T=\begin{pmatrix}
+12&8&12&5&8&10&0\\
+10&11&11&4&3&6&0\\
+4&7&2&3&10&9&0\\
+9&7&0&9&0&0&0\\
+0&0&9&0&7&9&0\\
+4&7&0&9&0&5&0\\
+0&0&0&0&0&10&7
+\end{pmatrix},
+\qquad \det T=5,
+\]
+and exact multiplication gives
+\(TG_{14}^{\sigma}=\widehat G_{14}\). Applying
+\(\partial(s,t)=t-5s\) blockwise makes the rank-one structure visible:
+\[
+\partial\widehat G_{14}=\AppThirteenFourteenReadout.
+\]
+Thus \(\rank(\partial\widehat G_{14})=6\), while its last row lies in
+\(U_5\) and ends in \((1,5)\); hence \(r=1\) and \(D=(1)\).
+The universal Gram relations hold for the extracted \(P,H,Q,A,D\), so
+Theorem~\ref{thm:universal-rank-boxed} gives self-duality both before and
+after the stated simultaneous row-and-block deletion.
+
+The parent has \(A_j=0\) for \(1\le j<6\), \(A_6=960\), and
+\(A_7=3744\). After projectivizing its weight-six and weight-seven
+coefficient vectors, there are \(\AppThirteenFourteenLowLines\) classes.
+Exact enumeration of \(\mathbf P^5(\F_{13})\) shows that precisely
+\(\AppThirteenFourteenSurvivor\) is nonorthogonal to every one of them.
+Finally,
+\[
+[\AppThirteenFourteenGamma]=\AppThirteenFourteenSurvivor,
+\]
+and the lower six rows of \eqref{eq:gf13-14-universal}, after deleting their
+first block, are literally the parent generator. Reattaching that block and
+the first row therefore recovers \(\widehat G_{14}\).
+\end{proof}
 
 \section{Conclusion}
 \label{sec:conclusion}
 
-We have studied self-dual codes over finite fields $\F_q$ with $q\equiv 1 \pmod 4$ from three complementary viewpoints: the classical building-up construction, the hyperbolic geometry forced by the split condition $-1\in (K^\times)^2$, and a Lean~4 formalization of the resulting algebraic statements. On the computational side, this yields explicit small-length applications over \(\GF{5}\) and \(\GF{13}\), including several optimal examples produced directly from the split boxed construction. The algebraic results are formalized in Lean~4.
+We have studied self-dual codes over finite fields $\F_q$ with $q\equiv 1 \pmod 4$ from three complementary viewpoints: the classical building-up construction, the hyperbolic geometry forced by the split condition $-1\in (K^\times)^2$, and a Lean~4 formalization of the resulting algebraic statements. On the computational side, the universal form gives an explicit rank-one realization and exact two-coordinate parent of a self-dual MDS \([14,7,8]\) code over \(\GF{13}\), in addition to the smaller optimal examples. The algebraic results are formalized in Lean~4.
 
 In the binary case, the universal rank-one normalization proves intrinsically that every Euclidean self-dual code has the literal Chinburg--Zhang boxed representative under a scalar-coordinate permutation.  Theorem~\ref{thm:binary-cz-kim} then transports the Chinburg--Zhang cohomological pairing through a specified orthonormal-basis isometry and compares the resulting Euclidean boxed matrix with Kim's building-up extension.  The top-down deletion is a coordinate reduction through a non-alternating first coordinate plane, not deletion of a hyperbolic pair.
 Over \(\F_q\) with \(q\equiv 1\pmod 4\), the decomposition obtained from
@@ -2434,6 +2491,11 @@ Theory Ser. A,} 2004, 105(1): 15-34.
 \bibitem{BaDou}
  E. Bannai, S. T. Dougherty, M. Harada, and M. Oura, Type II codes, ``even unimodular
 lattices, and invariant rings,'' \textit{IEEE Trans. Inf. Theory,} 1999, 45(4): 1194-1205.
+
+\bibitem{BetsumiyaEtAl}
+K.~Betsumiya, S.~Georgiou, T.~A.~Gulliver, M.~Harada, and C.~Koukouvinos,
+``On self-dual codes over some prime fields,''
+\textit{Discrete Math.}, vol.~262, nos.~1--3, pp.~37--58, 2003.
 
 \bibitem{CRSS}
 A. R. Calderbank, E. M. Rains, P. M. Shor, and N. J. A. Sloane, Quantum error

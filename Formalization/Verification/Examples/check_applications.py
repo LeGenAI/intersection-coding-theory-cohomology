@@ -189,7 +189,8 @@ def main():
                                  weight_distribution=counts, witness=e["witness"], word=word,
                                  macwilliams_verified=True))
         tex += tex_example(e, a, g)
-        table.append(f"\\ref{{{e['label']}}} & {p} & $[{n},{k}]$ & {p**k-1:,} & {distance} & {counts[distance]:,} \\\\")
+        if e.get("manuscript", True):
+            table.append(f"\\ref{{{e['label']}}} & {p} & $[{n},{k}]$ & {p**k-1:,} & {distance} & {counts[distance]:,} \\\\")
         print(f"PASS {e['id']}: [{n},{k},{distance}], {p**k-1:,} nonzero vectors", flush=True)
     tex += macro("DistanceTable", "\n".join(table))
     result = dict(input_sha256=hashlib.sha256(data).hexdigest(),

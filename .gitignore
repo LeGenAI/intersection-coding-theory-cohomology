@@ -36,6 +36,7 @@ __pycache__/
 
 # Publish only the current manuscript-only replay; retain older runs locally
 /Formalization/Verification/Comparator/receipts/*
-!/Formalization/Verification/Comparator/receipts/2026-08-27-afm-final/
-!/Formalization/Verification/Comparator/receipts/2026-08-27-afm-final/*.log
+!/Formalization/Verification/Comparator/receipts/2026-08-27-universal-mds-137/
+!/Formalization/Verification/Comparator/receipts/2026-08-27-universal-mds-137/*.log
+!/Formalization/Verification/Comparator/receipts/2026-08-27-universal-mds-137/summary.json
 /Formalization/Verification/Comparator/receipts/*/tools/
