@@ -214,7 +214,10 @@ def build_outputs():
 
     benchmark_by_length = {item["length"]: item for item in source["published_benchmarks"]}
     catalogue_rows = []
-    for symbol, code in [(r"C_{18}^{(13)}", c18), (r"C_{20}^{(13)}", c20)]:
+    for symbol, code, relation in [
+            (r"C_{18}^{(13)}", c18, "base parent"),
+            (r"C_{20}^{(13)}", c20,
+             r"$\mathcal B_5(G_{18}^{(13)},x_{18}^{(13)})$")]:
         n, k, d = code["parameters"]
         benchmark = benchmark_by_length[n]
         link = f"\\href{{{REPOSITORY}}}{{${symbol}$}}"
@@ -224,7 +227,7 @@ def build_outputs():
         catalogue_rows.append(
             f"{link} & 13 & $[{n},{k},{d}];\\,{a_d}$ & "
             f"$({benchmark['distance']};\\,{benchmark['a_d']:,})$ & "
-            f"{benchmark['reference']} \\\\"
+            f"{benchmark['reference']}; {relation} \\\\"
         )
 
     x18 = display_x

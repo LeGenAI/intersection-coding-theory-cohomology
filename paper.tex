@@ -2269,7 +2269,8 @@ For earlier results on self-dual codes over these fields, see
 A_j=\#\{a\in\mathbb F_p^k:\operatorname{wt}(aG)=j\}.
 \]
 Table~\ref{tab:application-distances} compares our exact pair \((d,A_d)\)
-with a publicly accessible benchmark at the same length.  A bold value in our
+with a publicly accessible benchmark at the same length and records every
+successive two-coordinate construction used below.  A bold value in our
 column matches the smallest \(A_d\) in the publicly accessible comparisons
 cited in the table.  At lengths covered by a complete online classification,
 or by the MDS weight enumerator, this is a certified minimum.  At unclassified
@@ -2292,14 +2293,14 @@ binary and short quinary rows are available in the online databases of
 \scriptsize
 \setlength{\tabcolsep}{3pt}
 \begin{tabular}{@{}lc>{\centering\arraybackslash}p{77pt}
-  >{\centering\arraybackslash}p{95pt}>{\raggedright\arraybackslash}p{98pt}@{}}
+  >{\centering\arraybackslash}p{87pt}>{\raggedright\arraybackslash}p{121pt}@{}}
 \toprule
-Code & \(p\) & Our \([n,k,d];A_d\) & Public benchmark \((d_{\rm best};A_d)\) & Reference\\
+Code & \(p\) & Our \([n,k,d];A_d\) & Public benchmark \((d_{\rm best};A_d)\) & Reference and construction\\
 \midrule
 \GolayCatalogueRows
 \specialrule{1.1pt}{2pt}{2pt}
-\GFFiveRepeatedCatalogueRows
 \ApplicationCatalogueRowsFive
+\GFFiveRepeatedCatalogueRows
 \specialrule{1.1pt}{2pt}{2pt}
 \ApplicationCatalogueRowsThirteen
 \GFThirteenRepeatedCatalogueRows
@@ -2418,8 +2419,8 @@ arrows are Kim building-up with \(x_{20}\) and \(x_{22}\).  Every left edge is
 also inverted exactly by the corresponding Kim step with \(x_{16}\) or
 \(x_{18}\), so all four adjacent pairs satisfy the same reconstruction
 identity.
-The parameters and the number \(A_d\) of minimum-weight words at each level
-are recorded in Table~\ref{tab:successive-constructions}.  In particular, the
+The parameters, minimum-word counts, and exact upward relations at every level
+are recorded in Table~\ref{tab:application-distances}.  In particular, the
 distance rises at both upward steps from the length-20 center.  All five
 distances attain the
 classical upper bounds for binary self-dual codes~\cite{HuffmanPless}.
@@ -2510,32 +2511,10 @@ distance-nine parent by a single two-coordinate reduction; the minimum loss is
 code and pairing search, not a nonexistence result for a self-dual
 \([18,9,9]\) code.
 
-For every upward edge in Table~\ref{tab:successive-constructions}, the corresponding
+For every upward edge in Table~\ref{tab:application-distances}, the corresponding
 checker verifies rank, self-orthogonality, literal reconstruction of the
 displayed repeated matrix, equality with the child row space, and the recorded
 weight distribution together with its MacWilliams identity.
-
-\begin{table}[htbp]
-\centering
-\small
-\setlength{\tabcolsep}{5pt}
-\begin{tabular}{@{}clccl@{}}
-\toprule
-Level & Code & Parameters & \(A_d\) & Exact upward relation\\
-\midrule
-\multicolumn{5}{c}{Binary sequence}\\
-\GolayLineageRows
-\specialrule{1.1pt}{2pt}{2pt}
-\multicolumn{5}{c}{\(\GF{5}\) extension}\\
-\GFFiveRepeatedLineageRows
-\specialrule{1.1pt}{2pt}{2pt}
-\multicolumn{5}{c}{\(\GF{13}\) sequence}\\
-\GFThirteenRepeatedLineageRows
-\bottomrule
-\end{tabular}
-\caption{Successive two-coordinate constructions over \(\GF{2}\), \(\GF{5}\), and \(\GF{13}\).}
-\label{tab:successive-constructions}
-\end{table}
 
 \section{Conclusion}
 \label{sec:conclusion}

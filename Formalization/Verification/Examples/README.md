@@ -36,22 +36,48 @@ the public Kim--Choi generator of a self-dual `[18,9,8]` code over `GF(13)`
 gives $A_8=1752$, below both our value 1896 and the earlier published value
 2484.  The GF(13) replay verifies this comparison together with our code.
 
-The binary Golay checker supplies the separate lineage table.  It reduces the
+The binary Golay checker supplies the binary rows of Table 1. It reduces the
 standard extended Golay generator four times and verifies the exact inverse Kim
 steps
 `[16,8,4] -> [18,9,4] -> [20,10,4] -> [22,11,6] -> [24,12,8]`, including
 complete weight distributions and literal row-space reconstruction at every
 level.
 
-The GF(13) repeated-lineage checker supplies the third panel of the same
-table and the two additional Table 1 rows. It verifies the exact inverse pair
+The GF(13) repeated-lineage checker supplies two additional Table 1 rows. It
+verifies the exact inverse pair
 `[18,9,8] <-> [20,10,10]`, including normalized Kim--Lee presentations,
 row-space reconstruction, complete weight distributions, and the exhaustive
 audit of all 380 ordered two-coordinate reductions of the fixed length-20
 code.
 
-The GF(5) top-edge checker supplies the [22,11,8] -> [24,12,9] panel and
-verifies the largest repeated box over that field.
+The GF(5) top-edge checker supplies the `[22,11,8] -> [24,12,9]` rows of
+Table 1 and verifies the largest repeated box over that field.
+
+The exact rank-one-obstruction audit is compiled and replayed with:
+
+```sh
+clang++ -O3 -std=c++17 \\
+  Formalization/Verification/Examples/rank_one_obstruction_audit.cpp \\
+  -o .lake/build/bin/rank_one_obstruction_audit
+.lake/build/bin/rank_one_obstruction_audit 4
+.lake/build/bin/rank_one_obstruction_audit 5
+```
+
+It enumerates all 28,800 systematic Euclidean self-dual generators of length
+8 and all 18,720,000 of length 10 over `GF(5)`, together with all 1,680 and
+30,240 oriented coordinate pairings, respectively. Every code has an `r=1`
+pairing. Thus a permutation-invariant rank-two example cannot occur at either
+length; the displayed rank-two example in the manuscript remains
+pairing-dependent unless a larger certified obstruction is found.
+
+The independent SAT replay
+`python3 Formalization/Verification/Examples/rank_one_pairing_sat.py`
+uses the project-local CaDiCaL 3.0.0 binary. Its 316-variable, 2,437-clause
+instance selects an oriented perfect matching and a nonzero vector in the
+boxed intersection. For the current Example 3.1 code it returns the
+zero-based pairing `(0,2),(1,6),(4,3),(7,5)` with defect rank 3 and hence
+`r=1`, independently confirming that the example is not a
+permutation-invariant obstruction.
 
 The separate `gf5_bklc_seed_audit.m` replay checks Magma's general linear-code
 BKLC entries at `[20,10]`, `[22,11]`, and `[24,12]` over `GF(5)`. Their

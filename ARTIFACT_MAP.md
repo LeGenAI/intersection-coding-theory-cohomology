@@ -16,7 +16,7 @@ Theorem, Proposition and Corollary share the theorem counter.
 | Theorem 3.6, restriction and specialization | Same-D restriction, terminal row space, rank-one bridge | RankBoxedStructure (3) |
 | Lemma 3.1 | Arbitrary repeatable extension with fixed D | `paper_rankBoxed_buildingUp_minimal_exact`; RankBoxedExtension (2) |
 | Lemmas 3.2--3.3 | Fixed-parent Kim--Lee iff, its forced-coefficient specialization, direct sum, converse | RepeatedStep (4), RepeatedBox (7) |
-| Example 3.1 | Dense GF(5) code, pairing-dependent ranks one and two, and two extensions with new diagonal blocks $01$ | `Verification/Examples/RankTwoGF5.lean`, four separate kernel certificates |
+| Example 3.1 | Dense GF(5) code, pairing-dependent ranks one and two, and two extensions with new diagonal blocks $01$ | `Verification/Examples/RankTwoGF5.lean`, four separate kernel certificates; `rank_one_obstruction_audit.cpp` proves that no length-8 or length-10 GF(5) code can be a permutation-invariant rank-two obstruction |
 | Theorem 3.7 | Chinburg--Zhang arithmetic realization | Cited published Theorem 1.5; not formalized here |
 | Lemma 3.4 | Two-coordinate reduction and exact reconstruction | BinaryTwoCoordinateReduction (3) |
 | Theorem 3.8 | Universal binary rank-one representation | `binarySelfDualCode_has_rankOneNormalForm`; BinaryRankOneNormalization (1) |
@@ -24,8 +24,7 @@ Theorem, Proposition and Corollary share the theorem counter.
 | Corollary 3.10 | Explicit normalized rank-one box | SplitBoxed (12), SplitBoxedOrthogonality (12) |
 | Theorem 3.11 | Conditional boxed coefficient theorem | `paper_conditional_boxed_normalization_exact`; ConditionalBoxed (1) |
 | Explicit change of form in Section 2 | Different named forms, not a Euclidean self-isometry | SplitFormTransport (3) |
-| Table 1 | Seven finite-field catalogue entries, five binary Golay-lineage levels, the largest repeated GF(5) endpoint, two repeated GF(13) levels, and public benchmark data with matching smallest cited $A_d$ values in bold and their minimum status qualified in the text | `application_catalog.json`, the three lineage certificates, linked `certificates/*.json`, `build_application_catalog.py`, the public online classifications, and the numerical checkers |
-| Table 2 | Repeated boxed presentations: binary $[24,12,8]$, GF(5) $[24,12,9]$, and the best-known-distance GF(13) sequence $[18,9,8]\leftrightarrow[20,10,10]$, together with their certified parents | `check_golay_lineage.py`, `check_gf5_repeated_top.py`, `check_gf13_repeated_lineage.py`, and their linked certificates |
+| Table 1 | Seven finite-field catalogue entries, five binary Golay levels, both GF(5) repeated levels, both GF(13) repeated levels, public benchmarks, and every exact upward relation | `application_catalog.json`, the three repeated certificates, linked `certificates/*.json`, `build_application_catalog.py`, the public online classifications, and the numerical checkers |
 | Proposition 4.1 | Universal rank-one realization of a self-dual MDS $[14,7,8]$ code over $\mathrm{GF}(13)$ | `Examples/LargeGF13.lean` (Gram, normalization, readout, parent, unique correction and reconstruction certificates); `large_applications.json` and `check_large_applications.py` (all $\binom{14}{7}$ minors and exhaustive projective enumeration) |
 | GF(5) search baseline | Magma BKLC distances and self-duality status at half dimension for lengths 20, 22, and 24 | `Examples/gf5_bklc_seed_audit.m` and its receipt |
 
@@ -58,9 +57,9 @@ arithmetic realization are outside this artifact's proved claims.
 `applications_results.json` records every weight multiplicity, rank and Gram
 check.  `build_application_catalog.py` packages these data into stable
 per-code certificates and generates the historical comparison in Table 1.
-The three repeated-box checkers independently generate Table 2 and certify
-the largest binary, GF(5), and GF(13) presentations and their parent
-reductions.  The separate
+The three repeated-box checkers generate the repeated rows incorporated into
+Table 1 and certify the largest binary, GF(5), and GF(13) presentations and
+their parent reductions. The separate
 large-example pipeline starts from the known
 self-dual MDS $[14,7,8]$ code, checks all $\binom{14}{7}=3432$ maximal minors,
 normalizes it to the manuscript's rank-one universal form, and exhaustively

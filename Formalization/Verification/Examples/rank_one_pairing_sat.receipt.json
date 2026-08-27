@@ -1,0 +1,17 @@
+{
+  "solver": "/Users/baegjaehyeon/CodingTheoryLib/references/oqp35_mols10/MOLS_EP/solvers/cadical/build/cadical",
+  "solver_version": "3.0.0",
+  "field_order": 5,
+  "square_root_minus_one": 2,
+  "ordered_pairing_zero_based": [
+    [0, 2],
+    [1, 6],
+    [4, 3],
+    [7, 5]
+  ],
+  "defect_rank": 3,
+  "r": 1,
+  "blocked_higher_rank_pairings": 0,
+  "cnf_variables": 316,
+  "cnf_clauses": 2437
+}

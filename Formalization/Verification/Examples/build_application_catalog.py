@@ -211,7 +211,7 @@ def build_outputs():
         ours = f"$[{n},{k},{d}];\\,{a_d}$"
         row = (
             f"{evidence} & {entry['field_order']} & {ours} & {prior} & "
-            f"{benchmark['reference']} \\\\"
+            f"{benchmark['reference']}; {entry['construction']} \\\\"
         )
         rows.append(row)
         rows_by_field[entry["field_order"]].append(row)
