@@ -219,7 +219,7 @@ Lemmas~\ref{lem:repeated-kim-lee}--\ref{lem:kim-lee-repeated}
 identify their fixed-parent correspondence with Kim--Lee steps, including
 the direct-sum exception.
 
-\item As concrete applications, we exhibit the largest certified repeated
+\item As concrete applications, we exhibit the largest repeated
 boxed presentations over \(\GF{2}\), \(\GF{5}\), and \(\GF{13}\), ending at
 self-dual codes with parameters \([24,12,8]\), \([24,12,9]\), and
 \([22,11,10]\), respectively.  For a known pure double-circulant
@@ -272,7 +272,7 @@ The paper is organized as follows. Section~\ref{sec:background} fixes notation
 and the split quadratic background. Section~\ref{sec:building-up} collects the
 building-up tools and presents the universal rank-\(r\) boxed form, its binary
 rank-one refinement, and the normalized rank-one forms over odd fields.
-Section~\ref{sec:applications} gives the certified applications over
+Section~\ref{sec:applications} gives the computational applications over
 \(\GF{2}\), \(\GF{5}\), and \(\GF{13}\).
 Section~\ref{sec:conclusion} closes with the comparison viewpoint and the
 formalization perspective.
@@ -2226,13 +2226,13 @@ self-duality implies precisely these three coefficient relations.
 
 The applications begin with an explicit realization of an optimal code in
 the universal form and the correction search exposed by its exact parent.
-The verified catalogue then compares the resulting codes with published
+The comparison table then places the resulting codes against published
 benchmarks, and the final subsection displays the largest repeated
 parent--child realizations.
 
 \input{sections/application_universal_gf13.tex}
 
-\subsection{Certified application catalogue}
+\subsection{Comparison with known parameters}
 
 For earlier results on self-dual codes over these fields, see
 \cite{LeonPlessSloane,BetsumiyaEtAl,KimChoi2021}.  For a displayed generator
@@ -2262,7 +2262,7 @@ Code & \(p\) & Our \([n,k,d];A_d\) & Published \((d_{\rm best};A_d)\) & Referenc
 \GFThirteenRepeatedCatalogueRows
 \bottomrule
 \end{tabular}
-\caption{Certified self-dual codes and published distance benchmarks.}
+\caption{Parameters of the constructed codes and published distance benchmarks.}
 \label{tab:application-distances}
 \end{table}
 
@@ -2276,15 +2276,15 @@ Lean proofs.
 
 \subsection{Largest repeated boxed presentations}
 
-The same two-coordinate border displays the largest certified code over each
+The same two-coordinate border displays the largest code considered over each
 of the three fields.  If \(G\) has rows \(g_1,\ldots,g_m\), let
 \begin{equation}
 \mathcal B_c(G,x)=
 \begin{pmatrix}
-1&0&x\\
--y_1&-cy_1&g_1\\
+0&1&x\\
+-cy_1&-y_1&g_1\\
 \vdots&\vdots&\vdots\\
--y_m&-cy_m&g_m
+-cy_m&-y_m&g_m
 \end{pmatrix},
 \qquad y_i=x\mathbin{\cdot}g_i,\qquad x\mathbin{\cdot}x=-1.
 \label{eq:largest-repeated-box}
@@ -2305,7 +2305,7 @@ are
 \end{aligned}
 \label{eq:three-largest-repeated-boxes}
 \end{equation}
-Each equality is an exact generator identity after the certified row
+Each equality is an exact generator identity after the recorded row
 normalization and coordinate permutation, not only an abstract equivalence of
 codes.
 
@@ -2346,16 +2346,20 @@ adjoined coordinate pair.  The outer thick rules mark the building-up border,
 whereas the inner thick rules separate the \(P\)-part from the \(D\)-part of
 the universal parent.
 For the binary endpoint the displayed parent has
-\(\BinaryLargestParentParameters\).  A permutation within each binary pivot
-pair orients every diagonal pair as \((0,1)\); equivalently, \(P_{ii}=0\) for
-all \(i\), exactly as in the normal form of Theorem~\ref{thm:binary-cz-kim}.
+\(\BinaryLargestParentParameters\).  Adding the all-ones master row when
+necessary and then permuting the two coordinates in the corresponding pivot
+pair puts every diagonal block in the form (01) and every terminal pivot
+block in the form (10).  The last row is (11) in every block.  Hence the
+parent is displayed literally in the form of
+Theorem~\ref{thm:binary-universal-rank-one}, not merely as a general
+rank-one universal box.
 \begin{figure}[htbp]
 \centering
 \resizebox{\textwidth}{!}{$
 \widetilde G_{24}^{(2)}=\BinaryLargestRepeatedMatrix .
 $}
 \caption{Binary repeated realization \(C_{22}^{(2)}\longleftrightarrow
-\mathcal G_{24}\) with universal parent.}
+\mathcal G_{24}\) in the form of Theorem~\ref{thm:binary-universal-rank-one}.}
 \label{fig:binary-largest-repeated}
 \end{figure}
 \FloatBarrier
@@ -2370,7 +2374,7 @@ also inverted exactly by the corresponding Kim step with \(x_{16}\) or
 \(x_{18}\), so all four adjacent pairs satisfy the same reconstruction
 identity.
 The parameters and the number \(A_d\) of minimum-weight words at each level
-are recorded in Table~\ref{tab:repeated-lineages}.  In particular, the
+are recorded in Table~\ref{tab:successive-constructions}.  In particular, the
 distance rises at both upward steps from the length-20 center.  All five
 distances attain the
 classical upper bounds for binary self-dual codes~\cite{HuffmanPless}.
@@ -2378,7 +2382,7 @@ classical upper bounds for binary self-dual codes~\cite{HuffmanPless}.
 Over \(\GF{5}\), let \(C_{24}^{(5)}\) be the self-dual
 \([24,12,9]\) code of Georgiou and Koukouvinos~\cite{GeorgiouKoukouvinos}.
 Its exact reduction at the ordered coordinate pair \((1,14)\) gives the
-self-dual \([22,11,8]\) parent \(C_{22}^{(5)}\).  For the certified parent
+self-dual \([22,11,8]\) parent \(C_{22}^{(5)}\).  For the displayed parent
 generator \(G_{22}^{(5)}\),
 \[
 x_{22}^{(5)}=\GFFiveTwentyTwoCorrection
@@ -2398,8 +2402,8 @@ the off-diagonal blocks are \(b_{ij}(1,2)\), and the final block is \((1,2)\).
 \resizebox{\textwidth}{!}{$
 \widetilde G_{24}^{(5)}=\GFFiveLargestRepeatedMatrix .
 $}
-\caption{Repeated realization over \(\GF{5}\):
-\(C_{22}^{(5)}\longleftrightarrow C_{24}^{(5)}\), with universal parent.}
+\caption{Repeated realization over \(\GF{5}\), with the parent in the form of
+Corollary~\ref{thm:split-boxed-form}.}
 \label{fig:gf5-largest-repeated}
 \end{figure}
 \FloatBarrier
@@ -2420,7 +2424,7 @@ self-dual \([18,9,7]\) code \(C_{18}^{(13)}\).  The coordinate indices are
 one-based, and \GFThirteenRepeatedCertificate\ links to the matrices and their
 verification record.
 
-For the certified parent generators \(G_{18}^{(13)}\) and
+For the displayed parent generators \(G_{18}^{(13)}\) and
 \(G_{20}^{(13)}\), the correction vectors are
 \[
 \begin{aligned}
@@ -2448,13 +2452,12 @@ off-diagonal blocks \(b_{ij}(1,5)\), and final block \((1,5)\):
 \resizebox{\textwidth}{!}{$
 \widetilde G_{22}^{(13)}=\GFThirteenLargestRepeatedMatrix .
 $}
-\caption{Repeated realization over \(\GF{13}\):
-\(C_{20}^{(13)}\longleftrightarrow C_{22}^{(13)}\), with universal parent.}
+\caption{Repeated realization over \(\GF{13}\), with the parent in the form of
+Corollary~\ref{thm:split-boxed-form}.}
 \label{fig:gf13-largest-repeated}
 \end{figure}
 \FloatBarrier
-Consequently these are not separately selected examples but one
-bidirectional lineage
+Consequently the three codes form the successive bidirectional construction
 \[
 C_{18}^{(13)}\ \longleftrightarrow\ C_{20}^{(13)}
 \ \longleftrightarrow\ C_{22}^{(13)}.
@@ -2464,7 +2467,7 @@ corresponding child row spaces, and the complete weight distributions at
 lengths 18 and 20.  The Magma audit examines all \(22\cdot21=462\) ordered
 pairs at the first reduction and all \(20\cdot19=380\) at the second.
 
-For every upward edge in Table~\ref{tab:repeated-lineages}, the corresponding
+For every upward edge in Table~\ref{tab:successive-constructions}, the corresponding
 checker verifies rank, self-orthogonality, literal reconstruction of the
 displayed repeated matrix, equality with the child row space, and the recorded
 weight distribution together with its MacWilliams identity.
@@ -2477,24 +2480,24 @@ weight distribution together with its MacWilliams identity.
 \toprule
 Level & Code & Parameters & \(A_d\) & Exact upward relation\\
 \midrule
-\multicolumn{5}{c}{Binary lineage}\\
+\multicolumn{5}{c}{Binary sequence}\\
 \GolayLineageRows
 \addlinespace
-\multicolumn{5}{c}{\(\GF{5}\) lineage}\\
+\multicolumn{5}{c}{\(\GF{5}\) extension}\\
 \GFFiveRepeatedLineageRows
 \addlinespace
-\multicolumn{5}{c}{\(\GF{13}\) lineage}\\
+\multicolumn{5}{c}{\(\GF{13}\) sequence}\\
 \GFThirteenRepeatedLineageRows
 \bottomrule
 \end{tabular}
-\caption{Repeated boxed lineages over \(\GF{2}\), \(\GF{5}\), and \(\GF{13}\).}
-\label{tab:repeated-lineages}
+\caption{Successive two-coordinate constructions over \(\GF{2}\), \(\GF{5}\), and \(\GF{13}\).}
+\label{tab:successive-constructions}
 \end{table}
 
 \section{Conclusion}
 \label{sec:conclusion}
 
-We have studied self-dual codes over finite fields $\F_q$ with $q\equiv 1 \pmod 4$ from three complementary viewpoints: the classical building-up construction, the hyperbolic geometry forced by the split condition $-1\in (K^\times)^2$, and a Lean~4 formalization of the resulting algebraic statements.  Section~\ref{sec:applications} exhibits the largest certified repeated boxed presentations over all three fields considered here: the binary Golay endpoint \([24,12,8]\), a self-dual \([24,12,9]\) code over \(\GF{5}\), and a self-dual \([22,11,10]\) code over \(\GF{13}\).  Each is displayed through the same two-coordinate border and an exact certified parent.  The universal form also gives an explicit rank-one realization and exact two-coordinate parent of a self-dual MDS \([14,7,8]\) code over \(\GF{13}\).  The algebraic results are formalized in Lean~4.
+We have studied self-dual codes over finite fields $\F_q$ with $q\equiv 1 \pmod 4$ from three complementary viewpoints: the classical building-up construction, the hyperbolic geometry forced by the split condition $-1\in (K^\times)^2$, and a Lean~4 formalization of the resulting algebraic statements.  Section~\ref{sec:applications} exhibits the largest repeated boxed presentations over all three fields considered here: the binary Golay endpoint \([24,12,8]\), a self-dual \([24,12,9]\) code over \(\GF{5}\), and a self-dual \([22,11,10]\) code over \(\GF{13}\).  Each is displayed through the same two-coordinate border and an explicit parent.  The universal form also gives an explicit rank-one realization and exact two-coordinate parent of a self-dual MDS \([14,7,8]\) code over \(\GF{13}\).  The algebraic results are formalized in Lean~4.
 
 In the binary case, the universal rank-one normalization proves intrinsically that every Euclidean self-dual code has the literal Chinburg--Zhang boxed representative under a scalar-coordinate permutation.  Theorem~\ref{thm:binary-cz-kim} then transports the Chinburg--Zhang cohomological pairing through a specified orthonormal-basis isometry and compares the resulting Euclidean boxed matrix with Kim's building-up extension.  The top-down deletion is a coordinate reduction through a non-alternating first coordinate plane, not deletion of a hyperbolic pair.
 Over \(\F_q\) with \(q\equiv 1\pmod 4\), the decomposition obtained from

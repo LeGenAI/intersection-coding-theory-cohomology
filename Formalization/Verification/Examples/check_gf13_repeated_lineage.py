@@ -157,7 +157,7 @@ def build_outputs():
     display_x = permute_vector(
         top_step["x"], display_parent["coordinate_order_zero_based"])
     display_child = kim_build(display_parent["matrix"], display_x, c, p)
-    child_order = [0, 1] + [2 + j for j in
+    child_order = [1, 0] + [2 + j for j in
                             display_parent["coordinate_order_zero_based"]]
     require(row_space_equal(
         display_child,
@@ -167,6 +167,7 @@ def build_outputs():
     display = {
         "parent": display_parent, "correction": display_x,
         "child_matrix": display_child,
+        "new_pair_oriented_as_01": True,
         "child_row_space_verified": True,
     }
 

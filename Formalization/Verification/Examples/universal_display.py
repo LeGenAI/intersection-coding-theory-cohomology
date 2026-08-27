@@ -96,6 +96,30 @@ def universal_normalize(matrix, pairs, c, p, zero_binary_pivot_diagonal=False,
     require(all(all(value == 0 for value in row)
                 for row in reduced_ordered[k:]), "zero master defects")
 
+    if zero_binary_pivot_diagonal:
+        # In the binary rank-one box the master row is the all-ones word,
+        # every pivot diagonal is 01, and every pivot terminal block is 10.
+        # Adding the master row changes a terminal 01 to 10; the same
+        # operation changes the diagonal 01 to 10, which is restored by a
+        # swap inside that pivot coordinate pair.  All other blocks in that
+        # pair are 00 or 11, so the swap leaves them unchanged.
+        require(r == 1, "Theorem 3.8 display has rank one")
+        require(all(value == 1 for value in normalized[k]),
+                "Theorem 3.8 all-ones master row")
+        for i in range(k):
+            terminal = normalized[i][2 * k:2 * k + 2]
+            require(terminal in ([0, 1], [1, 0]),
+                    "binary pivot terminal block is 01 or 10")
+            if terminal == [0, 1]:
+                normalized[i] = [(a + b) % 2
+                                 for a, b in zip(normalized[i], normalized[k])]
+                left, right = 2 * i, 2 * i + 1
+                for row in normalized:
+                    row[left], row[right] = row[right], row[left]
+                ordered_pairs[i] = (ordered_pairs[i][1], ordered_pairs[i][0])
+        coordinate_order = [coordinate for pair in ordered_pairs
+                            for coordinate in pair]
+
     if rank_one_split_normalize:
         require(r == 1, "Corollary 3.10 normalization requires rank one")
         core = normalized[k][2 * k] % p
@@ -125,6 +149,12 @@ def universal_normalize(matrix, pairs, c, p, zero_binary_pivot_diagonal=False,
     if zero_binary_pivot_diagonal:
         require(all(p_matrix[i][i] == 0 for i in range(k)),
                 "Theorem 3.8 zero pivot diagonal")
+        require(d_matrix == [[1]], "Theorem 3.8 unit terminal core")
+        require(all(normalized[i][2 * k:2 * k + 2] == [1, 0]
+                    for i in range(k)),
+                "Theorem 3.8 pivot terminal blocks are 10")
+        require(all(value == 1 for value in normalized[k]),
+                "Theorem 3.8 master row is 11 in every block")
     if rank_one_split_normalize:
         require(d_matrix == [[1]], "Corollary 3.10 unit terminal core")
         require(all(p_matrix[i][i] == 0 for i in range(k)),
@@ -171,16 +201,49 @@ def universal_normalize(matrix, pairs, c, p, zero_binary_pivot_diagonal=False,
 
 def kim_build(parent, correction, c, p):
     coefficients = [dot(correction, row, p) for row in parent]
-    return ([[1, 0] + correction] +
-            [[(-value) % p, (-c * value) % p] + row
+    # Orient the new diagonal block as 01 by swapping the two coordinates
+    # in the usual 10 convention.
+    return ([[0, 1] + correction] +
+            [[(-c * value) % p, (-value) % p] + row
              for value, row in zip(coefficients, parent)])
+
+
+def binary_rank_one_child_normalize(matrix, k):
+    """Put a binary Kim child itself in the literal Theorem 3.8 box."""
+    normalized = [row[:] for row in matrix]
+    require(len(normalized) == k + 2, "binary child row count")
+    require(len(normalized[0]) == 2 * (k + 2), "binary child length")
+    top = normalized[0]
+    for j in range(k):
+        left, right = 2 + 2 * j, 2 + 2 * j + 1
+        if top[left] != top[right]:
+            top = [(a + b) % 2 for a, b in zip(top, normalized[j + 1])]
+    require(top[-2:] in ([0, 1], [1, 0]),
+            "binary child terminal is 01 or 10")
+    if top[-2:] == [0, 1]:
+        top = [(a + b) % 2 for a, b in zip(top, normalized[-1])]
+    normalized[0] = top
+    swapped_new_pair = False
+    if normalized[0][:2] == [1, 0]:
+        for row in normalized:
+            row[0], row[1] = row[1], row[0]
+        swapped_new_pair = True
+    require(normalized[0][:2] == [0, 1],
+            "Theorem 3.8 new diagonal block is 01")
+    require(all(normalized[0][2 + 2 * j] == normalized[0][3 + 2 * j]
+                for j in range(k)),
+            "Theorem 3.8 new off-diagonal blocks are b(11)")
+    require(normalized[0][-2:] == [1, 0],
+            "Theorem 3.8 new pivot terminal block is 10")
+    return normalized, swapped_new_pair
 
 
 def permute_vector(vector, coordinate_order):
     return [vector[j] for j in coordinate_order]
 
 
-def matrix_tex(matrix, k, r, split_corollary=False):
+def matrix_tex(matrix, k, r, split_corollary=False,
+               binary_rank_one=False):
     """Complete child matrix with visible new, P, and D regions."""
     require(len(matrix) == 1 + k + r, "row partition")
     require(len(matrix[0]) == 2 * (1 + k + r), "paired child shape")
@@ -189,14 +252,19 @@ def matrix_tex(matrix, k, r, split_corollary=False):
     column_spec += "|".join(["cc"] * k)
     if r:
         column_spec += "!{\\vrule width 1.2pt}" + "|".join(["cc"] * r)
-    require(not split_corollary or r == 1,
-            "Corollary 3.10 display has a rank-one terminal block")
-    pivot_header = (r"P_{ii}=0:\ 01;\quad P_{ij}=b_{ij}:\ b_{ij}(1,c)"
-                    if split_corollary else
-                    r"P_{ij}(1,c)+\delta_{ij}(0,1)")
-    terminal_header = (r"D=(1):\ \ell_i;\ (1,c)"
-                       if split_corollary else
-                       r"D_{st}(1,c)\text{ terminal pairs}")
+    require(not (split_corollary or binary_rank_one) or r == 1,
+            "rank-one display has a single terminal block")
+    require(not (split_corollary and binary_rank_one),
+            "choose one rank-one display convention")
+    if binary_rank_one:
+        pivot_header = r"P_{ii}=0:\ 01;\quad P_{ij}=b_{ij}:\ b_{ij}(11)"
+        terminal_header = r"D=(1):\ 10;\ 11"
+    elif split_corollary:
+        pivot_header = r"P_{ii}=0:\ 01;\quad P_{ij}=b_{ij}:\ b_{ij}(1,c)"
+        terminal_header = r"D=(1):\ \ell_i;\ (1,c)"
+    else:
+        pivot_header = r"P_{ij}(1,c)+\delta_{ij}(0,1)"
+        terminal_header = r"D_{st}(1,c)\text{ terminal pairs}"
     headers = [r"\scriptstyle\text{rows}",
                r"\multicolumn{2}{c!{\vrule width 1.2pt}}{\scriptstyle\text{new pair}}",
                (f"\\multicolumn{{{2 * k}}}{{c!{{\\vrule width 1.2pt}}}}"
@@ -207,14 +275,24 @@ def matrix_tex(matrix, k, r, split_corollary=False):
     lines = [" & ".join(headers) + r" \\ \noalign{\hrule height 0.7pt}"]
     for index, row in enumerate(matrix):
         if index == 0:
-            label, row_color = r"\scriptstyle\text{new}", "blue!65!black"
+            label = (r"\scriptstyle b_{0j},10" if binary_rank_one
+                     else r"\scriptstyle 01\mid x")
+            row_color = "blue!65!black"
         elif index <= k:
-            label = (r"\scriptstyle b_{ij},\ell_i" if split_corollary
-                     else r"\scriptstyle P,H,Q")
+            if binary_rank_one:
+                label = r"\scriptstyle b_{ij},10"
+            elif split_corollary:
+                label = r"\scriptstyle b_{ij},\ell_i"
+            else:
+                label = r"\scriptstyle P,H,Q"
             row_color = "teal!60!black"
         else:
-            label = (r"\scriptstyle a_i,(1,c)" if split_corollary
-                     else r"\scriptstyle -DQ^{T},D")
+            if binary_rank_one:
+                label = r"\scriptstyle 11,11"
+            elif split_corollary:
+                label = r"\scriptstyle a_i,(1,c)"
+            else:
+                label = r"\scriptstyle -DQ^{T},D"
             row_color = "violet!75!black"
         entries = []
         for column, value in enumerate(row):
