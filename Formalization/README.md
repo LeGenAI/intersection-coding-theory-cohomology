@@ -27,9 +27,8 @@ axiom audits and independent Challenge/Solution pairs.
 
 Every completed family has a separate statement-only Comparator Challenge, completed
 Solution, JSON configuration, and transitive axiom-audit module.
-All 124 goals in seventeen suites are covered by the current trust audit;
-the dated Comparator record distinguishes the latest full Linux replay from
-the subsequently added forced-coefficient specialization.
+All 124 goals in seventeen suites passed a fresh complete Linux Comparator
+replay on 2026-08-27, including default-kernel and transitive axiom checks.
 This final run supersedes the earlier incremental coverage records.
 The dated current verification record is in
 [Verification/Comparator/RESULTS.md](Verification/Comparator/RESULTS.md).

@@ -1,0 +1,697 @@
+⚠ [8198/8257] Built Formalization.Archive.SubmittedBaseline (9.1s)
+warning: Formalization/Archive/SubmittedBaseline.lean:141:2: try 'simp' instead of 'simpa'
+
+Note: This linter can be disabled with `set_option linter.unnecessarySimpa false`
+warning: Formalization/Archive/SubmittedBaseline.lean:137:8: automatically included section variable(s) unused in theorem `prepend2_apply_zero`:
+  [Field K]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [Field K] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: Formalization/Archive/SubmittedBaseline.lean:153:2: try 'simp' instead of 'simpa'
+
+Note: This linter can be disabled with `set_option linter.unnecessarySimpa false`
+warning: Formalization/Archive/SubmittedBaseline.lean:144:8: automatically included section variable(s) unused in theorem `prepend2_apply_one`:
+  [Field K]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [Field K] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: Formalization/Archive/SubmittedBaseline.lean:269:4: try 'simp' instead of 'simpa'
+
+Note: This linter can be disabled with `set_option linter.unnecessarySimpa false`
+warning: Formalization/Archive/SubmittedBaseline.lean:277:4: try 'simp' instead of 'simpa'
+
+Note: This linter can be disabled with `set_option linter.unnecessarySimpa false`
+warning: Formalization/Archive/SubmittedBaseline.lean:281:4: try 'simp' instead of 'simpa'
+
+Note: This linter can be disabled with `set_option linter.unnecessarySimpa false`
+warning: Formalization/Archive/SubmittedBaseline.lean:334:30: This simp argument is unused:
+  h'
+
+Hint: Omit it from the simp argument list.
+  simp [Pi.single_apply, h, h̵'̵,̵ ̵eq_comm]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Formalization/Archive/SubmittedBaseline.lean:353:10: This simp argument is unused:
+  GramZero
+
+Hint: Omit it from the simp argument list.
+  simp [̵G̵r̵a̵m̵Z̵e̵r̵o̵,̵ ̵r̵o̵w̵M̵a̵t̵r̵i̵x̵_̵m̵u̵l̵_̵t̵r̵a̵n̵s̵p̵o̵s̵e̵_̵a̵p̵p̵l̵y̵,̵[̲r̲o̲w̲M̲a̲t̲r̲i̲x̲_̲m̲u̲l̲_̲t̲r̲a̲n̲s̲p̲o̲s̲e̲_̲a̲p̲p̲l̲y̲,̲ hR i j]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Formalization/Archive/SubmittedBaseline.lean:480:10: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+warning: Formalization/Archive/SubmittedBaseline.lean:518:4: Try `simp at hi` instead of `simpa using hi`
+
+Note: This linter can be disabled with `set_option linter.unnecessarySimpa false`
+warning: Formalization/Archive/SubmittedBaseline.lean:592:0: automatically included section variable(s) unused in theorem `append_leftHalf_rightHalf`:
+  [Field K]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [Field K] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: Formalization/Archive/SubmittedBaseline.lean:646:8: This simp argument is unused:
+  mul_assoc
+
+Hint: Omit it from the simp argument list.
+  simp [Pi.smul_apply, smul_eq_mul, m̵u̵l̵_̵a̵s̵s̵o̵c̵,̵ ̵mul_left_comm, mul_comm]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Formalization/Archive/SubmittedBaseline.lean:646:34: This simp argument is unused:
+  mul_comm
+
+Hint: Omit it from the simp argument list.
+  simp [Pi.smul_apply, smul_eq_mul, mul_assoc, m̵u̵l̵_̵l̵e̵f̵t̵_̵c̵o̵m̵m̵,̵ ̵m̵u̵l̵_̵c̵o̵m̵m̵]̵m̲u̲l̲_̲l̲e̲f̲t̲_̲c̲o̲m̲m̲]̲
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Formalization/Archive/SubmittedBaseline.lean:665:6: try 'simp' instead of 'simpa'
+
+Note: This linter can be disabled with `set_option linter.unnecessarySimpa false`
+warning: Formalization/Archive/SubmittedBaseline.lean:670:14: This simp argument is unused:
+  Pi.single_apply
+
+Hint: Omit it from the simp argument list.
+  simp [̵P̵i̵.̵s̵i̵n̵g̵l̵e̵_̵a̵p̵p̵l̵y̵,̵ ̵s̵m̵u̵l̵_̵e̵q̵_̵m̵u̵l̵]̵[̲s̲m̲u̲l̲_̲e̲q̲_̲m̲u̲l̲]̲
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Formalization/Archive/SubmittedBaseline.lean:671:14: This simp argument is unused:
+  Pi.single_apply
+
+Hint: Omit it from the simp argument list.
+  simp [P̵i̵.̵s̵i̵n̵g̵l̵e̵_̵a̵p̵p̵l̵y̵,̵ ̵h, smul_eq_mul]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Formalization/Archive/SubmittedBaseline.lean:679:35: This simp argument is unused:
+  mul_left_comm
+
+Hint: Omit it from the simp argument list.
+  simp [Pi.single_apply, mul_comm, mul_l̵e̵f̵t̵_̵c̵o̵m̵m̵,̵ ̵m̵u̵l̵_̵assoc]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Formalization/Archive/SubmittedBaseline.lean:679:50: This simp argument is unused:
+  mul_assoc
+
+Hint: Omit it from the simp argument list.
+  simp [Pi.single_apply, mul_comm, mul_left_comm,̵ ̵m̵u̵l̵_̵a̵s̵s̵o̵c̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Formalization/Archive/SubmittedBaseline.lean:684:36: This simp argument is unused:
+  dot_pi_single_right
+
+Hint: Omit it from the simp argument list.
+  simp [seedRow, dot_append_append, d̵o̵t̵_̵p̵i̵_̵s̵i̵n̵g̵l̵e̵_̵r̵i̵g̵h̵t̵,̵ ̵dot_pi_single_right_scalar]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Formalization/Archive/SubmittedBaseline.lean:690:63: This simp argument is unused:
+  mul_left_comm
+
+Hint: Omit it from the simp argument list.
+  simp [Pi.smul_apply, smul_eq_mul, Pi.single_apply, mul_comm, mul_l̵e̵f̵t̵_̵c̵o̵m̵m̵,̵ ̵m̵u̵l̵_̵assoc]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Formalization/Archive/SubmittedBaseline.lean:690:78: This simp argument is unused:
+  mul_assoc
+
+Hint: Omit it from the simp argument list.
+  simp [Pi.smul_apply, smul_eq_mul, Pi.single_apply, mul_comm, mul_left_comm,̵ ̵m̵u̵l̵_̵a̵s̵s̵o̵c̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Formalization/Archive/SubmittedBaseline.lean:730:34: try 'simp' instead of 'simpa'
+
+Note: This linter can be disabled with `set_option linter.unnecessarySimpa false`
+warning: Formalization/Archive/SubmittedBaseline.lean:926:20: This simp argument is unused:
+  head2
+
+Hint: Omit it from the simp argument list.
+  simp [prepend2,̵ ̵h̵e̵a̵d̵2̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Formalization/Archive/SubmittedBaseline.lean:924:43: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+warning: Formalization/Archive/SubmittedBaseline.lean:937:24: This simp argument is unused:
+  head2
+
+Hint: Omit it from the simp argument list.
+  simp [ri, prepend2,̵ ̵h̵e̵a̵d̵2̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Formalization/Archive/SubmittedBaseline.lean:935:51: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+warning: Formalization/Archive/SubmittedBaseline.lean:935:51: 'ring' tactic does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+warning: Formalization/Archive/SubmittedBaseline.lean:1003:38: This simp argument is unused:
+  mul_assoc
+
+Hint: Omit it from the simp argument list.
+  simp [ri, prepend2, head2, h, m̵u̵l̵_̵a̵s̵s̵o̵c̵,̵ ̵mul_left_comm, mul_comm]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Formalization/Archive/SubmittedBaseline.lean:1003:49: This simp argument is unused:
+  mul_left_comm
+
+Hint: Omit it from the simp argument list.
+  simp [ri, prepend2, head2, h, mul_assoc, m̵u̵l̵_̵l̵e̵f̵t̵_̵c̵o̵m̵m̵,̵ ̵mul_comm]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Formalization/Archive/SubmittedBaseline.lean:1003:64: This simp argument is unused:
+  mul_comm
+
+Hint: Omit it from the simp argument list.
+  simp [ri, prepend2, head2, h, mul_assoc, mul_left_comm,̵ ̵m̵u̵l̵_̵c̵o̵m̵m̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Formalization/Archive/SubmittedBaseline.lean:1005:26: This simp argument is unused:
+  head2
+
+Hint: Omit it from the simp argument list.
+  simp [ri, prepend2,̵ ̵h̵e̵a̵d̵2̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Formalization/Archive/SubmittedBaseline.lean:1029:0: automatically included section variable(s) unused in theorem `splitTail_prepend2`:
+  [Field K]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [Field K] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: Formalization/Archive/SubmittedBaseline.lean:1088:20: This simp argument is unused:
+  head2
+
+Hint: Omit it from the simp argument list.
+  simp [prepend2, h̵e̵a̵d̵2̵,̵ ̵Pi.smul_apply, smul_eq_mul, ha, mul_assoc]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Formalization/Archive/SubmittedBaseline.lean:1088:59: This simp argument is unused:
+  mul_assoc
+
+Hint: Omit it from the simp argument list.
+  simp [prepend2, head2, Pi.smul_apply, smul_eq_mul, ha,̵ ̵m̵u̵l̵_̵a̵s̵s̵o̵c̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Formalization/Archive/SubmittedBaseline.lean:1118:51: This simp argument is unused:
+  mul_assoc
+
+Hint: Omit it from the simp argument list.
+  simp [prepend2, head2, div_eq_mul_inv, ha, mul_a̵s̵s̵o̵c̵,̵ ̵m̵u̵l_̵l̵eft_comm, mul_comm]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Formalization/Archive/SubmittedBaseline.lean:1118:62: This simp argument is unused:
+  mul_left_comm
+
+Hint: Omit it from the simp argument list.
+  simp [prepend2, head2, div_eq_mul_inv, ha, mul_assoc, m̵u̵l̵_̵l̵e̵f̵t̵_̵c̵o̵m̵m̵,̵ ̵mul_comm]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Formalization/Archive/SubmittedBaseline.lean:1118:77: This simp argument is unused:
+  mul_comm
+
+Hint: Omit it from the simp argument list.
+  simp [prepend2, head2, div_eq_mul_inv, ha, mul_assoc, mul_left_comm,̵ ̵m̵u̵l̵_̵c̵o̵m̵m̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Formalization/Archive/SubmittedBaseline.lean:1120:22: This simp argument is unused:
+  head2
+
+Hint: Omit it from the simp argument list.
+  simp [prepend2,̵ ̵h̵e̵a̵d̵2̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Formalization/Archive/SubmittedBaseline.lean:1176:24: This simp argument is unused:
+  head2
+
+Hint: Omit it from the simp argument list.
+  simp [ri, prepend2,̵ ̵h̵e̵a̵d̵2̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Formalization/Archive/SubmittedBaseline.lean:1246:29: This simp argument is unused:
+  head2
+
+Hint: Omit it from the simp argument list.
+  simp [j, ri, prepend2, he̵a̵d2̵,̵ ̵h̵d̵ot, hc', mul_assoc] at h1
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Formalization/Archive/SubmittedBaseline.lean:1246:42: This simp argument is unused:
+  hc'
+
+Hint: Omit it from the simp argument list.
+  simp [j, ri, prepend2, head2, hdot, h̵c̵'̵,̵ ̵mul_assoc] at h1
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Formalization/Archive/SubmittedBaseline.lean:1246:47: This simp argument is unused:
+  mul_assoc
+
+Hint: Omit it from the simp argument list.
+  simp [j, ri, prepend2, head2, hdot, hc',̵ ̵m̵u̵l̵_̵a̵s̵s̵o̵c̵] at h1
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Formalization/Archive/SubmittedBaseline.lean:1403:0: automatically included section variable(s) unused in theorem `prepend2_head_splitTail`:
+  [Field K]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [Field K] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: Formalization/Archive/SubmittedBaseline.lean:1660:8: This simp argument is unused:
+  mul_assoc
+
+Hint: Omit it from the simp argument list.
+  simp [pivotRows, pivotPureTailRows, prepend2, head2, Pi.smul_apply, smul_eq_mul,
+         ̵ ̵mul_a̵s̵s̵o̵c̵,̵ ̵m̵u̵l_̵l̵eft_comm, mul_comm]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Formalization/Archive/SubmittedBaseline.lean:1660:19: This simp argument is unused:
+  mul_left_comm
+
+Hint: Omit it from the simp argument list.
+  simp [pivotRows, pivotPureTailRows, prepend2, head2, Pi.smul_apply, smul_eq_mul, mul_assoc,
+  ̲  ̲ ̲ ̲ ̲ ̲m̵u̵l̵_̵l̵e̵f̵t̵_̵c̵o̵m̵m̵,̵ ̵mul_comm]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Formalization/Archive/SubmittedBaseline.lean:1662:70: This simp argument is unused:
+  head2
+
+Hint: Omit it from the simp argument list.
+  simp [pivotRows, pivotPureTailRows, pivotResidualTails, prepend2, h̵e̵a̵d̵2̵,̵
+  ̵ ̵ ̵ ̵ ̵ ̵ ̵Pi.smul_apply, smul_eq_mul]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Formalization/Archive/SubmittedBaseline.lean:1703:4: try 'simp' instead of 'simpa'
+
+Note: This linter can be disabled with `set_option linter.unnecessarySimpa false`
+warning: Formalization/Archive/SubmittedBaseline.lean:1813:10: This simp argument is unused:
+  IsSplitBuildFamily
+
+Hint: Omit it from the simp argument list.
+  simp [I̵s̵S̵p̵l̵i̵t̵B̵u̵i̵l̵d̵F̵a̵m̵i̵l̵y̵,̵ ̵buildRows]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Formalization/Archive/SubmittedBaseline.lean:2214:0: automatically included section variable(s) unused in theorem `tailVec_prepend2`:
+  [Field K]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [Field K] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: Formalization/Archive/SubmittedBaseline.lean:2321:0: automatically included section variable(s) unused in theorem `permuteVec_refl`:
+  [Field K]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [Field K] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: Formalization/Archive/SubmittedBaseline.lean:2367:6: try 'simp' instead of 'simpa'
+
+Note: This linter can be disabled with `set_option linter.unnecessarySimpa false`
+warning: Formalization/Archive/SubmittedBaseline.lean:2408:4: try 'simp' instead of 'simpa'
+
+Note: This linter can be disabled with `set_option linter.unnecessarySimpa false`
+warning: Formalization/Archive/SubmittedBaseline.lean:2482:28: This simp argument is unused:
+  Pi.smul_apply
+
+Hint: Omit it from the simp argument list.
+  simp [rowScaleFamily, P̵i̵.̵s̵m̵u̵l̵_̵a̵p̵p̵l̵y̵,̵ ̵smul_eq_mul, ha i, mul_assoc]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Formalization/Archive/SubmittedBaseline.lean:2482:43: This simp argument is unused:
+  smul_eq_mul
+
+Hint: Omit it from the simp argument list.
+  simp [rowScaleFamily, Pi.smul_apply, s̵m̵u̵l̵_̵e̵q̵_̵m̵u̵l̵,̵ ̵ha i, mul_assoc]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Formalization/Archive/SubmittedBaseline.lean:2482:62: This simp argument is unused:
+  mul_assoc
+
+Hint: Omit it from the simp argument list.
+  simp [rowScaleFamily, Pi.smul_apply, smul_eq_mul, ha i,̵ ̵m̵u̵l̵_̵a̵s̵s̵o̵c̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Formalization/Archive/SubmittedBaseline.lean:2515:5: unused variable `ha`
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Formalization/Archive/SubmittedBaseline.lean:2565:61: This simp argument is unused:
+  mul_assoc
+
+Hint: Omit it from the simp argument list.
+  simp [prepend2, head2, Pi.smul_apply, smul_eq_mul, ha, mul_a̵s̵s̵o̵c̵,̵ ̵m̵u̵l_̵l̵eft_comm, mul_comm]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Formalization/Archive/SubmittedBaseline.lean:2565:72: This simp argument is unused:
+  mul_left_comm
+
+Hint: Omit it from the simp argument list.
+  simp [prepend2, head2, Pi.smul_apply, smul_eq_mul, ha, mul_assoc, mul_l̵e̵f̵t̵_̵comm,̵ ̵m̵u̵l̵_̵c̵o̵m̵m̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Formalization/Archive/SubmittedBaseline.lean:2567:20: This simp argument is unused:
+  head2
+
+Hint: Omit it from the simp argument list.
+  simp [prepend2, h̵e̵a̵d̵2̵,̵ ̵Pi.smul_apply, smul_eq_mul, mul_assoc]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Formalization/Archive/SubmittedBaseline.lean:2567:55: This simp argument is unused:
+  mul_assoc
+
+Hint: Omit it from the simp argument list.
+  simp [prepend2, head2, Pi.smul_apply, smul_eq_mul,̵ ̵m̵u̵l̵_̵a̵s̵s̵o̵c̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Formalization/Archive/SubmittedBaseline.lean:2745:34: This simp argument is unused:
+  mul_assoc
+
+Hint: Omit it from the simp argument list.
+  simp [div_eq_mul_inv, h2, m̵u̵l̵_̵a̵s̵s̵o̵c̵,̵ ̵mul_left_comm, mul_comm]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Formalization/Archive/SubmittedBaseline.lean:2745:45: This simp argument is unused:
+  mul_left_comm
+
+Hint: Omit it from the simp argument list.
+  simp [div_eq_mul_inv, h2, mul_assoc, m̵u̵l̵_̵l̵e̵f̵t̵_̵c̵o̵m̵m̵,̵ ̵mul_comm]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Formalization/Archive/SubmittedBaseline.lean:3240:0: automatically included section variable(s) unused in theorem `paper_binary_cz_kim_equivalence`:
+  [CharP K 2]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [CharP K 2] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: Formalization/Archive/SubmittedBaseline.lean:3248:0: automatically included section variable(s) unused in theorem `paper_binary_boxed_equals_kim`:
+  [CharP K 2]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [CharP K 2] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+✔ [8199/8257] Built Formalization.Components.QaryForwardDefinitions (3.4s)
+✔ [8200/8257] Built Formalization.Components.NormForm (3.6s)
+✔ [8201/8257] Built Formalization.Components.FoundationsDefinitions (3.8s)
+✔ [8202/8257] Built Formalization.Components.SplitBoxedDefinitions (4.6s)
+✔ [8203/8257] Built Formalization.Components.QaryEquivalenceDefinitions (3.6s)
+✔ [8204/8257] Built Formalization.Verification.Comparator.NormFormSolution (4.0s)
+✔ [8205/8257] Built Formalization.Components.PermutationEquivalenceDefinitions (3.9s)
+✔ [8206/8257] Built Formalization.Components.BinaryCzKimDefinitions (4.2s)
+✔ [8207/8257] Built Formalization.Components.SplitFormTransportDefinitions (4.6s)
+✔ [8208/8257] Built Formalization.Components.SplitBoxed (4.7s)
+✔ [8209/8257] Built Formalization.Components.Foundations (5.8s)
+✔ [8210/8257] Built Formalization.Components.RankBoxedDefinitions (5.3s)
+✔ [8211/8257] Built Formalization.Verification.Comparator.SplitBoxedSolution (4.1s)
+✔ [8212/8257] Built Formalization.Components.RepeatedStepDefinitions (4.1s)
+✔ [8213/8257] Built Formalization.Verification.Comparator.FoundationsSolution (4.4s)
+✔ [8214/8257] Built Formalization.Components.BinaryRankOneNormalizationDefinitions (4.8s)
+✔ [8215/8257] Built Formalization.Components.BinaryCzKim (5.6s)
+✔ [8216/8257] Built Formalization.Components.PermutationEquivalence (6.3s)
+✔ [8217/8257] Built Formalization.Components.QaryForward (7.8s)
+✔ [8218/8257] Built Formalization.Components.SplitBoxedOrthogonality (8.1s)
+✔ [8219/8257] Built Formalization.Components.BinaryTwoCoordinateReductionDefinitions (3.9s)
+✔ [8220/8257] Built Formalization.Verification.Comparator.BinaryCzKimSolution (3.8s)
+✔ [8221/8257] Built Formalization.Sections.Preliminaries (4.2s)
+✔ [8222/8257] Built Formalization.Verification.Comparator.PermutationEquivalenceSolution (4.5s)
+⚠ [8223/8257] Built Formalization.Components.SplitFormTransport (5.6s)
+warning: Formalization/Components/SplitFormTransport.lean:85:2: Try `simp at hbad` instead of `simpa using hbad`
+
+Note: This linter can be disabled with `set_option linter.unnecessarySimpa false`
+⚠ [8224/8257] Built Formalization.Components.RankBoxedConstruction (11s)
+warning: Formalization/Components/RankBoxedConstruction.lean:152:63: This simp argument is unused:
+  Pi.smul_apply
+
+Hint: Omit it from the simp argument list.
+  simp only [rankBoxedRows, isotropicLineBlock, head2, P̵i̵.̵s̵m̵u̵l̵_̵a̵p̵p̵l̵y̵,̵smul_eq_mul]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Formalization/Components/RankBoxedConstruction.lean:165:63: This simp argument is unused:
+  Pi.smul_apply
+
+Hint: Omit it from the simp argument list.
+  simp only [rankBoxedRows, isotropicLineBlock, head2, P̵i̵.̵s̵m̵u̵l̵_̵a̵p̵p̵l̵y̵,̵smul_eq_mul]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+✔ [8225/8257] Built Formalization.Verification.Comparator.QaryForwardSolution (3.7s)
+✔ [8226/8257] Built Formalization.Verification.Comparator.SplitBoxedOrthogonalitySolution (3.0s)
+✔ [8227/8257] Built Formalization.Components.QaryEquivalence (4.4s)
+✔ [8228/8257] Built Formalization.Components.RepeatedStep (8.2s)
+✔ [8229/8257] Built Formalization.Components.ConditionalBoxed (4.7s)
+✔ [8230/8257] Built Formalization.Verification.Comparator.SplitFormTransportSolution (3.3s)
+✔ [8231/8257] Built Formalization.Verification.Comparator.QaryEquivalenceSolution (3.1s)
+✔ [8232/8257] Built Formalization.Verification.Comparator.RepeatedStepSolution (3.2s)
+✔ [8233/8257] Built Formalization.Components.QaryRankBoxedNormalizationDefinitions (4.3s)
+✔ [8234/8257] Built Formalization.Verification.Comparator.ConditionalBoxedSolution (3.2s)
+✔ [8235/8257] Built Formalization.Sections.SplitQary (4.2s)
+✔ [8236/8257] Built Formalization.Components.RankBoxedStructureDefinitions (2.6s)
+✔ [8237/8257] Built Formalization.Components.BinaryRankOneNormalization (7.1s)
+✔ [8238/8257] Built Formalization.Components.RankBoxedExtensionDefinitions (2.9s)
+✔ [8239/8257] Built Formalization.Components.BinaryTwoCoordinateReduction (4.1s)
+⚠ [8240/8257] Built Formalization.Components.RankBoxedStructure (4.9s)
+warning: Formalization/Components/RankBoxedStructure.lean:116:8: try 'simp' instead of 'simpa'
+
+Note: This linter can be disabled with `set_option linter.unnecessarySimpa false`
+⚠ [8241/8257] Built Formalization.Components.QaryRankBoxedNormalization (8.8s)
+warning: Formalization/Components/QaryRankBoxedNormalization.lean:94:4: try 'simp' instead of 'simpa'
+
+Note: This linter can be disabled with `set_option linter.unnecessarySimpa false`
+warning: Formalization/Components/QaryRankBoxedNormalization.lean:127:11: unused variable `u`
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Formalization/Components/QaryRankBoxedNormalization.lean:127:13: unused variable `v`
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Formalization/Components/QaryRankBoxedNormalization.lean:128:12: unused variable `a`
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Formalization/Components/QaryRankBoxedNormalization.lean:128:14: unused variable `v`
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+✔ [8242/8257] Built Formalization.Components.RepeatedBoxDefinitions (4.1s)
+⚠ [8243/8257] Built Formalization.Components.BinaryRankOneNormalizationInduction (6.9s)
+warning: Formalization/Components/BinaryRankOneNormalizationInduction.lean:226:30: This simp argument is unused:
+  head2
+
+Hint: Omit it from the simp argument list.
+  simp [splitDiagonalBlock,̵ ̵h̵e̵a̵d̵2̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Formalization/Components/BinaryRankOneNormalizationInduction.lean:220:4: 'change (if s = 0 then blockSwap (head2 (1 + s) s) else head2 (1 + s) s) = head2 0 1' tactic does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+warning: Formalization/Components/BinaryRankOneNormalizationInduction.lean:321:38: This simp argument is unused:
+  head2
+
+Hint: Omit it from the simp argument list.
+  simp [isotropicLineBlock,̵ ̵h̵e̵a̵d̵2̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Formalization/Components/BinaryRankOneNormalizationInduction.lean:342:25: This simp argument is unused:
+  head2
+
+Hint: Omit it from the simp argument list.
+  simp [splitBlockInner,̵ ̵h̵e̵a̵d̵2̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Formalization/Components/BinaryRankOneNormalizationInduction.lean:381:37: This simp argument is unused:
+  head2
+
+Hint: Omit it from the simp argument list.
+  simp [splitBlockInner, h̵e̵a̵d̵2̵,̵ ̵CharTwo.add_self_eq_zero]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Formalization/Components/BinaryRankOneNormalizationInduction.lean:390:35: This simp argument is unused:
+  head2
+
+Hint: Omit it from the simp argument list.
+  simp [splitBlockInner, h̵e̵a̵d̵2̵,̵ ̵CharTwo.add_self_eq_zero]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Formalization/Components/BinaryRankOneNormalizationInduction.lean:402:37: This simp argument is unused:
+  head2
+
+Hint: Omit it from the simp argument list.
+  simp [splitBlockInner, h̵e̵a̵d̵2̵,̵ ̵CharTwo.add_self_eq_zero]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Formalization/Components/BinaryRankOneNormalizationInduction.lean:412:37: This simp argument is unused:
+  head2
+
+Hint: Omit it from the simp argument list.
+  simp [splitBlockInner, h̵e̵a̵d̵2̵,̵ ̵CharTwo.add_self_eq_zero]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Formalization/Components/BinaryRankOneNormalizationInduction.lean:423:35: This simp argument is unused:
+  head2
+
+Hint: Omit it from the simp argument list.
+  simp [splitBlockInner, h̵e̵a̵d̵2̵,̵ ̵CharTwo.add_self_eq_zero]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Formalization/Components/BinaryRankOneNormalizationInduction.lean:436:35: This simp argument is unused:
+  head2
+
+Hint: Omit it from the simp argument list.
+  simp [splitBlockInner, h̵e̵a̵d̵2̵,̵ ̵CharTwo.add_self_eq_zero]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Formalization/Components/BinaryRankOneNormalizationInduction.lean:446:35: This simp argument is unused:
+  head2
+
+Hint: Omit it from the simp argument list.
+  simp [splitBlockInner, h̵e̵a̵d̵2̵,̵ ̵CharTwo.add_self_eq_zero]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Formalization/Components/BinaryRankOneNormalizationInduction.lean:457:33: This simp argument is unused:
+  head2
+
+Hint: Omit it from the simp argument list.
+  simp [splitBlockInner, h̵e̵a̵d̵2̵,̵ ̵CharTwo.add_self_eq_zero]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Formalization/Components/BinaryRankOneNormalizationInduction.lean:567:19: This simp argument is unused:
+  hij
+
+Hint: Omit it from the simp argument list.
+  simp [hdiag, h̵i̵j̵,̵ ̵Ne.symm hij, splitAffineBlock,
+  ̵  ̵ ̵ ̵ ̵ ̵ ̵ ̵splitBlockInner, dot, head2, htwo]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Formalization/Components/BinaryRankOneNormalizationInduction.lean:568:37: This simp argument is unused:
+  htwo
+
+Hint: Omit it from the simp argument list.
+  simp [hdiag, hij, Ne.symm hij, splitAffineBlock,
+  ̵  ̵ ̵ ̵ ̵ ̵ ̵ ̵splitBlockInner, dot, head2,̵ ̵h̵t̵w̵o̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Formalization/Components/BinaryRankOneNormalizationInduction.lean:572:39: This simp argument is unused:
+  htwo
+
+Hint: Omit it from the simp argument list.
+  simp [hdiag, hij, Ne.symm hij, splitAffineBlock, splitBlockInner, dot, h̵e̵a̵d̵2̵,̵ ̵h̵t̵w̵o̵]̵h̲e̲a̲d̲2̲]̲
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Formalization/Components/BinaryRankOneNormalizationInduction.lean:791:52: This simp argument is unused:
+  flattenRankBoxRow
+
+Hint: Omit it from the simp argument list.
+  simp [flattenRankBoxedRows, f̵l̵a̵t̵t̵e̵n̵R̵a̵n̵k̵B̵o̵x̵R̵o̵w̵,̵castBuildRowsBin, binaryBlockExtensionRows,
+  ̲  ̲ ̲ ̲ ̲ ̲ ̲ ̲ ̲ ̲prependRankOneBlock, buildRowsBin, r0, liftRankBoxIndex, finSumFinEquiv]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Formalization/Components/BinaryRankOneNormalizationInduction.lean:792:10: This simp argument is unused:
+  castBuildRowsBin
+
+Hint: Omit it from the simp argument list.
+  simp [flattenRankBoxedRows, flattenRankBoxRow, c̵a̵s̵t̵B̵u̵i̵l̵d̵R̵o̵w̵s̵B̵i̵n̵,̵ ̵binaryBlockExtensionRows,
+            prependRankOneBlock, buildRowsBin, r0, liftRankBoxIndex, finSumFinEquiv]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Formalization/Components/BinaryRankOneNormalizationInduction.lean:794:10: This simp argument is unused:
+  liftRankBoxIndex
+
+Hint: Omit it from the simp argument list.
+  simp [flattenRankBoxedRows, flattenRankBoxRow, castBuildRowsBin,
+  ̲  ̲ ̲ ̲ ̲ ̲ ̲ ̲ ̲ ̲binaryBlockExtensionRows, prependRankOneBlock, buildRowsBin, r0, l̵i̵f̵t̵R̵a̵n̵k̵B̵o̵x̵I̵n̵d̵e̵x̵,̵ ̵finSumFinEquiv]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Formalization/Components/BinaryRankOneNormalizationInduction.lean:798:10: This simp argument is unused:
+  castBuildRowsBin
+
+Hint: Omit it from the simp argument list.
+  simp [flattenRankBoxedRows, flattenRankBoxRow,
+            c̵a̵s̵t̵B̵u̵i̵l̵d̵R̵o̵w̵s̵B̵i̵n̵,̵ ̵binaryBlockExtensionRows, prependRankOneBlock, buildRowsBin, r0, liftRankBoxIndex,
+  ̲  ̲ ̲ ̲ ̲ ̲ ̲ ̲ ̲ ̲finSumFinEquiv]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Formalization/Components/BinaryRankOneNormalizationInduction.lean:811:52: This simp argument is unused:
+  flattenRankBoxRow
+
+Hint: Omit it from the simp argument list.
+  simp [flattenRankBoxedRows, f̵l̵a̵t̵t̵e̵n̵R̵a̵n̵k̵B̵o̵x̵R̵o̵w̵,̵castBuildRowsBin, binaryBlockExtensionRows,
+  ̲  ̲ ̲ ̲ ̲ ̲ ̲ ̲ ̲ ̲prependRankOneBlock, buildRowsBin, riBin, oldRow, dot_flattenRankBoxRow, liftRankBoxIndex,
+  ̲  ̲ ̲ ̲ ̲ ̲ ̲ ̲ ̲ ̲finSumFinEquiv]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Formalization/Components/BinaryRankOneNormalizationInduction.lean:812:10: This simp argument is unused:
+  castBuildRowsBin
+
+Hint: Omit it from the simp argument list.
+  simp [flattenRankBoxedRows, flattenRankBoxRow, c̵a̵s̵t̵B̵u̵i̵l̵d̵R̵o̵w̵s̵B̵i̵n̵,̵ ̵binaryBlockExtensionRows,
+            prependRankOneBlock, buildRowsBin, riBin, oldRow, dot_flattenRankBoxRow, liftRankBoxIndex,
+  ̲  ̲ ̲ ̲ ̲ ̲ ̲ ̲ ̲ ̲finSumFinEquiv]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Formalization/Components/BinaryRankOneNormalizationInduction.lean:814:41: This simp argument is unused:
+  liftRankBoxIndex
+
+Hint: Omit it from the simp argument list.
+  simp [flattenRankBoxedRows, flattenRankBoxRow, castBuildRowsBin,
+  ̲  ̲ ̲ ̲ ̲ ̲ ̲ ̲ ̲ ̲binaryBlockExtensionRows, prependRankOneBlock, buildRowsBin, riBin, oldRow,
+  ̲  ̲ ̲ ̲ ̲ ̲ ̲ ̲ ̲ ̲dot_flattenRankBoxRow, l̵i̵f̵t̵R̵a̵n̵k̵B̵o̵x̵I̵n̵d̵e̵x̵,̵ ̵finSumFinEquiv]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Formalization/Components/BinaryRankOneNormalizationInduction.lean:818:10: This simp argument is unused:
+  castBuildRowsBin
+
+Hint: Omit it from the simp argument list.
+  simp [flattenRankBoxedRows, flattenRankBoxRow,
+            c̵a̵s̵t̵B̵u̵i̵l̵d̵R̵o̵w̵s̵B̵i̵n̵,̵ ̵binaryBlockExtensionRows, prependRankOneBlock, buildRowsBin, riBin, oldRow,
+  ̲  ̲ ̲ ̲ ̲ ̲ ̲ ̲ ̲ ̲dot_flattenRankBoxRow, liftRankBoxIndex, finSumFinEquiv]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Formalization/Components/BinaryRankOneNormalizationInduction.lean:833:50: This simp argument is unused:
+  flattenRankBoxRow
+
+Hint: Omit it from the simp argument list.
+  simp [flattenRankBoxedRows, f̵l̵a̵t̵t̵e̵n̵R̵a̵n̵k̵B̵o̵x̵R̵o̵w̵,̵castBuildRowsBin, binaryBlockExtensionRows,
+  ̲  ̲ ̲ ̲ ̲ ̲ ̲ ̲prependRankOneBlock, buildRowsBin, riBin, oldRow, dot_flattenRankBoxRow, liftRankBoxIndex,
+  ̲  ̲ ̲ ̲ ̲ ̲ ̲ ̲finSumFinEquiv]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Formalization/Components/BinaryRankOneNormalizationInduction.lean:834:8: This simp argument is unused:
+  castBuildRowsBin
+
+Hint: Omit it from the simp argument list.
+  simp [flattenRankBoxedRows, flattenRankBoxRow, c̵a̵s̵t̵B̵u̵i̵l̵d̵R̵o̵w̵s̵B̵i̵n̵,̵ ̵binaryBlockExtensionRows,
+          prependRankOneBlock, buildRowsBin, riBin, oldRow, dot_flattenRankBoxRow, liftRankBoxIndex,
+  ̲  ̲ ̲ ̲ ̲ ̲ ̲ ̲finSumFinEquiv]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Formalization/Components/BinaryRankOneNormalizationInduction.lean:836:39: This simp argument is unused:
+  liftRankBoxIndex
+
+Hint: Omit it from the simp argument list.
+  simp [flattenRankBoxedRows, flattenRankBoxRow, castBuildRowsBin,
+  ̲  ̲ ̲ ̲ ̲ ̲ ̲ ̲binaryBlockExtensionRows, prependRankOneBlock, buildRowsBin, riBin, oldRow,
+  ̲  ̲ ̲ ̲ ̲ ̲ ̲ ̲dot_flattenRankBoxRow, l̵i̵f̵t̵R̵a̵n̵k̵B̵o̵x̵I̵n̵d̵e̵x̵,̵ ̵finSumFinEquiv]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Formalization/Components/BinaryRankOneNormalizationInduction.lean:840:8: This simp argument is unused:
+  castBuildRowsBin
+
+Hint: Omit it from the simp argument list.
+  simp [flattenRankBoxedRows, flattenRankBoxRow,
+          c̵a̵s̵t̵B̵u̵i̵l̵d̵R̵o̵w̵s̵B̵i̵n̵,̵ ̵binaryBlockExtensionRows, prependRankOneBlock, buildRowsBin, riBin, oldRow,
+  ̲  ̲ ̲ ̲ ̲ ̲ ̲ ̲dot_flattenRankBoxRow, liftRankBoxIndex, finSumFinEquiv]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Formalization/Components/BinaryRankOneNormalizationInduction.lean:945:52: This simp argument is unused:
+  permuteVec
+
+Hint: Omit it from the simp argument list.
+  simp [buildRowsBin, riBin, permuteFamily, p̵e̵r̵m̵u̵t̵e̵V̵e̵c̵,̵
+  ̵ ̵ ̵ ̵ ̵ ̵ ̵ ̵ ̵ ̵ ̵ ̵ ̵dot_tail_inverse_permute]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+✔ [8244/8257] Built Formalization.Sections.Binary (3.1s)
+✔ [8245/8257] Built Formalization.Verification.Comparator.BinaryTwoCoordinateReductionSolution (3.2s)
+✔ [8246/8257] Built Formalization.Verification.Comparator.RankBoxedStructureSolution (3.1s)
+✔ [8247/8257] Built Formalization.Sections.QaryRankBoxedNormalization (3.0s)
+✔ [8248/8257] Built Formalization.Verification.Comparator.QaryRankBoxedNormalizationSolution (3.0s)
+✔ [8249/8257] Built Formalization.Sections.BinaryRankOneNormalization (2.8s)
+✔ [8250/8257] Built Formalization.Verification.Comparator.BinaryRankOneNormalizationSolution (2.0s)
+✔ [8251/8257] Built Formalization.Components.RankBoxedExtension (7.7s)
+✔ [8252/8257] Built Formalization.Verification.Comparator.RankBoxedExtensionSolution (2.3s)
+✔ [8253/8257] Built Formalization.Components.RepeatedBox (4.7s)
+✔ [8254/8257] Built Formalization.Components.RepeatedBoxConverse (3.1s)
+✔ [8255/8257] Built Formalization.Sections.RankBoxed (2.3s)
+✔ [8256/8257] Built Formalization.Verification.Comparator.RepeatedBoxSolution (2.3s)
+✔ [8257/8257] Built Formalization.Sections.All (2.1s)
+Build completed successfully (8257 jobs).
