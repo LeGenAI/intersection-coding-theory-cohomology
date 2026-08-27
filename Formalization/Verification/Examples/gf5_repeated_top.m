@@ -49,7 +49,9 @@ assert [MinimumWeight(C24),MinimumWeight(C22)] eq [9,8];
 assert LinearCode(ReducePair(G24,1,14)) eq C22;
 
 words9 := MinimumWords(C24);
+words10 := Words(C24,10);
 lossFree := 0;
+parentA8Counts := [];
 for first in [1..24] do
     for second in [1..24] do
         if first ne second then
@@ -57,13 +59,16 @@ for first in [1..24] do
                 w[first] ne 0 and w[second] eq c*w[first]];
             if loss eq 0 then
                 lossFree +:= 1;
+                Append(~parentA8Counts, #[w : w in words10 |
+                    w[first] ne 0 and w[second] eq c*w[first]]);
             end if;
         end if;
     end for;
 end for;
 assert #words9 eq 1056 and lossFree eq 132;
+assert Setseq(Seqset(parentA8Counts)) eq [660];
 
 print "PASS GF5 largest repeated box";
 print "levels", [<22,11,8,660>, <24,12,9,#words9>];
-print "audit", 552, lossFree, [1,14];
+print "audit", 552, lossFree, [1,14], "parent A8", 660;
 print "W22", WeightDistribution(C22);

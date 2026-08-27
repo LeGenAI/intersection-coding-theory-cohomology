@@ -23,6 +23,17 @@ row.  It records the exact parent identifier separately from the historical
 distance and weight-enumerator benchmark; a benchmark $A_d$ is not treated as
 an extremal quantity when several optimal weight enumerators exist.
 
+In Table 1, bold $A_d$ values have a deliberately narrow meaning.  For the
+binary rows they agree with the minimum at the best distance in the complete
+[online binary classification](https://www.math.is.tohoku.ac.jp/~mharada/research/codes/sd2.htm),
+and the two short quinary rows agree with the corresponding minima in the
+complete [GF(5) classification](https://www.math.is.tohoku.ac.jp/~mharada/research/codes/sd5.htm).
+The GF(13) MDS values are fixed by the MDS weight enumerator.  No bold claim is
+made for an unclassified length.  In particular, exact Magma enumeration of
+the public Kim--Choi generator of a self-dual `[18,9,8]` code over `GF(13)`
+gives $A_8=1752$, below both our value 1896 and the earlier published value
+2484.  The GF(13) replay verifies this comparison together with our code.
+
 The binary Golay checker supplies the separate lineage table.  It reduces the
 standard extended Golay generator four times and verifies the exact inverse Kim
 steps
@@ -47,6 +58,11 @@ projective correction vector surviving the weight-six/seven filter. It also
 generates the manuscript's block matrix and table row in
 `large_applications_data.tex`.  The catalogue builder consumes that result and
 generates `application_catalog_data.tex`.
+
+The separate `gf13_mds_parent_ad_audit.m` replay enumerates all 36,036
+minimum words of the `[14,7,8]` MDS code.  All 182 ordered two-coordinate
+reductions give a parent with $A_6=960$, so changing only the deleted pair of
+this fixed code cannot improve the Table 1 coefficient.
 
 `LargeGF13.lean` separately kernel-checks the scalar Gram matrix, the
 coordinate-reordered Gram matrix, the invertible row normalization in both

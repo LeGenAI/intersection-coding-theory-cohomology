@@ -1,0 +1,5 @@
+Magma V2.28-20 exact replay
+PASS GF13 MDS parent A6 audit
+ordered pairs: 182; every parent has A6=960
+minimum words of the [14,7,8] code: 36,036
+Total time: 1.139 seconds; total memory usage: 32.09 MB

@@ -24,7 +24,7 @@ Theorem, Proposition and Corollary share the theorem counter.
 | Corollary 3.10 | Explicit normalized rank-one box | SplitBoxed (12), SplitBoxedOrthogonality (12) |
 | Theorem 3.11 | Conditional boxed coefficient theorem | `paper_conditional_boxed_normalization_exact`; ConditionalBoxed (1) |
 | Explicit change of form in Section 2 | Different named forms, not a Euclidean self-isometry | SplitFormTransport (3) |
-| Table 1 | Seven finite-field catalogue entries, five binary Golay-lineage levels, the largest repeated GF(5) endpoint, two repeated GF(13) levels, and published benchmark data | `application_catalog.json`, the three lineage certificates, linked `certificates/*.json`, `build_application_catalog.py`, and the numerical checkers |
+| Table 1 | Seven finite-field catalogue entries, five binary Golay-lineage levels, the largest repeated GF(5) endpoint, two repeated GF(13) levels, and public benchmark data with conservatively certified minimum $A_d$ values in bold | `application_catalog.json`, the three lineage certificates, linked `certificates/*.json`, `build_application_catalog.py`, the public online classifications, and the numerical checkers |
 | Table 2 | Repeated boxed presentations: binary $[24,12,8]$, GF(5) $[24,12,9]$, and the best-known-distance GF(13) sequence $[18,9,8]\leftrightarrow[20,10,10]$, together with their certified parents | `check_golay_lineage.py`, `check_gf5_repeated_top.py`, `check_gf13_repeated_lineage.py`, and their linked certificates |
 | Proposition 4.1 | Universal rank-one realization of a self-dual MDS $[14,7,8]$ code over $\mathrm{GF}(13)$ | `Examples/LargeGF13.lean` (Gram, normalization, readout, parent, unique correction and reconstruction certificates); `large_applications.json` and `check_large_applications.py` (all $\binom{14}{7}$ minors and exhaustive projective enumeration) |
 
@@ -64,7 +64,9 @@ large-example pipeline starts from the known
 self-dual MDS $[14,7,8]$ code, checks all $\binom{14}{7}=3432$ maximal minors,
 normalizes it to the manuscript's rank-one universal form, and exhaustively
 checks the unique projective correction class used to reconstruct it from its
-$[12,6,6]$ two-coordinate parent.
+$[12,6,6]$ two-coordinate parent.  The Magma replay
+`gf13_mds_parent_ad_audit.m` additionally proves that all 182 ordered
+two-coordinate reductions of this fixed MDS code have $A_6=960$.
 
 The separate rank-two kernel example has no minimum-distance claim.
 

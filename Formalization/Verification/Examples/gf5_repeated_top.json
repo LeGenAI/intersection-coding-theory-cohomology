@@ -41,6 +41,7 @@
   },
   "magma_audit": {
     "ordered_pairs": 552,
-    "distance_nine_loss_free_pairs": 132
+    "distance_nine_loss_free_pairs": 132,
+    "loss_free_parent_a_d": 660
   }
 }

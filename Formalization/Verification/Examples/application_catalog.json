@@ -2,7 +2,8 @@
   "schema_version": 1,
   "policy": {
     "proposition": "A bound improvement, a proved optimal result, or a structurally new exact realization used in the main argument.",
-    "table": "A reproducible construction that illustrates the method without carrying a separate theorem-level claim."
+    "table": "A reproducible construction that illustrates the method without carrying a separate theorem-level claim.",
+    "bold_a_d": "The achieved A_d is minimal in a complete public online classification at the displayed best distance, or is fixed by the MDS weight enumerator."
   },
   "entries": [
     {
@@ -21,8 +22,9 @@
         "a_d": [
           60
         ],
-        "reference": "Leon--Pless--Sloane database"
+        "reference": "Harada--Munemasa database"
       },
+      "public_a_d_min_achieved": true,
       "parent": "GF5-04",
       "manuscript_role": "table",
       "certificate": "certificates/gf5-06.json",
@@ -44,8 +46,9 @@
         "a_d": [
           48
         ],
-        "reference": "Leon--Pless--Sloane database"
+        "reference": "Harada--Munemasa database"
       },
+      "public_a_d_min_achieved": true,
       "parent": "GF5-06",
       "manuscript_role": "table",
       "certificate": "certificates/gf5-08.json",
@@ -69,6 +72,7 @@
         ],
         "reference": "Betsumiya et al."
       },
+      "public_a_d_min_achieved": true,
       "parent": null,
       "manuscript_role": "table",
       "certificate": "certificates/gf13-08.json",
@@ -92,6 +96,7 @@
         ],
         "reference": "Betsumiya et al."
       },
+      "public_a_d_min_achieved": true,
       "parent": null,
       "manuscript_role": "table",
       "certificate": "certificates/gf13-10.json",
@@ -118,6 +123,7 @@
         ],
         "reference": "Betsumiya et al."
       },
+      "public_a_d_min_achieved": false,
       "parent": null,
       "manuscript_role": "table",
       "certificate": "certificates/gf13-12a.json",
@@ -144,6 +150,7 @@
         ],
         "reference": "Betsumiya et al."
       },
+      "public_a_d_min_achieved": false,
       "parent": null,
       "manuscript_role": "table",
       "certificate": "certificates/gf13-12p.json",
@@ -167,6 +174,7 @@
         ],
         "reference": "Betsumiya et al."
       },
+      "public_a_d_min_achieved": true,
       "parent": "GF13-12P",
       "manuscript_role": "proposition",
       "certificate": "certificates/gf13-14.json",

@@ -3,6 +3,7 @@ PASS GF13 best-known repeated lineage
 levels [ <20,10,10,111024>, <18,9,8,1896> ]
 pair audit: 380 ordered pairs; minimum weight-ten loss 1896; 10 minimizing pairs; 0 zero-loss pairs
 selected pair: (11,7)
+public A8 benchmark: 1752 (exact enumeration of the published Kim--Choi generator)
 W20:
 [ <0,1>, <10,111024>, <11,905280>, <12,8019360>, <13,60166080>,
   <14,361922400>, <15,1730361600>, <16,6500692440>, <17,18344211120>,
@@ -11,4 +12,4 @@ W18:
 [ <0,1>, <8,1896>, <9,22848>, <10,258792>, <11,2226048>, <12,15620640>,
   <13,86382240>, <14,370628592>, <15,1185374976>, <16,2667593436>,
   <17,3765814488>, <18,2510575416> ]
-Total time: 58.3 seconds; exact finite-field computation
+Total time: 63.1 seconds; exact finite-field computation

@@ -17,6 +17,17 @@ G18 := Matrix(F,9,18,[
   0,0,0,0,0,0,1,0,3,4,10,11,4,5,5,12,7,1,
   0,0,0,0,0,0,0,1,3,7,4,1,3,8,8,9,3,3
 ]);
+G18KimChoi := HorizontalJoin(IdentityMatrix(F,9),Matrix(F,9,9,[
+  10,5,5,0,1,9,12,2,3,
+  5,7,11,10,4,4,12,6,5,
+  5,11,5,3,5,3,7,6,5,
+  0,10,3,5,6,6,0,6,2,
+  1,4,5,6,0,10,5,1,9,
+  9,4,3,6,10,12,9,4,6,
+  12,12,7,0,5,9,3,12,1,
+  2,6,6,6,1,4,12,4,10,
+  3,5,5,2,9,6,1,10,11
+]));
 
 function ReducePair(G,first,second)
     k := Nrows(G);
@@ -31,9 +42,13 @@ end function;
 
 C20 := LinearCode(G20);
 C18 := LinearCode(G18);
+C18KimChoi := LinearCode(G18KimChoi);
 assert IsSelfDual(C20) and IsSelfDual(C18);
+assert IsSelfDual(C18KimChoi);
 assert LinearCode(ReducePair(G20,11,7)) eq C18;
 assert [MinimumWeight(C20),MinimumWeight(C18)] eq [10,8];
+assert MinimumWeight(C18KimChoi) eq 8;
+assert #MinimumWords(C18KimChoi) eq 1752;
 
 minimum20 := MinimumWords(C20);
 bestLoss := #minimum20+1;
@@ -60,5 +75,6 @@ print "PASS GF13 best-known repeated lineage";
 print "levels", [<20,10,10,#minimum20>, <18,9,8,1896>];
 print "pair audit", 380, bestLoss, #bestPairs, zeroLossPairs;
 print "selected pair", <11,7>;
+print "public A8 benchmark", 1752, "Kim--Choi";
 print "W20", WeightDistribution(C20);
 print "W18", WeightDistribution(C18);

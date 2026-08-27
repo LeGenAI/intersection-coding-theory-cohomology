@@ -20,6 +20,7 @@
       ],
       "reference": "Betsumiya et al."
     },
+    "public_a_d_min_achieved": false,
     "parent": null,
     "manuscript_role": "table",
     "certificate": "certificates/gf13-12a.json",

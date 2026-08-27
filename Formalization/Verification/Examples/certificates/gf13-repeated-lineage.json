@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "artifact_id": "GF13-BEST-KNOWN-REPEATED-18-20",
-  "source_sha256": "4460bb5127ac1b7324c89d361a189b89b591534907370aadf9b31a8cd1c9e0eb",
+  "source_sha256": "e75b4a443bda4bca7a9ed903c19269074d16b5bc31d1984ae3d9f92c25a6cf3c",
   "interpretation": "An exact two-coordinate reduction of the published GF(13) [20,10,10] code to a [18,9,8] parent and its literal inverse Kim--Lee presentation.",
   "levels_ascending": [
     {
@@ -1631,12 +1631,14 @@
     {
       "length": 18,
       "distance": 8,
-      "a_d": 2484
+      "a_d": 1752,
+      "reference": "Kim--Choi"
     },
     {
       "length": 20,
       "distance": 10,
-      "a_d": 111024
+      "a_d": 111024,
+      "reference": "Betsumiya et al."
     }
   ],
   "magma_audit": {
@@ -1645,6 +1647,7 @@
     "ordered_pairs": 380,
     "minimum_weight_ten_loss": 1896,
     "minimum_loss_pair_count": 10,
-    "zero_loss_pairs": 0
+    "zero_loss_pairs": 0,
+    "kim_choi_public_a8": 1752
   }
 }

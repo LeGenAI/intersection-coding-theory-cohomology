@@ -15,8 +15,9 @@
       "a_d": [
         48
       ],
-      "reference": "Leon--Pless--Sloane database"
+      "reference": "Harada--Munemasa database"
     },
+    "public_a_d_min_achieved": true,
     "parent": "GF5-06",
     "manuscript_role": "table",
     "certificate": "certificates/gf5-08.json",

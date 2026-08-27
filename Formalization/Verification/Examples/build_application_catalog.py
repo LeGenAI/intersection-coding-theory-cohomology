@@ -25,7 +25,8 @@ CATALOGUE_METADATA = {
         "display_name": r"C_{6}^{(5)}",
         "construction": "split box, $r=1$",
         "distance_status": "optimal (Singleton)",
-        "prior_benchmark": {"distance": 4, "a_d": [60], "reference": "Leon--Pless--Sloane database"},
+        "prior_benchmark": {"distance": 4, "a_d": [60], "reference": "Harada--Munemasa database"},
+        "public_a_d_min_achieved": True,
         "parent": "GF5-04",
         "manuscript_role": "table",
     },
@@ -34,7 +35,8 @@ CATALOGUE_METADATA = {
         "display_name": r"C_{8}^{(5)}",
         "construction": "split box, $r=1$",
         "distance_status": "optimal (Ball)",
-        "prior_benchmark": {"distance": 4, "a_d": [48], "reference": "Leon--Pless--Sloane database"},
+        "prior_benchmark": {"distance": 4, "a_d": [48], "reference": "Harada--Munemasa database"},
+        "public_a_d_min_achieved": True,
         "parent": "GF5-06",
         "manuscript_role": "table",
     },
@@ -44,6 +46,7 @@ CATALOGUE_METADATA = {
         "construction": "split box, $r=1$",
         "distance_status": "MDS",
         "prior_benchmark": {"distance": 5, "a_d": [672], "reference": "Betsumiya et al."},
+        "public_a_d_min_achieved": True,
         "parent": None,
         "manuscript_role": "table",
     },
@@ -53,6 +56,7 @@ CATALOGUE_METADATA = {
         "construction": "split box, $r=1$",
         "distance_status": "MDS",
         "prior_benchmark": {"distance": 6, "a_d": [2520], "reference": "Betsumiya et al."},
+        "public_a_d_min_achieved": True,
         "parent": None,
         "manuscript_role": "table",
     },
@@ -62,6 +66,7 @@ CATALOGUE_METADATA = {
         "construction": "split box, $r=1$",
         "distance_status": "exact $d=6$",
         "prior_benchmark": {"distance": 6, "a_d": [528, 576, 696, 792], "reference": "Betsumiya et al."},
+        "public_a_d_min_achieved": False,
         "parent": None,
         "manuscript_role": "table",
     },
@@ -71,6 +76,7 @@ CATALOGUE_METADATA = {
         "construction": "two-coordinate parent",
         "distance_status": "exact $d=6$",
         "prior_benchmark": {"distance": 6, "a_d": [528, 576, 696, 792], "reference": "Betsumiya et al."},
+        "public_a_d_min_achieved": False,
         "parent": None,
         "manuscript_role": "table",
     },
@@ -80,6 +86,7 @@ CATALOGUE_METADATA = {
         "construction": "universal box, $r=1$",
         "distance_status": "MDS",
         "prior_benchmark": {"distance": 8, "a_d": [36036], "reference": "Betsumiya et al."},
+        "public_a_d_min_achieved": True,
         "parent": "GF13-12P",
         "manuscript_role": "proposition",
     },
@@ -112,6 +119,7 @@ def build_outputs():
             "distance_status": metadata["distance_status"].replace("$", ""),
             "a_d": result["weight_distribution"][result["distance"]],
             "prior_benchmark": metadata["prior_benchmark"],
+            "public_a_d_min_achieved": metadata["public_a_d_min_achieved"],
             "parent": metadata["parent"],
             "manuscript_role": metadata["manuscript_role"],
             "certificate": "certificates/" + certificate_filename(metadata["artifact_id"]),
@@ -136,6 +144,7 @@ def build_outputs():
         "distance_status": metadata["distance_status"].replace("$", ""),
         "a_d": result["weight_distribution"][parent_distance],
         "prior_benchmark": metadata["prior_benchmark"],
+        "public_a_d_min_achieved": metadata["public_a_d_min_achieved"],
         "parent": metadata["parent"],
         "manuscript_role": metadata["manuscript_role"],
         "certificate": "certificates/" + certificate_filename(metadata["artifact_id"]),
@@ -158,6 +167,7 @@ def build_outputs():
         "distance_status": metadata["distance_status"],
         "a_d": 36036,
         "prior_benchmark": metadata["prior_benchmark"],
+        "public_a_d_min_achieved": metadata["public_a_d_min_achieved"],
         "parent": metadata["parent"],
         "manuscript_role": metadata["manuscript_role"],
         "certificate": "certificates/" + certificate_filename(metadata["artifact_id"]),
@@ -175,6 +185,7 @@ def build_outputs():
         "policy": {
             "proposition": "A bound improvement, a proved optimal result, or a structurally new exact realization used in the main argument.",
             "table": "A reproducible construction that illustrates the method without carrying a separate theorem-level claim.",
+            "bold_a_d": "The achieved A_d is minimal in a complete public online classification at the displayed best distance, or is fixed by the MDS weight enumerator.",
         },
         "entries": entries,
     }
@@ -194,7 +205,10 @@ def build_outputs():
         if len(benchmark["a_d"]) > 1:
             prior_a = "\\{" + prior_a + "\\}"
         prior = f"$({benchmark['distance']};\\,{prior_a})$"
-        ours = f"$[{n},{k},{d}];\\,{entry['a_d']:,}$"
+        a_d = f"{entry['a_d']:,}"
+        if entry["public_a_d_min_achieved"]:
+            a_d = f"\\mathbf{{{a_d}}}"
+        ours = f"$[{n},{k},{d}];\\,{a_d}$"
         row = (
             f"{evidence} & {entry['field_order']} & {ours} & {prior} & "
             f"{benchmark['reference']} \\\\"

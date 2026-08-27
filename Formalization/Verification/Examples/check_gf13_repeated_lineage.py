@@ -191,7 +191,8 @@ def build_outputs():
             "ordered_pairs": 380,
             "minimum_weight_ten_loss": 1896,
             "minimum_loss_pair_count": 10,
-            "zero_loss_pairs": 0
+            "zero_loss_pairs": 0,
+            "kim_choi_public_a8": 1752
         }
     }
     results = {
@@ -216,7 +217,8 @@ def build_outputs():
         link = f"\\href{{{REPOSITORY}}}{{${symbol}$}}"
         catalogue_rows.append(
             f"{link} & 13 & $[{n},{k},{d}];\\,{code['a_d']:,}$ & "
-            f"$({benchmark['distance']};\\,{benchmark['a_d']:,})$ & Betsumiya et al. \\\\"
+            f"$({benchmark['distance']};\\,{benchmark['a_d']:,})$ & "
+            f"{benchmark['reference']} \\\\"
         )
 
     x18 = display_x

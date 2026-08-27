@@ -244,7 +244,7 @@ def permute_vector(vector, coordinate_order):
 
 def matrix_tex(matrix, k, r, split_corollary=False,
                binary_rank_one=False):
-    """Complete child matrix with visible new, P, and D regions."""
+    """Complete child matrix with visible new, pivot, and terminal regions."""
     require(len(matrix) == 1 + k + r, "row partition")
     require(len(matrix[0]) == 2 * (1 + k + r), "paired child shape")
     group_sizes = [1, k, r]
@@ -257,13 +257,14 @@ def matrix_tex(matrix, k, r, split_corollary=False,
     require(not (split_corollary and binary_rank_one),
             "choose one rank-one display convention")
     if binary_rank_one:
-        pivot_header = r"P_{ii}=0:\ 01;\quad P_{ij}=b_{ij}:\ b_{ij}(11)"
+        pivot_header = r"\operatorname{diag}:\ 01;\quad i\ne j:\ b_{ij}(11)"
         terminal_header = r"D=(1):\ 10;\ 11"
     elif split_corollary:
-        pivot_header = r"P_{ii}=0:\ 01;\quad P_{ij}=b_{ij}:\ b_{ij}(1,c)"
+        pivot_header = r"\operatorname{diag}:\ 01;\quad i\ne j:\ b_{ij}(1,c)"
         terminal_header = r"D=(1):\ \ell_i;\ (1,c)"
     else:
-        pivot_header = r"P_{ij}(1,c)+\delta_{ij}(0,1)"
+        pivot_header = (r"\operatorname{diag}:\ (a_i,ca_i+1);\quad "
+                        r"i\ne j:\ b_{ij}(1,c)")
         terminal_header = r"D_{st}(1,c)\text{ terminal pairs}"
     headers = [r"\scriptstyle\text{rows}",
                r"\multicolumn{2}{c!{\vrule width 1.2pt}}{\scriptstyle\text{new pair}}",
@@ -284,7 +285,7 @@ def matrix_tex(matrix, k, r, split_corollary=False,
             elif split_corollary:
                 label = r"\scriptstyle b_{ij},\ell_i"
             else:
-                label = r"\scriptstyle P,H,Q"
+                label = r"\scriptstyle a_i,b_{ij},\ell_i"
             row_color = "teal!60!black"
         else:
             if binary_rank_one:
@@ -292,7 +293,7 @@ def matrix_tex(matrix, k, r, split_corollary=False,
             elif split_corollary:
                 label = r"\scriptstyle a_i,(1,c)"
             else:
-                label = r"\scriptstyle -DQ^{T},D"
+                label = r"\scriptstyle -D\partial_c\ell_i,D"
             row_color = "violet!75!black"
         entries = []
         for column, value in enumerate(row):
@@ -302,7 +303,10 @@ def matrix_tex(matrix, k, r, split_corollary=False,
                 color = "violet!75!black"
             else:
                 color = row_color
-            entries.append(f"\\textcolor{{{color}}}{{{value}}}")
+            entry = f"\\textcolor{{{color}}}{{{value}}}"
+            if column // 2 == index:
+                entry = "\\cellcolor{black!7}" + entry
+            entries.append(entry)
         suffix = r" \\"
         if index == 0 or index == k:
             suffix += r" \noalign{\hrule height 1.2pt}"
