@@ -81,6 +81,27 @@ def inverse(a, p):
     return [row[n:] for row in reduced]
 
 
+def determinant(a, p):
+    work = [[value % p for value in row] for row in a]
+    value = 1
+    for column in range(len(work)):
+        pivot = next((i for i in range(column, len(work))
+                      if work[i][column]), None)
+        if pivot is None:
+            return 0
+        if pivot != column:
+            work[column], work[pivot] = work[pivot], work[column]
+            value = -value
+        pivot_value = work[column][column]
+        value = value * pivot_value % p
+        inverse_pivot = pow(pivot_value, -1, p)
+        for i in range(column + 1, len(work)):
+            scale = work[i][column] * inverse_pivot % p
+            work[i] = [(x - scale * y) % p
+                       for x, y in zip(work[i], work[column])]
+    return value % p
+
+
 def circulant(first):
     n = len(first)
     return [[first[(j - i) % n] for j in range(n)] for i in range(n)]
@@ -90,7 +111,7 @@ def block_permute(g, order):
     return [[x for j in order for x in row[2 * j:2 * j + 2]] for row in g]
 
 
-def normalize_universal(g, c, p):
+def normalize_universal(g, c, p, rank_one_split_normalize=False):
     n = len(g)
     defect = [[(row[2 * j + 1] - c * row[2 * j]) % p for j in range(n)]
               for row in g]
@@ -127,10 +148,39 @@ def normalize_universal(g, c, p):
     normalized_transform = ([row[:] for row in transform[:k]] +
                             matmul(D_inverse, transform[k:], p))
     normalized_rows = matmul(normalized_transform, block_permute(g, order), p)
-    normalized_A = matmul(D_inverse, A, p)
+    if rank_one_split_normalize:
+        require(r == 1, "rank-one split normalization")
+        for i in range(k):
+            diagonal = normalized_rows[i][2 * i]
+            lower = normalized_rows[k][2 * i]
+            require(diagonal == 0 or lower != 0,
+                    "zero diagonal requires a nonzero master coefficient")
+            if diagonal:
+                scale = -diagonal * pow(lower, -1, p) % p
+                normalized_rows[i] = [(a + scale * b) % p
+                                      for a, b in zip(normalized_rows[i],
+                                                      normalized_rows[k])]
+                normalized_transform[i] = [(a + scale * b) % p
+                                           for a, b in zip(normalized_transform[i],
+                                                           normalized_transform[k])]
+
+    def first(row, block):
+        return normalized_rows[row][2 * block]
+
+    P = [[first(i, j) for j in range(k)] for i in range(k)]
+    H = [[first(i, k + t) for t in range(r)] for i in range(k)]
+    Q = [[(normalized_rows[i][2 * (k + t) + 1]
+           - c * normalized_rows[i][2 * (k + t)]) % p
+          for t in range(r)] for i in range(k)]
+    A = [[first(k + s, j) for j in range(k)] for s in range(r)]
+    D = [[first(k + s, k + t) for t in range(r)] for s in range(r)]
+    if rank_one_split_normalize:
+        require(all(P[i][i] == 0 for i in range(k)),
+                "rank-one split diagonal blocks are 01")
+        require(D == [[1]], "rank-one split core is (1)")
     return dict(k=k, r=r, block_order=order, row_transform=normalized_transform,
-                rows=normalized_rows, P=P, H=H, Q=Q, A=normalized_A,
-                D=[[int(i == j) for j in range(r)] for i in range(r)])
+                rows=normalized_rows, P=P, H=H, Q=Q, A=A, D=D,
+                rank_one_split_normalized=rank_one_split_normalize)
 
 
 def rank_boxed_rows(data, c, p):
@@ -239,6 +289,8 @@ def large_application_tex(specification, universal, parent, parent_distribution,
                         "[" + ":".join(str(x) for x in survivor) + "]")
     result += tex_macro("AppThirteenFourteenCoordinateOrder",
                         "(" + ",".join(str(x) for x in order) + ")")
+    result += tex_macro("AppThirteenFourteenTransformDeterminant",
+                        str(universal["row_transform_determinant"]))
     result += tex_macro(
         "AppThirteenFourteenDistanceRow",
         f"\\ref{{{specification['label']}}} & 13 & $[14,7]$ & {13**7-1:,} & 8 & {a8:,} \\\\")
@@ -273,10 +325,15 @@ def main():
     coordinate_order = specification["coordinate_order"]
     require(sorted(coordinate_order) == list(range(14)), "coordinate permutation")
     paired = [[row[j] for j in coordinate_order] for row in g14]
-    universal = normalize_universal(paired, c, p)
+    universal = normalize_universal(paired, c, p,
+                                    rank_one_split_normalize=True)
     require(universal["block_order"] == list(range(7)), "preordered universal blocks")
     universal["coordinate_order"] = coordinate_order
     require(rank(universal["D"], p) == universal["r"], "normalized terminal matrix")
+    universal["row_transform_determinant"] = determinant(
+        universal["row_transform"], p)
+    require(universal["row_transform_determinant"] != 0,
+            "invertible row transformation")
     require(rank_boxed_rows(universal, c, p) == universal["rows"], "literal reconstruction")
     k, r = universal["k"], universal["r"]
     require(universal["A"] == [[-universal["Q"][j][s] % p for j in range(k)]

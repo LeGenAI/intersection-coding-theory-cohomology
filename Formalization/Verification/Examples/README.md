@@ -31,9 +31,11 @@ complete weight distributions and literal row-space reconstruction at every
 level.
 
 The GF(13) repeated-lineage checker supplies the third panel of the same
-table and the three additional Table 1 rows. It verifies
-[18,9,7] <-> [20,10,8] <-> [22,11,10] as one exact lineage, including both
-normalized Kim--Lee presentations and row-space reconstruction.
+table and the two additional Table 1 rows. It verifies the exact inverse pair
+`[18,9,8] <-> [20,10,10]`, including normalized Kim--Lee presentations,
+row-space reconstruction, complete weight distributions, and the exhaustive
+audit of all 380 ordered two-coordinate reductions of the fixed length-20
+code.
 
 The GF(5) top-edge checker supplies the [22,11,8] -> [24,12,9] panel and
 verifies the largest repeated box over that field.

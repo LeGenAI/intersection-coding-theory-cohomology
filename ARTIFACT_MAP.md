@@ -20,12 +20,12 @@ Theorem, Proposition and Corollary share the theorem counter.
 | Theorem 3.7 | Chinburg--Zhang arithmetic realization | Cited published Theorem 1.5; not formalized here |
 | Lemma 3.4 | Two-coordinate reduction and exact reconstruction | BinaryTwoCoordinateReduction (3) |
 | Theorem 3.8 | Universal binary rank-one representation | `binarySelfDualCode_has_rankOneNormalForm`; BinaryRankOneNormalization (1) |
-| Theorem 3.9 | Transport and exact binary comparison | `paper_binary_cz_kim_corrected`; BinaryCzKim (18) |
+| Theorem 3.9 | Euclidean realization and exact binary comparison | `paper_binary_cz_kim_corrected`; BinaryCzKim (18) |
 | Corollary 3.10 | Explicit normalized rank-one box | SplitBoxed (12), SplitBoxedOrthogonality (12) |
 | Theorem 3.11 | Conditional boxed coefficient theorem | `paper_conditional_boxed_normalization_exact`; ConditionalBoxed (1) |
 | Explicit change of form in Section 2 | Different named forms, not a Euclidean self-isometry | SplitFormTransport (3) |
-| Table 1 | Seven finite-field catalogue entries, five binary Golay-lineage levels, the largest repeated GF(5) endpoint, three repeated GF(13) levels, and published benchmark data | `application_catalog.json`, the three lineage certificates, linked `certificates/*.json`, `build_application_catalog.py`, and the numerical checkers |
-| Table 2 | Three largest repeated boxed presentations: binary $[24,12,8]$, GF(5) $[24,12,9]$, and GF(13) $[22,11,10]$, together with their certified parents | `check_golay_lineage.py`, `check_gf5_repeated_top.py`, `check_gf13_repeated_lineage.py`, and their linked certificates |
+| Table 1 | Seven finite-field catalogue entries, five binary Golay-lineage levels, the largest repeated GF(5) endpoint, two repeated GF(13) levels, and published benchmark data | `application_catalog.json`, the three lineage certificates, linked `certificates/*.json`, `build_application_catalog.py`, and the numerical checkers |
+| Table 2 | Repeated boxed presentations: binary $[24,12,8]$, GF(5) $[24,12,9]$, and the best-known-distance GF(13) sequence $[18,9,8]\leftrightarrow[20,10,10]$, together with their certified parents | `check_golay_lineage.py`, `check_gf5_repeated_top.py`, `check_gf13_repeated_lineage.py`, and their linked certificates |
 | Proposition 4.1 | Universal rank-one realization of a self-dual MDS $[14,7,8]$ code over $\mathrm{GF}(13)$ | `Examples/LargeGF13.lean` (Gram, normalization, readout, parent, unique correction and reconstruction certificates); `large_applications.json` and `check_large_applications.py` (all $\binom{14}{7}$ minors and exhaustive projective enumeration) |
 
 The suite inventory contains **17 suites / 126 distinct declarations**.

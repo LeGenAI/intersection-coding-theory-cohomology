@@ -23,15 +23,15 @@ in~\cite{BetsumiyaEtAl}. Put the columns of \(G_{14}\) in the order
 and group consecutive coordinates into seven two-coordinate blocks. Put
 \begin{equation}
 b=\begin{pmatrix}
-*&0&1&12&12&5\\
-6&*&4&10&11&4\\
-9&0&*&4&2&3\\
-0&0&6&*&0&9\\
-9&0&9&0&*&0\\
-5&0&1&4&0&*
+*&12&11&5&6&9\\
+1&*&12&11&4&1\\
+10&1&*&3&11&0\\
+8&7&10&*&9&9\\
+3&6&11&7&*&9\\
+12&12&8&4&0&*
 \end{pmatrix},
 \qquad
-(\ell_i)_{i=1}^6=((5,2),(2,6),(5,8),(9,6),(6,4),(1,5)),
+(\ell_i)_{i=1}^6=((3,9),(9,10),(3,9),(4,3),(0,8),(3,9)),
 \label{eq:gf13-14-coefficients}
 \end{equation}
 where the diagonal symbols in \(b\) are unused.  In the notation of
@@ -67,15 +67,15 @@ For the asserted row equivalence, if \(G_{14}^{\sigma}\) denotes the stated
 column reordering, then
 \[
 T=\begin{pmatrix}
-12&8&12&5&8&10&0\\
-10&11&11&4&3&6&0\\
-4&7&2&3&10&9&0\\
-9&7&0&9&0&0&0\\
-0&0&9&0&7&9&0\\
-4&7&0&9&0&5&0\\
-0&0&0&0&0&10&7
+12&12&6&4&3&3&6\\
+0&3&5&7&9&8&4\\
+1&2&0&3&3&1&11\\
+7&1&6&6&4&11&9\\
+6&9&6&1&0&3&0\\
+12&7&1&0&3&1&0\\
+9&7&4&12&1&4&5
 \end{pmatrix},
-\qquad \det T=5,
+\qquad \det T=\AppThirteenFourteenTransformDeterminant,
 \]
 and exact multiplication gives
 \(TG_{14}^{\sigma}=\widehat G_{14}\), with \(\widehat G_{14}\) as in
@@ -86,7 +86,8 @@ and exact multiplication gives
 \]
 Thus \(\rank(\partial\widehat G_{14})=6\), while its last row lies in
 \(U_5\) and ends in \((1,5)\); hence \(r=1\) and \(D=(1)\).
-The six forced diagonal identities and the off-diagonal relations
+Every pivot diagonal block is \(01\).  The six forced diagonal identities
+and the off-diagonal relations
 \(5(b_{ij}+b_{ji})+\ell_i\cdot\ell_j=0\) hold, so
 Theorem~\ref{thm:universal-rank-boxed} gives self-duality both before and
 after the simultaneous row-and-block deletion.
