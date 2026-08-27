@@ -15,7 +15,7 @@
       "a_d": [
         60
       ],
-      "reference": "Harada--Munemasa database"
+      "reference": "Leon--Pless--Sloane DB~\\cite{LeonPlessSloane}"
     },
     "public_a_d_min_achieved": true,
     "parent": "GF5-04",

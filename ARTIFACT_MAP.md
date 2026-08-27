@@ -16,7 +16,7 @@ Theorem, Proposition and Corollary share the theorem counter.
 | Theorem 3.6, restriction and specialization | Same-D restriction, terminal row space, rank-one bridge | RankBoxedStructure (3) |
 | Lemma 3.1 | Arbitrary repeatable extension with fixed D | `paper_rankBoxed_buildingUp_minimal_exact`; RankBoxedExtension (2) |
 | Lemmas 3.2--3.3 | Fixed-parent Kim--Lee iff, its forced-coefficient specialization, direct sum, converse | RepeatedStep (4), RepeatedBox (7) |
-| Example 3.1 | Dense GF(5) rank-two code and both extension steps | `Verification/Examples/RankTwoGF5.lean`, four separate kernel certificates |
+| Example 3.1 | Dense GF(5) code, pairing-dependent ranks one and two, and two extensions with new diagonal blocks $01$ | `Verification/Examples/RankTwoGF5.lean`, four separate kernel certificates |
 | Theorem 3.7 | Chinburg--Zhang arithmetic realization | Cited published Theorem 1.5; not formalized here |
 | Lemma 3.4 | Two-coordinate reduction and exact reconstruction | BinaryTwoCoordinateReduction (3) |
 | Theorem 3.8 | Universal binary rank-one representation | `binarySelfDualCode_has_rankOneNormalForm`; BinaryRankOneNormalization (1) |
@@ -27,6 +27,7 @@ Theorem, Proposition and Corollary share the theorem counter.
 | Table 1 | Seven finite-field catalogue entries, five binary Golay-lineage levels, the largest repeated GF(5) endpoint, two repeated GF(13) levels, and public benchmark data with matching smallest cited $A_d$ values in bold and their minimum status qualified in the text | `application_catalog.json`, the three lineage certificates, linked `certificates/*.json`, `build_application_catalog.py`, the public online classifications, and the numerical checkers |
 | Table 2 | Repeated boxed presentations: binary $[24,12,8]$, GF(5) $[24,12,9]$, and the best-known-distance GF(13) sequence $[18,9,8]\leftrightarrow[20,10,10]$, together with their certified parents | `check_golay_lineage.py`, `check_gf5_repeated_top.py`, `check_gf13_repeated_lineage.py`, and their linked certificates |
 | Proposition 4.1 | Universal rank-one realization of a self-dual MDS $[14,7,8]$ code over $\mathrm{GF}(13)$ | `Examples/LargeGF13.lean` (Gram, normalization, readout, parent, unique correction and reconstruction certificates); `large_applications.json` and `check_large_applications.py` (all $\binom{14}{7}$ minors and exhaustive projective enumeration) |
+| GF(5) search baseline | Magma BKLC distances and self-duality status at half dimension for lengths 20, 22, and 24 | `Examples/gf5_bklc_seed_audit.m` and its receipt |
 
 The suite inventory contains **17 suites / 126 distinct declarations**.
 Principal declarations are under `BuildingUpFormalization.Components`.

@@ -15,7 +15,7 @@
       "a_d": [
         672
       ],
-      "reference": "Betsumiya et al."
+      "reference": "Betsumiya et al.~\\cite{BetsumiyaEtAl}"
     },
     "public_a_d_min_achieved": true,
     "parent": null,

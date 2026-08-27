@@ -22,7 +22,7 @@
         "a_d": [
           60
         ],
-        "reference": "Harada--Munemasa database"
+        "reference": "Leon--Pless--Sloane DB~\\cite{LeonPlessSloane}"
       },
       "public_a_d_min_achieved": true,
       "parent": "GF5-04",
@@ -46,7 +46,7 @@
         "a_d": [
           48
         ],
-        "reference": "Harada--Munemasa database"
+        "reference": "Leon--Pless--Sloane DB~\\cite{LeonPlessSloane}"
       },
       "public_a_d_min_achieved": true,
       "parent": "GF5-06",
@@ -70,7 +70,7 @@
         "a_d": [
           672
         ],
-        "reference": "Betsumiya et al."
+        "reference": "Betsumiya et al.~\\cite{BetsumiyaEtAl}"
       },
       "public_a_d_min_achieved": true,
       "parent": null,
@@ -94,7 +94,7 @@
         "a_d": [
           2520
         ],
-        "reference": "Betsumiya et al."
+        "reference": "Betsumiya et al.~\\cite{BetsumiyaEtAl}"
       },
       "public_a_d_min_achieved": true,
       "parent": null,
@@ -121,7 +121,7 @@
           696,
           792
         ],
-        "reference": "Betsumiya et al."
+        "reference": "Betsumiya et al.~\\cite{BetsumiyaEtAl}"
       },
       "public_a_d_min_achieved": false,
       "parent": null,
@@ -148,7 +148,7 @@
           696,
           792
         ],
-        "reference": "Betsumiya et al."
+        "reference": "Betsumiya et al.~\\cite{BetsumiyaEtAl}"
       },
       "public_a_d_min_achieved": false,
       "parent": null,
@@ -172,7 +172,7 @@
         "a_d": [
           36036
         ],
-        "reference": "Betsumiya et al."
+        "reference": "Betsumiya et al.~\\cite{BetsumiyaEtAl}"
       },
       "public_a_d_min_achieved": true,
       "parent": "GF13-12P",

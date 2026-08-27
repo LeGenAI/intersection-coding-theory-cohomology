@@ -1,0 +1,14 @@
+Remote Magma replay through the authenticated Mac Studio / Linux route.
+
+BKLC 20 10 available true
+parameters 20 10 8
+self_dual false
+lower_upper 8 9
+BKLC 22 11 available true
+parameters 22 11 8
+self_dual false
+lower_upper 8 10
+BKLC 24 12 available true
+parameters 24 12 9
+self_dual false
+lower_upper 9 10

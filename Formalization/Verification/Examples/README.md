@@ -53,6 +53,14 @@ code.
 The GF(5) top-edge checker supplies the [22,11,8] -> [24,12,9] panel and
 verifies the largest repeated box over that field.
 
+The separate `gf5_bklc_seed_audit.m` replay checks Magma's general linear-code
+BKLC entries at `[20,10]`, `[22,11]`, and `[24,12]` over `GF(5)`. Their
+distances are 8, 8, and 9, respectively, but none of the returned codes is
+Euclidean self-dual. Thus BKLC is a useful distance bound and construction
+baseline, not a direct source of self-dual parents without an additional
+self-duality or diagonal-scaling test. Magma's BKLC tables do not cover
+`GF(13)`.
+
 The large Python check verifies all 3,432 seven-column information sets, performs
 the exact universal normalization, enumerates the deletion parent, and checks
 the fixed-parent lifting condition. The MDS deletion parent has exactly one
