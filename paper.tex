@@ -2370,12 +2370,37 @@ in~\cite{BetsumiyaEtAl}. Put the columns of \(G_{14}\) in the order
 \sigma=\AppThirteenFourteenCoordinateOrder
 \]
 and group consecutive coordinates into seven two-coordinate blocks. A
-row-equivalent universal generator is
+row-equivalent universal generator is obtained from the coefficient matrix
 \begin{equation}
-\widehat G_{14}=\AppThirteenFourteenUniversal.
-\label{eq:gf13-14-universal}
+P=\AppThirteenFourteenP
+\label{eq:gf13-14-coefficient-p}
 \end{equation}
-It has \(k=6\), \(r=1\), and \(D=(1)\). Deleting its first block row and
+and
+\[
+H=\AppThirteenFourteenH,
+\qquad
+Q=\AppThirteenFourteenQ,
+\qquad
+A=\AppThirteenFourteenA=-Q^{\mathsf T},
+\qquad D=(1).
+\]
+In the notation of Theorem~\ref{thm:universal-rank-boxed}, this gives
+\begin{equation}
+\widehat G_{14}=G(5;P,H,Q,A,D)
+=\left[
+\begin{array}{c|c}
+\bigl((P_{ij},5P_{ij}+\delta_{ij})\bigr)_{1\le i,j\le6}
+  & \bigl((H_i,5H_i+Q_i)\bigr)_{1\le i\le6}\\
+\hline
+\bigl(A_j(1,5)\bigr)_{1\le j\le6} & (1,5)
+\end{array}
+\right].
+\label{eq:gf13-14-structured-generator}
+\end{equation}
+Thus the six pivot rows have exactly the pattern of
+Theorem~\ref{thm:universal-rank-boxed}, while every block of the terminal row
+is a multiple of \((1,5)\). It has \(k=6\), \(r=1\), and \(D=(1)\).
+Deleting its first block row and
 first block column gives a self-dual \([12,6,6]\) parent. For this displayed
 parent, the projective correction classes satisfying the necessary
 weight-six/seven lifting condition form the singleton
@@ -2409,7 +2434,8 @@ T=\begin{pmatrix}
 \qquad \det T=5,
 \]
 and exact multiplication gives
-\(TG_{14}^{\sigma}=\widehat G_{14}\). Applying
+\(TG_{14}^{\sigma}=\widehat G_{14}\), with \(\widehat G_{14}\) as in
+\eqref{eq:gf13-14-structured-generator}. Applying
 \(\partial(s,t)=t-5s\) blockwise makes the rank-one structure visible:
 \[
 \partial\widehat G_{14}=\AppThirteenFourteenReadout.
@@ -2429,7 +2455,7 @@ Finally,
 \[
 [\AppThirteenFourteenGamma]=\AppThirteenFourteenSurvivor,
 \]
-and the lower six rows of \eqref{eq:gf13-14-universal}, after deleting their
+and the lower six rows of \eqref{eq:gf13-14-structured-generator}, after deleting their
 first block, are literally the parent generator. Reattaching that block and
 the first row therefore recovers \(\widehat G_{14}\).
 \end{proof}
