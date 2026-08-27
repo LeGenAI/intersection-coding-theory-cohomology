@@ -2189,16 +2189,15 @@ self-duality implies precisely these three coefficient relations.
 
 \medskip
 
-The applications below separate three kinds of computational output.  Table~1
-compares reproducible examples with the corresponding published benchmarks,
-a separate binary example records an exact two-level descent and ascent, and a
-proposition is reserved for the universal realization that supplies a
-distinguished parent and a fixed-seed continuation problem.
+The applications below separate reproducible catalogue entries, repeated
+parent--child lineages, and the universal realization used in the main
+argument.
 
-\subsection{Applications}\label{sec:applications}
+\subsection{Verified application catalogue}\label{sec:applications}
 \input{Formalization/Verification/Examples/application_catalog_data.tex}
 \input{Formalization/Verification/Examples/large_applications_data.tex}
 \input{Formalization/Verification/Examples/golay_lineage_data.tex}
+\input{Formalization/Verification/Examples/gf13_repeated_lineage_data.tex}
 
 For earlier results on self-dual codes over these fields, see
 \cite{LeonPlessSloane,BetsumiyaEtAl,KimChoi2021}.  For a displayed generator
@@ -2222,24 +2221,28 @@ codes have different weight enumerators.  For MDS rows, by contrast,
 \toprule
 Artifact & \(p\) & Our \([n,k,d];A_d\) & Published \((d_{\rm best};A_d)\) & Source\\
 \midrule
+\GolayCatalogueRows
 \ApplicationCatalogueRows
+\GFThirteenRepeatedCatalogueRows
 \bottomrule
 \end{tabular}
 \caption{Verified application catalogue compared with published benchmarks.
-Each artifact identifier links to its generator, complete weight distribution,
-and verification metadata.  The table makes no claim that a listed benchmark
-value of \(A_d\) is extremal.}
+Each artifact identifier links to its generator and verification metadata;
+complete weight distributions are included whenever they were computed.  The
+table makes no claim that a listed benchmark value of \(A_d\) is extremal.}
 \label{tab:application-distances}
 \end{table}
 
 The full matrices formerly displayed as separate propositions are retained in
-the linked certificates.  The numerical verifier checks their boxed
-relations, rank, Gram matrix, complete weight distribution, and MacWilliams
-identity.  Thus moving them to Table~\ref{tab:application-distances} changes
-only the exposition, not the available evidence.  The finite enumerations are
-external exact computations rather than Lean proofs.
+the linked certificates.  The numerical verifiers check their relevant boxed
+or repeated relations, rank, Gram matrix, and the recorded weight data; every
+complete distribution is also checked against the MacWilliams identity.  Thus
+moving them to Table~\ref{tab:application-distances} changes only the
+exposition, not the available evidence.  The finite enumerations are external
+exact computations rather than Lean proofs.
 
-\paragraph{A length-20-centered Golay descent and ascent.}
+\subsection{Repeated lineages centered at length~20}
+
 The extended binary Golay code gives a compact instance in which two exact
 levels can be followed in either direction from length~20.  Let
 \(\mathcal G_{24}\) be the extended Golay code with its standard generator
@@ -2274,10 +2277,64 @@ also inverted exactly by the corresponding Kim step with \(x_{16}\) or
 \(x_{18}\), so all four adjacent pairs satisfy the same reconstruction
 identity.
 The parameters and the number \(A_d\) of minimum-weight words at each level
-are recorded separately in Table~\ref{tab:golay-lineage}.  In particular, the
+are recorded in Table~\ref{tab:repeated-lineages}.  In particular, the
 distance rises at both upward steps from the length-20 center.  All five
 distances attain the
 classical upper bounds for binary self-dual codes~\cite{HuffmanPless}.
+
+There is an odd-characteristic analogue over \(\GF{13}\) using the same
+repeated mechanism.  Let \(C_{22}^{(13)}\) be the pure double-circulant
+self-dual \([22,11,10]\) code whose circulant first row is
+\[
+(7,7,8,3,0,10,1,9,7,11,10),
+\]
+as in~\cite{BetsumiyaEtAl}.  Exact two-coordinate reduction at the ordered
+pair \((1,16)\) gives a self-dual \([20,10,8]\) code
+\(C_{20}^{(13)}\), and reduction of this same code at \((1,2)\) gives a
+self-dual \([18,9,7]\) code \(C_{18}^{(13)}\).  The coordinate indices are
+one-based and refer to the matrices in certificate
+\GFThirteenRepeatedCertificate.
+
+For a self-dual parent matrix \(G\) with rows \(g_i\), put
+\[
+\mathcal K_5(G,x)=
+\begin{pmatrix}
+1&0&x\\
+-y_1&-5y_1&g_1\\
+\vdots&\vdots&\vdots\\
+-y_m&-5y_m&g_m
+\end{pmatrix},
+\qquad y_i=x\mathbin{\cdot}g_i.
+\]
+This is the normalization of Theorem~\ref{thm:qary-building-up} with
+\(c=5\).  For the certified parent generators \(G_{18}^{(13)}\) and
+\(G_{20}^{(13)}\), the correction vectors are
+\[
+\begin{aligned}
+x_{18}^{(13)}&=\GFThirteenEighteenCorrection,\\
+x_{20}^{(13)}&=\GFThirteenTwentyCorrection.
+\end{aligned}
+\]
+They satisfy \(x_m^{(13)}\mathbin{\cdot}x_m^{(13)}=-1\) and the exact
+row-space identities
+\[
+\begin{aligned}
+\operatorname{rowspan}\mathcal K_5
+  (G_{18}^{(13)},x_{18}^{(13)})&=C_{20}^{(13)},\\
+\operatorname{rowspan}\mathcal K_5
+  (G_{20}^{(13)},x_{20}^{(13)})&=C_{22}^{(13)}.
+\end{aligned}
+\]
+Consequently these are not separately selected examples but one
+bidirectional lineage
+\[
+C_{18}^{(13)}\ \longleftrightarrow\ C_{20}^{(13)}
+\ \longleftrightarrow\ C_{22}^{(13)}.
+\]
+The checker verifies both literal repeated matrices, equality with the
+corresponding child row spaces, and the complete weight distributions at
+lengths 18 and 20.  The Magma audit examines all \(22\cdot21=462\) ordered
+pairs at the first reduction and all \(20\cdot19=380\) at the second.
 
 \begin{table}[htbp]
 \centering
@@ -2287,18 +2344,25 @@ classical upper bounds for binary self-dual codes~\cite{HuffmanPless}.
 \toprule
 Level & Code & Parameters & \(A_d\) & Exact upward relation\\
 \midrule
+\multicolumn{5}{c}{Binary lineage}\\
 \GolayLineageRows
+\addlinespace
+\multicolumn{5}{c}{\(\GF{13}\) lineage}\\
+\GFThirteenRepeatedLineageRows
 \bottomrule
 \end{tabular}
-\caption{The verified length-20-centered Golay lineage.  Complete enumeration checks
-rank, self-orthogonality, distance, weight distribution, and the MacWilliams
-identity.  At each upward step the checker also verifies literal reconstruction
-of the displayed Kim matrix and equality of its row space with the child code;
-the full matrices are in certificate \GolayLineageCertificate.}
-\label{tab:golay-lineage}
+\caption{The two verified lineages centered at length~20.  The checkers verify
+rank, self-orthogonality, the recorded weight distributions and their
+MacWilliams identities, literal reconstruction of every displayed Kim or
+Kim--Lee matrix, and equality with the child row space.  The full matrices are
+in certificates \GolayLineageCertificate\ and
+\GFThirteenRepeatedCertificate.}
+\label{tab:repeated-lineages}
 \end{table}
 
-\begin{prop}[A universal rank-one realization of a self-dual MDS \texorpdfstring{$[14,7,8]$}{[14,7,8]} code over \texorpdfstring{$\GF{13}$}{GF(13)}]
+\subsection{A universal rank-one MDS realization over \texorpdfstring{$\GF{13}$}{GF(13)}}
+
+\begin{prop}
 \label{prop:universal-mds-137}
 \rm
 Let \(K=\GF{13}\), let \(c=5\), and let
@@ -2325,6 +2389,16 @@ Q=\AppThirteenFourteenQ,
 \qquad
 A=\AppThirteenFourteenA=-Q^{\mathsf T},
 \qquad D=(1).
+\]
+Let \(\delta_{ij}\) denote the Kronecker delta: \(\delta_{ij}=1\) when
+\(i=j\), and \(\delta_{ij}=0\) otherwise.  It records the identity readout
+in the second coordinate of the \(j\)-th pivot block; explicitly,
+\[
+(P_{ij},5P_{ij}+\delta_{ij})=
+\begin{cases}
+(P_{ii},5P_{ii}+1),&i=j,\\
+(P_{ij},5P_{ij}),&i\ne j.
+\end{cases}
 \]
 In the notation of Theorem~\ref{thm:universal-rank-boxed}, this gives
 \begin{equation}

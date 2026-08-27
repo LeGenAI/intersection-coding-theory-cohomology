@@ -77,7 +77,7 @@ def main():
     inputs |= {ROOT / n for n in ["lakefile.lean", "lake-manifest.json", "lean-toolchain",
                                   "comparator/verify_manuscript.py", "comparator/generate_challenge.py"]}
     inputs |= set((ROOT / "Formalization/Verification/Examples").glob("*applications*"))
-    inputs |= set((ROOT / "Formalization/Verification/Examples").glob("*golay*"))
+    inputs |= set((ROOT / "Formalization/Verification/Examples").glob("*lineage*"))
     inputs.add(ROOT / "Formalization/Verification/Examples/check_applications.py")
     inputs.add(ROOT / "Formalization/Verification/Examples/build_application_catalog.py")
     inputs.add(ROOT / "Formalization/Verification/Examples/application_catalog.json")
@@ -158,6 +158,8 @@ def main():
             ["python3", "Formalization/Verification/Examples/check_large_applications.py", "--check"])
         run("golay-lineage",
             ["python3", "Formalization/Verification/Examples/check_golay_lineage.py", "--check"])
+        run("gf13-repeated-lineage",
+            ["python3", "Formalization/Verification/Examples/check_gf13_repeated_lineage.py", "--check"])
         run("application-catalogue",
             ["python3", "Formalization/Verification/Examples/build_application_catalog.py", "--check"])
         require(all(sha(ROOT / p) == h for p, h in hashes.items()), "input changed during verification")

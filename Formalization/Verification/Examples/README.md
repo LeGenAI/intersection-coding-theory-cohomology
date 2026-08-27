@@ -5,6 +5,7 @@ The small application matrices catalogued by the manuscript are checked with:
 ```sh
 python3 Formalization/Verification/Examples/check_applications.py --check
 python3 Formalization/Verification/Examples/check_golay_lineage.py --check
+python3 Formalization/Verification/Examples/check_gf13_repeated_lineage.py --check
 python3 Formalization/Verification/Examples/build_application_catalog.py --check
 ```
 
@@ -27,6 +28,11 @@ steps
 `[16,8,4] -> [18,9,4] -> [20,10,4] -> [22,11,6] -> [24,12,8]`, including
 complete weight distributions and literal row-space reconstruction at every
 level.
+
+The GF(13) repeated-lineage checker supplies the second panel of the same
+table and the three additional Table 1 rows. It verifies
+[18,9,7] <-> [20,10,8] <-> [22,11,10] as one exact lineage, including both
+normalized Kim--Lee presentations and row-space reconstruction.
 
 The large Python check verifies all 3,432 seven-column information sets, performs
 the exact universal normalization, enumerates the deletion parent, and checks
