@@ -1,0 +1,374 @@
+'BuildingUpFormalization.Components.BinaryCzKim.binaryDiagonalHead_apply_zero' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'BuildingUpFormalization.Components.BinaryCzKim.binaryDiagonalHead_apply_one' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'BuildingUpFormalization.Components.BinaryCzKim.standardEuclideanPlaneForm_binaryDiagonalHead_self' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'BuildingUpFormalization.Components.BinaryCzKim.standardEuclideanPlaneForm_planeE0_binaryDiagonalHead' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'BuildingUpFormalization.Components.BinaryCzKim.standardEuclideanPlane_head_not_hyperbolicPair' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'BuildingUpFormalization.Components.BinaryCzKim.dot_r0_riBin_eq_zero_iff' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'BuildingUpFormalization.Components.BinaryCzKim.boxedFamily_coefficient_eq_dot' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'BuildingUpFormalization.Components.BinaryCzKim.dot_riBin_riBin_eq_dot' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'BuildingUpFormalization.Components.BinaryCzKim.boxedFamily_tail_pairwiseOrthogonal' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'BuildingUpFormalization.Components.BinaryCzKim.buildSuccBinLinear_apply' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'BuildingUpFormalization.Components.BinaryCzKim.buildRowsBin_succ_eq_buildSuccBinLinear' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'BuildingUpFormalization.Components.BinaryCzKim.buildRowsBin_tail_linearIndependent' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'BuildingUpFormalization.Components.BinaryCzKim.buildRows_one_eq_buildRowsBin' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'BuildingUpFormalization.Components.BinaryCzKim.paper_binary_kim_building_up_exact' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'BuildingUpFormalization.Components.BinaryCzKim.isSelfOrthogonal_map_of_isFormIsometry' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'BuildingUpFormalization.Components.BinaryCzKim.boxedFamily_linearIndependent_of_paperSelfDualCode' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'BuildingUpFormalization.Components.BinaryCzKim.boxedFamily_tail_paperSelfDualCode' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'BuildingUpFormalization.Components.BinaryCzKim.paper_binary_cz_kim_corrected' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'BuildingUpFormalization.Components.BinaryRankOneNormalization.every_binary_selfDualCode_has_rankOne_normalForm' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'BuildingUpFormalization.Components.BinaryRankOneNormalization.mem_binaryReducedCode_iff' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'BuildingUpFormalization.Components.BinaryRankOneNormalization.paper_binary_twoCoordinateReduction_exact' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'BuildingUpFormalization.Components.BinaryRankOneNormalization.paper_binary_reconstruction_from_reduction_exact' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'BuildingUpFormalization.Components.SplitBoxed.paper_conditional_boxed_normalization_exact' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'BuildingUpFormalization.Components.Foundations.standardEuclideanPlaneForm_apply' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'BuildingUpFormalization.Components.Foundations.alternatingHyperbolicPlaneForm_apply' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'BuildingUpFormalization.Components.Foundations.standardEuclideanPlaneForm_gram' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'BuildingUpFormalization.Components.Foundations.alternatingHyperbolicPlaneForm_gram' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'BuildingUpFormalization.Components.Foundations.standardEuclideanPlaneForm_not_isAlt' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'BuildingUpFormalization.Components.Foundations.alternatingHyperbolicPlaneForm_isAlt' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'BuildingUpFormalization.Components.Foundations.isAlt_of_isFormIsometry' depends on axioms: [propext, Quot.sound]
+'BuildingUpFormalization.Components.Foundations.no_isometry_standardEuclideanPlane_alternatingHyperbolicPlane' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'BuildingUpFormalization.Components.Foundations.selfOrthogonal_isTotallyIsotropic' depends on axioms: [propext,
+ Quot.sound]
+'BuildingUpFormalization.Components.Foundations.selfOrthogonal_isMaximalTotallyIsotropic' depends on axioms: [propext,
+ Quot.sound]
+'BuildingUpFormalization.Components.Foundations.selfOrthogonal_iff_totallyIsotropic_and_finrank_half' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'BuildingUpFormalization.Components.Foundations.selfOrthogonal_even_finrank' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'BuildingUpFormalization.Components.Foundations.selfOrthogonal_iff_maximalTotallyIsotropic_and_finrank_half' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'BuildingUpFormalization.Components.Foundations.paperLagrangianSubspace_iff_totallyIsotropic_and_finrank_half' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'BuildingUpFormalization.Components.Foundations.paperSelfDualCode_iff_totallyIsotropic_and_finrank_half' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'BuildingUpFormalization.Components.Foundations.paperLagrangianSubspace_even_length' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'BuildingUpFormalization.Components.Foundations.paperSelfDualCode_even_length' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'BuildingUpFormalization.Components.Foundations.systematicRows_linearIndependent' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'BuildingUpFormalization.Components.Foundations.dot_systematicRows' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'BuildingUpFormalization.Components.Foundations.systematicRows_pairwiseOrthogonal_iff' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'BuildingUpFormalization.Components.Foundations.systematicRows_selfDual_iff_pairwiseOrthogonal' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'BuildingUpFormalization.Components.Foundations.paper_systematic_form_criterion_exact' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'BuildingUpFormalization.Components.NormForm.root_neg_one_orderOf' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'BuildingUpFormalization.Components.NormForm.scalar_identity_mul_transpose' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'BuildingUpFormalization.Components.NormForm.splitE1_splitE2_hyperbolicPair' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'BuildingUpFormalization.Components.NormForm.splitE1_splitE2_linearIndependent' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'BuildingUpFormalization.Components.NormForm.norm_form_splitting_paper_order' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'BuildingUpFormalization.Components.NormForm.norm_form_witness_factors' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'BuildingUpFormalization.Components.NormForm.exists_norm_pair_with_paper_factors' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'BuildingUpFormalization.Components.NormForm.paper_split_consequences_exact' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'BuildingUpFormalization.Components.NormForm.paper_euclidean_plane_hyperbolic_basis_exact' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'BuildingUpFormalization.Components.PermutationEquivalence.coordinatePermuteLinearEquiv_apply' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'BuildingUpFormalization.Components.PermutationEquivalence.dot_coordinatePermuteLinearEquiv' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'BuildingUpFormalization.Components.PermutationEquivalence.rowSpace_permuteFamily_eq_permutedCode' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'BuildingUpFormalization.Components.PermutationEquivalence.paperSelfDualCode_permutedCode' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'BuildingUpFormalization.Components.PermutationEquivalence.codeEquiv_preserves_paperSelfDualCode' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'BuildingUpFormalization.Components.QaryEquivalence.paper_qary_free_core_boxed_equivalence' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'BuildingUpFormalization.Components.QaryForward.buildSuccLinear_apply' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'BuildingUpFormalization.Components.QaryForward.splitTailLinear_buildSuccLinear' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'BuildingUpFormalization.Components.QaryForward.buildRows_succ_eq_buildSuccLinear' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'BuildingUpFormalization.Components.QaryForward.buildRows_tail_linearIndependent' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'BuildingUpFormalization.Components.QaryForward.buildRows_linearIndependent_iff' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'BuildingUpFormalization.Components.QaryForward.dot_ri_ri_eq_dot' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'BuildingUpFormalization.Components.QaryForward.buildRows_tail_pairwiseOrthogonal' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'BuildingUpFormalization.Components.QaryForward.buildRows_pairwiseOrthogonal_iff' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'BuildingUpFormalization.Components.QaryForward.paper_qary_kim_lee_building_up_exact' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'BuildingUpFormalization.Components.QaryForward.rowSpace_finrank_of_linearIndependent' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'BuildingUpFormalization.Components.QaryForward.buildRows_tail_finrank_of_linearIndependent' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'BuildingUpFormalization.Components.QaryForward.buildRows_tail_independent_orthogonal_finrank' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'BuildingUpFormalization.Components.QaryForward.buildRows_tail_paperLagrangianSubspace' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'BuildingUpFormalization.Components.QaryForward.dot_r0_r0_eq_zero_iff' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'BuildingUpFormalization.Components.QaryForward.dot_r0_ri_eq_zero_iff' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'BuildingUpFormalization.Components.QaryForward.qaryAdaptedFamily_extension_vector_norm' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'BuildingUpFormalization.Components.QaryForward.qaryAdaptedFamily_coefficient_eq_dot' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'BuildingUpFormalization.Components.QaryForward.qaryAdaptedFamily_eq_buildRows' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'BuildingUpFormalization.Components.QaryForward.qaryAdaptedFamily_linearIndependent_of_paperSelfDualCode' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'BuildingUpFormalization.Components.QaryForward.qaryAdaptedFamily_tail_paperSelfDualCode' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'BuildingUpFormalization.Components.QaryForward.paper_qary_adapted_reduction' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'BuildingUpFormalization.Components.RankBoxed.paperRankBoxedRows_forward_selfDual' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'BuildingUpFormalization.Components.QaryRankBoxedNormalization.every_qary_selfDualCode_has_rankBoxed_normalForm' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'BuildingUpFormalization.Components.RankBoxedExtension.paper_rankBoxed_buildingUp_exact' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'BuildingUpFormalization.Components.RankBoxedExtension.paper_rankBoxed_buildingUp_minimal_exact' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'BuildingUpFormalization.Components.RankBoxedStructure.paper_rankBoxed_pivot_restriction_exact' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'BuildingUpFormalization.Components.RankBoxedStructure.paper_rankBoxed_terminal_exact' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'BuildingUpFormalization.Components.RankBoxedStructure.paper_rankOne_split_specialization_exact' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'BuildingUpFormalization.Components.RepeatedBox.extension_dictionary_exact' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'BuildingUpFormalization.Components.RepeatedBox.extension_zero_column_iff' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'BuildingUpFormalization.Components.RepeatedBox.repeated_step_selfDual_exact' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'BuildingUpFormalization.Components.RepeatedBox.repeated_step_normalization_exact' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'BuildingUpFormalization.Components.RepeatedBox.repeated_step_kim_lee_iff' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'BuildingUpFormalization.Components.RepeatedBox.determined_repeated_step_kim_lee_iff' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'BuildingUpFormalization.Components.RepeatedBox.kim_lee_to_repeated_exact' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'BuildingUpFormalization.Components.RepeatedStep.one_step_normalization_exact' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'BuildingUpFormalization.Components.RepeatedStep.zero_column_exact' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'BuildingUpFormalization.Components.RepeatedStep.one_step_kim_lee_iff' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'BuildingUpFormalization.Components.RepeatedStep.binary_normalization_exact' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'BuildingUpFormalization.Components.SplitBoxed.blockDefect_isotropicLineBlock' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'BuildingUpFormalization.Components.SplitBoxed.blockDefect_splitDiagonalBlock' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'BuildingUpFormalization.Components.SplitBoxed.blockDefectLinear_isotropicLineBlock' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'BuildingUpFormalization.Components.SplitBoxed.blockDefectLinear_splitDiagonalBlock' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'BuildingUpFormalization.Components.SplitBoxed.splitBoxedReadout_splitBoxedRows' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'BuildingUpFormalization.Components.SplitBoxed.splitBoxedRows_linearIndependent' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'BuildingUpFormalization.Components.SplitBoxed.splitBlockRowInner_comm' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'BuildingUpFormalization.Components.SplitBoxed.splitBlockRowBilin_isRefl' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'BuildingUpFormalization.Components.SplitBoxed.splitBlockRowBilin_separatingLeft' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'BuildingUpFormalization.Components.SplitBoxed.splitBlockRowBilin_separatingRight' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'BuildingUpFormalization.Components.SplitBoxed.splitBlockRowBilin_nondegenerate' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'BuildingUpFormalization.Components.SplitBoxed.splitBoxedRows_rowSpace_finrank' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'BuildingUpFormalization.Components.SplitBoxed.splitBlockInner_isotropicLine_isotropicLine' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'BuildingUpFormalization.Components.SplitBoxed.splitBlockInner_diagonal_isotropicLine' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'BuildingUpFormalization.Components.SplitBoxed.splitBlockInner_isotropicLine_diagonal' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'BuildingUpFormalization.Components.SplitBoxed.splitBoxed_offDiagonal_two_block_contribution' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'BuildingUpFormalization.Components.SplitBoxed.splitBoxedRows_nonfinal_inner' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'BuildingUpFormalization.Components.SplitBoxed.splitBoxedRows_nonfinal_self' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'BuildingUpFormalization.Components.SplitBoxed.splitBoxedRows_final_self' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'BuildingUpFormalization.Components.SplitBoxed.splitBoxedRows_nonfinal_final_inner' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'BuildingUpFormalization.Components.SplitBoxed.splitBoxedRows_pairwiseOrthogonal' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'BuildingUpFormalization.Components.SplitBoxed.splitBoxedRowSpace_le_orthogonal' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'BuildingUpFormalization.Components.SplitBoxed.splitBoxedRows_rowSpace_selfDual' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'BuildingUpFormalization.Components.SplitBoxed.paper_split_boxed_form_exact' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'BuildingUpFormalization.Components.SplitFormTransport.split_form_transport_exact' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'BuildingUpFormalization.Components.SplitFormTransport.split_isometry_code_equiv_exact' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'BuildingUpFormalization.Components.SplitFormTransport.head_alignment_not_euclidean_isometry' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]

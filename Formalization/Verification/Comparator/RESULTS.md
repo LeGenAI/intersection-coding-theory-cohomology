@@ -1,25 +1,25 @@
 # Manuscript verification results
 
-**PASS: fresh complete Linux replay of 17 suites / 124 exact goals.**
+**PASS: fresh complete Linux replay of 17 suites / 126 exact goals.**
 
-The current run started 2026-08-27 07:28:58 UTC and ended 07:37:36 UTC
-(2026-08-27, 15:28--15:37 UTC+8).
+The current run started 2026-08-27 08:23:04 UTC and ended 08:30:48 UTC
+(2026-08-27, 16:23--16:30 UTC+8).
 All 17 suites were replayed in one fresh project snapshot. This supersedes
 the earlier full replay as well as the incremental 113 + 10 coverage; it is
 not merely a recount of historical receipts.
 
 ## Evidence
 
-- [Machine-readable summary and 139 input hashes](receipts/2026-08-27-universal-parents/summary.json)
-- [124 transitive axiom reports](receipts/2026-08-27-universal-parents/axioms.log)
-- [Section and Solution build](receipts/2026-08-27-universal-parents/build.log)
-- [Four rank-two GF(5) kernel certificates](receipts/2026-08-27-universal-parents/rank-two-gf5.log)
-- [Finite-field application computations](receipts/2026-08-27-universal-parents/applications.log)
-- [Large GF(13) computation](receipts/2026-08-27-universal-parents/large-applications.log)
-- [Binary Golay descent, ascent and universal parent](receipts/2026-08-27-universal-parents/golay-lineage.log)
-- [GF(5) Corollary 3.10 parent](receipts/2026-08-27-universal-parents/gf5-repeated-top.log)
-- [GF(13) Corollary 3.10 parent](receipts/2026-08-27-universal-parents/gf13-repeated-lineage.log)
-- [Generated historical catalogue](receipts/2026-08-27-universal-parents/application-catalogue.log)
+- [Machine-readable summary and 139 input hashes](receipts/2026-08-27-minimal-form-linux-final2/summary.json)
+- [126 transitive axiom reports](receipts/2026-08-27-minimal-form-linux-final2/axioms.log)
+- [Section and Solution build](receipts/2026-08-27-minimal-form-linux-final2/build.log)
+- [Four rank-two GF(5) kernel certificates](receipts/2026-08-27-minimal-form-linux-final2/rank-two-gf5.log)
+- [Finite-field application computations](receipts/2026-08-27-minimal-form-linux-final2/applications.log)
+- [Large GF(13) computation](receipts/2026-08-27-minimal-form-linux-final2/large-applications.log)
+- [Binary Golay descent, ascent and universal parent](receipts/2026-08-27-minimal-form-linux-final2/golay-lineage.log)
+- [GF(5) Corollary 3.10 parent](receipts/2026-08-27-minimal-form-linux-final2/gf5-repeated-top.log)
+- [GF(13) Corollary 3.10 parent](receipts/2026-08-27-minimal-form-linux-final2/gf13-repeated-lineage.log)
+- [Generated historical catalogue](receipts/2026-08-27-minimal-form-linux-final2/application-catalogue.log)
 
 The summary records all 28 commands, exit statuses and log hashes.
 Every input hash was checked again after execution, and all input and log
@@ -36,9 +36,9 @@ local build, transitive axiom audit, rank-two certificate check and computations
 | QaryForward | 21 | PASS / accepted |
 | QaryEquivalence | 1 | PASS / accepted |
 | BinaryRankOneNormalization | 1 | PASS / accepted |
-| QaryRankBoxedNormalization | 1 | PASS / accepted |
+| QaryRankBoxedNormalization | 2 | PASS / accepted |
 | RankBoxedStructure | 3 | PASS / accepted |
-| RankBoxedExtension | 1 | PASS / accepted |
+| RankBoxedExtension | 2 | PASS / accepted |
 | RepeatedStep | 4 | PASS / accepted |
 | RepeatedBox | 7 | PASS / accepted |
 | SplitBoxed | 12 | PASS / accepted |
@@ -47,7 +47,7 @@ local build, transitive axiom audit, rank-two certificate check and computations
 | BinaryTwoCoordinateReduction | 3 | PASS / accepted |
 | SplitFormTransport | 3 | PASS / accepted |
 | ConditionalBoxed | 1 | PASS / accepted |
-| **Total** | **124** | **All accepted** |
+| **Total** | **126** | **All accepted** |
 
 Each suite's raw log is named `comparator-<Suite>.log` in the evidence directory.
 
@@ -57,7 +57,7 @@ Each suite's raw log is named `comparator-<Suite>.log` in the evidence directory
   `1f3cdaa7a7f82a2e521d285b11e261110e1e1962`.
 - All nine dependency repositories matched the lockfile revisions and had
   clean tracked source trees; their existing package caches were reused.
-- All 124 exact goals report only `propext`, `Classical.choice` and `Quot.sound`.
+- All 126 exact goals report only `propext`, `Classical.choice` and `Quot.sound`.
 - The 53 local production dependency files contain no executable
   `sorry`, `admit`, user `axiom`, `sorryAx`, `native_decide` or
   `implemented_by`. The scanner masks nested comments and strings.
@@ -80,7 +80,7 @@ given code after the stated coordinate permutation. The repeated-step goals
 include the nonzero-correction iff and the zero-correction direct-sum case.
 
 The concrete rank-two certificates and finite-code computations are separate
-from the 124 Comparator goals. The application distances and the two-step
+from the 126 Comparator goals. The application distances and the two-step
 Golay lineage are external exact finite enumerations, not Lean proofs. Their
 inputs, generated TeX, reconstruction certificates and complete weight
 distributions are versioned under `../Examples/`.  The largest binary parent
