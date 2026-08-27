@@ -2235,7 +2235,7 @@ codes have different weight enumerators.  For MDS rows, by contrast,
 \begin{tabular}{@{}lc>{\centering\arraybackslash}p{75pt}
   >{\centering\arraybackslash}p{95pt}>{\raggedright\arraybackslash}p{100pt}@{}}
 \toprule
-Artifact & \(p\) & Our \([n,k,d];A_d\) & Published \((d_{\rm best};A_d)\) & Source\\
+Code & \(p\) & Our \([n,k,d];A_d\) & Published \((d_{\rm best};A_d)\) & Reference\\
 \midrule
 \GolayCatalogueRows
 \GFFiveRepeatedCatalogueRows
@@ -2243,20 +2243,17 @@ Artifact & \(p\) & Our \([n,k,d];A_d\) & Published \((d_{\rm best};A_d)\) & Sour
 \GFThirteenRepeatedCatalogueRows
 \bottomrule
 \end{tabular}
-\caption{Verified application catalogue compared with published benchmarks.
-Each artifact identifier links to its generator and verification metadata;
-complete weight distributions are included whenever they were computed.  The
-table makes no claim that a listed benchmark value of \(A_d\) is extremal.}
+\caption{Certified self-dual codes and published distance benchmarks.}
 \label{tab:application-distances}
 \end{table}
 
-The full matrices formerly displayed as separate propositions are retained in
-the linked certificates.  The numerical verifiers check their relevant boxed
-or repeated relations, rank, Gram matrix, and the recorded weight data; every
-complete distribution is also checked against the MacWilliams identity.  Thus
-moving them to Table~\ref{tab:application-distances} changes only the
-exposition, not the available evidence.  The finite enumerations are external
-exact computations rather than Lean proofs.
+Each code symbol in Table~\ref{tab:application-distances} links to its exact
+generator and verification record.  The numerical verifiers check the
+relevant boxed or repeated relation, rank, Gram matrix, and recorded weight
+data; every complete distribution is also checked against the MacWilliams
+identity.  The three largest repeated generators are written out in full
+below.  The finite enumerations are external exact computations rather than
+Lean proofs.
 
 \subsection{Largest repeated boxed presentations}
 
@@ -2276,7 +2273,8 @@ of the three fields.  If \(G\) has rows \(g_1,\ldots,g_m\), let
 For \(q=2,5,13\), take \(c=1,2,5\), respectively.  In characteristic two,
 \(-1=1\) and the lower heads become \((y_i,y_i)\), so
 \(\mathcal B_1\) is literally the binary repeated box.  With the coordinate
-orders recorded in the certificates, the three largest presentations are
+orders recorded in the verification records, the three largest presentations
+are
 \begin{equation}
 \begin{aligned}
 \widetilde G_{24}^{(2)}
@@ -2318,6 +2316,14 @@ x_{22}&=\GolayTwentyTwoCorrection,\\
 \]
 Here \(x_{22}^{(2)}=x_{22}\) in
 \eqref{eq:three-largest-repeated-boxes}.
+The complete normalized generator is
+\[
+\resizebox{\textwidth}{!}{$
+\widetilde G_{24}^{(2)}=\BinaryLargestRepeatedMatrix .
+$}
+\]
+The vertical rules delimit the twelve two-coordinate blocks; they are not
+additional entries of the matrix.
 Thus length~20 is the center of the requested two-level picture:
 \[
 C_{16}\longleftarrow C_{18}\longleftarrow C_{20}
@@ -2347,6 +2353,12 @@ has norm \(-1\), and
 \operatorname{rowspan}\mathcal B_2
   (G_{22}^{(5)},x_{22}^{(5)})=C_{24}^{(5)}.
 \]
+In the same paired coordinate order, the complete normalized generator is
+\[
+\resizebox{\textwidth}{!}{$
+\widetilde G_{24}^{(5)}=\GFFiveLargestRepeatedMatrix .
+$}
+\]
 The checker verifies the literal matrix in
 \eqref{eq:three-largest-repeated-boxes}, its parent row space, and the complete
 weight distribution of \(C_{22}^{(5)}\); the exhaustive Magma audit finds
@@ -2361,8 +2373,8 @@ as in~\cite{BetsumiyaEtAl}.  Exact two-coordinate reduction at the ordered
 pair \((1,16)\) gives a self-dual \([20,10,8]\) code
 \(C_{20}^{(13)}\), and reduction of this same code at \((1,2)\) gives a
 self-dual \([18,9,7]\) code \(C_{18}^{(13)}\).  The coordinate indices are
-one-based and refer to the matrices in certificate
-\GFThirteenRepeatedCertificate.
+one-based, and \GFThirteenRepeatedCertificate\ links to the matrices and their
+verification record.
 
 For the certified parent generators \(G_{18}^{(13)}\) and
 \(G_{20}^{(13)}\), the correction vectors are
@@ -2382,6 +2394,12 @@ row-space identities
   (G_{20}^{(13)},x_{20}^{(13)})&=C_{22}^{(13)}.
 \end{aligned}
 \]
+The complete normalized generator at the largest level is
+\[
+\resizebox{\textwidth}{!}{$
+\widetilde G_{22}^{(13)}=\GFThirteenLargestRepeatedMatrix .
+$}
+\]
 Consequently these are not separately selected examples but one
 bidirectional lineage
 \[
@@ -2392,6 +2410,11 @@ The checker verifies both literal repeated matrices, equality with the
 corresponding child row spaces, and the complete weight distributions at
 lengths 18 and 20.  The Magma audit examines all \(22\cdot21=462\) ordered
 pairs at the first reduction and all \(20\cdot19=380\) at the second.
+
+For every upward edge in Table~\ref{tab:repeated-lineages}, the corresponding
+checker verifies rank, self-orthogonality, literal reconstruction of the
+displayed repeated matrix, equality with the child row space, and the recorded
+weight distribution together with its MacWilliams identity.
 
 \begin{table}[htbp]
 \centering
@@ -2411,13 +2434,7 @@ Level & Code & Parameters & \(A_d\) & Exact upward relation\\
 \GFThirteenRepeatedLineageRows
 \bottomrule
 \end{tabular}
-\caption{The verified lineages supporting the three largest repeated boxed
-presentations.  The checkers verify
-rank, self-orthogonality, the recorded weight distributions and their
-MacWilliams identities, literal reconstruction of every displayed repeated
-box, and equality with the child row space.  The full matrices are
-in certificates \GolayLineageCertificate,
-\GFFiveRepeatedCertificate, and \GFThirteenRepeatedCertificate.}
+\caption{Repeated boxed lineages over \(\GF{2}\), \(\GF{5}\), and \(\GF{13}\).}
 \label{tab:repeated-lineages}
 \end{table}
 

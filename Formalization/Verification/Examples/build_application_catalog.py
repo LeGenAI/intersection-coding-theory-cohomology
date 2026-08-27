@@ -22,6 +22,7 @@ REPOSITORY = (
 CATALOGUE_METADATA = {
     "gf5_6": {
         "artifact_id": "GF5-06",
+        "display_name": r"C_{6}^{(5)}",
         "construction": "split box, $r=1$",
         "distance_status": "optimal (Singleton)",
         "prior_benchmark": {"distance": 4, "a_d": [60], "reference": "Leon--Pless--Sloane database"},
@@ -30,6 +31,7 @@ CATALOGUE_METADATA = {
     },
     "gf5_8": {
         "artifact_id": "GF5-08",
+        "display_name": r"C_{8}^{(5)}",
         "construction": "split box, $r=1$",
         "distance_status": "optimal (Ball)",
         "prior_benchmark": {"distance": 4, "a_d": [48], "reference": "Leon--Pless--Sloane database"},
@@ -38,6 +40,7 @@ CATALOGUE_METADATA = {
     },
     "gf13_8": {
         "artifact_id": "GF13-08",
+        "display_name": r"C_{8}^{(13)}",
         "construction": "split box, $r=1$",
         "distance_status": "MDS",
         "prior_benchmark": {"distance": 5, "a_d": [672], "reference": "Betsumiya et al."},
@@ -46,6 +49,7 @@ CATALOGUE_METADATA = {
     },
     "gf13_10": {
         "artifact_id": "GF13-10",
+        "display_name": r"C_{10}^{(13)}",
         "construction": "split box, $r=1$",
         "distance_status": "MDS",
         "prior_benchmark": {"distance": 6, "a_d": [2520], "reference": "Betsumiya et al."},
@@ -54,6 +58,7 @@ CATALOGUE_METADATA = {
     },
     "gf13_12": {
         "artifact_id": "GF13-12A",
+        "display_name": r"C_{12,A}^{(13)}",
         "construction": "split box, $r=1$",
         "distance_status": "exact $d=6$",
         "prior_benchmark": {"distance": 6, "a_d": [528, 576, 696, 792], "reference": "Betsumiya et al."},
@@ -62,6 +67,7 @@ CATALOGUE_METADATA = {
     },
     "gf13_14_parent": {
         "artifact_id": "GF13-12P",
+        "display_name": r"C_{12,P}^{(13)}",
         "construction": "two-coordinate parent",
         "distance_status": "exact $d=6$",
         "prior_benchmark": {"distance": 6, "a_d": [528, 576, 696, 792], "reference": "Betsumiya et al."},
@@ -70,6 +76,7 @@ CATALOGUE_METADATA = {
     },
     "gf13_14_mds": {
         "artifact_id": "GF13-14",
+        "display_name": r"C_{14}^{(13)}",
         "construction": "universal box, $r=1$",
         "distance_status": "MDS",
         "prior_benchmark": {"distance": 8, "a_d": [36036], "reference": "Betsumiya et al."},
@@ -172,12 +179,15 @@ def build_outputs():
         "entries": entries,
     }
 
+    display_names = {metadata["artifact_id"]: metadata["display_name"]
+                     for metadata in CATALOGUE_METADATA.values()}
     rows = []
     for entry in entries:
         artifact_id = entry["artifact_id"]
         filename = certificate_filename(artifact_id)
         n, k, d = entry["parameters"]
-        evidence = f"\\href{{{REPOSITORY}/{filename}}}{{\\texttt{{{artifact_id}}}}}"
+        evidence = (f"\\href{{{REPOSITORY}/{filename}}}"
+                    f"{{${display_names[artifact_id]}$}}")
         benchmark = entry["prior_benchmark"]
         prior_a = ",".join(f"{x:,}" for x in benchmark["a_d"])
         if len(benchmark["a_d"]) > 1:
