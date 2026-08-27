@@ -2189,172 +2189,114 @@ self-duality implies precisely these three coefficient relations.
 
 \medskip
 
-The applications below use the boxed forms developed above to give
-explicit self-dual codes over \(\GF{5}\) and \(\GF{13}\).
+The applications below separate three kinds of computational output.  Table~1
+compares reproducible examples with the corresponding published benchmarks,
+a separate binary example records an exact two-level descent and ascent, and a
+proposition is reserved for the universal realization that supplies a
+distinguished parent and a fixed-seed continuation problem.
 
 \subsection{Applications}\label{sec:applications}
-\input{Formalization/Verification/Examples/applications_data.tex}
+\input{Formalization/Verification/Examples/application_catalog_data.tex}
 \input{Formalization/Verification/Examples/large_applications_data.tex}
+\input{Formalization/Verification/Examples/golay_lineage_data.tex}
 
 For earlier results on self-dual codes over these fields, see
-\cite{LeonPlessSloane,KimChoi2021}. All residues below are represented by
-integers between \(0\) and \(p-1\), where \(p=5\) or \(13\).
-The parameters, matrices, and witness codewords for the first four rows of
-Table~\ref{tab:application-distances} are generated from
-\texttt{applications.json} in the accompanying artifact.
-The standard-library Python script \texttt{check\_applications.py}
-checks the boxed relations, full row rank, and \(GG^{\mathsf T}=0\).
-It also enumerates all \(p^k\) coefficient vectors for each \(k\times2k\)
-matrix \(G\), recording
+\cite{LeonPlessSloane,BetsumiyaEtAl,KimChoi2021}.  For a displayed generator
+\(G\), write
 \[
 A_j=\#\{a\in\mathbb F_p^k:\operatorname{wt}(aG)=j\}.
 \]
-For the final row, \texttt{check\_large\_applications.py} verifies all
-\(\binom{14}{7}=3432\) seven-column information sets and the exact universal
-normalization. Table~\ref{tab:application-distances} gives the resulting
-minimum distance \(d\) and \(A_d\); in each row,
-\(A_0=1\) and \(A_j=0\) for \(0<j<d\).
-The complete distributions, which also satisfy the MacWilliams identity,
-are recorded in \texttt{applications\_results.json}; the large normalization
-and parent data are recorded in \texttt{large\_applications\_results.json}.
-These distance computations are reproducible exact computations, not Lean
-certificates. The Gram, normalization, deletion, and self-duality identities
-for the large example are checked separately by the Lean kernel.
+Table~\ref{tab:application-distances} compares our exact pair \((d,A_d)\)
+with a published benchmark at the same length.  The benchmark \(A_d\) is the
+coefficient of the cited representative code, not an extremal quantity.  This
+distinction matters at length~12 over \(\GF{13}\), where inequivalent optimal
+codes have different weight enumerators.  For MDS rows, by contrast,
+\(A_d=(p-1)\binom nd\) is determined by the parameters.
+
+\begin{table}[htbp]
+\centering
+\scriptsize
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{@{}lc>{\centering\arraybackslash}p{75pt}
+  >{\centering\arraybackslash}p{95pt}>{\raggedright\arraybackslash}p{100pt}@{}}
+\toprule
+Artifact & \(p\) & Our \([n,k,d];A_d\) & Published \((d_{\rm best};A_d)\) & Source\\
+\midrule
+\ApplicationCatalogueRows
+\bottomrule
+\end{tabular}
+\caption{Verified application catalogue compared with published benchmarks.
+Each artifact identifier links to its generator, complete weight distribution,
+and verification metadata.  The table makes no claim that a listed benchmark
+value of \(A_d\) is extremal.}
+\label{tab:application-distances}
+\end{table}
+
+The full matrices formerly displayed as separate propositions are retained in
+the linked certificates.  The numerical verifier checks their boxed
+relations, rank, Gram matrix, complete weight distribution, and MacWilliams
+identity.  Thus moving them to Table~\ref{tab:application-distances} changes
+only the exposition, not the available evidence.  The finite enumerations are
+external exact computations rather than Lean proofs.
+
+\paragraph{A length-20-centered Golay descent and ascent.}
+The extended binary Golay code gives a compact instance in which two exact
+levels can be followed in either direction from length~20.  Let
+\(\mathcal G_{24}\) be the extended Golay code with its standard generator
+\(G_{24}\), and put \(C_{24}=\mathcal G_{24}\).  Repeatedly
+apply the two-coordinate reduction of Theorem~\ref{thm:binary-cz-kim} to the
+first coordinate pair of the current tail.  Deterministic row reduction gives
+self-dual generators \(G_m\), for \(m=16,18,20,22\), such that
+\begin{equation}
+ \begin{pmatrix}1&0&x_m\\ y_m&y_m&G_m\end{pmatrix}
+ \quad\text{generates }C_{m+2},
+ \qquad m\in\{16,18,20,22\},
+ \label{eq:golay-lineage-kim}
+\end{equation}
+where \(C_m=\operatorname{rowspan}(G_m)\) and
+\[
+\begin{aligned}
+x_{16}&=\GolaySixteenCorrection,&
+x_{18}&=\GolayEighteenCorrection,\\
+x_{20}&=\GolayTwentyCorrection,&
+x_{22}&=\GolayTwentyTwoCorrection,\\
+(y_m)_i&=x_m\mathbin{\cdot}(G_m)_i.
+\end{aligned}
+\]
+Thus length~20 is the center of the requested two-level picture:
+\[
+C_{16}\longleftarrow C_{18}\longleftarrow C_{20}
+\longrightarrow C_{22}\longrightarrow C_{24}=\mathcal G_{24}.
+\]
+Following the arrows to the left means two-coordinate reduction; the right
+arrows are Kim building-up with \(x_{20}\) and \(x_{22}\).  Every left edge is
+also inverted exactly by the corresponding Kim step with \(x_{16}\) or
+\(x_{18}\), so all four adjacent pairs satisfy the same reconstruction
+identity.
+The parameters and the number \(A_d\) of minimum-weight words at each level
+are recorded separately in Table~\ref{tab:golay-lineage}.  In particular, the
+distance rises at both upward steps from the length-20 center.  All five
+distances attain the
+classical upper bounds for binary self-dual codes~\cite{HuffmanPless}.
 
 \begin{table}[htbp]
 \centering
 \small
-\begin{tabular}{rrrrrr}
+\setlength{\tabcolsep}{5pt}
+\begin{tabular}{@{}clccl@{}}
 \toprule
-Proposition & \(p\) & Parameters & Nonzero vectors & \(d\) & \(A_d\)\\
+Level & Code & Parameters & \(A_d\) & Exact upward relation\\
 \midrule
-\AppDistanceTable
-\AppThirteenFourteenDistanceRow
+\GolayLineageRows
 \bottomrule
 \end{tabular}
-\caption{Exact minimum-distance data for the application matrices. The first four rows use complete coefficient enumeration; the final row uses the MDS minor criterion.}
-\label{tab:application-distances}
+\caption{The verified length-20-centered Golay lineage.  Complete enumeration checks
+rank, self-orthogonality, distance, weight distribution, and the MacWilliams
+identity.  At each upward step the checker also verifies literal reconstruction
+of the displayed Kim matrix and equality of its row space with the child code;
+the full matrices are in certificate \GolayLineageCertificate.}
+\label{tab:golay-lineage}
 \end{table}
-
-\begin{prop}[An optimal self-dual \texorpdfstring{$[6,3,4]$}{[6,3,4]} code over \texorpdfstring{$\GF{5}$}{GF(5)}]
-\label{ex:split-boxed-63}
-\rm
-Let \(K=\GF{5}\), \(c=2\), and choose
-\AppFiveSixParameters
-The corresponding two-coordinate block matrix is
-\[
-\widetilde G_3=\AppFiveSixBlocks.
-\]
-It generates an optimal self-dual \([6,3,4]\) code.
-\end{prop}
-
-\begin{proof}
-The displayed parameters satisfy the three boxed relations, so
-Corollary~\ref{thm:split-boxed-form} gives self-duality. In scalar coordinates,
-\[
-G_3=\AppFiveSixMatrix.
-\]
-Its second row has weight \(4\), while the enumeration summarized
-in Table~\ref{tab:application-distances} gives \(A_1=A_2=A_3=0\).
-Thus \(d=4\). The Singleton bound gives \(d\le6-3+1=4\) for every
-linear \([6,3]\) code, proving optimality.
-
-Deleting the first block row and block column gives
-\[
-\widetilde G_2=
-\begin{pmatrix}
-01 & 02\\
-31 & 12
-\end{pmatrix},
-\]
-which generates the corresponding self-dual \([4,2,2]\) code.
-\end{proof}
-
-\begin{prop}[An optimal self-dual \texorpdfstring{$[8,4,4]$}{[8,4,4]} code over \texorpdfstring{$\GF{5}$}{GF(5)}]
-\label{ex:split-boxed-84}
-\rm
-Let \(K=\GF{5}\), \(c=2\), and choose
-\AppFiveEightParameters
-The corresponding two-coordinate block matrix is
-\[
-\widetilde G_4=\AppFiveEightBlocks.
-\]
-It generates an optimal self-dual \([8,4,4]\) code.
-\end{prop}
-
-\begin{proof}
-Corollary~\ref{thm:split-boxed-form} gives self-duality, and the scalar matrix is
-\[
-G_4=\AppFiveEightMatrix.
-\]
-The coefficient vector \(\AppFiveEightWitness\) gives the word
-\[
-\AppFiveEightWord,
-\]
-of weight \(4\). Table~\ref{tab:application-distances} gives
-\(A_1=A_2=A_3=0\), so \(d=4\).
-Any linear \([8,4]\) code with larger minimum distance would be an
-\([8,4,5]\) MDS code by the Singleton bound. Ball's bound
-\cite{Ball2012}, applied with \(k=4\le p=5\), excludes this: its generator
-columns would form a set of eight vectors every four of which are a basis,
-whereas such a set has at most \(p+1=6\) elements. Hence the code is optimal.
-\end{proof}
-
-Deleting the first block row and block column from \(\widetilde G_4\)
-recovers exactly \(\widetilde G_3\).
-
-\begin{prop}[An optimal self-dual \texorpdfstring{$[8,4,5]$}{[8,4,5]} code over \texorpdfstring{$\GF{13}$}{GF(13)}]
-\label{ex:split-boxed-134}
-\rm
-Let \(K=\GF{13}\), \(c=5\), and choose
-\AppThirteenEightParameters
-The corresponding generator is
-\[
-G=\AppThirteenEightMatrix.
-\]
-It generates an optimal self-dual \([8,4,5]\) code.
-\end{prop}
-
-\begin{proof}
-The boxed relations give self-duality by Corollary~\ref{thm:split-boxed-form}.
-The coefficient vector \(\AppThirteenEightWitness\) produces
-\[
-\AppThirteenEightWord,
-\]
-of weight \(5\). Table~\ref{tab:application-distances} has \(A_j=0\)
-for \(1\le j<5\), so \(d=5\). This meets the Singleton bound
-\(d\le8-4+1=5\), proving optimality among all linear \([8,4]\) codes.
-\end{proof}
-
-\begin{remark}
-\label{rem:optimal-gf13-example}
-\rm
-The preceding code is MDS; thus the split boxed construction can attain
-the Singleton bound over \(\GF{13}\).
-\end{remark}
-
-\begin{prop}[An optimal self-dual \texorpdfstring{$[10,5,6]$}{[10,5,6]} code over \texorpdfstring{$\GF{13}$}{GF(13)}]
-\label{ex:split-boxed-135}
-\rm
-Let \(K=\GF{13}\), \(c=5\), and choose
-\AppThirteenTenParameters
-The corresponding generator is
-\[
-G_{10}=\AppThirteenTenMatrix.
-\]
-It generates an optimal self-dual \([10,5,6]\) code.
-\end{prop}
-
-\begin{proof}
-The boxed relations give self-duality by Corollary~\ref{thm:split-boxed-form}.
-The coefficient vector \(\AppThirteenTenWitness\) produces
-\[
-\AppThirteenTenWord,
-\]
-of weight \(6\). Table~\ref{tab:application-distances} has \(A_j=0\)
-for \(1\le j<6\), so \(d=6\). The Singleton bound is
-\(d\le10-5+1=6\), proving optimality among all linear \([10,5]\) codes.
-\end{proof}
 
 \begin{prop}[A universal rank-one realization of a self-dual MDS \texorpdfstring{$[14,7,8]$}{[14,7,8]} code over \texorpdfstring{$\GF{13}$}{GF(13)}]
 \label{prop:universal-mds-137}
@@ -2460,10 +2402,28 @@ first block, are literally the parent generator. Reattaching that block and
 the first row therefore recovers \(\widehat G_{14}\).
 \end{proof}
 
+This exact parent--child pair suggests a fixed-seed measure of the
+construction.  Let \(C_0=\langle G_{14}\rangle\), and for \(m\ge0\) define
+\[
+\begin{aligned}
+\delta_m(G_{14})=\max\{d(C_m):\;&C_{i+1}\text{ is obtained from }C_i\\
+ &\text{by one non-direct-sum step of
+ Lemma~\ref{lem:rank-boxed-building-up}}\}.
+\end{aligned}
+\]
+The computational question is whether \(\delta_m(G_{14})\) reaches the
+best possible minimum distance of a self-dual code of length \(14+2m\).
+The correction-space search first rejects projective correction classes that
+are orthogonal to a low-weight coefficient line of the fixed parent; exact
+minimum distance is computed only for the survivors.  Any continuation from
+\texttt{GF13-14} will be recorded in a separate lineage certificate, so that
+Table~\ref{tab:application-distances} remains a comparison with the published
+history rather than mixing benchmark and ancestry data.
+
 \section{Conclusion}
 \label{sec:conclusion}
 
-We have studied self-dual codes over finite fields $\F_q$ with $q\equiv 1 \pmod 4$ from three complementary viewpoints: the classical building-up construction, the hyperbolic geometry forced by the split condition $-1\in (K^\times)^2$, and a Lean~4 formalization of the resulting algebraic statements. On the computational side, the universal form gives an explicit rank-one realization and exact two-coordinate parent of a self-dual MDS \([14,7,8]\) code over \(\GF{13}\), in addition to the smaller optimal examples. The algebraic results are formalized in Lean~4.
+We have studied self-dual codes over finite fields $\F_q$ with $q\equiv 1 \pmod 4$ from three complementary viewpoints: the classical building-up construction, the hyperbolic geometry forced by the split condition $-1\in (K^\times)^2$, and a Lean~4 formalization of the resulting algebraic statements. On the computational side, the universal form gives an explicit rank-one realization and exact two-coordinate parent of a self-dual MDS \([14,7,8]\) code over \(\GF{13}\).  Repetitive examples are collected in a linked certificate table, leaving the universal realization and its fixed-seed continuation problem as the principal odd-characteristic application.  The separate Golay computation exhibits four successive exact reductions and inverse Kim steps through the optimal binary chain \([16,8,4]\to[18,9,4]\to[20,10,4]\to[22,11,6]\to[24,12,8]\). The algebraic results are formalized in Lean~4.
 
 In the binary case, the universal rank-one normalization proves intrinsically that every Euclidean self-dual code has the literal Chinburg--Zhang boxed representative under a scalar-coordinate permutation.  Theorem~\ref{thm:binary-cz-kim} then transports the Chinburg--Zhang cohomological pairing through a specified orthonormal-basis isometry and compares the resulting Euclidean boxed matrix with Kim's building-up extension.  The top-down deletion is a coordinate reduction through a non-alternating first coordinate plane, not deletion of a hyperbolic pair.
 Over \(\F_q\) with \(q\equiv 1\pmod 4\), the decomposition obtained from

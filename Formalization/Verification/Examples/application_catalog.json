@@ -1,0 +1,176 @@
+{
+  "schema_version": 1,
+  "policy": {
+    "proposition": "A bound improvement, a proved optimal result, or a structurally new exact realization used in the main argument.",
+    "table": "A reproducible construction that illustrates the method without carrying a separate theorem-level claim."
+  },
+  "entries": [
+    {
+      "artifact_id": "GF5-06",
+      "field_order": 5,
+      "parameters": [
+        6,
+        3,
+        4
+      ],
+      "construction": "split box, r=1",
+      "distance_status": "optimal (Singleton)",
+      "a_d": 60,
+      "prior_benchmark": {
+        "distance": 4,
+        "a_d": [
+          60
+        ],
+        "reference": "Leon--Pless--Sloane database"
+      },
+      "parent": "GF5-04",
+      "manuscript_role": "table",
+      "certificate": "certificates/gf5-06.json",
+      "verifier": "check_applications.py --check"
+    },
+    {
+      "artifact_id": "GF5-08",
+      "field_order": 5,
+      "parameters": [
+        8,
+        4,
+        4
+      ],
+      "construction": "split box, r=1",
+      "distance_status": "optimal (Ball)",
+      "a_d": 48,
+      "prior_benchmark": {
+        "distance": 4,
+        "a_d": [
+          48
+        ],
+        "reference": "Leon--Pless--Sloane database"
+      },
+      "parent": "GF5-06",
+      "manuscript_role": "table",
+      "certificate": "certificates/gf5-08.json",
+      "verifier": "check_applications.py --check"
+    },
+    {
+      "artifact_id": "GF13-08",
+      "field_order": 13,
+      "parameters": [
+        8,
+        4,
+        5
+      ],
+      "construction": "split box, r=1",
+      "distance_status": "MDS",
+      "a_d": 672,
+      "prior_benchmark": {
+        "distance": 5,
+        "a_d": [
+          672
+        ],
+        "reference": "Betsumiya et al."
+      },
+      "parent": null,
+      "manuscript_role": "table",
+      "certificate": "certificates/gf13-08.json",
+      "verifier": "check_applications.py --check"
+    },
+    {
+      "artifact_id": "GF13-10",
+      "field_order": 13,
+      "parameters": [
+        10,
+        5,
+        6
+      ],
+      "construction": "split box, r=1",
+      "distance_status": "MDS",
+      "a_d": 2520,
+      "prior_benchmark": {
+        "distance": 6,
+        "a_d": [
+          2520
+        ],
+        "reference": "Betsumiya et al."
+      },
+      "parent": null,
+      "manuscript_role": "table",
+      "certificate": "certificates/gf13-10.json",
+      "verifier": "check_applications.py --check"
+    },
+    {
+      "artifact_id": "GF13-12A",
+      "field_order": 13,
+      "parameters": [
+        12,
+        6,
+        6
+      ],
+      "construction": "split box, r=1",
+      "distance_status": "exact d=6",
+      "a_d": 576,
+      "prior_benchmark": {
+        "distance": 6,
+        "a_d": [
+          528,
+          576,
+          696,
+          792
+        ],
+        "reference": "Betsumiya et al."
+      },
+      "parent": null,
+      "manuscript_role": "table",
+      "certificate": "certificates/gf13-12a.json",
+      "verifier": "check_applications.py --check"
+    },
+    {
+      "artifact_id": "GF13-12P",
+      "field_order": 13,
+      "parameters": [
+        12,
+        6,
+        6
+      ],
+      "construction": "two-coordinate parent",
+      "distance_status": "exact d=6",
+      "a_d": 960,
+      "prior_benchmark": {
+        "distance": 6,
+        "a_d": [
+          528,
+          576,
+          696,
+          792
+        ],
+        "reference": "Betsumiya et al."
+      },
+      "parent": null,
+      "manuscript_role": "table",
+      "certificate": "certificates/gf13-12p.json",
+      "verifier": "check_large_applications.py --check"
+    },
+    {
+      "artifact_id": "GF13-14",
+      "field_order": 13,
+      "parameters": [
+        14,
+        7,
+        8
+      ],
+      "construction": "universal box, r=1",
+      "distance_status": "MDS",
+      "a_d": 36036,
+      "prior_benchmark": {
+        "distance": 8,
+        "a_d": [
+          36036
+        ],
+        "reference": "Betsumiya et al."
+      },
+      "parent": "GF13-12P",
+      "manuscript_role": "proposition",
+      "certificate": "certificates/gf13-14.json",
+      "verifier": "check_large_applications.py --check"
+    }
+  ]
+}

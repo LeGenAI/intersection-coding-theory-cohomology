@@ -77,7 +77,12 @@ def main():
     inputs |= {ROOT / n for n in ["lakefile.lean", "lake-manifest.json", "lean-toolchain",
                                   "comparator/verify_manuscript.py", "comparator/generate_challenge.py"]}
     inputs |= set((ROOT / "Formalization/Verification/Examples").glob("*applications*"))
+    inputs |= set((ROOT / "Formalization/Verification/Examples").glob("*golay*"))
     inputs.add(ROOT / "Formalization/Verification/Examples/check_applications.py")
+    inputs.add(ROOT / "Formalization/Verification/Examples/build_application_catalog.py")
+    inputs.add(ROOT / "Formalization/Verification/Examples/application_catalog.json")
+    inputs.add(ROOT / "Formalization/Verification/Examples/application_catalog_data.tex")
+    inputs |= set((ROOT / "Formalization/Verification/Examples/certificates").glob("*.json"))
     hashes = {str(p.relative_to(ROOT)): sha(p) for p in sorted(inputs)}
     out = Path(args.output).resolve()
     out.mkdir(parents=True, exist_ok=False)
@@ -151,6 +156,10 @@ def main():
         run("applications", ["python3", "Formalization/Verification/Examples/check_applications.py", "--check"])
         run("large-applications",
             ["python3", "Formalization/Verification/Examples/check_large_applications.py", "--check"])
+        run("golay-lineage",
+            ["python3", "Formalization/Verification/Examples/check_golay_lineage.py", "--check"])
+        run("application-catalogue",
+            ["python3", "Formalization/Verification/Examples/build_application_catalog.py", "--check"])
         require(all(sha(ROOT / p) == h for p, h in hashes.items()), "input changed during verification")
         report.update(status="PASS", inputs_unchanged=True)
     except Exception as error:

@@ -18,8 +18,10 @@ theorem of Chinburg--Zhang.
 - `Formalization/Archive/SubmittedBaseline.lean`: frozen baseline supplying
   shared infrastructure; its 260 theorems are not additional current exact goals.
 - `Formalization/Verification/Comparator/`: 17 independent suites / 123 goals.
-- `Formalization/Verification/Examples/`: kernel-checked rank-two example and
-  reproducible application data, generators and complete weight distributions.
+- `Formalization/Verification/Examples/`: kernel-checked rank-two example,
+  reproducible application data, a public historical catalogue, the exact
+  length-20-centered Golay lineage, linked certificates, generators and complete weight
+  distributions.
 - `comparator/verify_manuscript.py`: current build, trust audit and Linux replay.
 - `ARTIFACT_MAP.md`, `BUILD.md`: theorem map and reproduction instructions.
 
@@ -36,6 +38,9 @@ lake exe cache get
 lake build
 python3 comparator/verify_manuscript.py --output tmp/local-check
 python3 Formalization/Verification/Examples/check_applications.py --check
+python3 Formalization/Verification/Examples/check_large_applications.py --check
+python3 Formalization/Verification/Examples/check_golay_lineage.py --check
+python3 Formalization/Verification/Examples/build_application_catalog.py --check
 ```
 
 The verification output directory must not already exist.

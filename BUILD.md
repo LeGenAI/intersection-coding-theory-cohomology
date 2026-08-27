@@ -27,9 +27,9 @@ python3 comparator/verify_manuscript.py --output tmp/local-check
 This builds the 17 Solutions, checks their local import closure for forbidden
 proof tokens, verifies dependency revisions and clean tracked dependency
 sources, and prints the transitive axioms of all 123 exact goals. It also
-compiles the four rank-two GF(5) certificates and reruns all five application
-computations. The output directory must be new. A local audit is not a
-Comparator replay.
+compiles the rank-two GF(5) certificates and reruns the application catalogue,
+the large GF(13) computation, and the length-20-centered binary Golay lineage. The output
+directory must be new. A local audit is not a Comparator replay.
 
 ## Linux Comparator replay
 
@@ -55,6 +55,9 @@ and run the JSON suites directly; do not describe it as the recorded replay.
 
 ```sh
 python3 Formalization/Verification/Examples/check_applications.py --check
+python3 Formalization/Verification/Examples/check_large_applications.py --check
+python3 Formalization/Verification/Examples/check_golay_lineage.py --check
+python3 Formalization/Verification/Examples/build_application_catalog.py --check
 ```
 
 `applications.json` is the single input for all five application matrices,
@@ -65,6 +68,21 @@ After an intentional data change, use `--write` to regenerate
 `applications_data.tex` and `applications_results.json`, then run `--check`.
 The script enumerates 4,826,808 nonzero vectors in its largest example.
 These computations are not Lean proofs.
+
+`check_golay_lineage.py` starts from the standard extended binary Golay
+generator, performs four exact two-coordinate reductions, and completely
+enumerates every code from `[24,12,8]` down to `[16,8,4]`. At all four edges it
+checks rank, Gram matrix, the MacWilliams identity, the Kim coefficient
+relations, literal reconstruction, and equality of the reconstructed and child
+row spaces. Its generated table rows and certificate are versioned with the
+manuscript.
+
+`build_application_catalog.py` does not recompute distances. It packages the
+two verified result files into the reviewer-facing `application_catalog.json`,
+seven individual certificates, and the generated Table 1 rows. After an
+intentional numerical-data change, run the two numerical checkers with
+`--write`, then the catalogue builder with `--write`, and finish with all three
+`--check` commands.
 
 The separate rank-two [8,4] -> [10,5] -> [12,6] example is checked by:
 

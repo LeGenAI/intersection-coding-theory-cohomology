@@ -1,0 +1,138 @@
+{
+  "catalogue_entry": {
+    "artifact_id": "GF13-10",
+    "field_order": 13,
+    "parameters": [
+      10,
+      5,
+      6
+    ],
+    "construction": "split box, r=1",
+    "distance_status": "MDS",
+    "a_d": 2520,
+    "prior_benchmark": {
+      "distance": 6,
+      "a_d": [
+        2520
+      ],
+      "reference": "Betsumiya et al."
+    },
+    "parent": null,
+    "manuscript_role": "table",
+    "certificate": "certificates/gf13-10.json",
+    "verifier": "check_applications.py --check"
+  },
+  "source": "applications_results.json",
+  "source_method": "complete base-p enumeration; independent rank, Gram and MacWilliams checks",
+  "result": {
+    "id": "gf13_10",
+    "p": 13,
+    "n": 10,
+    "k": 5,
+    "distance": 6,
+    "a": [
+      3,
+      7,
+      7,
+      10
+    ],
+    "matrix": [
+      [
+        0,
+        1,
+        5,
+        12,
+        11,
+        3,
+        10,
+        11,
+        9,
+        3
+      ],
+      [
+        11,
+        3,
+        0,
+        1,
+        7,
+        9,
+        11,
+        3,
+        10,
+        4
+      ],
+      [
+        5,
+        12,
+        1,
+        5,
+        0,
+        1,
+        1,
+        5,
+        10,
+        4
+      ],
+      [
+        8,
+        1,
+        12,
+        8,
+        9,
+        6,
+        0,
+        1,
+        4,
+        10
+      ],
+      [
+        3,
+        2,
+        7,
+        9,
+        7,
+        9,
+        10,
+        11,
+        1,
+        5
+      ]
+    ],
+    "rank": 5,
+    "gram_zero": true,
+    "nonzero_vectors": 371292,
+    "weight_distribution": [
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      2520,
+      10080,
+      53460,
+      138360,
+      166872
+    ],
+    "witness": [
+      0,
+      0,
+      1,
+      1,
+      0
+    ],
+    "word": [
+      0,
+      0,
+      0,
+      0,
+      9,
+      7,
+      1,
+      6,
+      1,
+      1
+    ],
+    "macwilliams_verified": true
+  }
+}

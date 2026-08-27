@@ -2,21 +2,24 @@
 
 **PASS: fresh complete Linux replay of 17 suites / 123 exact goals.**
 
-The run started 2026-08-26 18:07:15 UTC and ended 18:15:37 UTC
-(2026-08-27, 02:07--02:15 UTC+8).
+The current run started 2026-08-27 05:57:04 UTC and ended 06:04:05 UTC
+(2026-08-27, 13:57--14:04 UTC+8).
 All 17 suites were replayed in one fresh project snapshot. This supersedes
-the earlier incremental 113 + 10 coverage; it is not merely a recount of
-historical receipts.
+the earlier full replay as well as the incremental 113 + 10 coverage; it is
+not merely a recount of historical receipts.
 
 ## Evidence
 
-- [Machine-readable summary and 105 input hashes](receipts/2026-08-27-afm-final/summary.json)
-- [123 transitive axiom reports](receipts/2026-08-27-afm-final/axioms.log)
-- [Section and Solution build](receipts/2026-08-27-afm-final/build.log)
-- [Four rank-two GF(5) kernel certificates](receipts/2026-08-27-afm-final/rank-two-gf5.log)
-- [Five exhaustive application computations](receipts/2026-08-27-afm-final/applications.log)
+- [Machine-readable summary and 125 input hashes](receipts/2026-08-27-golay-lineage/summary.json)
+- [123 transitive axiom reports](receipts/2026-08-27-golay-lineage/axioms.log)
+- [Section and Solution build](receipts/2026-08-27-golay-lineage/build.log)
+- [Four rank-two GF(5) kernel certificates](receipts/2026-08-27-golay-lineage/rank-two-gf5.log)
+- [Finite-field application computations](receipts/2026-08-27-golay-lineage/applications.log)
+- [Large GF(13) computation](receipts/2026-08-27-golay-lineage/large-applications.log)
+- [Length-20-centered Golay descent and ascent](receipts/2026-08-27-golay-lineage/golay-lineage.log)
+- [Generated historical catalogue](receipts/2026-08-27-golay-lineage/application-catalogue.log)
 
-The summary records all 22 commands, exit statuses and log hashes.
+The summary records all 26 commands, exit statuses and log hashes.
 Every input hash was checked again after execution, and all input and log
 hashes were verified after retrieval. The same source snapshot passed the
 local build, transitive axiom audit, rank-two certificate check and computations.
@@ -74,10 +77,12 @@ The universal normal-form goals require actual row-space equality with the
 given code after the stated coordinate permutation. The repeated-step goals
 include the nonzero-correction iff and the zero-correction direct-sum case.
 
-The four concrete rank-two certificates are separate from the 123 Comparator
-goals. The five application distance computations are external exact finite
-enumerations, not Lean proofs. Their input, generated TeX and complete weight
-distributions are versioned under `../Examples/`.
+The concrete rank-two certificates and finite-code computations are separate
+from the 123 Comparator goals. The application distances and the two-step
+Golay lineage are external exact finite enumerations, not Lean proofs. Their
+inputs, generated TeX, reconstruction certificates and complete weight
+distributions are versioned under `../Examples/`. The generic deletion and
+rebuilding equality used at each Golay step is the exact BinaryCzKim goal.
 
 The cited arithmetic realization theorem and separate arithmetic follow-up
 are not claimed as conclusions of this AFM artifact.

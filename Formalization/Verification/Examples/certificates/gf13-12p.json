@@ -1,0 +1,157 @@
+{
+  "catalogue_entry": {
+    "artifact_id": "GF13-12P",
+    "field_order": 13,
+    "parameters": [
+      12,
+      6,
+      6
+    ],
+    "construction": "two-coordinate parent",
+    "distance_status": "exact d=6",
+    "a_d": 960,
+    "prior_benchmark": {
+      "distance": 6,
+      "a_d": [
+        528,
+        576,
+        696,
+        792
+      ],
+      "reference": "Betsumiya et al."
+    },
+    "parent": null,
+    "manuscript_role": "table",
+    "certificate": "certificates/gf13-12p.json",
+    "verifier": "check_large_applications.py --check"
+  },
+  "source": "large_applications_results.json#deletion_parent",
+  "result": {
+    "parameters": [
+      12,
+      6,
+      6
+    ],
+    "matrix": [
+      [
+        5,
+        0,
+        4,
+        7,
+        10,
+        11,
+        11,
+        3,
+        4,
+        7,
+        2,
+        6
+      ],
+      [
+        0,
+        0,
+        4,
+        8,
+        4,
+        7,
+        2,
+        10,
+        3,
+        2,
+        5,
+        8
+      ],
+      [
+        0,
+        0,
+        6,
+        4,
+        9,
+        7,
+        0,
+        0,
+        9,
+        6,
+        9,
+        6
+      ],
+      [
+        0,
+        0,
+        9,
+        6,
+        0,
+        0,
+        9,
+        7,
+        0,
+        0,
+        6,
+        4
+      ],
+      [
+        0,
+        0,
+        1,
+        5,
+        4,
+        7,
+        0,
+        0,
+        9,
+        7,
+        1,
+        5
+      ],
+      [
+        4,
+        7,
+        4,
+        7,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        5
+      ]
+    ],
+    "weight_distribution": [
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      960,
+      3744,
+      50040,
+      226320,
+      853920,
+      1844064,
+      1847760
+    ],
+    "gamma": [
+      6,
+      9,
+      0,
+      9,
+      5,
+      10
+    ],
+    "low_weight_projective_lines": 392,
+    "lifting_survivor_count": 1,
+    "lifting_survivors": [
+      [
+        1,
+        8,
+        0,
+        8,
+        3,
+        6
+      ]
+    ]
+  }
+}

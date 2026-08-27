@@ -1,0 +1,112 @@
+{
+  "catalogue_entry": {
+    "artifact_id": "GF5-08",
+    "field_order": 5,
+    "parameters": [
+      8,
+      4,
+      4
+    ],
+    "construction": "split box, r=1",
+    "distance_status": "optimal (Ball)",
+    "a_d": 48,
+    "prior_benchmark": {
+      "distance": 4,
+      "a_d": [
+        48
+      ],
+      "reference": "Leon--Pless--Sloane database"
+    },
+    "parent": "GF5-06",
+    "manuscript_role": "table",
+    "certificate": "certificates/gf5-08.json",
+    "verifier": "check_applications.py --check"
+  },
+  "source": "applications_results.json",
+  "source_method": "complete base-p enumeration; independent rank, Gram and MacWilliams checks",
+  "result": {
+    "id": "gf5_8",
+    "p": 5,
+    "n": 8,
+    "k": 4,
+    "distance": 4,
+    "a": [
+      3,
+      3,
+      3
+    ],
+    "matrix": [
+      [
+        0,
+        1,
+        1,
+        2,
+        1,
+        2,
+        0,
+        2
+      ],
+      [
+        2,
+        4,
+        0,
+        1,
+        1,
+        2,
+        0,
+        2
+      ],
+      [
+        2,
+        4,
+        2,
+        4,
+        0,
+        1,
+        0,
+        2
+      ],
+      [
+        3,
+        1,
+        3,
+        1,
+        3,
+        1,
+        1,
+        2
+      ]
+    ],
+    "rank": 4,
+    "gram_zero": true,
+    "nonzero_vectors": 624,
+    "weight_distribution": [
+      1,
+      0,
+      0,
+      0,
+      48,
+      32,
+      288,
+      128,
+      128
+    ],
+    "witness": [
+      0,
+      0,
+      1,
+      1
+    ],
+    "word": [
+      0,
+      0,
+      0,
+      0,
+      3,
+      2,
+      1,
+      4
+    ],
+    "macwilliams_verified": true
+  }
+}

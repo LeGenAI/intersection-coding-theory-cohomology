@@ -24,8 +24,9 @@ Theorem, Proposition and Corollary share the theorem counter.
 | Corollary 3.10 | Explicit normalized rank-one box | SplitBoxed (12), SplitBoxedOrthogonality (12) |
 | Theorem 3.11 | Conditional boxed coefficient theorem | `paper_conditional_boxed_normalization_exact`; ConditionalBoxed (1) |
 | Explicit change of form in Section 2 | Different named forms, not a Euclidean self-isometry | SplitFormTransport (3) |
-| Propositions 3.12--3.15 | Four finite-field applications | `applications.json`, `check_applications.py`, generated TeX and full distributions |
-| Proposition 3.16 | Universal rank-one realization of a self-dual MDS $[14,7,8]$ code over $\mathrm{GF}(13)$ | `Examples/LargeGF13.lean` (Gram, normalization, readout, parent, unique correction and reconstruction certificates); `large_applications.json` and `check_large_applications.py` (all $\binom{14}{7}$ minors and exhaustive projective enumeration) |
+| Table 1 | Seven finite-field catalogue entries and published benchmark data | `application_catalog.json`, linked `certificates/*.json`, `build_application_catalog.py`, and both finite-field numerical checkers |
+| Table 2 | Length-20-centered binary Golay lineage with two reductions below and two Kim steps above, $[16,8,4]\leftrightarrow[18,9,4]\leftrightarrow[20,10,4]\leftrightarrow[22,11,6]\leftrightarrow[24,12,8]$ | `golay_lineage.json`, `check_golay_lineage.py`, `certificates/binary-golay-lineage.json`; the generic inverse step is Theorem 3.9 / BinaryCzKim |
+| Proposition 3.12 | Universal rank-one realization of a self-dual MDS $[14,7,8]$ code over $\mathrm{GF}(13)$ | `Examples/LargeGF13.lean` (Gram, normalization, readout, parent, unique correction and reconstruction certificates); `large_applications.json` and `check_large_applications.py` (all $\binom{14}{7}$ minors and exhaustive projective enumeration) |
 
 The suite inventory contains **17 suites / 123 distinct declarations**.
 Principal declarations are under `BuildingUpFormalization.Components`.
@@ -52,9 +53,13 @@ arithmetic realization are outside this artifact's proved claims.
 
 ## Numerical data
 
-`applications.json` generates the four smaller examples and their table rows in
-Section 3.5. `applications_results.json` records every weight multiplicity,
-rank and Gram check.  The separate large-example pipeline starts from the known
+`applications.json` generates the five smaller examples.
+`applications_results.json` records every weight multiplicity, rank and Gram
+check.  `build_application_catalog.py` packages these data into stable
+per-code certificates and generates the historical comparison in Table 1.
+`check_golay_lineage.py` independently generates Table 2 and certifies both
+directions on all four edges of the length-20-centered Golay lineage.  The separate
+large-example pipeline starts from the known
 self-dual MDS $[14,7,8]$ code, checks all $\binom{14}{7}=3432$ maximal minors,
 normalizes it to the manuscript's rank-one universal form, and exhaustively
 checks the unique projective correction class used to reconstruct it from its

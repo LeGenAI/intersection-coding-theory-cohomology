@@ -1,0 +1,1121 @@
+{
+  "status": "PASS",
+  "started_utc": "2026-08-27T05:57:04.169409+00:00",
+  "platform": "Linux",
+  "suite_count": 17,
+  "goal_count": 123,
+  "production_file_count": 53,
+  "forbidden_token_scan": "PASS",
+  "comparator_replayed": true,
+  "tool_sha256": {
+    "comparator": "1b7b27b0233fd75672eeb777fec1c35257f1fb111acbb9cbcb2d0674a7b2c154",
+    "lean4export": "293e221ed1b515de1aeaf06d2fe8f3f919f0b75f1e4d3b228f43f53d576501ea",
+    "landrun": "6ada66a06669e8994e174a7271af2db636308e55a0d6ec896cc7d326b46727f6"
+  },
+  "inputs": {
+    "Formalization/Archive/SubmittedBaseline.lean": "b54a45c2ba3e12677a504372a2cb1a96f8b024cdfd2ef2425d72442ef9c627d1",
+    "Formalization/Components/BinaryCzKim.lean": "258d739a41dd8d24fd456b70fef578044eb2114834159ec8a118dea2363a486b",
+    "Formalization/Components/BinaryCzKimDefinitions.lean": "5b6fb673f85269225a4fffbaba9bbe335791a80a76d25d1fea068ccfea479597",
+    "Formalization/Components/BinaryRankOneNormalization.lean": "c0d7280f1fc03ca8b11ffaa4fdd5e25b35bcdf034f71fbf6e281eccf3c268cc9",
+    "Formalization/Components/BinaryRankOneNormalizationDefinitions.lean": "222d562053b91bfc6a1423fdf57fbcb58482503440ae7d1e97fc5a38e1662b6b",
+    "Formalization/Components/BinaryRankOneNormalizationInduction.lean": "913a85c0392dbf09533081dbf2f9628f1c2c92fa85675ec556befde0a8907c28",
+    "Formalization/Components/BinaryTwoCoordinateReduction.lean": "f361eac3956a36fc91dd0519f66cbca57f0e3aee8ffb2547ffd8c8a1009a3914",
+    "Formalization/Components/BinaryTwoCoordinateReductionDefinitions.lean": "c801ab9042c8a5fcc48fa121ad60302cb50309b7662d0d08f9e2ae72f6109dda",
+    "Formalization/Components/ConditionalBoxed.lean": "d65fe0ac6539eb86f7057b7b029c3ffbe45deed4ba874cfd5e316a3eb89d0f09",
+    "Formalization/Components/Foundations.lean": "c9b56b891e1394481c6bd3a4210fae1713e008f240e2657e0a2dbe76ffa6e857",
+    "Formalization/Components/FoundationsDefinitions.lean": "594df14434502b150473d9d36d6c96ddb6e9739f2c7c38955f434136c4426da4",
+    "Formalization/Components/NormForm.lean": "bafb485124edb6eb888c26a3f6b95e07d8ca464fb9842896c352269491237954",
+    "Formalization/Components/PermutationEquivalence.lean": "d747e64604f55420dcbcc6aa3308074e989f137d254ecc6c6ad61ef28673de6f",
+    "Formalization/Components/PermutationEquivalenceDefinitions.lean": "19267ed4ae577e5415e47be458705888f17db0a12013734bc80125b850376993",
+    "Formalization/Components/QaryEquivalence.lean": "1f220665c525642e2d19e6568edb1802070844bba49d111f84bf243e23bedfd1",
+    "Formalization/Components/QaryEquivalenceDefinitions.lean": "307cbe4cf2bb353cedf963cb4afe2238425c39799200d0d2b063df3716a4024f",
+    "Formalization/Components/QaryForward.lean": "1d7aae6c566cd1c507fe657ea342ec6eb1cf94fe579f644f160d6400139ad898",
+    "Formalization/Components/QaryForwardDefinitions.lean": "90df57ce61eefc81fe92b72c2f6f9543414adbf1c4dcf5883d15ced25983cc2e",
+    "Formalization/Components/QaryRankBoxedNormalization.lean": "6d3ae0da0a7d7a625a1832afa8fc438c1e19bdcf4fb0ebd7de782f78276f064f",
+    "Formalization/Components/QaryRankBoxedNormalizationDefinitions.lean": "e80c71a720117adca52a6cb14bbe47550ad23259b574893e2473ebd0edfde0ac",
+    "Formalization/Components/RankBoxedConstruction.lean": "218f78f3cf87e0d758c9612584072a97a379754d90c3b88a2f589ad1e044be26",
+    "Formalization/Components/RankBoxedDefinitions.lean": "930f13ed8677cf8786e526777c6526e5e6b5a62f4d9d4944cacda2bcc5b4e5fa",
+    "Formalization/Components/RankBoxedExtension.lean": "390f590df83c10c343d23460bc7e04ba21abeca560e31111c8263599cea354be",
+    "Formalization/Components/RankBoxedExtensionDefinitions.lean": "a6e34942ad51b1cc98e9624fec0cd067d5a30380d5db9db2b6f8eaba4c2a2b12",
+    "Formalization/Components/RankBoxedStructure.lean": "1af603477d2f1beb4bfbcf7fb27d1c889c3ef9e15ef53a76fe78ea7a8ab79f49",
+    "Formalization/Components/RankBoxedStructureDefinitions.lean": "5e8e62049f7196dccfed9d5a50c8271e6ea3a700f202c1f08b0cfce2e09a96be",
+    "Formalization/Components/RepeatedBox.lean": "78110d8ab9ea3f7e38f62cde0ea8aad744217ce49db24da8b1b04457a00d08e1",
+    "Formalization/Components/RepeatedBoxConverse.lean": "782eba10885aec5cc5f5bdd2846d45e846f7055f8d953b8c2a91e767be5d8d8a",
+    "Formalization/Components/RepeatedBoxDefinitions.lean": "d7b5de7837f8554c76a07032455f63cf78650913cb3065a73cd9cf67d20fae5a",
+    "Formalization/Components/RepeatedStep.lean": "591c7dd5c1225151232ec110f6c8212370c77c990a104ddf2612e0f181ec02de",
+    "Formalization/Components/RepeatedStepDefinitions.lean": "668a75ba2de8172dbcdd85885644ca41b008437488245cc514be210baa1176b9",
+    "Formalization/Components/SplitBoxed.lean": "94b8a7e0bae14a9148ce2484de842bfdfd0b69bd8c1509b5e027d04c55db80e4",
+    "Formalization/Components/SplitBoxedDefinitions.lean": "9853870522dee744bbbeba91f10100eca0c0a9f47079dba9c61de293ce2a519f",
+    "Formalization/Components/SplitBoxedOrthogonality.lean": "1983076fc8788dabc86d9b83b21d41fc3b9c371736038fd04b08d6949f3e64b6",
+    "Formalization/Components/SplitFormTransport.lean": "66c55d0693bebc381ebd7da63357b64e9b6f1f3ed17f7b9d0dacaf9354a90c92",
+    "Formalization/Components/SplitFormTransportDefinitions.lean": "f9969ba80f583ccf9e06da06a16713bbb1ed48635d33e119349c647b4f0b9ac6",
+    "Formalization/Sections/All.lean": "27a6d4a6b47fab8537009f8311b32744add902a331a4ad571c6791f9191b03e6",
+    "Formalization/Sections/Binary.lean": "cf40ced17fdc74d15b534acee04df3adebf668df03fa28c31323d905482730aa",
+    "Formalization/Sections/BinaryRankOneNormalization.lean": "9df374cd409981eb55def3f511b1f9993b1edbd9c67d26b65d730e95f6c63021",
+    "Formalization/Sections/Preliminaries.lean": "e4ba1eeba2d49107656abef519cc3eef483b8f1d9263139f24a3f5fad01344d8",
+    "Formalization/Sections/QaryRankBoxedNormalization.lean": "af6025e854d37f8531594ffbf5521f935c333f117a2e349d9deae796b86f1f2e",
+    "Formalization/Sections/RankBoxed.lean": "d7c82ef0fc2e0012d9c21234021877419521032ee962b471b08b5aea0357d926",
+    "Formalization/Sections/SplitQary.lean": "9903cbf3d9b814db98892535fe79a42e4b83ba38c74bec0971062cb463795644",
+    "Formalization/Verification/Comparator/BinaryCzKim.json": "de8e756f41651906d4be818685dce4d5f6c90ee0f668b440484b98b19dc870b6",
+    "Formalization/Verification/Comparator/BinaryCzKimChallenge.lean": "2ef45a69bf611e6805039ac2364b98f5868bb1c6c8b0d4712a9c9650fbe5a9bc",
+    "Formalization/Verification/Comparator/BinaryCzKimSolution.lean": "7d4b8ef4cb118c347fee05410a216bdc3dd6c4b4d78cbb97a4877a4967110ee6",
+    "Formalization/Verification/Comparator/BinaryRankOneNormalization.json": "211c2eb8a0d9cb5c7c708fb7b07494ad71a89255b1d69cfd38e423c4fc9264d4",
+    "Formalization/Verification/Comparator/BinaryRankOneNormalizationChallenge.lean": "a99402a49b95a104934d9c1ab0756b33354ba0da1e6b22905aba93493e0f7334",
+    "Formalization/Verification/Comparator/BinaryRankOneNormalizationSolution.lean": "74574d13affe16ccc0d3c59d30c033a0a08a0284f68ddf1c2259f62cc52e3301",
+    "Formalization/Verification/Comparator/BinaryTwoCoordinateReduction.json": "3e367a4611ca78a81e3aa7430e35a3b212d7adfcbca2defdf0e081ab599b08d6",
+    "Formalization/Verification/Comparator/BinaryTwoCoordinateReductionChallenge.lean": "cee29aa75d4b2d5086b980e9b4fdef8121431334ab5fe642e8af32d288024760",
+    "Formalization/Verification/Comparator/BinaryTwoCoordinateReductionSolution.lean": "d0b3f1a7603755d846669143c9818abdb51adbd8c8063a45ac680239406fedca",
+    "Formalization/Verification/Comparator/ConditionalBoxed.json": "7d8fdea07bf9d47c5573d65cd65d77a8c4b56f9c8a9c5a237351b943efbbffb6",
+    "Formalization/Verification/Comparator/ConditionalBoxedChallenge.lean": "dba34f2dd2369c81ee278da95b7973509ea26899411a52b2887c6b8bb09ba915",
+    "Formalization/Verification/Comparator/ConditionalBoxedSolution.lean": "b14b3c980e4643450aa79ee49fbd12d988fb621451b81b8b9dea5d4ba54d5ebd",
+    "Formalization/Verification/Comparator/Foundations.json": "ea32df933a05254686de7ebfeb3042bbc9939bcbb14b41fa0dddf59cb6a4fdfc",
+    "Formalization/Verification/Comparator/FoundationsChallenge.lean": "b94bb8d6a8bb097a67811630439919ac1310218974d5082ce2d58198a594aed1",
+    "Formalization/Verification/Comparator/FoundationsSolution.lean": "67beffb0a93935ed76c5cdcd610274eb32fc1a737ef4a58970735b34d6933718",
+    "Formalization/Verification/Comparator/NormForm.json": "2648afe84477be45aefbae833cd7f8dec56fe46fdd137c48579196c216efad41",
+    "Formalization/Verification/Comparator/NormFormChallenge.lean": "9c042d63799190ad3e8f576a4908de90905101dbd00fa6d7f52cdc367488587a",
+    "Formalization/Verification/Comparator/NormFormSolution.lean": "d5377de8251d113834e7efd6529bbf240e8bd3a71a9ee69592cf9389ed5e04b4",
+    "Formalization/Verification/Comparator/PermutationEquivalence.json": "7d50bc21791d954c3f6c852f647c8a2a35444012d75712aaa6e75486a464a2f6",
+    "Formalization/Verification/Comparator/PermutationEquivalenceChallenge.lean": "92ab47b33925d995037d677c0ac1b29db8cd4a8a924e4c06c9437f4752241b2c",
+    "Formalization/Verification/Comparator/PermutationEquivalenceSolution.lean": "f4962e9cb5d24c5735b1366c259861f293cb73c25007f6330e36ebf313cdd430",
+    "Formalization/Verification/Comparator/QaryEquivalence.json": "a1d35ea45d72e642ea636ab591b0625c0741a6cb5c3dde0b4d0c8e2439819188",
+    "Formalization/Verification/Comparator/QaryEquivalenceChallenge.lean": "572791d0a1d4699d63b94b503947e96af211843808affa222c115a343e03e865",
+    "Formalization/Verification/Comparator/QaryEquivalenceSolution.lean": "cf2a0080314dc621994a2e0f1ea78407394523d0758f5d8de780d6f2d7023b93",
+    "Formalization/Verification/Comparator/QaryForward.json": "ed22c8776bee8b981f58698f8ab64ec18b0108c70c6bd5b3a596e0ef866a0484",
+    "Formalization/Verification/Comparator/QaryForwardChallenge.lean": "8f758e4589c936e0e297b962100ec882d6762be5010e2507a4dffcd11384ecda",
+    "Formalization/Verification/Comparator/QaryForwardSolution.lean": "47a522347d83a23215e4a909dce557dec78b6081daa6c352a49f0acd1c6bd547",
+    "Formalization/Verification/Comparator/QaryRankBoxedNormalization.json": "3d155ae13491946df69909d86082b5b085a4b0d68b5793c4d3f674d5773f60d5",
+    "Formalization/Verification/Comparator/QaryRankBoxedNormalizationChallenge.lean": "868b3480fec620f0c29a4ee75a09f36cd25e83bdf51e39fb50bb5cc6731b2b58",
+    "Formalization/Verification/Comparator/QaryRankBoxedNormalizationSolution.lean": "9613fca0a650b9f70da9e14b571519c2b5d03eec64896b6b52fe03eb60b79ee4",
+    "Formalization/Verification/Comparator/RankBoxedExtension.json": "a352739cb17a0f65adf5635aa8b4ca72889933ebfa2a2f72a229e0a650f1adb4",
+    "Formalization/Verification/Comparator/RankBoxedExtensionChallenge.lean": "4dce6f3631ee8dd398454343fe423de3607deb562b509f952bd570f419d423c2",
+    "Formalization/Verification/Comparator/RankBoxedExtensionSolution.lean": "782745feb6004e47f81daeeb99f21c0caaba163872392d14193accd07dee6422",
+    "Formalization/Verification/Comparator/RankBoxedStructure.json": "a02a80e7f44ab73f6252ca1a96546f97092e736d886a52c331928b7e3c3b2a20",
+    "Formalization/Verification/Comparator/RankBoxedStructureChallenge.lean": "5567a521d66395dd6171fa03fbb7e40c29ab88683467cacd5d73e75a50ccb806",
+    "Formalization/Verification/Comparator/RankBoxedStructureSolution.lean": "5a53dedaf3159300047b2f9cc32da2a9c14115e7d92ea641e9cecdff7d0dd11c",
+    "Formalization/Verification/Comparator/RepeatedBox.json": "91f9c13fe888c971a3c195ed55b6fdc0f5c7eb934d0f70685c56b55b88d18a07",
+    "Formalization/Verification/Comparator/RepeatedBoxChallenge.lean": "62a213dab6676653d4897fb5a377b95934e40989bae0355475208c6961dfc0ab",
+    "Formalization/Verification/Comparator/RepeatedBoxSolution.lean": "ecd8b2a90ec547d9803e786c2bcb9191da811e8c0924c0f5e85995c863090858",
+    "Formalization/Verification/Comparator/RepeatedStep.json": "a745c47f6ffba133e0b8d9069ebbc3f5e55060b829ccfe37da8f7bed72bb1e9c",
+    "Formalization/Verification/Comparator/RepeatedStepChallenge.lean": "1b956707985b8dad377954100fa607c0dad64118271cededa021900bf2b50b1c",
+    "Formalization/Verification/Comparator/RepeatedStepSolution.lean": "f51dae5b1a488ff432559de441a1a9057dba4d05c353aa4c80cdcc2394e1e2bf",
+    "Formalization/Verification/Comparator/SplitBoxed.json": "96c37320caa8944401c506736df8d5b660fa5003bcfccaae1d2c350849d6e64b",
+    "Formalization/Verification/Comparator/SplitBoxedChallenge.lean": "8ea4ebe2ad99a3d960645cd5751a477182c82652d7bc3a5f64f135a1fa29d0d7",
+    "Formalization/Verification/Comparator/SplitBoxedOrthogonality.json": "2988ef5ea6c67663120fb25d46660e493dd17b777a8362aa49c6e892503a273a",
+    "Formalization/Verification/Comparator/SplitBoxedOrthogonalityChallenge.lean": "2db7be36f4d224cfab2905ed11ac00b83bcec928edb1b15ab7257a93049fd4d2",
+    "Formalization/Verification/Comparator/SplitBoxedOrthogonalitySolution.lean": "9d18c2640d1dd50d7f55c01d04371dd3447993a6f5f91daf569b8801523eb22b",
+    "Formalization/Verification/Comparator/SplitBoxedSolution.lean": "84e1e0f282c97070e0a7ad0c160513357854b63d9808bb4f09a071efdf27c563",
+    "Formalization/Verification/Comparator/SplitFormTransport.json": "a0800794239d0681afe8dd44fffe7fcb95900f2407694312e93ef4cb872ed1fe",
+    "Formalization/Verification/Comparator/SplitFormTransportChallenge.lean": "90717f2e0ba0bacc4af0eec5b202a41c1c941af2425da1dc488652badff37305",
+    "Formalization/Verification/Comparator/SplitFormTransportSolution.lean": "4abe19e14753c8042b92e350e4116a337263832002cce77daccb404cf017c381",
+    "Formalization/Verification/Examples/LargeGF13.lean": "9ceac6404c54a8a62b13d6c5d263cf016024f834fcb0904b22096f0baa1fc779",
+    "Formalization/Verification/Examples/RankTwoGF5.lean": "c5b205d2f2fed486e6f47e65565aae79ce2a8027786c275d0a70746d56e5e8b5",
+    "Formalization/Verification/Examples/application_catalog.json": "d05973c11df418189f69ace0f6e827bda963b4605586e14f4e17ca6a104f88be",
+    "Formalization/Verification/Examples/application_catalog_data.tex": "565492e1a9340dfe206d10af68123f3a5940128411fef1bbfb9f883fe5bff479",
+    "Formalization/Verification/Examples/applications.json": "70bac850a7f2148195230b8183eea044103447c855682e9d7bdd438b7cd5f795",
+    "Formalization/Verification/Examples/applications_data.tex": "af12d5892af0d311a37319ad12b3576d8f61969dd6427f75cb2641cbbf40c9e4",
+    "Formalization/Verification/Examples/applications_results.json": "4a30ab47ef71cbcf44e303217da2eb3017edf09607d963c77c67d19d229ed0d8",
+    "Formalization/Verification/Examples/build_application_catalog.py": "98f85b9cfa3fd2a8615db8e10a955969ec0870bf2dc3945cf1be2cb59c43f621",
+    "Formalization/Verification/Examples/certificates/binary-golay-lineage.json": "cc465477873457eba7373e76cd370374f1642a3d95d2246620e31ec18bb904f3",
+    "Formalization/Verification/Examples/certificates/gf13-08.json": "0e637c214564936e28f8c65a843ce2916718a1693ea998d6227eccc093ae0a42",
+    "Formalization/Verification/Examples/certificates/gf13-10.json": "34821274cc4430a1606f92cb22dacdbfa3031266b5d0693c3ad56b93aa00f515",
+    "Formalization/Verification/Examples/certificates/gf13-12a.json": "7429ac80ae8c9999586477dc2a1c8901c1415a99f7678114aecba52794552df0",
+    "Formalization/Verification/Examples/certificates/gf13-12p.json": "c52b57b92546b4833e4d644adcc190b128f1ec6c916c81c36e01abb82b1de9cf",
+    "Formalization/Verification/Examples/certificates/gf13-14.json": "fe8ba7803e6930cf1d308eabf7a3832a8579e7667308f9ea1a50b937bad64694",
+    "Formalization/Verification/Examples/certificates/gf5-06.json": "f3b10d596c5c05a8b70df1db4f0732f9ca4706b61552e35574743b1ea7e1b465",
+    "Formalization/Verification/Examples/certificates/gf5-08.json": "e3491e5966abb9ebe37396f26c0b1466d03d58b6affc3dbd7b73c5cbfc579930",
+    "Formalization/Verification/Examples/check_applications.py": "6bd9b51ecfb22c97e0e63f604cd513ca7422abd854aa779c45b21f183b5847cf",
+    "Formalization/Verification/Examples/check_golay_lineage.py": "8188702172e1c63e83907602a64cd2d033ae81c8724201986678a03ee531abb7",
+    "Formalization/Verification/Examples/check_large_applications.py": "187e35c8a2ddb749fdeaee2ea9f6debe6f3260899ede1b2a0e54db5698dbced2",
+    "Formalization/Verification/Examples/golay_lineage.json": "59b6aa22b66fb0013f0208a577b2d0d09ce4ef41f986c22b38b02b98d2f27a4b",
+    "Formalization/Verification/Examples/golay_lineage_data.tex": "15c81995ffd06656ea93d80d5f04edac059489c552cb1c0aef9a657cf36ff562",
+    "Formalization/Verification/Examples/golay_lineage_results.json": "a6ff3f306954e4a155924ded8aa78358cf4b63b879a28bbf1d174ee66b957465",
+    "Formalization/Verification/Examples/large_applications.json": "9fd6c9390e1aa92dfa811611bfdbba745039e5d9f382fd9ae3169bf920f88715",
+    "Formalization/Verification/Examples/large_applications_data.tex": "2adcac170a122d2c86c317de50cc271b151b33f30ae6bc154af95e66fa79a80f",
+    "Formalization/Verification/Examples/large_applications_results.json": "25d54b4b67d98554c89d00c797b41a2f8af556c668dbd7c9a7f3515d1f06c294",
+    "Formalization.lean": "5df092f4e41021473ba934fc148e835325e47a589165a90925731932eebb56b6",
+    "comparator/generate_challenge.py": "24e6f654865127462205537f78ab3a4725810e1307ab880f1651867f96bd8980",
+    "comparator/verify_manuscript.py": "e33a1b21ed0bbba2dceffe68fb6daedc24fb5274efcda8d973e2252249fa9ed2",
+    "lake-manifest.json": "e2eed7eb905df464a3ffb0941bbf7afc1fc483081dd1f4561dcca2c21c108cab",
+    "lakefile.lean": "2dc39baa97107710a0af9b8df323cb2d97d74ed911ec37fd2f1f8ae0790eb786",
+    "lean-toolchain": "507ad76e41019e2adbec1b3647e9e417c797902a1ed7238ba9a5a4ef048806d6"
+  },
+  "steps": [
+    {
+      "name": "lean-version",
+      "command": [
+        "lake",
+        "env",
+        "lean",
+        "--version"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "log": "lean-version.log",
+      "sha256": "ffc062887a88810ba8aa56371c6f0ef93d49dad1c0bc7fe99a8d7b264d3db0b1"
+    },
+    {
+      "name": "build",
+      "command": [
+        "lake",
+        "build",
+        "Formalization.Sections.All",
+        "Formalization.Verification.Comparator.BinaryCzKimSolution",
+        "Formalization.Verification.Comparator.BinaryRankOneNormalizationSolution",
+        "Formalization.Verification.Comparator.BinaryTwoCoordinateReductionSolution",
+        "Formalization.Verification.Comparator.ConditionalBoxedSolution",
+        "Formalization.Verification.Comparator.FoundationsSolution",
+        "Formalization.Verification.Comparator.NormFormSolution",
+        "Formalization.Verification.Comparator.PermutationEquivalenceSolution",
+        "Formalization.Verification.Comparator.QaryEquivalenceSolution",
+        "Formalization.Verification.Comparator.QaryForwardSolution",
+        "Formalization.Verification.Comparator.QaryRankBoxedNormalizationSolution",
+        "Formalization.Verification.Comparator.RankBoxedExtensionSolution",
+        "Formalization.Verification.Comparator.RankBoxedStructureSolution",
+        "Formalization.Verification.Comparator.RepeatedBoxSolution",
+        "Formalization.Verification.Comparator.RepeatedStepSolution",
+        "Formalization.Verification.Comparator.SplitBoxedSolution",
+        "Formalization.Verification.Comparator.SplitBoxedOrthogonalitySolution",
+        "Formalization.Verification.Comparator.SplitFormTransportSolution"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "log": "build.log",
+      "sha256": "6c2f891d286d9eeb042c8b9894dc3b8fbfd8f44ef760841d1018323469cb6cef"
+    },
+    {
+      "name": "comparator-BinaryCzKim",
+      "command": [
+        "lake",
+        "env",
+        "comparator",
+        "Formalization/Verification/Comparator/BinaryCzKim.json"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "log": "comparator-BinaryCzKim.log",
+      "sha256": "986fafac10c0cece3a751306c06d95328815afb93151cec86a443da882956704"
+    },
+    {
+      "name": "comparator-BinaryRankOneNormalization",
+      "command": [
+        "lake",
+        "env",
+        "comparator",
+        "Formalization/Verification/Comparator/BinaryRankOneNormalization.json"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "log": "comparator-BinaryRankOneNormalization.log",
+      "sha256": "eff29298cce14a287726453c06ca7bf0fdd99af6994b477fef737f9a38434d35"
+    },
+    {
+      "name": "comparator-BinaryTwoCoordinateReduction",
+      "command": [
+        "lake",
+        "env",
+        "comparator",
+        "Formalization/Verification/Comparator/BinaryTwoCoordinateReduction.json"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "log": "comparator-BinaryTwoCoordinateReduction.log",
+      "sha256": "1b3f6c14940e2940dbdc6e03f6767642ead1b2a63e0fc9bd7dd7496f74997754"
+    },
+    {
+      "name": "comparator-ConditionalBoxed",
+      "command": [
+        "lake",
+        "env",
+        "comparator",
+        "Formalization/Verification/Comparator/ConditionalBoxed.json"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "log": "comparator-ConditionalBoxed.log",
+      "sha256": "411633a572b92265721539dd7f8680f791002251b19741c18b2e875dd850457e"
+    },
+    {
+      "name": "comparator-Foundations",
+      "command": [
+        "lake",
+        "env",
+        "comparator",
+        "Formalization/Verification/Comparator/Foundations.json"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "log": "comparator-Foundations.log",
+      "sha256": "cf83f5ffaad45912215958f71d34ddfd53a77f55b3c474bf739a9edc9b8cc597"
+    },
+    {
+      "name": "comparator-NormForm",
+      "command": [
+        "lake",
+        "env",
+        "comparator",
+        "Formalization/Verification/Comparator/NormForm.json"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "log": "comparator-NormForm.log",
+      "sha256": "9332b28912b55eb1f9f86578a3c2edc918d4287a96e6256f238607f4903bea07"
+    },
+    {
+      "name": "comparator-PermutationEquivalence",
+      "command": [
+        "lake",
+        "env",
+        "comparator",
+        "Formalization/Verification/Comparator/PermutationEquivalence.json"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "log": "comparator-PermutationEquivalence.log",
+      "sha256": "15fec55cbc58a2f088ca05606922b579ed7ecb8316b1c79992c7e267e9760899"
+    },
+    {
+      "name": "comparator-QaryEquivalence",
+      "command": [
+        "lake",
+        "env",
+        "comparator",
+        "Formalization/Verification/Comparator/QaryEquivalence.json"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "log": "comparator-QaryEquivalence.log",
+      "sha256": "a79f8524f4f0fb58261f40032f1d9cf84e9cd6c258df443b93947d66fe4f73f4"
+    },
+    {
+      "name": "comparator-QaryForward",
+      "command": [
+        "lake",
+        "env",
+        "comparator",
+        "Formalization/Verification/Comparator/QaryForward.json"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "log": "comparator-QaryForward.log",
+      "sha256": "7609aa85aa9ec05f2bb622bdd29d67846ef6f75e408f9a8a91738d256f4b75cb"
+    },
+    {
+      "name": "comparator-QaryRankBoxedNormalization",
+      "command": [
+        "lake",
+        "env",
+        "comparator",
+        "Formalization/Verification/Comparator/QaryRankBoxedNormalization.json"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "log": "comparator-QaryRankBoxedNormalization.log",
+      "sha256": "659b2ae11aeec69b6dce3a7d227f73f63bafaf51a2ad6f5ad4404a71aa5f38d8"
+    },
+    {
+      "name": "comparator-RankBoxedExtension",
+      "command": [
+        "lake",
+        "env",
+        "comparator",
+        "Formalization/Verification/Comparator/RankBoxedExtension.json"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "log": "comparator-RankBoxedExtension.log",
+      "sha256": "3255d1679d0fb7e0c1b78e0e7d1fd489e4b49743468da51ae4ba1dce680f6af6"
+    },
+    {
+      "name": "comparator-RankBoxedStructure",
+      "command": [
+        "lake",
+        "env",
+        "comparator",
+        "Formalization/Verification/Comparator/RankBoxedStructure.json"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "log": "comparator-RankBoxedStructure.log",
+      "sha256": "cf5f44aa43dce332bae79a5da97f69089c2ea1221edb03ce3c774e9e64f1ea56"
+    },
+    {
+      "name": "comparator-RepeatedBox",
+      "command": [
+        "lake",
+        "env",
+        "comparator",
+        "Formalization/Verification/Comparator/RepeatedBox.json"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "log": "comparator-RepeatedBox.log",
+      "sha256": "dbb97c74e249120d8ebe5fc03a47f19c0a4634c62b674aa876c41287be465d40"
+    },
+    {
+      "name": "comparator-RepeatedStep",
+      "command": [
+        "lake",
+        "env",
+        "comparator",
+        "Formalization/Verification/Comparator/RepeatedStep.json"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "log": "comparator-RepeatedStep.log",
+      "sha256": "af546198648caa3dad4f88f9085c9c7db4e918188a2a8503881746c990ee6707"
+    },
+    {
+      "name": "comparator-SplitBoxed",
+      "command": [
+        "lake",
+        "env",
+        "comparator",
+        "Formalization/Verification/Comparator/SplitBoxed.json"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "log": "comparator-SplitBoxed.log",
+      "sha256": "4d24fc1a1e238f6efc741d27bc2262086beff336d835906df20cdebd4079cb4e"
+    },
+    {
+      "name": "comparator-SplitBoxedOrthogonality",
+      "command": [
+        "lake",
+        "env",
+        "comparator",
+        "Formalization/Verification/Comparator/SplitBoxedOrthogonality.json"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "log": "comparator-SplitBoxedOrthogonality.log",
+      "sha256": "992f97cf1b30aa233bb019a23da5d394ca893007bf9a1a3830c5cd9dbf77374c"
+    },
+    {
+      "name": "comparator-SplitFormTransport",
+      "command": [
+        "lake",
+        "env",
+        "comparator",
+        "Formalization/Verification/Comparator/SplitFormTransport.json"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "log": "comparator-SplitFormTransport.log",
+      "sha256": "80d7542a6fa0446dda2b5c7daf48a98693ccc54c74739f162f67b961a367170a"
+    },
+    {
+      "name": "axioms",
+      "command": [
+        "lake",
+        "env",
+        "lean",
+        "--stdin"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "log": "axioms.log",
+      "sha256": "d1e39f1ce4772127ea4701c505f1a25c5d7a238ab6cce5d1ae4030ac8b925016"
+    },
+    {
+      "name": "rank-two-gf5",
+      "command": [
+        "lake",
+        "env",
+        "lean",
+        "Formalization/Verification/Examples/RankTwoGF5.lean"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "log": "rank-two-gf5.log",
+      "sha256": "7d18fe2f6d8d61c52c3816a6da54a0943beabb92a912a020f977f2bb67abf647"
+    },
+    {
+      "name": "large-gf13",
+      "command": [
+        "lake",
+        "env",
+        "lean",
+        "Formalization/Verification/Examples/LargeGF13.lean"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "log": "large-gf13.log",
+      "sha256": "abb7a24e0e699a2a1e89ab57452dfd5d3a8a4932fd26f021cd6555d127eafb59"
+    },
+    {
+      "name": "applications",
+      "command": [
+        "python3",
+        "Formalization/Verification/Examples/check_applications.py",
+        "--check"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "log": "applications.log",
+      "sha256": "e8a07c630cad3abe906ef6fdd926d368557577ac9ddcb500b2ba80906398ac39"
+    },
+    {
+      "name": "large-applications",
+      "command": [
+        "python3",
+        "Formalization/Verification/Examples/check_large_applications.py",
+        "--check"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "log": "large-applications.log",
+      "sha256": "a70da60fec00e4abf5715339ed823f012d521270083e55d1f43e1f729751c736"
+    },
+    {
+      "name": "golay-lineage",
+      "command": [
+        "python3",
+        "Formalization/Verification/Examples/check_golay_lineage.py",
+        "--check"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "log": "golay-lineage.log",
+      "sha256": "65936ed853d84b4020a2c1d0ee5a62a49002cf5054c30b0821da0b24fbe4a1d6"
+    },
+    {
+      "name": "application-catalogue",
+      "command": [
+        "python3",
+        "Formalization/Verification/Examples/build_application_catalog.py",
+        "--check"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "log": "application-catalogue.log",
+      "sha256": "8898e6b09edfff99dd67332ae8faff2a6122689731d9906a41f8f157af8d55cc"
+    }
+  ],
+  "dependencies": {
+    "mathlib": "1f3cdaa7a7f82a2e521d285b11e261110e1e1962",
+    "plausible": "e84e3e16aea6b72cc5d311ca1bb25caad417e162",
+    "LeanSearchClient": "c5d5b8fe6e5158def25cd28eb94e4141ad97c843",
+    "importGraph": "f207d9fcf0cef00ba79962a33ef156061914d9c7",
+    "proofwidgets": "2e58165a9dcdca9837b666528f974299ee1a51cc",
+    "aesop": "c3361708f266893de5d1769192b60d4b1831f2bb",
+    "Qq": "221e8088e3a066b8676dc471ff10638cf1c10835",
+    "batteries": "77a5160a74772214ef37caba2847cfe9ab600285",
+    "Cli": "3de531c1135f5e3a01f3ac04830996fda476b28e"
+  },
+  "axioms": {
+    "BuildingUpFormalization.Components.BinaryCzKim.binaryDiagonalHead_apply_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "BuildingUpFormalization.Components.BinaryCzKim.binaryDiagonalHead_apply_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "BuildingUpFormalization.Components.BinaryCzKim.standardEuclideanPlaneForm_binaryDiagonalHead_self": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "BuildingUpFormalization.Components.BinaryCzKim.standardEuclideanPlaneForm_planeE0_binaryDiagonalHead": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "BuildingUpFormalization.Components.BinaryCzKim.standardEuclideanPlane_head_not_hyperbolicPair": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "BuildingUpFormalization.Components.BinaryCzKim.dot_r0_riBin_eq_zero_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "BuildingUpFormalization.Components.BinaryCzKim.boxedFamily_coefficient_eq_dot": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "BuildingUpFormalization.Components.BinaryCzKim.dot_riBin_riBin_eq_dot": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "BuildingUpFormalization.Components.BinaryCzKim.boxedFamily_tail_pairwiseOrthogonal": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "BuildingUpFormalization.Components.BinaryCzKim.buildSuccBinLinear_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "BuildingUpFormalization.Components.BinaryCzKim.buildRowsBin_succ_eq_buildSuccBinLinear": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "BuildingUpFormalization.Components.BinaryCzKim.buildRowsBin_tail_linearIndependent": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "BuildingUpFormalization.Components.BinaryCzKim.buildRows_one_eq_buildRowsBin": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "BuildingUpFormalization.Components.BinaryCzKim.paper_binary_kim_building_up_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "BuildingUpFormalization.Components.BinaryCzKim.isSelfOrthogonal_map_of_isFormIsometry": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "BuildingUpFormalization.Components.BinaryCzKim.boxedFamily_linearIndependent_of_paperSelfDualCode": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "BuildingUpFormalization.Components.BinaryCzKim.boxedFamily_tail_paperSelfDualCode": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "BuildingUpFormalization.Components.BinaryCzKim.paper_binary_cz_kim_corrected": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "BuildingUpFormalization.Components.BinaryRankOneNormalization.every_binary_selfDualCode_has_rankOne_normalForm": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "BuildingUpFormalization.Components.BinaryRankOneNormalization.mem_binaryReducedCode_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "BuildingUpFormalization.Components.BinaryRankOneNormalization.paper_binary_twoCoordinateReduction_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "BuildingUpFormalization.Components.BinaryRankOneNormalization.paper_binary_reconstruction_from_reduction_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "BuildingUpFormalization.Components.SplitBoxed.paper_conditional_boxed_normalization_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "BuildingUpFormalization.Components.Foundations.standardEuclideanPlaneForm_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "BuildingUpFormalization.Components.Foundations.alternatingHyperbolicPlaneForm_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "BuildingUpFormalization.Components.Foundations.standardEuclideanPlaneForm_gram": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "BuildingUpFormalization.Components.Foundations.alternatingHyperbolicPlaneForm_gram": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "BuildingUpFormalization.Components.Foundations.standardEuclideanPlaneForm_not_isAlt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "BuildingUpFormalization.Components.Foundations.alternatingHyperbolicPlaneForm_isAlt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "BuildingUpFormalization.Components.Foundations.isAlt_of_isFormIsometry": [
+      "propext",
+      "Quot.sound"
+    ],
+    "BuildingUpFormalization.Components.Foundations.no_isometry_standardEuclideanPlane_alternatingHyperbolicPlane": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "BuildingUpFormalization.Components.Foundations.selfOrthogonal_isTotallyIsotropic": [
+      "propext",
+      "Quot.sound"
+    ],
+    "BuildingUpFormalization.Components.Foundations.selfOrthogonal_isMaximalTotallyIsotropic": [
+      "propext",
+      "Quot.sound"
+    ],
+    "BuildingUpFormalization.Components.Foundations.selfOrthogonal_iff_totallyIsotropic_and_finrank_half": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "BuildingUpFormalization.Components.Foundations.selfOrthogonal_even_finrank": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "BuildingUpFormalization.Components.Foundations.selfOrthogonal_iff_maximalTotallyIsotropic_and_finrank_half": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "BuildingUpFormalization.Components.Foundations.paperLagrangianSubspace_iff_totallyIsotropic_and_finrank_half": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "BuildingUpFormalization.Components.Foundations.paperSelfDualCode_iff_totallyIsotropic_and_finrank_half": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "BuildingUpFormalization.Components.Foundations.paperLagrangianSubspace_even_length": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "BuildingUpFormalization.Components.Foundations.paperSelfDualCode_even_length": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "BuildingUpFormalization.Components.Foundations.systematicRows_linearIndependent": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "BuildingUpFormalization.Components.Foundations.dot_systematicRows": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "BuildingUpFormalization.Components.Foundations.systematicRows_pairwiseOrthogonal_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "BuildingUpFormalization.Components.Foundations.systematicRows_selfDual_iff_pairwiseOrthogonal": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "BuildingUpFormalization.Components.Foundations.paper_systematic_form_criterion_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "BuildingUpFormalization.Components.NormForm.root_neg_one_orderOf": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "BuildingUpFormalization.Components.NormForm.scalar_identity_mul_transpose": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "BuildingUpFormalization.Components.NormForm.splitE1_splitE2_hyperbolicPair": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "BuildingUpFormalization.Components.NormForm.splitE1_splitE2_linearIndependent": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "BuildingUpFormalization.Components.NormForm.norm_form_splitting_paper_order": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "BuildingUpFormalization.Components.NormForm.norm_form_witness_factors": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "BuildingUpFormalization.Components.NormForm.exists_norm_pair_with_paper_factors": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "BuildingUpFormalization.Components.NormForm.paper_split_consequences_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "BuildingUpFormalization.Components.NormForm.paper_euclidean_plane_hyperbolic_basis_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "BuildingUpFormalization.Components.PermutationEquivalence.coordinatePermuteLinearEquiv_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "BuildingUpFormalization.Components.PermutationEquivalence.dot_coordinatePermuteLinearEquiv": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "BuildingUpFormalization.Components.PermutationEquivalence.rowSpace_permuteFamily_eq_permutedCode": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "BuildingUpFormalization.Components.PermutationEquivalence.paperSelfDualCode_permutedCode": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "BuildingUpFormalization.Components.PermutationEquivalence.codeEquiv_preserves_paperSelfDualCode": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "BuildingUpFormalization.Components.QaryEquivalence.paper_qary_free_core_boxed_equivalence": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "BuildingUpFormalization.Components.QaryForward.buildSuccLinear_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "BuildingUpFormalization.Components.QaryForward.splitTailLinear_buildSuccLinear": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "BuildingUpFormalization.Components.QaryForward.buildRows_succ_eq_buildSuccLinear": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "BuildingUpFormalization.Components.QaryForward.buildRows_tail_linearIndependent": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "BuildingUpFormalization.Components.QaryForward.buildRows_linearIndependent_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "BuildingUpFormalization.Components.QaryForward.dot_ri_ri_eq_dot": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "BuildingUpFormalization.Components.QaryForward.buildRows_tail_pairwiseOrthogonal": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "BuildingUpFormalization.Components.QaryForward.buildRows_pairwiseOrthogonal_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "BuildingUpFormalization.Components.QaryForward.paper_qary_kim_lee_building_up_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "BuildingUpFormalization.Components.QaryForward.rowSpace_finrank_of_linearIndependent": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "BuildingUpFormalization.Components.QaryForward.buildRows_tail_finrank_of_linearIndependent": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "BuildingUpFormalization.Components.QaryForward.buildRows_tail_independent_orthogonal_finrank": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "BuildingUpFormalization.Components.QaryForward.buildRows_tail_paperLagrangianSubspace": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "BuildingUpFormalization.Components.QaryForward.dot_r0_r0_eq_zero_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "BuildingUpFormalization.Components.QaryForward.dot_r0_ri_eq_zero_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "BuildingUpFormalization.Components.QaryForward.qaryAdaptedFamily_extension_vector_norm": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "BuildingUpFormalization.Components.QaryForward.qaryAdaptedFamily_coefficient_eq_dot": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "BuildingUpFormalization.Components.QaryForward.qaryAdaptedFamily_eq_buildRows": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "BuildingUpFormalization.Components.QaryForward.qaryAdaptedFamily_linearIndependent_of_paperSelfDualCode": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "BuildingUpFormalization.Components.QaryForward.qaryAdaptedFamily_tail_paperSelfDualCode": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "BuildingUpFormalization.Components.QaryForward.paper_qary_adapted_reduction": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "BuildingUpFormalization.Components.QaryRankBoxedNormalization.every_qary_selfDualCode_has_rankBoxed_normalForm": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "BuildingUpFormalization.Components.RankBoxedExtension.paper_rankBoxed_buildingUp_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "BuildingUpFormalization.Components.RankBoxedStructure.paper_rankBoxed_pivot_restriction_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "BuildingUpFormalization.Components.RankBoxedStructure.paper_rankBoxed_terminal_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "BuildingUpFormalization.Components.RankBoxedStructure.paper_rankOne_split_specialization_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "BuildingUpFormalization.Components.RepeatedBox.extension_dictionary_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "BuildingUpFormalization.Components.RepeatedBox.extension_zero_column_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "BuildingUpFormalization.Components.RepeatedBox.repeated_step_selfDual_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "BuildingUpFormalization.Components.RepeatedBox.repeated_step_normalization_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "BuildingUpFormalization.Components.RepeatedBox.repeated_step_kim_lee_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "BuildingUpFormalization.Components.RepeatedBox.kim_lee_to_repeated_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "BuildingUpFormalization.Components.RepeatedStep.one_step_normalization_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "BuildingUpFormalization.Components.RepeatedStep.zero_column_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "BuildingUpFormalization.Components.RepeatedStep.one_step_kim_lee_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "BuildingUpFormalization.Components.RepeatedStep.binary_normalization_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "BuildingUpFormalization.Components.SplitBoxed.blockDefect_isotropicLineBlock": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "BuildingUpFormalization.Components.SplitBoxed.blockDefect_splitDiagonalBlock": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "BuildingUpFormalization.Components.SplitBoxed.blockDefectLinear_isotropicLineBlock": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "BuildingUpFormalization.Components.SplitBoxed.blockDefectLinear_splitDiagonalBlock": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "BuildingUpFormalization.Components.SplitBoxed.splitBoxedReadout_splitBoxedRows": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "BuildingUpFormalization.Components.SplitBoxed.splitBoxedRows_linearIndependent": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "BuildingUpFormalization.Components.SplitBoxed.splitBlockRowInner_comm": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "BuildingUpFormalization.Components.SplitBoxed.splitBlockRowBilin_isRefl": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "BuildingUpFormalization.Components.SplitBoxed.splitBlockRowBilin_separatingLeft": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "BuildingUpFormalization.Components.SplitBoxed.splitBlockRowBilin_separatingRight": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "BuildingUpFormalization.Components.SplitBoxed.splitBlockRowBilin_nondegenerate": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "BuildingUpFormalization.Components.SplitBoxed.splitBoxedRows_rowSpace_finrank": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "BuildingUpFormalization.Components.SplitBoxed.splitBlockInner_isotropicLine_isotropicLine": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "BuildingUpFormalization.Components.SplitBoxed.splitBlockInner_diagonal_isotropicLine": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "BuildingUpFormalization.Components.SplitBoxed.splitBlockInner_isotropicLine_diagonal": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "BuildingUpFormalization.Components.SplitBoxed.splitBoxed_offDiagonal_two_block_contribution": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "BuildingUpFormalization.Components.SplitBoxed.splitBoxedRows_nonfinal_inner": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "BuildingUpFormalization.Components.SplitBoxed.splitBoxedRows_nonfinal_self": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "BuildingUpFormalization.Components.SplitBoxed.splitBoxedRows_final_self": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "BuildingUpFormalization.Components.SplitBoxed.splitBoxedRows_nonfinal_final_inner": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "BuildingUpFormalization.Components.SplitBoxed.splitBoxedRows_pairwiseOrthogonal": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "BuildingUpFormalization.Components.SplitBoxed.splitBoxedRowSpace_le_orthogonal": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "BuildingUpFormalization.Components.SplitBoxed.splitBoxedRows_rowSpace_selfDual": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "BuildingUpFormalization.Components.SplitBoxed.paper_split_boxed_form_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "BuildingUpFormalization.Components.SplitFormTransport.split_form_transport_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "BuildingUpFormalization.Components.SplitFormTransport.split_isometry_code_equiv_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "BuildingUpFormalization.Components.SplitFormTransport.head_alignment_not_euclidean_isometry": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  "inputs_unchanged": true,
+  "finished_utc": "2026-08-27T06:04:05.220684+00:00"
+}
