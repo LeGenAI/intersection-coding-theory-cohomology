@@ -40,6 +40,7 @@ python3 comparator/verify_manuscript.py --output tmp/local-check
 python3 Formalization/Verification/Examples/check_applications.py --check
 python3 Formalization/Verification/Examples/check_large_applications.py --check
 python3 Formalization/Verification/Examples/check_golay_lineage.py --check
+python3 Formalization/Verification/Examples/check_gf5_repeated_top.py --check
 python3 Formalization/Verification/Examples/check_gf13_repeated_lineage.py --check
 python3 Formalization/Verification/Examples/build_application_catalog.py --check
 ```

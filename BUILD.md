@@ -57,6 +57,7 @@ and run the JSON suites directly; do not describe it as the recorded replay.
 python3 Formalization/Verification/Examples/check_applications.py --check
 python3 Formalization/Verification/Examples/check_large_applications.py --check
 python3 Formalization/Verification/Examples/check_golay_lineage.py --check
+python3 Formalization/Verification/Examples/check_gf5_repeated_top.py --check
 python3 Formalization/Verification/Examples/check_gf13_repeated_lineage.py --check
 python3 Formalization/Verification/Examples/build_application_catalog.py --check
 ```
@@ -83,6 +84,10 @@ double-circulant [22,11,10] code, checks the two exact reductions through
 [20,10,8] to [18,9,7], and verifies both inverse Kim--Lee matrices. It also
 checks the supplied complete Magma weight distributions at lengths 20 and 18
 against the MacWilliams identity.
+
+The GF(5) checker verifies the top repeated box from the exact
+[22,11,8] parent to the Georgiou--Koukouvinos [24,12,9] endpoint. Its Magma
+replay audits all 552 ordered coordinate pairs.
 
 `build_application_catalog.py` does not recompute distances. It packages the
 two verified result files into the reviewer-facing `application_catalog.json`,

@@ -169,8 +169,10 @@ def build_outputs():
     rows = []
     for level, name, code, relation in [
             (0, r"$C_{18}^{(13)}$", c18, "base parent"),
-            (1, r"$C_{20}^{(13)}$", c20, r"Kim--Lee$(C_{18}^{(13)},x_{18}^{(13)})$"),
-            (2, r"$C_{22}^{(13)}$", c22, r"Kim--Lee$(C_{20}^{(13)},x_{20}^{(13)})$")]:
+            (1, r"$C_{20}^{(13)}$", c20,
+             r"$\mathcal B_5(G_{18}^{(13)},x_{18}^{(13)})$"),
+            (2, r"$C_{22}^{(13)}$", c22,
+             r"$\mathcal B_5(G_{20}^{(13)},x_{20}^{(13)})$")]:
         n, k, d = code["parameters"]
         rows.append(f"{level} & {name} & $[{n},{k},{d}]$ & {code['a_d']:,} & {relation} \\\\")
 

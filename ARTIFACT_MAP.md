@@ -24,9 +24,9 @@ Theorem, Proposition and Corollary share the theorem counter.
 | Corollary 3.10 | Explicit normalized rank-one box | SplitBoxed (12), SplitBoxedOrthogonality (12) |
 | Theorem 3.11 | Conditional boxed coefficient theorem | `paper_conditional_boxed_normalization_exact`; ConditionalBoxed (1) |
 | Explicit change of form in Section 2 | Different named forms, not a Euclidean self-isometry | SplitFormTransport (3) |
-| Table 1 | Seven finite-field catalogue entries, five binary Golay-lineage levels, three repeated GF(13) levels, and published benchmark data | `application_catalog.json`, both lineage certificates, linked `certificates/*.json`, `build_application_catalog.py`, and the numerical checkers |
-| Table 2 | Two length-20-centered repeated lineages: the five-level binary Golay chain and the three-level GF(13) chain | `check_golay_lineage.py`, `check_gf13_repeated_lineage.py`, and their linked certificates; the generic inverse steps are Theorem 3.9 / BinaryCzKim and Theorem 3.6 |
-| Proposition 3.12 | Universal rank-one realization of a self-dual MDS $[14,7,8]$ code over $\mathrm{GF}(13)$ | `Examples/LargeGF13.lean` (Gram, normalization, readout, parent, unique correction and reconstruction certificates); `large_applications.json` and `check_large_applications.py` (all $\binom{14}{7}$ minors and exhaustive projective enumeration) |
+| Table 1 | Seven finite-field catalogue entries, five binary Golay-lineage levels, the largest repeated GF(5) endpoint, three repeated GF(13) levels, and published benchmark data | `application_catalog.json`, the three lineage certificates, linked `certificates/*.json`, `build_application_catalog.py`, and the numerical checkers |
+| Table 2 | Three largest repeated boxed presentations: binary $[24,12,8]$, GF(5) $[24,12,9]$, and GF(13) $[22,11,10]$, together with their certified parents | `check_golay_lineage.py`, `check_gf5_repeated_top.py`, `check_gf13_repeated_lineage.py`, and their linked certificates |
+| Proposition 4.1 | Universal rank-one realization of a self-dual MDS $[14,7,8]$ code over $\mathrm{GF}(13)$ | `Examples/LargeGF13.lean` (Gram, normalization, readout, parent, unique correction and reconstruction certificates); `large_applications.json` and `check_large_applications.py` (all $\binom{14}{7}$ minors and exhaustive projective enumeration) |
 
 The suite inventory contains **17 suites / 123 distinct declarations**.
 Principal declarations are under `BuildingUpFormalization.Components`.
@@ -57,9 +57,9 @@ arithmetic realization are outside this artifact's proved claims.
 `applications_results.json` records every weight multiplicity, rank and Gram
 check.  `build_application_catalog.py` packages these data into stable
 per-code certificates and generates the historical comparison in Table 1.
-`check_golay_lineage.py` and `check_gf13_repeated_lineage.py` independently
-generate Table 2 and certify both directions on the binary and GF(13)
-length-20-centered lineages.  The separate
+The three repeated-box checkers independently generate Table 2 and certify
+the largest binary, GF(5), and GF(13) presentations and their parent
+reductions.  The separate
 large-example pipeline starts from the known
 self-dual MDS $[14,7,8]$ code, checks all $\binom{14}{7}=3432$ maximal minors,
 normalizes it to the manuscript's rank-one universal form, and exhaustively

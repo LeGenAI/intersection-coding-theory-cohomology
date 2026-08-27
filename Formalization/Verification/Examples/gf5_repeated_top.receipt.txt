@@ -1,0 +1,10 @@
+Magma V2.28-20 exact replay
+PASS GF5 largest repeated box
+levels [ <22,11,8,660>, <24,12,9,1056> ]
+audit: 552 ordered pairs; 132 distance-nine-loss-free pairs; selected (1,14)
+W22:
+[ <0,1>, <8,660>, <9,1720>, <10,17148>, <11,49240>, <12,258436>,
+  <13,595840>, <14,1933320>, <15,3443280>, <16,7005840>,
+  <17,8765808>, <18,10737900>, <19,8361560>, <20,5357996>,
+  <21,1931920>, <22,367456> ]
+Total time: 0.140 seconds; total memory usage: 32.09 MB
