@@ -6,6 +6,8 @@ import Formalization.Components.PermutationEquivalenceAxiomAudit
 import Formalization.Components.QaryForwardAxiomAudit
 import Formalization.Components.QaryEquivalenceAxiomAudit
 import Formalization.Components.QaryRankBoxedNormalizationAxiomAudit
+import Formalization.Components.QaryRankOnePairingMergeAxiomAudit
+import Formalization.Components.QaryRankOneUniversalPairingAxiomAudit
 import Formalization.Components.RankBoxedAxiomAudit
 import Formalization.Components.RankBoxedStructureAxiomAudit
 import Formalization.Components.RankBoxedExtensionAxiomAudit
@@ -20,6 +22,6 @@ import Formalization.Components.SplitFormTransportAxiomAudit
 /-!
 # Complete theorem axiom audit
 
-Building this module runs the transitive `#print axioms` audit for every
-completed component suite and for the trusted part of the M6 normalization.
+Building this module runs the transitive `#print axioms` audit for the
+paper-facing AFM revision components.
 -/

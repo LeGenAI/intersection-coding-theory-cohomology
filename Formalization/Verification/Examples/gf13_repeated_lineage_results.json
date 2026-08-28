@@ -1,10 +1,10 @@
 {
-  "input_sha256": "9566d1932d2c9f584e830e6edfd4e65e01df180f749292e36d285ec7ec31c00d",
+  "input_sha256": "5271bbeb72f05ab3ba1d5c720f586925d45bea15ab2709502035ef23a3be870a",
   "method": "exact rank/Gram/row-space/Kim reconstruction; supplied complete Magma distributions checked by MacWilliams",
   "certificate": {
     "schema_version": 1,
     "artifact_id": "GF13-BEST-KNOWN-REPEATED-18-20",
-    "source_sha256": "9566d1932d2c9f584e830e6edfd4e65e01df180f749292e36d285ec7ec31c00d",
+    "source_sha256": "5271bbeb72f05ab3ba1d5c720f586925d45bea15ab2709502035ef23a3be870a",
     "interpretation": "An exact two-coordinate reduction of the published GF(13) [20,10,10] code to a [18,9,8] parent and its literal inverse Kim--Lee presentation.",
     "levels_ascending": [
       {
@@ -1381,6 +1381,7 @@
         ],
         "literal_universal_form": true,
         "zero_pivot_diagonal": false,
+        "rank_one_normalized": false,
         "rank_one_split_normalized": true,
         "det_D": 1,
         "gram_zero": true
@@ -1635,13 +1636,13 @@
         "length": 18,
         "distance": 8,
         "a_d": 1752,
-        "reference": "Kim--Choi~\\cite{KimChoi2021}"
+        "reference": "\\cite{KimChoi2021}"
       },
       {
         "length": 20,
         "distance": 10,
         "a_d": 111024,
-        "reference": "Betsumiya et al.~\\cite{BetsumiyaEtAl}"
+        "reference": "\\cite{BetsumiyaEtAl}"
       }
     ],
     "magma_audit": {

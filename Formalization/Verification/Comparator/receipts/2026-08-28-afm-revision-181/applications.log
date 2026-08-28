@@ -1,0 +1,3 @@
+PASS gf5_6: [6,3,4], 124 nonzero vectors
+PASS gf5_8: [8,4,4], 624 nonzero vectors
+PASS all generated files match

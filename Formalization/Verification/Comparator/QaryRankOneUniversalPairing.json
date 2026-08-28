@@ -1,0 +1,13 @@
+{
+  "challenge_module": "Formalization.Verification.Comparator.QaryRankOneUniversalPairingChallenge",
+  "solution_module": "Formalization.Verification.Comparator.QaryRankOneUniversalPairingSolution",
+  "theorem_names": [
+    "BuildingUpFormalization.Components.QaryRankOneOrientedPairing.every_qary_selfDualCode_has_rankOne_orientedPairing"
+  ],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ],
+  "enable_nanoda": false
+}

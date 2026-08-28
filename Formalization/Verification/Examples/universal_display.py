@@ -64,6 +64,7 @@ def determinant(matrix, p):
 
 
 def universal_normalize(matrix, pairs, c, p, zero_binary_pivot_diagonal=False,
+                        rank_one_normalize=False,
                         rank_one_split_normalize=False):
     """Return a literal ``G(c;P,H,Q,D)`` generator for the same code."""
     dimension = len(matrix)
@@ -120,12 +121,13 @@ def universal_normalize(matrix, pairs, c, p, zero_binary_pivot_diagonal=False,
         coordinate_order = [coordinate for pair in ordered_pairs
                             for coordinate in pair]
 
-    if rank_one_split_normalize:
-        require(r == 1, "Corollary 3.10 normalization requires rank one")
+    if rank_one_normalize or rank_one_split_normalize:
+        require(r == 1, "rank-one normalization requires rank one")
         core = normalized[k][2 * k] % p
         require(core != 0, "nonzero rank-one terminal core")
         inverse = pow(core, -1, p)
         normalized[k] = [(inverse * value) % p for value in normalized[k]]
+    if rank_one_split_normalize:
         for i in range(k):
             diagonal = normalized[i][2 * i] % p
             lower = normalized[k][2 * i] % p
@@ -159,6 +161,8 @@ def universal_normalize(matrix, pairs, c, p, zero_binary_pivot_diagonal=False,
         require(d_matrix == [[1]], "Corollary 3.10 unit terminal core")
         require(all(p_matrix[i][i] == 0 for i in range(k)),
                 "Corollary 3.10 zero pivot diagonal")
+    if rank_one_normalize:
+        require(d_matrix == [[1]], "Theorem 3.7 unit terminal core")
 
     expected = []
     for i in range(k):
@@ -194,6 +198,7 @@ def universal_normalize(matrix, pairs, c, p, zero_binary_pivot_diagonal=False,
         "P": p_matrix, "H": h_matrix, "Q": q_matrix, "D": d_matrix,
         "matrix": normalized, "literal_universal_form": True,
         "zero_pivot_diagonal": zero_binary_pivot_diagonal,
+        "rank_one_normalized": rank_one_normalize,
         "rank_one_split_normalized": rank_one_split_normalize,
         "det_D": determinant(d_matrix, p), "gram_zero": True,
     }

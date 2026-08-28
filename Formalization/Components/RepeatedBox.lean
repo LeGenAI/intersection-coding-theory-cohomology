@@ -1,6 +1,7 @@
 import Formalization.Components.RepeatedBoxDefinitions
 import Formalization.Components.RepeatedStep
 import Formalization.Components.RankBoxedExtension
+import Formalization.Components.RankBoxedStructure
 
 set_option autoImplicit false
 
@@ -234,6 +235,92 @@ theorem repeated_step_kim_lee_iff {k r : ℕ} (c : K)
   · intro heq
     rw [heq]
     rfl
+
+/-- Exhaustive row-space form of the one-step dichotomy.  Every valid
+successor is either literally a standard building-up row space for some
+norm-minus-one word, or literally the split direct-sum row space. -/
+theorem repeated_step_rowSpace_dichotomy_exact {k r : ℕ} (c : K)
+    (P : Fin k → Fin k → K) (H Q : Fin k → Fin r → K)
+    (A : Fin r → Fin k → K) (D : Fin r → Fin r → K)
+    (hc : c ^ 2 = (-1 : K)) (h2 : (2 : K) ≠ 0)
+    (hD : RankBoxCoreFullRank D)
+    (hpm : PivotMasterRelations Q A D) (hpp : PivotGramRelations c P H Q)
+    (h q : Fin r → K) (u : Fin k → K) :
+    (∃ x, dot x x = -1 ∧
+      rowSpace (readSuccessor (extendedRows c P H Q A D h q u)) =
+        rowSpace (buildRows x c
+          (flattenRows (rankBoxedRows c P H Q A D)))) ∨
+      rowSpace (readSuccessor (extendedRows c P H Q A D h q u)) =
+        rowSpace (directSumRows c
+          (flattenRows (rankBoxedRows c P H Q A D))) := by
+  classical
+  let gamma : Fin (k + r) → K := fun i =>
+    extensionGamma c H Q D h q u (finSumFinEquiv.symm i)
+  by_cases hgamma : gamma = 0
+  · right
+    obtain ⟨hG, hB⟩ :=
+      repeated_step_selfDual_exact c P H Q A D hc h2 hD hpm hpp h q u
+    rw [extension_dictionary_exact] at hB ⊢
+    change paperSelfDualCode
+      (rowSpace (borderedRows c
+        (c / 2 * (1 + ∑ t, q t * q t) - ∑ t, h t * q t)
+        (flattenRow (extensionTail c h q u)) gamma
+        (flattenRows (rankBoxedRows c P H Q A D)))) at hB
+    change rowSpace (borderedRows c
+        (c / 2 * (1 + ∑ t, q t * q t) - ∑ t, h t * q t)
+        (flattenRow (extensionTail c h q u)) gamma
+        (flattenRows (rankBoxedRows c P H Q A D))) = _
+    rw [hgamma] at hB ⊢
+    exact (zero_column_exact c
+      (c / 2 * (1 + ∑ t, q t * q t) - ∑ t, h t * q t)
+      (flattenRow (extensionTail c h q u))
+      (flattenRows (rankBoxedRows c P H Q A D))
+      hc h2 hG hB).2.2.1
+  · left
+    rw [repeated_step_kim_lee_iff c P H Q A D hc h2 hD hpm hpp h q u]
+    intro hzero
+    have hext :=
+      (extension_zero_column_iff c H Q D hD h q u).2 hzero
+    apply hgamma
+    funext i
+    simpa [gamma] using congrFun hext (finSumFinEquiv.symm i)
+
+/-- The first pivot of an arbitrary valid nonterminal rank box satisfies the
+same exhaustive Kim--Lee/direct-sum dichotomy as a constructed successor.
+The parent is the literal first-pivot restriction and the criterion is written
+only in the coefficients of the original box. -/
+theorem paper_rankBoxed_head_step_kim_lee_iff {k r : ℕ} (c : K)
+    (P : Fin (k + 1) → Fin (k + 1) → K)
+    (H Q : Fin (k + 1) → Fin r → K)
+    (A : Fin r → Fin (k + 1) → K) (D : Fin r → Fin r → K)
+    (hc : c ^ 2 = (-1 : K)) (h2 : (2 : K) ≠ 0)
+    (hD : RankBoxCoreFullRank D)
+    (hpm : PivotMasterRelations Q A D)
+    (hpp : PivotGramRelations c P H Q) :
+    (∃ x, dot x x = -1 ∧
+      rowSpace (readSuccessor (rankBoxedRows c P H Q A D)) =
+        rowSpace (buildRows x c
+          (flattenRows (rankBoxedRows c
+            (fun i j => P i.succ j.succ)
+            (fun i t => H i.succ t) (fun i t => Q i.succ t)
+            (fun t j => A t j.succ) D)))) ↔
+      ¬ (Q 0 = 0 ∧ ∀ i : Fin k,
+        P 0 i.succ = -(∑ t, Q i.succ t * H 0 t)) := by
+  have hpm' : PivotMasterRelations
+      (fun i t => Q i.succ t) (fun t j => A t j.succ) D := by
+    intro s i
+    exact hpm s i.succ
+  have hpp' : PivotGramRelations c
+      (fun i j => P i.succ j.succ)
+      (fun i t => H i.succ t) (fun i t => Q i.succ t) := by
+    intro i j
+    simpa using hpp i.succ j.succ
+  rw [paper_rankBoxed_successor_dictionary_exact c P H Q A D hc h2 hpm hpp]
+  simpa using repeated_step_kim_lee_iff c
+    (fun i j => P i.succ j.succ)
+    (fun i t => H i.succ t) (fun i t => Q i.succ t)
+    (fun t j => A t j.succ) D hc h2 hD hpm' hpp'
+    (H 0) (Q 0) (fun i => P 0 i.succ)
 
 /-- Exact fixed-parent criterion after removing the redundant
 master-by-pivot coefficient matrix. -/

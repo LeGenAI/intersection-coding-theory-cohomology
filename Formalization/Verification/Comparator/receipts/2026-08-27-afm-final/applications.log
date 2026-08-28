@@ -1,6 +1,0 @@
-PASS gf5_6: [6,3,4], 124 nonzero vectors
-PASS gf5_8: [8,4,4], 624 nonzero vectors
-PASS gf13_8: [8,4,5], 28,560 nonzero vectors
-PASS gf13_10: [10,5,6], 371,292 nonzero vectors
-PASS gf13_12: [12,6,6], 4,826,808 nonzero vectors
-PASS all generated files match

@@ -224,6 +224,7 @@ theorem paper_binary_cz_kim_corrected [CharP K 2]
     {G : Fin m → Fin (2 * m) → K}
     (hcode : L.map e.toLinearMap = rowSpace (boxedFamily x Y G)) :
     IsSelfOrthogonal (dotBilin (K := K) (n := 2 + 2 * m)) (L.map e.toLinearMap) ∧
+      dot x x = (1 : K) ∧
       paperSelfDualCode (K := K) (rowSpace G) ∧
       (∀ i : Fin m, Y i = dot x (G i)) ∧
       boxedFamily x Y G = buildRowsBin x G ∧
@@ -235,13 +236,24 @@ theorem paper_binary_cz_kim_corrected [CharP K 2]
     simpa [paperSelfDualCode, IsSelfOrthogonal, hcode] using htransport
   have horth : PairwiseOrthogonal (K := K) (boxedFamily x Y G) :=
     (pairwiseOrthogonal_iff_rowSpace_le_orthogonal (K := K)).2 hselfBoxed.le
+  have hx : dot x x = (1 : K) := by
+    have hxx : dot (r0 x) (r0 x) = 0 := by
+      simpa only [boxedFamily, Fin.cases_zero] using horth 0 0
+    rw [r0, dot_prepend2_prepend2] at hxx
+    have hneg : dot x x = (-1 : K) := by
+      linear_combination hxx
+    have htwo : (2 : K) = 0 := CharP.cast_eq_zero K 2
+    have hnegOne : (-1 : K) = 1 := by
+      apply neg_eq_iff_add_eq_zero.mpr
+      simpa [one_add_one_eq_two] using htwo
+    simpa [hnegOne] using hneg
   have hY : ∀ i : Fin m, Y i = dot x (G i) :=
     boxedFamily_coefficient_eq_dot horth
   have heq : boxedFamily x Y G = buildRowsBin x G := boxedFamily_eq_buildRowsBin hY
   have hdelete : deleteBinaryHeadPair (boxedFamily x Y G) = G := by
     rw [deleteBinaryHeadPair, heq]
     exact deleteHyperbolicPair_buildRowsBin x G
-  refine ⟨htransport, boxedFamily_tail_paperSelfDualCode hselfBoxed,
+  refine ⟨htransport, hx, boxedFamily_tail_paperSelfDualCode hselfBoxed,
     hY, heq, hdelete, ?_⟩
   rw [hdelete, ← heq]
   exact codeEquiv_refl (boxedFamily x Y G)

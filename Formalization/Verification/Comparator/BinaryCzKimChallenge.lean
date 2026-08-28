@@ -114,6 +114,7 @@ theorem paper_binary_cz_kim_corrected [CharP K 2]
     {G : Fin m → Fin (2 * m) → K}
     (hcode : L.map e.toLinearMap = rowSpace (boxedFamily x Y G)) :
     IsSelfOrthogonal (dotBilin (K := K) (n := 2 + 2 * m)) (L.map e.toLinearMap) ∧
+      dot x x = (1 : K) ∧
       paperSelfDualCode (K := K) (rowSpace G) ∧
       (∀ i : Fin m, Y i = dot x (G i)) ∧
       boxedFamily x Y G = buildRowsBin x G ∧

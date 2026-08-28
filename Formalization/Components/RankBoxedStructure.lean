@@ -1,5 +1,6 @@
 import Formalization.Components.RankBoxedStructureDefinitions
 import Formalization.Components.RankBoxedConstruction
+import Formalization.Components.RankBoxedExtensionDefinitions
 
 set_option autoImplicit false
 
@@ -8,6 +9,7 @@ namespace BuildingUpFormalization.Components.RankBoxedStructure
 open BuildingUpFormalization.Components.SplitBoxed
 open BuildingUpFormalization.Components.RankBoxed
 open BuildingUpFormalization.Components.QaryRankBoxedNormalization
+open BuildingUpFormalization.Components.RankBoxedExtension
 
 variable {K : Type*} [Field K]
 
@@ -132,6 +134,118 @@ theorem paper_rankBoxed_terminal_exact {r : ℕ} (c : K)
         · change c * v (.inr t) 0 = v (.inr t) 1
           exact (sub_eq_zero.mp ht).symm
     rwa [hFv] at hFw
+
+/-- Every valid nonterminal rank box is literally the successor obtained by
+removing its first pivot and reading that pivot's coefficients as extension
+parameters.  This is the recursive dictionary needed to apply the one-step
+Kim--Lee/direct-sum dichotomy to an arbitrary boxed normal form. -/
+theorem paper_rankBoxed_successor_dictionary_exact {k r : ℕ}
+    (c : K) (P : Fin (k + 1) → Fin (k + 1) → K)
+    (H Q : Fin (k + 1) → Fin r → K)
+    (A : Fin r → Fin (k + 1) → K) (D : Fin r → Fin r → K)
+    (hc : c ^ 2 = (-1 : K)) (h2 : (2 : K) ≠ 0)
+    (hpm : PivotMasterRelations Q A D)
+    (hpp : PivotGramRelations c P H Q) :
+    rankBoxedRows c P H Q A D =
+      extendedRows c
+        (fun i j => P i.succ j.succ)
+        (fun i t => H i.succ t) (fun i t => Q i.succ t)
+        (fun t j => A t j.succ) D
+        (H 0) (Q 0) (fun j => P 0 j.succ) := by
+  classical
+  have hc0 : c ≠ 0 := by
+    intro hz
+    simp [hz] at hc
+  let p : K :=
+    c / 2 * (1 + ∑ t, Q 0 t * Q 0 t) - ∑ t, H 0 t * Q 0 t
+  have hpvalid :
+      1 + c * (p + p) +
+        ∑ t, (c * (H 0 t * Q 0 t + Q 0 t * H 0 t) +
+          Q 0 t * Q 0 t) = 0 := by
+    have hs :
+        (∑ t, (c * (H 0 t * Q 0 t + Q 0 t * H 0 t) +
+          Q 0 t * Q 0 t)) =
+          2 * c * (∑ t, H 0 t * Q 0 t) +
+            ∑ t, Q 0 t * Q 0 t := by
+      rw [Finset.sum_add_distrib, Finset.mul_sum]
+      congr 1
+      apply Finset.sum_congr rfl
+      intro t _
+      ring
+    rw [hs]
+    have hh : c / 2 * 2 = c := div_mul_cancel₀ c h2
+    dsimp [p]
+    calc
+      _ = (c * (c / 2 * 2)) * (1 + ∑ t, Q 0 t * Q 0 t) +
+          (1 + ∑ t, Q 0 t * Q 0 t) := by ring
+      _ = 0 := by rw [hh, ← pow_two, hc]; ring
+  have hP00 : P 0 0 = p := by
+    have horig := hpp 0 0
+    simp only [if_pos] at horig
+    have hmul : c * (P 0 0 + P 0 0) = c * (p + p) := by
+      linear_combination horig - hpvalid
+    have hadd : P 0 0 + P 0 0 = p + p := by
+      exact mul_left_cancel₀ hc0 hmul
+    apply mul_left_cancel₀ h2
+    simpa [two_mul] using hadd
+  have hPlower (i : Fin k) :
+      P i.succ 0 =
+        c * (∑ t, Q 0 t * Q i.succ t) -
+          (∑ t, (H 0 t * Q i.succ t + Q 0 t * H i.succ t)) -
+            P 0 i.succ := by
+    let v := c * (∑ t, Q 0 t * Q i.succ t) -
+      (∑ t, (H 0 t * Q i.succ t + Q 0 t * H i.succ t)) -
+        P 0 i.succ
+    have hsplit :
+        (∑ t, (H 0 t * Q i.succ t + Q 0 t * H i.succ t)) =
+          (∑ t, H 0 t * Q i.succ t) +
+            ∑ t, Q 0 t * H i.succ t := Finset.sum_add_distrib
+    have hv :
+        c * (P 0 i.succ + v) +
+          ∑ t, (c * (H 0 t * Q i.succ t + Q 0 t * H i.succ t) +
+            Q 0 t * Q i.succ t) = 0 := by
+      simp_rw [mul_add]
+      simp only [Finset.sum_add_distrib, ← Finset.mul_sum]
+      dsimp [v]
+      rw [hsplit]
+      linear_combination (∑ t, Q 0 t * Q i.succ t) * hc
+    have horig := hpp 0 i.succ
+    have hne : (0 : Fin (k + 1)) ≠ i.succ := (Fin.succ_ne_zero i).symm
+    rw [if_neg hne] at horig
+    simp only [zero_add] at horig
+    have hmul : c * (P 0 i.succ + P i.succ 0) =
+        c * (P 0 i.succ + v) := by
+      linear_combination horig - hv
+    have hadd : P 0 i.succ + P i.succ 0 = P 0 i.succ + v :=
+      mul_left_cancel₀ hc0 hmul
+    have : P i.succ 0 = v := add_left_cancel hadd
+    simpa [v, mul_comm, add_comm] using this
+  have hP : P = extendP c
+      (fun i j => P i.succ j.succ)
+      (fun i t => H i.succ t) (fun i t => Q i.succ t)
+      (H 0) (Q 0) (fun j => P 0 j.succ) := by
+    funext i j
+    refine Fin.cases ?_ (fun i => ?_) i
+    · refine Fin.cases ?_ (fun j => ?_) j
+      · simpa [extendP, p] using hP00
+      · rfl
+    · refine Fin.cases ?_ (fun j => ?_) j
+      · simpa [extendP, mul_comm, add_comm] using hPlower i
+      · rfl
+  have hH : H = Fin.cons (H 0) (fun i t => H i.succ t) := by
+    funext i
+    refine Fin.cases rfl (fun i => rfl) i
+  have hQ : Q = Fin.cons (Q 0) (fun i t => Q i.succ t) := by
+    funext i
+    refine Fin.cases rfl (fun i => rfl) i
+  have hA : A = extendA (fun t j => A t j.succ) D (Q 0) := by
+    funext t j
+    refine Fin.cases ?_ (fun j => rfl) j
+    have ht := hpm t 0
+    simp [extendA]
+    exact eq_neg_of_add_eq_zero_left ht
+  simp only [extendedRows]
+  rw [← hP, ← hH, ← hQ, ← hA]
 
 /-- Literal matrix equality and iff of the full hypothesis sets in the
 transition from Theorem 3.12 to Theorem 3.13. -/

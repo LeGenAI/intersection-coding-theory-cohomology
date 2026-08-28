@@ -1,4 +1,0 @@
-PASS GF(13) [14,7,8]: 3432 information sets
-PASS universal normalization: k=6, r=1, D=I_1
-PASS deletion parent: [12,6,6], 1 lifting survivors
-PASS unique projective distance-eight correction: (1, 8, 0, 8, 3, 6)

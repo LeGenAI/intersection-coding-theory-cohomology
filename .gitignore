@@ -36,10 +36,6 @@ __pycache__/
 
 # Publish only the current manuscript-only replay; retain older runs locally
 /Formalization/Verification/Comparator/receipts/*
-!/Formalization/Verification/Comparator/receipts/2026-08-27-g14-structured/
-!/Formalization/Verification/Comparator/receipts/2026-08-27-g14-structured/*.log
-!/Formalization/Verification/Comparator/receipts/2026-08-27-g14-structured/summary.json
-!/Formalization/Verification/Comparator/receipts/2026-08-27-golay-lineage/
-!/Formalization/Verification/Comparator/receipts/2026-08-27-golay-lineage/*.log
-!/Formalization/Verification/Comparator/receipts/2026-08-27-golay-lineage/summary.json
+!/Formalization/Verification/Comparator/receipts/2026-08-28-afm-revision-181/
+!/Formalization/Verification/Comparator/receipts/2026-08-28-afm-revision-181/**
 /Formalization/Verification/Comparator/receipts/*/tools/

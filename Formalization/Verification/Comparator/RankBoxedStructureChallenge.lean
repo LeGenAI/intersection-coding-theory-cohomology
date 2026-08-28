@@ -1,4 +1,5 @@
 import Formalization.Components.RankBoxedStructureDefinitions
+import Formalization.Components.RankBoxedExtensionDefinitions
 
 set_option autoImplicit false
 
@@ -7,6 +8,7 @@ namespace BuildingUpFormalization.Components.RankBoxedStructure
 open BuildingUpFormalization.Components.SplitBoxed
 open BuildingUpFormalization.Components.RankBoxed
 open BuildingUpFormalization.Components.QaryRankBoxedNormalization
+open BuildingUpFormalization.Components.RankBoxedExtension
 
 variable {K : Type*} [Field K]
 
@@ -38,6 +40,22 @@ theorem paper_rankBoxed_terminal_exact {r : ℕ} (c : K)
     (hD : RankBoxCoreFullRank D) :
     rankBoxedRowSpace (rankBoxedRows c P H Q A D) =
       qaryIsotropicLineCode (K := K) c := by
+  sorry
+
+/-- Exact recursive dictionary for a nonterminal rank box. -/
+theorem paper_rankBoxed_successor_dictionary_exact {k r : ℕ}
+    (c : K) (P : Fin (k + 1) → Fin (k + 1) → K)
+    (H Q : Fin (k + 1) → Fin r → K)
+    (A : Fin r → Fin (k + 1) → K) (D : Fin r → Fin r → K)
+    (hc : c ^ 2 = (-1 : K)) (h2 : (2 : K) ≠ 0)
+    (hpm : PivotMasterRelations Q A D)
+    (hpp : PivotGramRelations c P H Q) :
+    rankBoxedRows c P H Q A D =
+      extendedRows c
+        (fun i j => P i.succ j.succ)
+        (fun i t => H i.succ t) (fun i t => Q i.succ t)
+        (fun t j => A t j.succ) D
+        (H 0) (Q 0) (fun j => P 0 j.succ) := by
   sorry
 
 /-- Literal matrix equality and iff of the full hypothesis sets in the

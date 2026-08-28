@@ -4,6 +4,7 @@
   "theorem_names": [
     "BuildingUpFormalization.Components.RankBoxedStructure.paper_rankBoxed_pivot_restriction_exact",
     "BuildingUpFormalization.Components.RankBoxedStructure.paper_rankBoxed_terminal_exact",
+    "BuildingUpFormalization.Components.RankBoxedStructure.paper_rankBoxed_successor_dictionary_exact",
     "BuildingUpFormalization.Components.RankBoxedStructure.paper_rankOne_split_specialization_exact"
   ],
   "permitted_axioms": ["propext", "Quot.sound", "Classical.choice"],

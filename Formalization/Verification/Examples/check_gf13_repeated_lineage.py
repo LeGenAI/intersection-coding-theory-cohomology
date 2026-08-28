@@ -8,15 +8,14 @@ from pathlib import Path
 
 from check_applications import dot, macwilliams, rank, require
 from universal_display import (
-    kim_build, matrix_small_tex, matrix_tex, permute_vector,
-    universal_normalize,
+    kim_build, matrix_tex, permute_vector, universal_normalize,
 )
 
 
 HERE = Path(__file__).resolve().parent
 REPOSITORY = (
     "https://github.com/LeGenAI/intersection-coding-theory-cohomology/"
-    "blob/afm-revision-2026-08-27/"
+    "blob/main/"
     "Formalization/Verification/Examples/certificates/gf13-repeated-lineage.json"
 )
 
@@ -203,7 +202,7 @@ def build_outputs():
 
     rows = []
     for level, name, code, relation in [
-            (0, r"$C_{18}^{(13)}$", c18, "base parent"),
+            (0, r"$C_{18}^{(13)}$", c18, "rank-one parent"),
             (1, r"$C_{20}^{(13)}$", c20,
              r"$\mathcal B_5(G_{18}^{(13)},x_{18}^{(13)})$")]:
         n, k, d = code["parameters"]
@@ -215,7 +214,7 @@ def build_outputs():
     benchmark_by_length = {item["length"]: item for item in source["published_benchmarks"]}
     catalogue_rows = []
     for symbol, code, relation in [
-            (r"C_{18}^{(13)}", c18, "base parent"),
+            (r"C_{18}^{(13)}", c18, "rank-one parent"),
             (r"C_{20}^{(13)}", c20,
              r"$\mathcal B_5(G_{18}^{(13)},x_{18}^{(13)})$")]:
         n, k, d = code["parameters"]
@@ -227,7 +226,7 @@ def build_outputs():
         catalogue_rows.append(
             f"{link} & 13 & $[{n},{k},{d}];\\,{a_d}$ & "
             f"$({benchmark['distance']};\\,{benchmark['a_d']:,})$ & "
-            f"{benchmark['reference']}; {relation} \\\\"
+            f"{benchmark['reference']} \\\\"
         )
 
     x18 = display_x
@@ -238,9 +237,7 @@ def build_outputs():
             + matrix_tex(display_child, display_parent["k"],
                          display_parent["r"], split_corollary=True) + "}\n")
     tex += ("\\newcommand{\\GFThirteenLargestParentParameters}"
-            f"{{c={c},\\; k={display_parent['k']},\\; "
-            f"r={display_parent['r']},\\; "
-            f"D={matrix_small_tex(display_parent['D'])}}}\n")
+            f"{{c={c},\\; k={display_parent['k']}}}\n")
     tex += f"\\newcommand{{\\GFThirteenEighteenCorrection}}{{{tuple_tex(x18)}}}\n"
     tex += ("\\newcommand{\\GFThirteenRepeatedCertificate}{\\href{" + REPOSITORY +
             "}{$C_{20}^{(13)}$}}\n")

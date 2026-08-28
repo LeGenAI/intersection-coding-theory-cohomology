@@ -15,16 +15,86 @@ import re
 import subprocess
 from datetime import datetime, timezone
 
-from generate_challenge import mask_comments_and_strings
-
 ROOT = Path(__file__).resolve().parent.parent
 CONFIGS = ROOT / "Formalization/Verification/Comparator"
 AXIOMS = {"propext", "Quot.sound", "Classical.choice"}
+SUITE_COUNT = 19
+GOAL_COUNT = 181
+SUITE_STEMS = (
+    "BinaryCzKim", "BinaryRankOneNormalization", "BinaryTwoCoordinateReduction",
+    "ConditionalBoxed", "Foundations", "NormForm", "PermutationEquivalence",
+    "QaryEquivalence", "QaryForward", "QaryRankBoxedNormalization",
+    "QaryRankOnePairingMerge", "QaryRankOneUniversalPairing",
+    "RankBoxedExtension", "RankBoxedStructure", "RepeatedBox", "RepeatedStep",
+    "SplitBoxed", "SplitBoxedOrthogonality", "SplitFormTransport",
+)
 TOOL_HASHES = {
     "comparator": "1b7b27b0233fd75672eeb777fec1c35257f1fb111acbb9cbcb2d0674a7b2c154",
     "lean4export": "293e221ed1b515de1aeaf06d2fe8f3f919f0b75f1e4d3b228f43f53d576501ea",
     "landrun": "6ada66a06669e8994e174a7271af2db636308e55a0d6ec896cc7d326b46727f6",
 }
+
+
+def mask_comments_and_strings(source):
+    """Mask non-code characters while preserving source offsets and lines."""
+    masked = list(source)
+    block_depth = 0
+    in_line_comment = False
+    in_string = False
+    escaped = False
+    i = 0
+    while i < len(source):
+        ch = source[i]
+        nxt = source[i + 1] if i + 1 < len(source) else ""
+        if ch == "\n":
+            in_line_comment = False
+            escaped = False
+            i += 1
+            continue
+        if in_line_comment:
+            masked[i] = " "
+            i += 1
+            continue
+        if block_depth:
+            masked[i] = " "
+            if ch == "/" and nxt == "-":
+                masked[i + 1] = " "
+                block_depth += 1
+                i += 2
+            elif ch == "-" and nxt == "/":
+                masked[i + 1] = " "
+                block_depth -= 1
+                i += 2
+            else:
+                i += 1
+            continue
+        if in_string:
+            masked[i] = " "
+            if escaped:
+                escaped = False
+            elif ch == "\\":
+                escaped = True
+            elif ch == '"':
+                in_string = False
+            i += 1
+            continue
+        if ch == "-" and nxt == "-":
+            masked[i] = masked[i + 1] = " "
+            in_line_comment = True
+            i += 2
+        elif ch == "/" and nxt == "-":
+            masked[i] = masked[i + 1] = " "
+            block_depth = 1
+            i += 2
+        elif ch == '"':
+            masked[i] = " "
+            in_string = True
+            i += 1
+        else:
+            i += 1
+    require(not block_depth and not in_string,
+            "unterminated block comment or string literal")
+    return "".join(masked)
 
 
 def require(condition, message):
@@ -57,9 +127,12 @@ def main():
     for name in TOOL_HASHES:
         parser.add_argument("--" + name)
     args = parser.parse_args()
-    configs = [(p, json.loads(p.read_text())) for p in sorted(CONFIGS.glob("*.json"))]
+    configs = [(CONFIGS / (stem + ".json"),
+                json.loads((CONFIGS / (stem + ".json")).read_text()))
+               for stem in SUITE_STEMS]
     names = [name for _, c in configs for name in c["theorem_names"]]
-    require(len(configs) == 17 and len(names) == len(set(names)) == 126, "suite/goal inventory")
+    require(len(configs) == SUITE_COUNT and
+            len(names) == len(set(names)) == GOAL_COUNT, "suite/goal inventory")
     for path, c in configs:
         require(set(c["permitted_axioms"]) == AXIOMS and c["enable_nanoda"] is False,
                 f"trust configuration: {path.name}")
@@ -71,19 +144,21 @@ def main():
                 f"forbidden production token: {path.relative_to(ROOT)}")
         require(not path.name.endswith("Challenge.lean"), "Solution imports a Challenge")
     inputs = production | closure([c["challenge_module"] for _, c in configs])
-    inputs |= closure(["Formalization", "Formalization.Verification.Examples.RankTwoGF5",
-                       "Formalization.Verification.Examples.LargeGF13"])
+    inputs |= closure(["Formalization"])
     inputs |= {p for p, _ in configs}
     inputs |= {ROOT / n for n in ["lakefile.lean", "lake-manifest.json", "lean-toolchain",
-                                  "comparator/verify_manuscript.py", "comparator/generate_challenge.py"]}
-    inputs |= set((ROOT / "Formalization/Verification/Examples").glob("*applications*"))
-    inputs |= set((ROOT / "Formalization/Verification/Examples").glob("*lineage*"))
-    inputs |= set((ROOT / "Formalization/Verification/Examples").glob("*repeated*"))
-    inputs.add(ROOT / "Formalization/Verification/Examples/check_applications.py")
-    inputs.add(ROOT / "Formalization/Verification/Examples/build_application_catalog.py")
-    inputs.add(ROOT / "Formalization/Verification/Examples/application_catalog.json")
-    inputs.add(ROOT / "Formalization/Verification/Examples/application_catalog_data.tex")
-    inputs |= set((ROOT / "Formalization/Verification/Examples/certificates").glob("*.json"))
+                                  "comparator/verify_manuscript.py"]}
+    example_root = ROOT / "Formalization/Verification/Examples"
+    inputs |= {example_root / name for name in [
+        "applications.json", "applications_data.tex", "applications_results.json",
+        "check_applications.py", "check_gf13_repeated_lineage.py",
+        "gf13_repeated_lineage.json", "gf13_repeated_lineage.m",
+        "gf13_repeated_lineage.receipt.txt", "gf13_repeated_lineage_data.tex",
+        "gf13_repeated_lineage_results.json", "universal_display.py",
+        "certificates/gf5-06.json", "certificates/gf5-08.json",
+        "certificates/gf13-repeated-lineage.json",
+    ]}
+    inputs.add(ROOT / "paper.tex")
     hashes = {str(p.relative_to(ROOT)): sha(p) for p in sorted(inputs)}
     out = Path(args.output).resolve()
     out.mkdir(parents=True, exist_ok=False)
@@ -103,7 +178,7 @@ def main():
             tools[name] = expected
         env["PATH"] = str(tool_dir) + os.pathsep + env["PATH"]
     report = dict(status="RUNNING", started_utc=datetime.now(timezone.utc).isoformat(),
-                  platform=platform.system(), suite_count=17, goal_count=126,
+                  platform=platform.system(), suite_count=SUITE_COUNT, goal_count=GOAL_COUNT,
                   production_file_count=len(production), forbidden_token_scan="PASS",
                   comparator_replayed=replay, tool_sha256=tools, inputs=hashes, steps=[])
 
@@ -152,19 +227,9 @@ def main():
         require(set(found) == set(names), "exact axiom-report coverage")
         require(all(set(values) <= AXIOMS for values in found.values()), "unpermitted transitive axiom")
         report["axioms"] = found
-        run("rank-two-gf5", ["lake", "env", "lean", "Formalization/Verification/Examples/RankTwoGF5.lean"])
-        run("large-gf13", ["lake", "env", "lean", "Formalization/Verification/Examples/LargeGF13.lean"])
         run("applications", ["python3", "Formalization/Verification/Examples/check_applications.py", "--check"])
-        run("large-applications",
-            ["python3", "Formalization/Verification/Examples/check_large_applications.py", "--check"])
-        run("golay-lineage",
-            ["python3", "Formalization/Verification/Examples/check_golay_lineage.py", "--check"])
-        run("gf5-repeated-top",
-            ["python3", "Formalization/Verification/Examples/check_gf5_repeated_top.py", "--check"])
         run("gf13-repeated-lineage",
             ["python3", "Formalization/Verification/Examples/check_gf13_repeated_lineage.py", "--check"])
-        run("application-catalogue",
-            ["python3", "Formalization/Verification/Examples/build_application_catalog.py", "--check"])
         require(all(sha(ROOT / p) == h for p, h in hashes.items()), "input changed during verification")
         report.update(status="PASS", inputs_unchanged=True)
     except Exception as error:
@@ -173,7 +238,8 @@ def main():
     finally:
         report["finished_utc"] = datetime.now(timezone.utc).isoformat()
         save()
-    print("PASS: 17 suites / 126 axiom reports" + (" / 126 Linux Comparator goals" if replay else " (local audit)"))
+    print(f"PASS: {SUITE_COUNT} suites / {GOAL_COUNT} axiom reports" +
+          (f" / {GOAL_COUNT} Linux Comparator goals" if replay else " (local audit)"))
 
 
 if __name__ == "__main__":

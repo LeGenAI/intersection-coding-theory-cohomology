@@ -7,7 +7,7 @@
       3,
       4
     ],
-    "construction": "split box, r=1",
+    "construction": "zero-diagonal rank-one form",
     "distance_status": "optimal (Singleton)",
     "a_d": 60,
     "prior_benchmark": {
@@ -15,7 +15,7 @@
       "a_d": [
         60
       ],
-      "reference": "Leon--Pless--Sloane DB~\\cite{LeonPlessSloane}"
+      "reference": "\\cite{LeonPlessSloane}"
     },
     "public_a_d_min_achieved": true,
     "parent": "GF5-04",

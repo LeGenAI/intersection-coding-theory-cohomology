@@ -75,6 +75,45 @@ theorem repeated_step_kim_lee_iff {k r : ℕ} (c : K)
       ¬ (q = 0 ∧ ∀ i, u i = -(∑ t, Q i t * h t)) := by
   sorry
 
+/-- Exhaustive row-space form of the one-step building-up/direct-sum
+dichotomy. -/
+theorem repeated_step_rowSpace_dichotomy_exact {k r : ℕ} (c : K)
+    (P : Fin k → Fin k → K) (H Q : Fin k → Fin r → K)
+    (A : Fin r → Fin k → K) (D : Fin r → Fin r → K)
+    (hc : c ^ 2 = (-1 : K)) (h2 : (2 : K) ≠ 0)
+    (hD : RankBoxCoreFullRank D)
+    (hpm : PivotMasterRelations Q A D) (hpp : PivotGramRelations c P H Q)
+    (h q : Fin r → K) (u : Fin k → K) :
+    (∃ x, dot x x = -1 ∧
+      rowSpace (readSuccessor (extendedRows c P H Q A D h q u)) =
+        rowSpace (buildRows x c
+          (flattenRows (rankBoxedRows c P H Q A D)))) ∨
+      rowSpace (readSuccessor (extendedRows c P H Q A D h q u)) =
+        rowSpace (directSumRows c
+          (flattenRows (rankBoxedRows c P H Q A D))) := by
+  sorry
+
+/-- Exact Kim--Lee/direct-sum dichotomy for the first pivot of an arbitrary
+valid nonterminal rank box. -/
+theorem paper_rankBoxed_head_step_kim_lee_iff {k r : ℕ} (c : K)
+    (P : Fin (k + 1) → Fin (k + 1) → K)
+    (H Q : Fin (k + 1) → Fin r → K)
+    (A : Fin r → Fin (k + 1) → K) (D : Fin r → Fin r → K)
+    (hc : c ^ 2 = (-1 : K)) (h2 : (2 : K) ≠ 0)
+    (hD : RankBoxCoreFullRank D)
+    (hpm : PivotMasterRelations Q A D)
+    (hpp : PivotGramRelations c P H Q) :
+    (∃ x, dot x x = -1 ∧
+      rowSpace (readSuccessor (rankBoxedRows c P H Q A D)) =
+        rowSpace (buildRows x c
+          (flattenRows (rankBoxedRows c
+            (fun i j => P i.succ j.succ)
+            (fun i t => H i.succ t) (fun i t => Q i.succ t)
+            (fun t j => A t j.succ) D)))) ↔
+      ¬ (Q 0 = 0 ∧ ∀ i : Fin k,
+        P 0 i.succ = -(∑ t, Q i.succ t * H 0 t)) := by
+  sorry
+
 theorem determined_repeated_step_kim_lee_iff {k r : ℕ} (c : K)
     (P : Fin k → Fin k → K) (H Q : Fin k → Fin r → K)
     (D : Fin r → Fin r → K)

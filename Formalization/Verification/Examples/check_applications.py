@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Reproduce the paper's five prime-field examples (Python standard library).
+"""Reproduce the revision's recursive quinary pair (Python standard library).
 
 The single input is applications.json. --write regenerates the TeX and JSON
 certificates; --check (the default) recomputes them and rejects any drift.
@@ -7,7 +7,6 @@ These exhaustive computations are not Lean theorem-prover certificates.
 """
 
 import argparse
-import copy
 import hashlib
 import itertools
 import json
@@ -106,15 +105,8 @@ def self_test(examples):
                     for j in range(len(g[0]))]
             expected[sum(y != 0 for y in word)] += 1
         require(distribution(g, p) == expected, "enumerator regression")
-    # The two earlier transcription errors must be rejected, individually.
-    for column, wrong in [(2, 6), (3, 7)]:
-        bad = copy.deepcopy(examples[-1])
-        bad["b"][4][column] = wrong
-        try:
-            build(bad)
-        except ValueError:
-            continue
-        raise ValueError("failed to reject the historical coefficient error")
+    require(len(examples) == 2 and all(e["p"] == 5 for e in examples),
+            "revision application inventory")
 
 
 def tuple_tex(row):
@@ -162,7 +154,7 @@ def main():
     data = (HERE / "applications.json").read_bytes()
     examples = json.loads(data)
     self_test(examples)
-    g6, g8 = (build(e)[1] for e in examples[:2])
+    g6, g8 = (build(e)[1] for e in examples)
     require([row[2:] for row in g8[1:]] == g6, "literal GF(5) reduction")
     g4 = [row[2:] for row in g6[1:]]
     require(rank(g4, 5) == 2 and all(dot(x, y, 5) == 0 for x in g4 for y in g4),

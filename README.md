@@ -1,35 +1,30 @@
 # Building-up constructions of self-dual codes
 
-Lean 4 artifact accompanying *Formalizing building-up construction of self-dual
+Revision artifact for *Formalizing building-up construction of self-dual
 codes through isotropic lines in Lean*.
 
-The manuscript proves universal rank-r boxed representations over split odd
-fields, recursive restrictions and extensions, a fixed-parent correspondence
-with Kim--Lee building-up, and an independent binary rank-one normalization.
-It distinguishes these algebraic results from the cited arithmetic realization
-theorem of Chinburg--Zhang.
+The public tree follows the focused AFM revision: binary building-up, the
+split q-ary extension, and the universal rank-one normal form. Reconstruction
+drafts and the separate arithmetic/four-coordinate follow-up are retained only
+in the ignored `.internal/` workspace and are not part of this artifact.
 
-## Artifact layout
+## Contents
 
-- `paper.tex`, `paper.pdf`: manuscript and compiled PDF.
-- `Formalization.lean`: default entry point importing the section API.
-- `Formalization/Sections/`: mathematical section entry points.
-- `Formalization/Components/`: definitions and proofs.
-- `Formalization/Archive/SubmittedBaseline.lean`: frozen baseline supplying
-  shared infrastructure; its 260 theorems are not additional current exact goals.
-- `Formalization/Verification/Comparator/`: 17 independent suites / 124 goals.
-- `Formalization/Verification/Examples/`: kernel-checked rank-two example,
-  reproducible application data, a public historical catalogue, the exact
-  length-20-centered Golay lineage, linked certificates, generators and complete weight
-  distributions.
-- `comparator/verify_manuscript.py`: current build, trust audit and Linux replay.
-- `ARTIFACT_MAP.md`, `BUILD.md`: theorem map and reproduction instructions.
+- `paper.tex`, `paper.pdf`, `AFM_buildingup_paper_v3.pdf`: revision manuscript.
+- `AFM_buildingup_response_to_referee_v2.pdf`: response letter.
+- `Formalization/Components/`: paper-facing definitions and completed proofs.
+- `Formalization/Sections/`: section-level Lean entry points.
+- `Formalization/Verification/Comparator/`: exactly 19 independent
+  Challenge/Solution suites containing 181 declarations.
+- `Formalization/Verification/Examples/`: the recursive GF(5) pair and the
+  complete GF(13) repeated realization used in Section 4.
+- `ARTIFACT_MAP.md`, `BUILD.md`: theorem map and reproducibility instructions.
 
-Lean is pinned to `v4.29.0-rc6`; Mathlib is pinned to
-`1f3cdaa7a7f82a2e521d285b11e261110e1e1962`.
-The only permitted foundational axioms are `propext`, `Quot.sound` and
-`Classical.choice`. NanoDA is disabled. Placeholder proofs occur only in
-statement-side Challenges, not in completed Solutions or their proof dependencies.
+Lean is pinned to `v4.29.0-rc6` and Mathlib to
+`1f3cdaa7a7f82a2e521d285b11e261110e1e1962`. Production dependencies contain
+no `sorry`, `admit`, user `axiom`, `sorryAx`, `native_decide`, or
+`implemented_by`. The 181 exact goals use only `propext`, `Quot.sound`, and
+`Classical.choice`; NanoDA is disabled.
 
 ## Reproduce
 
@@ -37,15 +32,8 @@ statement-side Challenges, not in completed Solutions or their proof dependencie
 lake exe cache get
 lake build
 python3 comparator/verify_manuscript.py --output tmp/local-check
-python3 Formalization/Verification/Examples/check_applications.py --check
-python3 Formalization/Verification/Examples/check_large_applications.py --check
-python3 Formalization/Verification/Examples/check_golay_lineage.py --check
-python3 Formalization/Verification/Examples/check_gf5_repeated_top.py --check
-python3 Formalization/Verification/Examples/check_gf13_repeated_lineage.py --check
-python3 Formalization/Verification/Examples/build_application_catalog.py --check
 ```
 
-The verification output directory must not already exist.
-See [BUILD.md](BUILD.md) for the full procedure and
-[RESULTS.md](Formalization/Verification/Comparator/RESULTS.md) for dated evidence.
-The finite-field distance computations are not Lean proofs.
+See [BUILD.md](BUILD.md) for the pinned Linux Comparator replay and PDF build,
+and [RESULTS.md](Formalization/Verification/Comparator/RESULTS.md) for the
+dated verification record.
