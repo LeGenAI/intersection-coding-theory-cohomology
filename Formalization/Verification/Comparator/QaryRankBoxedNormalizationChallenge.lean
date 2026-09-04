@@ -8,19 +8,19 @@ open BuildingUpFormalization.Components.SplitBoxed
 
 variable {K : Type*} [Field K]
 
-/-- Exact forward goal for the minimal paper form `G(c;b,ell,D)`. -/
+/-- Exact forward goal for the minimal paper form `G(c;Q,ell,D)`. -/
 theorem paperRankBoxedRows_forward_selfDual {k r : ℕ} (c : K)
-    (b : Fin k → Fin k → K)
+    (Q : Fin k → Fin k → K)
     (ell : Fin k → Fin r → SplitBlock K)
     (D : Fin r → Fin r → K)
     (hc : c * c = -1) (h2 : (2 : K) ≠ 0)
     (hD : RankBoxCoreFullRank D)
-    (hoff : PaperOffDiagonalRelations c b ell) :
-    RankBoxedPairwiseOrthogonal (paperRankBoxedRows c b ell D) ∧
-      LinearIndependent K (paperRankBoxedRows c b ell D) ∧
-      rankBoxedRowSpace (paperRankBoxedRows c b ell D) =
+    (hoff : PaperOffDiagonalRelations c Q ell) :
+    RankBoxedPairwiseOrthogonal (paperRankBoxedRows c Q ell D) ∧
+      LinearIndependent K (paperRankBoxedRows c Q ell D) ∧
+      rankBoxedRowSpace (paperRankBoxedRows c Q ell D) =
         (rankBoxRowBilin (K := K) (k := k) (r := r)).orthogonal
-          (rankBoxedRowSpace (paperRankBoxedRows c b ell D)) := by
+          (rankBoxedRowSpace (paperRankBoxedRows c Q ell D)) := by
   sorry
 
 end BuildingUpFormalization.Components.RankBoxed

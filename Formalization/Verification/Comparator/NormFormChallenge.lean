@@ -49,8 +49,6 @@ theorem exists_norm_pair_with_paper_factors
 theorem paper_split_consequences_exact
     [Fact ((2 : K) ≠ 0)] (c : K) (hc : c ^ 2 = (-1 : K)) :
     orderOf c = 4 ∧
-      (paperHyperbolicPair (K := K) (splitE1 c) (splitE2 c) ∧
-        LinearIndependent K ![splitE1 c, splitE2 c]) ∧
       (∀ k : ℕ,
         (c • (1 : Matrix (Fin k) (Fin k) K)) *
             (c • (1 : Matrix (Fin k) (Fin k) K)).transpose =

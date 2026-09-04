@@ -199,19 +199,12 @@ Coding theory is the study of reliable communication. Its modern foundations
 were laid by Shannon's seminal paper~\cite{Sha}. Since then, many classes of
 linear codes have been studied. In particular, the extended binary Hamming
 code of length 8, the binary Golay code of length 24, and the ternary Golay
-code of length 12 are self-dual, that is,
-$\mathcal C=\mathcal C^{\perp}$.
+code of length 12 are self-dual, that is, $C = C^{\perp}$.
 Thus the classification or construction of self-dual codes has been one of the most active research problems~\cite{self-dual}.
 Self-dual codes have wide connections with several mathematical areas including $t$-design theory~\cite{BacGab}, group theory~\cite{ConSlo}, number theory~\cite{BaDou},~\cite{ConSlo},~\cite{ShiChoShaSol}. Furthermore, they have applications in quantum error-correcting codes~\cite{CRSS}.
 
 Kim~\cite{Kim2001} introduced ``building-up construction'' which proved that all binary self-dual codes can be constructed in this way. This construction starts from a binary self-dual code of length $2n$ and then adds a vector of length $2n$ of odd weight to construct a binary self-dual code of length $2n+2$. Kim--Lee~\cite{KimLee2009},~\cite{KimLee} generalized this method to construct self-dual codes over finite fields $\mathbb F_q$, where $q$ is even or $q \equiv 1 \pmod{4}$.
- In practice, this is a principal method for constructing examples from a
- split bilinear space. However, the formula for the new generator rows is
- often presented in terms of an auxiliary vector whose inner product with
- itself is $-1$. One of the central points of the present paper is that the
- corresponding correction coordinates are naturally organized by an
- isotropic line in a hyperbolic plane, and that the forward construction
- admits a precise row-wise and family-wise characterization in those terms.
+ In practice, this is a principal method for constructing examples over split fields. However, the formula for the new generator rows is often presented in terms of an auxiliary vector whose inner product with itself is $-1$. One of the central points of the present paper is that the corresponding correction coordinates are naturally organized by an isotropic line in a hyperbolic plane, and that the forward construction admits a precise row-wise and family-wise characterization in those terms.
 
  On the other hand, Kreck and Puppe~\cite{KreckPuppe} constructed binary
 self-dual codes from the cohomology of three-manifolds. Chinburg and
@@ -269,7 +262,7 @@ an explicit adapted-presentation hypothesis
 \item For each fixed ordered coordinate pairing, every Euclidean self-dual
 code over \(\F_q\), \(q\equiv1\pmod4\), has the universal rank-\(r\) boxed
 normal form of Theorem~\ref{thm:qary-universal-rank-r}, with
-\(r=\dim(\mathcal C\cap U_c)\).  After a scalar-coordinate permutation, one may
+\(r=\dim(C\cap U_c)\).  After a scalar-coordinate permutation, one may
 always take \(r=1\), as proved in
 Theorem~\ref{thm:qary-universal-rank-one}.
 
@@ -309,22 +302,18 @@ Throughout the paper, \(\F_q\) denotes a finite field. We equip \(\F_q^n\) with 
 \[
 \langle u,v\rangle := \sum_{i=1}^n u_i v_i.
 \]
-For a linear code, the minimum distance equals the minimum Hamming weight of
-its nonzero codewords.  For a linear code
-$\mathcal C\subseteq\F_q^n$, we write
+Here ``Euclidean'' refers to the coding-theoretic dot product, not to
+positive definiteness. For a linear code, the minimum distance equals the
+minimum Hamming weight of its nonzero codewords.
+For a linear code $C \subseteq \F_q^n$, we write
 \[
-\mathcal C^\perp :=
-\{v \in \F_q^n : \langle v,c\rangle =0\text{ for all }c\in\mathcal C\}.
+C^\perp := \{v \in \F_q^n : \langle v,c\rangle = 0 \text{ for all } c \in C\}.
 \]
-For subspaces \(\mathcal A,\mathcal B\subseteq V\), put
-\(\mathcal A\cap\mathcal B:=\{v\in V:v\in\mathcal A\text{ and }
-v\in\mathcal B\}\).  For a matrix \(G\) over \(K\),
-\(\langle G\rangle_K\) denotes the code spanned by its rows.
 
 \begin{defn}[self-dual code]\label{def:sd}
 {\rm
-A linear code $\mathcal C\subseteq\F_q^n$ is \emph{self-dual} if
-$\mathcal C=\mathcal C^\perp$~\cite{Pless1965}.
+A linear code $C \subseteq \F_q^n$ is \emph{self-dual} if
+$C=C^\perp$~\cite{Pless1965}.
 }
 \end{defn}
 
@@ -342,8 +331,8 @@ For a nondegenerate form,
 \(L\) is totally isotropic and \(2\dim L=\dim V\). In particular, a
 bilinear space admitting a Lagrangian subspace is even-dimensional.
 Applied to the standard Euclidean form, this says that
-\(\mathcal C\subseteq\F_q^n\) is self-dual if and only if it is totally isotropic
-and \(2\dim\mathcal C=n\). Thus a self-dual code is precisely a Lagrangian
+\(C\subseteq\F_q^n\) is self-dual if and only if it is totally isotropic
+and \(2\dim C=n\). Thus a self-dual code is precisely a Lagrangian
 subspace of \((\F_q^n,\langle\cdot,\cdot\rangle)\), and its length is even.
 
 \begin{lstlisting}[caption={Lean for Definitions~\ref{def:sd} and~\ref{def:lagrangian}.}]
@@ -377,8 +366,7 @@ theorem paperSelfDualCode_even_length
 \end{lstlisting}
 
 \begin{prop}[Systematic form criterion]\label{prop:systematic-form}
-Let $\mathcal C\subseteq\F_q^{2k}$ be generated by a matrix
-$G=[I_k\mid A]$ with $A\in M_k(\F_q)$. Then \(\mathcal C\) is self-dual if and only if
+Let $C \subseteq \F_q^{2k}$ be generated by a matrix $G = [I_k \mid A]$ with $A \in M_k(\F_q)$. Then $C$ is self-dual if and only if
 \[
 AA^T = -I_k.
 \]
@@ -401,22 +389,16 @@ theorem paper_systematic_form_criterion_exact
 
 \begin{defn}[Permutation equivalence]\label{def:perm-equiv}
 {\rm
-Writing codewords as row vectors, two codes
-$\mathcal C_1,\mathcal C_2\subseteq\F_q^n$ are
-\emph{permutation equivalent} if there is a permutation \(\sigma\in S_n\)
-such that
-\[
- \mathcal C_2=\mathcal C_1P_\sigma,
-\]
-where \(P_\sigma\) is the permutation matrix associated with \(\sigma\).
+Two codes $C_1,C_2\subseteq\F_q^n$ are \emph{permutation equivalent}
+if there is a permutation \(\sigma\in S_n\) such that
+\(C_2=P_\sigma C_1\), where
+\((P_\sigma u)_j=u_{\sigma(j)}\).
 }
 \end{defn}
 
-In the Lean notation below, \texttt{permuteVec~\(\sigma\)~u} denotes
-the row-vector product \(uP_\sigma\).  Coordinate permutations are Euclidean
-isometries:
+Coordinate permutations are Euclidean isometries:
 \[
-\langle uP_\sigma,vP_\sigma\rangle=\langle u,v\rangle.
+\langle P_\sigma u,P_\sigma v\rangle=\langle u,v\rangle.
 \]
 Consequently, permutation equivalence preserves Euclidean self-duality.
 A general monomial transformation also permits independent nonzero
@@ -472,6 +454,7 @@ of the underlying finite field.
 Let \(q\) be odd and let \(c\in\F_q\) satisfy \(c^2=-1\). Then:
 \begin{enumerate}[label=(\roman*)]
 \item The element $c$ has multiplicative order $4$.
+\item The Euclidean plane $(\F_q^2,\langle \cdot,\cdot\rangle)$ is hyperbolic.
 \item For every $k \ge 1$, the matrix equation $AA^T = -I_k$ has the explicit solution $A=cI_k$.
 \item The binary quadratic form $x^2+y^2$ splits as
 \[
@@ -482,13 +465,19 @@ hence it represents every element of\/ $\F_q$.
 \end{prop}
 
 \begin{proof}
-For (i), since \(q\) is odd, \(-1\ne1\). Thus \(c^4=1\) and
-\(c^2\ne1\), so \(c\) has order \(4\).
-
-For (ii), take \(A=cI_k\). Then
-\(AA^T=c^2I_k=-I_k\).
-
-For (iii),
+Since \(q\) is odd, \(-1\ne1\). Thus \(c^4=1\) and \(c^2\ne1\), so
+\(c\) has order \(4\). Put
+\[
+e_1=(1,c),\qquad e_2=(2^{-1},-2^{-1}c).
+\]
+Then
+\[
+\langle e_1,e_1\rangle=\langle e_2,e_2\rangle=0,
+\qquad \langle e_1,e_2\rangle=1.
+\]
+If \(\alpha e_1+\beta e_2=0\), pairing successively with \(e_2\) and
+\(e_1\) gives \(\alpha=\beta=0\); hence \(e_1,e_2\) form a hyperbolic
+basis. For \(A=cI_k\), we have \(AA^T=c^2I_k=-I_k\). Finally,
 \[
 (x-cy)(x+cy)=x^2-c^2y^2=x^2+y^2.
 \]
@@ -511,24 +500,18 @@ form a hyperbolic basis of\/ $\F_q^2$. Equivalently, the line spanned by $(1,c)$
 \end{prop}
 
 \begin{proof}
-Direct calculation gives
-\[
-\langle e_1,e_1\rangle=1+c^2=0,
-\qquad
-\langle e_2,e_2\rangle=2^{-2}(1+c^2)=0,
-\qquad
-\langle e_1,e_2\rangle=2^{-1}(1-c^2)=1.
-\]
-If \(\alpha e_1+\beta e_2=0\), pairing successively with \(e_2\) and
-\(e_1\) gives \(\alpha=\beta=0\). Hence \(e_1,e_2\) form a hyperbolic
-basis. In particular, \(\F_q(1,c)\) is isotropic and the Euclidean plane is
-split.
+Proposition~\ref{prop:split-consequences}(ii) gives
+\(\langle e_i,e_i\rangle=0\), \(\langle e_1,e_2\rangle=1\), and the
+linear independence of \(e_1,e_2\). These are precisely the basis and Gram
+conditions for a hyperbolic plane.
 \end{proof}
 
 \begin{lstlisting}[caption={Lean for Proposition~\ref{prop:split-consequences} and Proposition~\ref{prop:eucl-hyp}.}]
 theorem paper_split_consequences_exact
     [Fact ((2 : K) ≠ 0)] (c : K) (hc : c ^ 2 = (-1 : K)) :
     orderOf c = 4 ∧
+      (paperHyperbolicPair (splitE1 c) (splitE2 c) ∧
+        LinearIndependent K ![splitE1 c, splitE2 c]) ∧
       (∀ k : Nat,
         (c • (1 : Matrix (Fin k) (Fin k) K)) *
             (c • (1 : Matrix (Fin k) (Fin k) K)).transpose =
@@ -551,11 +534,7 @@ In 2001, Kim~\cite{Kim2001} proposed a building-up construction of binary self-d
 
 \begin{theorem}(\cite[Theorem 1]{Kim2001}) \label{thm-binary-build-1}
 %Let $\mathbb F_q$ be a finite field with $q$ elements. Assume that $q \equiv 1 \pmod{4}$. Let $c$ be in $\mathbb F_q$ such that $c^2 = -1$.
-Let $G_0$ be a generator matrix of a binary self-dual code
-$\mathcal C_0$ of length $2n$, whose rows are $g_1, \dots, g_n$. Let
-$\bf x$ be a binary vector in $\mathbb F_2^{2n}$ satisfying
-${\bf x}\cdot{\bf x}=1$. Suppose that $y_i={\bf x}\cdot g_i$ for
-$1\le i\le n$. Then the following matrix
+Let $G_0$ be a generator matrix of a binary self-dual code $C_0$ of length $2n$, whose rows are $g_1, \dots, g_n$. Let $\bf x$ be a binary vector in $\mathbb F_2^{2n}$ satisfying ${\bf x} \cdot {\bf x} = 1$. Suppose that $y_i ={\bf x} \cdot g_i$ for $1 \le i \le n$. Then the following matrix
 \[
 \begingroup
 \setlength{\arraycolsep}{6pt}
@@ -572,13 +551,13 @@ y_n & y_n & g_n
 \right]
 \endgroup
 \]
-generates a binary self-dual code $\mathcal C$ of length $2n+2$.
+generates a binary self-dual code $C$ of length $2n+2$.
 \end{theorem}
 
 Then the converse of Theorem~\ref{thm-binary-build-1} was proved in~\cite{Kim2001} as follows.
 
 \begin{theorem} (\cite[Theorem 2]{Kim2001})  \label{thm-binary-build-2}
- Any binary self-dual code $\mathcal C$ of length $2n$ with minimum distance $d>2$ is obtained from some self-dual code $\mathcal C_0$ of length
+ Any binary self-dual code $C$ of length $2n$ with minimum distance $d>2$ is obtained from some self-dual code $C_0$ of length
 $2n-2$ (up to permutation equivalence) by the construction in
 Theorem~\ref{thm-binary-build-1}.
 \end{theorem}
@@ -648,7 +627,7 @@ Euclidean binary code.
 \label{thm:binary-cz-kim}
 Let \(n\ge2\), let \(L\subset W\) be the Chinburg--Zhang arithmetic image,
 and suppose that \(L=L^{\perp_{B_{\rm coh}}}\). Fix the form isometry
-\(\iota_E\) above and put \(\mathcal C=\iota_E(L)\). Suppose that the coordinate
+\(\iota_E\) above and put \(C=\iota_E(L)\). Suppose that the coordinate
 permutation furnishing the Chinburg--Zhang boxed representative, followed by
 the indicated elementary row operation, gives
 \[
@@ -669,14 +648,12 @@ y_{n-1}&y_{n-1}&g_{n-1}
 \qquad x,g_i\in\mathbb F_2^{2n-2}.
 \]
 Let \(G\) have rows \(g_1,\ldots,g_{n-1}\), and put
-\(\mathcal C'=\langle G\rangle_{\mathbb F_2}\). Then:
+\(C'=\operatorname{rowspan}G\). Then:
 \begin{enumerate}
-\item \(L\) is Lagrangian for \(B_{\rm coh}\), while \(\mathcal C\) and the boxed
-representative \(\langle G'\rangle_{\mathbb F_2}\) are Euclidean self-dual.
+\item \(L\) is Lagrangian for \(B_{\rm coh}\), while \(C\) and the boxed
+representative \(\operatorname{rowspan}G'\) are Euclidean self-dual.
 \item In the displayed Euclidean coordinates,
 \[
-E_2=\langle(1,0),(0,1)\rangle=\mathbb F_2^2,
-\qquad
 \mathbb F_2^{2n}=E_2\perp\mathbb F_2^{2n-2},
 \qquad \operatorname{Gram}(E_2)=I_2.
 \]
@@ -684,7 +661,7 @@ The plane \(E_2\) is non-alternating and is not isometric to the
 alternating hyperbolic plane. Nevertheless,
 \(\mathbb F_2(1,1)\subset E_2\) is isotropic.
 \item The rows \(g_i\) are linearly independent and pairwise orthogonal;
-hence \(\mathcal C'\) is Euclidean self-dual of length \(2n-2\).
+hence \(C'\) is Euclidean self-dual of length \(2n-2\).
 \item One has \(x\cdot x=1\) and, for every \(i\),
 \[
 y_i=\langle x,g_i\rangle_{\rm E}.
@@ -699,25 +676,24 @@ inverse up to permutation equivalence.
 \end{theorem}
 
 \begin{proof}
-Let \(P_\sigma\) denote the selected permutation matrix and define
-\(\eta(u)=\iota_E(u)P_\sigma\). Since right multiplication by
-\(P_\sigma\) and \(\iota_E\) are form isometries,
+Let \(P_\sigma\) denote the selected coordinate permutation and set
+\(\eta=P_\sigma\circ\iota_E\). Since both maps are form isometries,
 \[
 \eta(u)\cdot\eta(v)=B_{\rm coh}(u,v)
 \qquad(u,v\in W).
 \]
-Thus \(\mathcal C_\sigma:=\eta(L)=\langle G'\rangle_{\mathbb F_2}\) is Euclidean
+Thus \(C_\sigma:=\eta(L)=\operatorname{rowspan}G'\) is Euclidean
 self-dual and has dimension \(n\). Since \(\iota_E\) is also a form
 isometry,
 \[
-\mathcal C=\mathcal C^\perp,
+C=C^\perp,
 \qquad
-\mathcal C_\sigma=\mathcal C_\sigma^\perp.
+C_\sigma=C_\sigma^\perp.
 \]
 This proves (1).
 
-The first two standard coordinate vectors \((1,0)\) and \((0,1)\) span the
-plane \(E_2\) with Gram matrix \(I_2\). In particular,
+The first two standard coordinate vectors span a plane \(E_2\) with Gram
+matrix \(I_2\). In particular,
 \[
 (1,0)\cdot(1,0)=1,\qquad
 (1,1)\cdot(1,1)=0,\qquad
@@ -767,9 +743,8 @@ Hence the constructed matrix is equal to \(G'\) row by row.  Conversely,
 deleting \(r_0\) and the first two coordinates sends every remaining row
 \(r_i\) to \(g_i\), and therefore recovers \(G\).  Thus reduction followed
 by building-up gives \(G'\) exactly.  Since
-\(\langle G'\rangle_{\mathbb F_2}=\mathcal C P_\sigma\), right multiplication by
-\(P_\sigma^{-1}\) shows that the reconstructed code is permutation
-equivalent to \(\mathcal C\), as
+\(\operatorname{rowspan}G'=P_\sigma(C)\), applying \(P_\sigma^{-1}\)
+shows that the reconstructed code is permutation equivalent to \(C\), as
 claimed.
 \end{proof}
 
@@ -783,7 +758,7 @@ deleted Euclidean plane with the alternating hyperbolic plane.
 
 \noindent
 In the following listing, \texttt{e} denotes the composite
-\(\eta(u)=\iota_E(u)P_\sigma\), so \texttt{hcode} identifies the actual
+\(\eta=P_\sigma\circ\iota_E\), so \texttt{hcode} identifies the actual
 permuted image of \(L\) with the displayed boxed family. The two plane
 lemmas for the standard Gram matrix and the characteristic-two non-isometry
 formalize item~(2), while
@@ -813,7 +788,7 @@ theorem paper_binary_cz_kim_corrected [CharP K 2]
 Motivated by the building-up construction of binary self-dual codes, Kim and Lee~\cite{KimLee} generalized it to finite fields with $q$ elements where $q \equiv 1 \pmod{4}$ as follows.
 
 \begin{theorem}(\cite[Proposition 2.1]{KimLee}) \label{thm-q-ary-build-1}
-Let $\mathbb F_q$ be a finite field with $q$ elements. Assume that $q \equiv 1 \pmod{4}$. Let $c$ be in $\mathbb F_q$ such that $c^2 = -1$. Let $G_0$ be a generator matrix of a Euclidean self-dual code $\mathcal C_0$ over $\mathbb F_q$ of length $2n$, whose rows are $g_1, \dots, g_n$. Let $\bf x$ be a vector in $\mathbb F_q^{2n}$ satisfying ${\bf x} \cdot {\bf x} = -1$. Suppose that $y_i ={\bf x} \cdot g_i$ for $1 \le i \le n$. Then the following matrix
+Let $\mathbb F_q$ be a finite field with $q$ elements. Assume that $q \equiv 1 \pmod{4}$. Let $c$ be in $\mathbb F_q$ such that $c^2 = -1$. Let $G_0$ be a generator matrix of a Euclidean self-dual code $C_0$ over $\mathbb F_q$ of length $2n$, whose rows are $g_1, \dots, g_n$. Let $\bf x$ be a vector in $\mathbb F_q^{2n}$ satisfying ${\bf x} \cdot {\bf x} = -1$. Suppose that $y_i ={\bf x} \cdot g_i$ for $1 \le i \le n$. Then the following matrix
 \[
 \begingroup
 \setlength{\arraycolsep}{6pt}
@@ -830,7 +805,7 @@ G=
 \right]
 \endgroup
 \]
-generates a self-dual code $\mathcal C$ over $\mathbb F_q$ of length $2n+2$.
+generates a self-dual code $C$ over $\mathbb F_q$ of length $2n+2$.
 \end{theorem}
 
 \begin{remark}
@@ -842,7 +817,7 @@ normalization \((-y_i,-cy_i,g_i)\) in the sequel.
  Then the converse of the above theorem was also stated and proved in \cite{KimLee}.
 
 \begin{theorem}(\cite[Proposition 2.2]{KimLee}) \label{thm-q-ary-build-2}
-Let $\mathbb F_q$ be a finite field with $q$ elements. Assume that $q \equiv 1 \pmod{4}$. Any Euclidean self-dual code $\mathcal C$ over $\mathbb F_q$ of length $2n$ with minimum distance $d >2$ is obtained from some Euclidean self-dual code $\mathcal C_0$ over $\mathbb F_q$ of length $2n-2$ (up to permutation equivalence) by the construction method in Theorem~\ref{thm-q-ary-build-1}.
+Let $\mathbb F_q$ be a finite field with $q$ elements. Assume that $q \equiv 1 \pmod{4}$. Any Euclidean self-dual code $C$ over $\mathbb F_q$ of length $2n$ with minimum distance $d >2$ is obtained from some Euclidean self-dual code $C_0$ over $\mathbb F_q$ of length $2n-2$ (up to permutation equivalence) by the construction method in Theorem~\ref{thm-q-ary-build-1}.
 \end{theorem}
 
 This naturally leads to the following question: is there a split \(q\)-ary analogue of the Chinburg--Zhang boxed reduction for self-dual codes over \(\mathbb F_q\) when \(q\equiv 1 \pmod 4\)?
@@ -881,8 +856,7 @@ where $x \in K^{2n-2}$ and $g_i \in K^{2n-2}$ for $1 \le i \le n-1$.
 Let $W_0 = K^{2n-2}$ and define $L_0 := \langle g_1,\dots,g_{n-1}\rangle \subset W_0$.
 Then the following statements hold:
 \begin{enumerate}
-\item Let \(E=K^2\) denote the first coordinate plane in the displayed
-decomposition of \(W\).
+\item Let \(E=K^2\times\{0\}\subset W\) be the first coordinate plane.
 Then \(W=E\perp W_0\) in the displayed coordinates, and \(E\) is
 isometric to a hyperbolic plane.  This is an abstract change of basis in
 \(E\); no coordinate change is applied to the displayed matrix \(M\).
@@ -895,8 +869,8 @@ y_i = \langle x, g_i\rangle\quad(1\le i\le n-1).
 \]
 \item Consequently,
 \[
-L = \Bigl\langle(1,0,x),\;
-(-\langle x,g_i\rangle,\,-c\langle x,g_i\rangle,\,g_i)\;:\;1 \le i \le n-1\Bigr\rangle_K,
+L = \operatorname{Span}\Bigl\{(1,0,x),\;
+(-\langle x,g_i\rangle,\,-c\langle x,g_i\rangle,\,g_i)\;:\;1 \le i \le n-1\Bigr\},
 \]
 so that $L$ is obtained from $L_0$ by a $q$-ary building-up construction.
 \item Conversely, two reverse statements hold:
@@ -917,7 +891,7 @@ is linearly independent and generates a self-dual code of length $2n$.
 \end{theorem}
 
 \begin{proof}
-The decomposition \(W=E\perp W_0\), with \(E=K^2\), is
+The decomposition \(W=E\perp W_0\), with \(E=K^2\times\{0\}\), is
 the literal decomposition into the first two and the remaining coordinates.
 The standard basis of \(E\) has Gram matrix \(I_2\).  Since \(2\ne0\), the
 vectors
@@ -1322,7 +1296,7 @@ Theorem~\ref{thm:split-boxed-form} is the forward boxed statement. The remaining
 
 \begin{theorem}[Conditional boxed normalization from a distinguished isotropic-line row]
 \label{thm:conditional-split-boxed-normalization}
-Let \(\mathcal C\subset K^{2n}\) be a self-dual code, and fix \(c\in K^\times\) with \(c^2=-1\). Assume that, after coordinate permutations preserving the \(2\)-block decomposition and elementary row operations, \(\mathcal C\) admits a generator matrix whose last row is
+Let \(C\subset K^{2n}\) be a self-dual code, and fix \(c\in K^\times\) with \(c^2=-1\). Assume that, after coordinate permutations preserving the \(2\)-block decomposition and elementary row operations, \(C\) admits a generator matrix whose last row is
 \[
 \bigl(a_1(1,c),\,a_2(1,c),\,\dots,\,a_{n-1}(1,c),\,(1,c)\bigr),
 \]
@@ -1336,7 +1310,7 @@ B_{ij}=b_{ij}(1,c)
 \]
 for some scalar \(b_{ij}\in K\).
 \end{enumerate}
-Then this generator matrix is automatically a split boxed matrix of Theorem~\ref{thm:split-boxed-form}: the self-duality of \(\mathcal C\) forces
+Then this generator matrix is automatically a split boxed matrix of Theorem~\ref{thm:split-boxed-form}: the self-duality of \(C\) forces
 \[
 u_i^2+v_i^2=-1,
 \qquad
@@ -1344,7 +1318,7 @@ u_i+c v_i=-c a_i,
 \qquad
 c(b_{ij}+b_{ji})+\ell_i\cdot \ell_j=0,
 \]
-and hence \(\mathcal C\) is generated by a matrix of the displayed split boxed type.
+and hence \(C\) is generated by a matrix of the displayed split boxed type.
 \end{theorem}
 
 \begin{proof}
@@ -1352,7 +1326,7 @@ Write the adapted generator matrix in block form as
 \[
 \widetilde M=(B_{ij})_{1\le i,j\le n},
 \]
-with \(B_{ii}=01\) for \(1\le i\le n-1\), \(B_{in}=\ell_i\), \(B_{ni}=a_i(1,c)\), and \(B_{ij}=b_{ij}(1,c)\) for \(i\neq j<n\). Since \(\mathcal C\) is self-dual, its generator rows are pairwise orthogonal.
+with \(B_{ii}=01\) for \(1\le i\le n-1\), \(B_{in}=\ell_i\), \(B_{ni}=a_i(1,c)\), and \(B_{ij}=b_{ij}(1,c)\) for \(i\neq j<n\). Since \(C\) is self-dual, its generator rows are pairwise orthogonal.
 
 Applying self-orthogonality to a non-final row \(R_i\) gives
 \[
@@ -1440,18 +1414,18 @@ Euclidean form and every Hamming weight.
 \label{thm:qary-universal-rank-r}
 Let \(K=\F_q\), where \(q\equiv1\pmod4\), fix \(c\in K^\times\) with
 \(c^2=-1\), and fix an ordered pairing \(K^{2n}=(K^2)^n\).  For every
-Euclidean self-dual code \(\mathcal C\subseteq K^{2n}\), put
+Euclidean self-dual code \(C\subseteq K^{2n}\), put
 \[
  U_c=\bigoplus_{j=1}^n K(1,c),\qquad
- r=\dim(\mathcal C\cap U_c),\qquad k=n-r.
+ r=\dim(C\cap U_c),\qquad k=n-r.
 \]
 After a permutation of the \(n\) two-coordinate blocks and elementary row
-operations, \(\mathcal C\) has a generator matrix
+operations, \(C\) has a generator matrix
 \begin{equation}
-G_r(c;Q,\ell,D)=
+G_r(c;P,\ell,D)=
 \left[
 \begin{array}{c|c}
-\bigl(Q_{ij}(1,c)+\delta_{ij}(0,1)\bigr)_{k\times k}
+\bigl(P_{ij}(1,c)+\delta_{ij}(0,1)\bigr)_{k\times k}
   & \bigl(\ell_{it}\bigr)_{k\times r}\\ \hline
 \bigl(-(D\partial_c\ell_j)_s(1,c)\bigr)_{r\times k}
   & \bigl(D_{st}(1,c)\bigr)_{r\times r}
@@ -1463,15 +1437,15 @@ where \(1\le i,j\le k\), \(1\le s,t\le r\),
 \(\ell_{it}=(u_{it},v_{it})\in K^2\),
 \[
  (\partial_c\ell_i)_t=v_{it}-cu_{it},\qquad
- Q_{ii}=\frac c2\bigl(1+\ell_i\cdot\ell_i\bigr),
+ P_{ii}=\frac c2\bigl(1+\ell_i\cdot\ell_i\bigr),
 \]
 \(D\in M_r(K)\) is nonsingular, and the remaining coefficients satisfy
 \begin{equation}
- c(Q_{ij}+Q_{ji})+\ell_i\cdot\ell_j=0
-\qquad(i\ne j).
+ c(P_{ij}+P_{ji})+\ell_i\cdot\ell_j=0
+ \qquad(i\ne j).
 \label{eq:universal-rank-r-relation}
 \end{equation}
-The last \(r\) rows span \(\mathcal C\cap U_c\).  Conversely, every matrix
+The last \(r\) rows span \(C\cap U_c\).  Conversely, every matrix
 \eqref{eq:universal-rank-r-box} with \(\det D\ne0\) and
 \eqref{eq:universal-rank-r-relation} has \(k+r\) independent, pairwise
 orthogonal rows and generates a Euclidean self-dual code.  Moreover,
@@ -1486,21 +1460,21 @@ For \(v=(v_1,\ldots,v_n)\in(K^2)^n\), write each block uniquely as
  v_j=(\alpha_j(v),c\alpha_j(v)+\beta_j(v)),\qquad
  \beta_j(v)=v_{j,2}-cv_{j,1},
 \]
-and define \(\partial:\mathcal C\to K^n\) by
+and define \(\partial:C\to K^n\) by
 \(\partial(v)=(\beta_1(v),\ldots,\beta_n(v))\).  Since
-\(\ker\partial=\mathcal C\cap U_c\), rank--nullity gives
+\(\ker\partial=C\cap U_c\), rank--nullity gives
 \(\rank\partial=k\).  Choose \(k\) coordinates on which
 \(\operatorname{im}\partial\) projects isomorphically, permute them to the
-first \(k\) positions, and choose rows \(g_1,\ldots,g_k\in\mathcal C\) whose defects
+first \(k\) positions, and choose rows \(g_1,\ldots,g_k\in C\) whose defects
 restrict there to the standard basis.  Complete them by a basis
 \(S_1,\ldots,S_r\) of \(\ker\partial\).  Applying \(\partial\) to a linear
 relation first determines the coefficients of the \(g_i\); independence of
-the \(S_s\) then shows that these \(n\) rows form a basis of \(\mathcal C\).
+the \(S_s\) then shows that these \(n\) rows form a basis of \(C\).
 
-Let \(Q_{ij}\) be the first coordinate of the \(j\)-th pivot block of
+Let \(P_{ij}\) be the first coordinate of the \(j\)-th pivot block of
 \(g_i\), and write its terminal block-row as \(\ell_i\).  Thus its
 \(j\)-th pivot block is
-\(Q_{ij}(1,c)+\delta_{ij}(0,1)\).  Since every \(S_s\) lies in
+\(P_{ij}(1,c)+\delta_{ij}(0,1)\).  Since every \(S_s\) lies in
 \(\ker\partial\), write its pivot and terminal blocks as
 \(A_{sj}(1,c)\) and \(D_{st}(1,c)\), respectively.  The identity
 \[
@@ -1511,12 +1485,12 @@ and the orthogonality of the chosen basis give
 \[
  A_{si}+(D\partial_c\ell_i)_s=0,
 \qquad
- \delta_{ij}+c(Q_{ij}+Q_{ji})+\ell_i\cdot\ell_j=0.
+ \delta_{ij}+c(P_{ij}+P_{ji})+\ell_i\cdot\ell_j=0.
 \]
 The first equation gives the lower-left block in
 \eqref{eq:universal-rank-r-box}; the second gives
 \eqref{eq:universal-rank-r-relation}, and its diagonal part gives the stated
-formula for \(Q_{ii}\).  It remains to prove that \(D\) is nonsingular.
+formula for \(P_{ii}\).  It remains to prove that \(D\) is nonsingular.
 Let \(\lambda=(\lambda_1,\ldots,\lambda_r)\in K^r\) satisfy
 \(\lambda D=0\).  For every \(i\), the first identity yields
 \[
@@ -1546,8 +1520,8 @@ Moreover,
 \[
  p_i\cdot p_j=
  \begin{cases}
-  1+2cQ_{ii}+\ell_i\cdot\ell_i=0,&i=j,\\
-  c(Q_{ij}+Q_{ji})+\ell_i\cdot\ell_j=0,&i\ne j.
+  1+2cP_{ii}+\ell_i\cdot\ell_i=0,&i=j,\\
+  c(P_{ij}+P_{ji})+\ell_i\cdot\ell_j=0,&i\ne j.
  \end{cases}
 \]
 Thus the displayed rows are pairwise orthogonal.
@@ -1570,16 +1544,15 @@ space is consequently self-dual.  If
 \(x=\sum_i\xi_ip_i+\sum_s\mu_sS_s\) belongs to \(U_c\), then the defect of
 its \(j\)-th pivot block is \(\xi_j\), so \(\xi_j=0\) for every \(j\).
 Conversely, every linear combination of the \(S_s\) lies in \(U_c\).
-Therefore, writing
-\(\mathcal C_r:=\langle G_r(c;Q,\ell,D)\rangle_K\),
+Therefore
 \[
- \mathcal C_r\cap U_c
-   =\langle S_1,\ldots,S_r\rangle_K.
+ \operatorname{rowspan}G_r\cap U_c
+   =\operatorname{span}_K\{S_1,\ldots,S_r\}.
 \]
 
 Finally, let \(I\subseteq\{1,\ldots,k\}\).  Retaining the rows \(p_i\)
 with \(i\in I\), their pivot block columns, and all terminal rows and block
-columns replaces \(Q\) by \(Q|_{I\times I}\) and \((\ell_i)_{i=1}^k\) by
+columns replaces \(P\) by \(P|_{I\times I}\) and \((\ell_i)_{i=1}^k\) by
 \((\ell_i)_{i\in I}\), while leaving \(D\) unchanged.  The two Gram
 identities above restrict to indices in \(I\).  Hence its rows are pairwise
 orthogonal; the pivot-block defects determine the coefficients of the
@@ -1597,7 +1570,7 @@ nonsingular.  This proves the final assertion.
 \begin{example}[A fixed rank-two pairing over \(\GF{5}\)]
 \label{ex:rank-two-gf5}
 \rm
-Take \(c=2\), so \(c^2=-1\), and let \(\mathcal C\) be generated by
+Take \(c=2\), so \(c^2=-1\), and let \(C\) be generated by
 \[
 G_0=\begin{pmatrix}
 1&3&3&2&1&1&1&3\\
@@ -1608,11 +1581,11 @@ G_0=\begin{pmatrix}
 \]
 All calculations in this example are in \(\GF{5}\). One checks that
 \(G_0G_0^{\mathsf T}=0\), while the minor formed by the first four columns
-has determinant \(4\). Hence \(\mathcal C\) has dimension \(4\) and is self-dual.
+has determinant \(4\). Hence \(C\) has dimension \(4\) and is self-dual.
 
 Pair adjacent coordinates and let \(G_0^\sigma\) be obtained by ordering the
 four two-coordinate blocks as \((2,4,1,3)\). Writing
-\(a_i=Q_{ii}\), the diagonal formula in
+\(a_i=P_{ii}\), the diagonal formula in
 \eqref{eq:universal-rank-r-box} gives \(a_1=4\) and \(a_2=3\). We
 substitute these values and \(c=2\), but retain the displayed diagonal
 formula in the second coordinate: the two blocks are
@@ -1634,37 +1607,27 @@ G_{2,2}=TG_0^\sigma=
 \noalign{\hrule height 1.2pt}
 4(1,2)&(3,2\cdot3+1)&(2,3)&(0,2)\\[-1pt]
 \noalign{\hrule height 0.6pt}
-(1,2)&4(1,2)&(1,2)&(1,2)\\
-4(1,2)&2(1,2)&(1,2)&2(1,2)
+(1,2)&(4,3)&(1,2)&(1,2)\\
+(4,3)&(2,4)&(1,2)&(2,4)
 \end{array}\right]}.
 \]
 This is \eqref{eq:universal-rank-r-box} with
 \[
 \ell_1=((2,1),(3,3)),\qquad
 \ell_2=((2,3),(0,2)),\qquad
-Q_{12}=2,\quad Q_{21}=4,
+P_{12}=2,\quad P_{21}=4,
 \]
 and
 \[
 D=\begin{pmatrix}1&1\\1&2\end{pmatrix},\qquad \det D=1.
 \]
 Modulo five the diagonal pairs are \((4,4)\) and \((3,2)\), respectively.
-For a block \((u,v)\), recall that \(\partial_2(u,v)=v-2u\).  Hence
+Moreover,
 \[
-\begin{aligned}
-\partial_2\ell_1
-  &=\begin{pmatrix}1-2\cdot2\\3-2\cdot3\end{pmatrix}
-    =\begin{pmatrix}2\\2\end{pmatrix},\\
--D\partial_2\ell_1
-  &=-\begin{pmatrix}1&1\\1&2\end{pmatrix}
-       \begin{pmatrix}2\\2\end{pmatrix}
-    =-\begin{pmatrix}4\\1\end{pmatrix}
-    =\begin{pmatrix}1\\4\end{pmatrix}.
-\end{aligned}
+-D\partial_2\ell_1=(1,4)^{\mathsf T},\qquad
+-D\partial_2\ell_2=(4,2)^{\mathsf T},
 \]
-Similarly, \(\partial_2\ell_2=(4,2)^{\mathsf T}\) and
-\(-D\partial_2\ell_2=(4,2)^{\mathsf T}\).
-The off-diagonal relation
+and the off-diagonal relation
 \eqref{eq:universal-rank-r-relation} is satisfied. Applying the blockwise
 defect map gives
 \[
@@ -1678,7 +1641,7 @@ defect map gives
 \]
 so
 \[
-r=\dim(\mathcal C\cap U_2)=4-\rank(\partial G_{2,2})=2.
+r=\dim(C\cap U_2)=4-\rank(\partial G_{2,2})=2.
 \]
 The block permutation preserves \(U_2\); consequently, whole-block
 permutations and row operations cannot reduce \(r\) for this fixed oriented
@@ -1691,13 +1654,13 @@ G_{1,2}=
 \left[\begin{array}{c!{\vrule width 1.2pt}cc}
 (3,2\cdot3+1)&(2,3)&(0,2)\\[-1pt]
 \noalign{\hrule height 1.2pt}
-4(1,2)&(1,2)&(1,2)\\
-2(1,2)&(1,2)&2(1,2)
+(4,3)&(1,2)&(1,2)\\
+(2,4)&(1,2)&(2,4)
 \end{array}\right]},\qquad
 G_{0,2}=
 \begin{pmatrix}
 (1,2)&(1,2)\\
-(1,2)&2(1,2)
+(1,2)&(2,4)
 \end{pmatrix}.
 \]
 Thus Theorem~\ref{thm:qary-universal-rank-r} gives the exact self-dual chain
@@ -1705,7 +1668,7 @@ Thus Theorem~\ref{thm:qary-universal-rank-r} gives the exact self-dual chain
 [8,4]\longrightarrow[6,3]\longrightarrow[4,2],
 \]
 with the same terminal matrix \(D\) at every level and
-\(\langle G_{0,2}\rangle_K=K(1,2)\oplus K(1,2)\).
+\(\operatorname{rowspan}G_{0,2}=K(1,2)\oplus K(1,2)\).
 \end{example}
 
 The integer \(r\) in Theorem~\ref{thm:qary-universal-rank-r} belongs to the
@@ -1743,10 +1706,10 @@ b_{k1}(1,c)&b_{k2}(1,c)&\cdots&(a_k,ca_k+1)&\ell_k\\[-1pt]
 \right]},
 \]
 with the evident one-row interpretation \(G_1=(1,c)\) when \(n=1\).
-For a linear code \(\mathcal C\subset K^{2n}\), the following are equivalent:
+For a linear code \(C\subset K^{2n}\), the following are equivalent:
 \begin{enumerate}
-\item \(\mathcal C=\mathcal C^\perp\);
-\item there are a permutation \(\pi\in S_{2n}\) and
+\item \(C=C^\perp\);
+\item there are a permutation \(\pi\) of the \(2n\) scalar coordinates and
 data \(b,\ell\) satisfying
 \begin{equation}
 c(b_{ij}+b_{ji})+\ell_i\cdot\ell_j=0
@@ -1755,12 +1718,12 @@ c(b_{ij}+b_{ji})+\ell_i\cdot\ell_j=0
 \end{equation}
 such that
 \[
-\mathcal C P_\pi=\langle G_1(c;b,\ell)\rangle_K.
+\pi(C)=\operatorname{rowspan}G_1(c;b,\ell).
 \]
 \end{enumerate}
 In these coordinates,
 \[
-\dim\bigl((\mathcal C P_\pi)\cap U_c\bigr)=1.
+\dim\bigl(\pi(C)\cap U_c\bigr)=1.
 \]
 Moreover, \(\pi\) preserves the complete weight enumerator, and hence every
 coefficient \(A_j\).
@@ -1836,12 +1799,12 @@ so the new defect matrix has rank exactly \(m-1\).  This completes the
 induction.  By \eqref{eq:defect-nullity}, there is a scalar-coordinate
 permutation \(\pi_0\) such that
 \[
-\dim\bigl((\mathcal C P_{\pi_0})\cap U_c\bigr)=1.
+\dim(\pi_0(C)\cap U_c)=1.
 \]
 
-Let \(s\) span \((\mathcal C P_{\pi_0})\cap U_c\).  Some block of \(s\) is nonzero;
+Let \(s\) span \(\pi_0(C)\cap U_c\).  Some block of \(s\) is nonzero;
 after permuting whole blocks and rescaling \(s\), take its last block to be
-\((1,c)\).  The restriction to \(\mathcal C P_{\pi_0}\) of
+\((1,c)\).  The restriction to \(\pi_0(C)\) of
 \[
 \partial_c((x_j,y_j)_{j=1}^n)=(y_j-cx_j)_{j=1}^n
 \]
@@ -1936,7 +1899,7 @@ Thus its three diagonal blocks display the substituted pairs
 0&0&0&0
 \end{pmatrix},
 \qquad
-\dim\bigl((\mathcal C P_\tau)\cap U_2\bigr)=4-3=1.
+\dim(\tau(C)\cap U_2)=4-3=1.
 \]
 More precisely, \(G_{3,1}\) is the matrix \(G_1(c;b,\ell)\) of
 Theorem~\ref{thm:qary-universal-rank-one} with
@@ -1976,12 +1939,12 @@ theorem every_qary_selfDualCode_has_rankBoxed_normalForm
 theorem paperRankBoxedRows_forward_selfDual
     (hc : c * c = -1) (h2 : (2 : K) != 0)
     (hD : RankBoxCoreFullRank D)
-    (hoff : PaperOffDiagonalRelations c Q ell) :
+    (hoff : PaperOffDiagonalRelations c b ell) :
     RankBoxedPairwiseOrthogonal
-      (paperRankBoxedRows c Q ell D) /\
-    LinearIndependent K (paperRankBoxedRows c Q ell D) /\
+      (paperRankBoxedRows c b ell D) /\
+    LinearIndependent K (paperRankBoxedRows c b ell D) /\
     paperSelfDualCode
-      (rankBoxedRowSpace (paperRankBoxedRows c Q ell D))
+      (rankBoxedRowSpace (paperRankBoxedRows c b ell D))
 \end{lstlisting}
 
 \begin{remark}
@@ -2154,7 +2117,7 @@ same orientation as the diagonal blocks of the rank-one parent.
 \texorpdfstring{\(\GF{13}\)}{GF(13)}]
 \label{ex:gf13-repeated-realization}
 \rm
-Let \(\mathcal C_{20}^{(13)}\) be the pure double-circulant self-dual code generated
+Let \(C_{20}^{(13)}\) be the pure double-circulant self-dual code generated
 by
 \[
 G_{20}=\left[I_{10}\ \middle|\
@@ -2163,7 +2126,7 @@ G_{20}=\left[I_{10}\ \middle|\
 It has parameters \([20,10,10]\) and \(A_{10}=111024\)
 \cite{BetsumiyaEtAl}.  After the ordered two-coordinate reduction at
 \((11,7)\), followed by the recorded row normalization and coordinate
-permutation, one obtains a self-dual parent \(\mathcal C_{18}^{(13)}\) with parameters
+permutation, one obtains a self-dual parent \(C_{18}^{(13)}\) with parameters
 \([18,9,8]\) and \(A_8=1896\).  There are a rank-one generator
 \(G_{18}^{(13)}\) of this parent and
 \[
@@ -2172,9 +2135,8 @@ x_{18}^{(13)}=\GFThirteenEighteenCorrection
 such that
 \[
 x_{18}^{(13)}\cdot x_{18}^{(13)}=-1,\qquad
-\left\langle\mathcal B_5
- \bigl(G_{18}^{(13)},x_{18}^{(13)}\bigr)\right\rangle_{\GF{13}}
- =\mathcal C_{20}^{(13)}.
+\operatorname{rowspan}\mathcal B_5
+ \bigl(G_{18}^{(13)},x_{18}^{(13)}\bigr)=C_{20}^{(13)}.
 \]
 In \(G_{18}^{(13)}\), every pivot diagonal block is \((0,1)\), every
 off-diagonal block is \(b_{ij}(1,5)\), and the terminal block is \((1,5)\).
@@ -2220,20 +2182,20 @@ part of the rank-one parent from its terminal part.
 \widetilde G_{20}^{(13)}=\GFThirteenLargestRepeatedMatrix .
 $}
 \captionof{figure}{Repeated boxed realization
-\(\mathcal C_{18}^{(13)}\longleftrightarrow\mathcal C_{20}^{(13)}\).}
+\(C_{18}^{(13)}\longleftrightarrow C_{20}^{(13)}\).}
 \label{fig:gf13-repeated-realization}
 \end{center}
 \end{samepage}
 
 Thus the same figure exhibits both directions:
 \[
-\mathcal C_{18}^{(13)}
+C_{18}^{(13)}
 \ \xrightarrow{\ \mathcal B_5(G_{18}^{(13)},x_{18}^{(13)})\ }\
-\mathcal C_{20}^{(13)},
+C_{20}^{(13)},
 \qquad
-\mathcal C_{20}^{(13)}
+C_{20}^{(13)}
 \ \xrightarrow{\ (11,7)\text{-reduction}\ }\
-\mathcal C_{18}^{(13)}.
+C_{18}^{(13)}.
 \]
 Both distances equal the published best-known distances at their respective
 lengths~\cite{KimChoi2021,BetsumiyaEtAl}.  The complete audit of all

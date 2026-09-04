@@ -65,5 +65,5 @@ tectonic --keep-intermediates --keep-logs paper.tex
 tectonic --keep-intermediates --keep-logs response_to_referee.tex
 ```
 
-The versioned submission copies are `AFM_buildingup_paper_v3.pdf` and
-`AFM_buildingup_response_to_referee_v2.pdf`.
+The current versioned submission copies are `AFM_buildingup_paper_v5.pdf`
+and `AFM_buildingup_response_to_referee_v4.pdf`.

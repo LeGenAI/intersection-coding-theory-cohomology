@@ -17,8 +17,8 @@ editorial numbering changes.
 | Theorem 3.15, universal rank-one normal form after scalar-coordinate permutation | `QaryRankOnePairingMerge` (51), `QaryRankOneUniversalPairing` (1) |
 | Supporting rank-boxed existence, restriction, extension, and repeated-step identities | `QaryRankBoxedNormalization` (2), `RankBoxedStructure` (4), `RankBoxedExtension` (2), `RepeatedStep` (4), `RepeatedBox` (9) |
 | Binary two-coordinate reduction and universal normalization interfaces | `BinaryTwoCoordinateReduction` (3), `BinaryRankOneNormalization` (1) |
-| Propositions 4.1--4.2 | `applications.json`, `check_applications.py`, and generated result data |
-| Proposition 4.3 | `check_gf13_repeated_lineage.py`, its source/receipt/results, and `certificates/gf13-repeated-lineage.json` |
+| Examples 4.1--4.2 | `applications.json`, `check_applications.py`, and generated result data |
+| Example 4.3 | `check_gf13_repeated_lineage.py`, its source/receipt/results, and `certificates/gf13-repeated-lineage.json` |
 
 The inventory is exactly **19 suites / 181 distinct declarations**. Every
 suite has one statement-side Challenge, one completed Solution, one JSON

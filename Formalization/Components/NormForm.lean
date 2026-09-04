@@ -152,12 +152,10 @@ theorem exists_norm_pair_with_paper_factors
   refine ⟨(1 + a) / 2, ((1 - a) / 2) * c, ?_⟩
   exact norm_form_witness_factors a c hc
 
-/-- Exact paper-facing package for all four conclusions of Proposition 2.2. -/
+/-- Exact paper-facing package for the three conclusions of Proposition 2.2. -/
 theorem paper_split_consequences_exact
     [Fact ((2 : K) ≠ 0)] (c : K) (hc : c ^ 2 = (-1 : K)) :
     orderOf c = 4 ∧
-      (paperHyperbolicPair (K := K) (splitE1 c) (splitE2 c) ∧
-        LinearIndependent K ![splitE1 c, splitE2 c]) ∧
       (∀ k : ℕ,
         (c • (1 : Matrix (Fin k) (Fin k) K)) *
             (c • (1 : Matrix (Fin k) (Fin k) K)).transpose =
@@ -165,8 +163,6 @@ theorem paper_split_consequences_exact
       (∀ a : K, ∃ x y : K,
         x - c * y = 1 ∧ x + c * y = a ∧ x ^ 2 + y ^ 2 = a) := by
   exact ⟨root_neg_one_orderOf c hc,
-    ⟨splitE1_splitE2_hyperbolicPair c hc,
-      splitE1_splitE2_linearIndependent c hc⟩,
     fun _ => scalar_identity_mul_transpose c hc,
     fun a => exists_norm_pair_with_paper_factors a c hc⟩
 

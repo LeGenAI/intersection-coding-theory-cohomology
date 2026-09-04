@@ -143,27 +143,27 @@ def forcedPivotDiagonal {k r : ℕ} (c : K)
   c / 2 * (1 + terminalInner ell i i)
 
 /-- Pivot coefficients in the minimal paper parametrization.  Only the
-off-diagonal values of `b` are used; the diagonal is forced by `ell`. -/
+off-diagonal values of `Q` are used; the diagonal is forced by `ell`. -/
 def paperPivotCoefficients {k r : ℕ} (c : K)
-    (b : Fin k → Fin k → K)
+    (Q : Fin k → Fin k → K)
     (ell : Fin k → Fin r → SplitBlock K) : Fin k → Fin k → K :=
-  fun i j => if i = j then forcedPivotDiagonal c ell i else b i j
+  fun i j => if i = j then forcedPivotDiagonal c ell i else Q i j
 
 /-- The universal rank-boxed rows in the paper parametrization
-`G(c;b,ell,D)`. -/
+`G(c;Q,ell,D)`. -/
 def paperRankBoxedRows {k r : ℕ} (c : K)
-    (b : Fin k → Fin k → K)
+    (Q : Fin k → Fin k → K)
     (ell : Fin k → Fin r → SplitBlock K)
     (D : Fin r → Fin r → K) :
     RankBoxIndex k r → RankBoxRow K k r :=
-  determinedRankBoxedRows c (paperPivotCoefficients c b ell)
+  determinedRankBoxedRows c (paperPivotCoefficients c Q ell)
     (terminalFirst ell) (terminalDefect c ell) D
 
 /-- The sole Gram condition in the minimal paper parametrization. -/
 def PaperOffDiagonalRelations {k r : ℕ} (c : K)
-    (b : Fin k → Fin k → K)
+    (Q : Fin k → Fin k → K)
     (ell : Fin k → Fin r → SplitBlock K) : Prop :=
-  ∀ i j, i ≠ j → c * (b i j + b j i) + terminalInner ell i j = 0
+  ∀ i j, i ≠ j → c * (Q i j + Q j i) + terminalInner ell i j = 0
 
 /-- The pivot--pivot Gram relation.  Under `c² = -1` it is exactly
 

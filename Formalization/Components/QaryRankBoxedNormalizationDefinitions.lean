@@ -80,7 +80,7 @@ def relabelBlockCode {ι κ : Type*} (σ : ι ≃ κ)
   Submodule.map (blockRelabelLinearEquiv (K := K) σ).toLinearMap C
 
 /-- Exact universal rank-`r` boxed normal-form goal in the minimal paper
-parametrization.  The inputs are only the off-diagonal coefficients `b`, the
+parametrization.  The inputs are only the off-diagonal coefficients `Q`, the
 terminal block-rows `ell`, and the nonsingular terminal core `D`. -/
 def HasQaryRankBoxedNormalForm {n : ℕ} (c : K)
     (C : Submodule K (QaryBlockRow K (Fin n))) : Prop :=
@@ -88,12 +88,12 @@ def HasQaryRankBoxedNormalForm {n : ℕ} (c : K)
     r = Module.finrank K ↥(C ⊓ qaryIsotropicLineCode (K := K) c) ∧
     k + r = n ∧
     ∃ (σ : RankBoxIndex k r ≃ Fin n)
-      (b : Fin k → Fin k → K)
+      (Q : Fin k → Fin k → K)
       (ell : Fin k → Fin r → SplitBlock K)
       (D : Fin r → Fin r → K),
       RankBoxCoreFullRank D ∧
-      PaperOffDiagonalRelations c b ell ∧
+      PaperOffDiagonalRelations c Q ell ∧
       relabelBlockCode (K := K) σ C =
-        rankBoxedRowSpace (paperRankBoxedRows c b ell D)
+        rankBoxedRowSpace (paperRankBoxedRows c Q ell D)
 
 end BuildingUpFormalization.Components.QaryRankBoxedNormalization

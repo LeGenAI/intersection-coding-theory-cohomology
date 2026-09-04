@@ -10,8 +10,9 @@ in the ignored `.internal/` workspace and are not part of this artifact.
 
 ## Contents
 
-- `paper.tex`, `paper.pdf`, `AFM_buildingup_paper_v3.pdf`: revision manuscript.
-- `AFM_buildingup_response_to_referee_v2.pdf`: response letter.
+- `paper.tex`, `paper.pdf`, `AFM_buildingup_paper_v5.tex`,
+  `AFM_buildingup_paper_v5.pdf`: current revision manuscript.
+- `AFM_buildingup_response_to_referee_v4.pdf`: current response letter.
 - `Formalization/Components/`: paper-facing definitions and completed proofs.
 - `Formalization/Sections/`: section-level Lean entry points.
 - `Formalization/Verification/Comparator/`: exactly 19 independent
