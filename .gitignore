@@ -8,7 +8,9 @@
 .local_*.log
 __pycache__/
 
-# LaTeX intermediates; paper.pdf and generated application data are versioned
+# Manuscript files and LaTeX intermediates
+*.pdf
+*.tex
 *.aux
 *.log
 *.out

@@ -150,15 +150,14 @@ def main():
                                   "comparator/verify_manuscript.py"]}
     example_root = ROOT / "Formalization/Verification/Examples"
     inputs |= {example_root / name for name in [
-        "applications.json", "applications_data.tex", "applications_results.json",
+        "applications.json", "applications_results.json",
         "check_applications.py", "check_gf13_repeated_lineage.py",
         "gf13_repeated_lineage.json", "gf13_repeated_lineage.m",
-        "gf13_repeated_lineage.receipt.txt", "gf13_repeated_lineage_data.tex",
+        "gf13_repeated_lineage.receipt.txt",
         "gf13_repeated_lineage_results.json", "universal_display.py",
         "certificates/gf5-06.json", "certificates/gf5-08.json",
         "certificates/gf13-repeated-lineage.json",
     ]}
-    inputs.add(ROOT / "paper.tex")
     hashes = {str(p.relative_to(ROOT)): sha(p) for p in sorted(inputs)}
     out = Path(args.output).resolve()
     out.mkdir(parents=True, exist_ok=False)

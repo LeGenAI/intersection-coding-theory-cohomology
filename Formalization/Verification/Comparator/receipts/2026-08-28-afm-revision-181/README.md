@@ -17,3 +17,8 @@ snapshot on 2026-08-28.
 hashes, step exit codes, log hashes, and every axiom report. The 19
 `comparator-*.log` files end with both default-kernel acceptance and
 `Your solution is okay!`.
+
+The replay data records the 2026-08-28 snapshot. Its input manifest
+includes the manuscript and generated TeX files that were removed from the
+current evidence-only tree; the retained Lean proofs, JSON certificates, and
+replay logs remain the verification evidence.

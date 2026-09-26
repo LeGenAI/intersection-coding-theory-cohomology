@@ -1,7 +1,10 @@
 # Building-up constructions of self-dual codes
 
-Revision artifact for *Formalizing building-up construction of self-dual
+Revision artifact for *Formalizing building-up constructions of self-dual
 codes through isotropic lines in Lean*.
+
+Paper: [arXiv:2604.08485](https://arxiv.org/abs/2604.08485). This repository
+contains the formal proofs, computational certificates, and replay records.
 
 The public tree follows the focused AFM revision: binary building-up, the
 split q-ary extension, and the universal rank-one normal form. Reconstruction
@@ -10,15 +13,14 @@ in the ignored `.internal/` workspace and are not part of this artifact.
 
 ## Contents
 
-- `paper.tex`, `paper.pdf`, `AFM_buildingup_paper_v5.tex`,
-  `AFM_buildingup_paper_v5.pdf`: current revision manuscript.
-- `AFM_buildingup_response_to_referee_v4.pdf`: current response letter.
 - `Formalization/Components/`: paper-facing definitions and completed proofs.
 - `Formalization/Sections/`: section-level Lean entry points.
 - `Formalization/Verification/Comparator/`: exactly 19 independent
   Challenge/Solution suites containing 181 declarations.
 - `Formalization/Verification/Examples/`: the recursive GF(5) pair and the
   complete GF(13) repeated realization used in Section 4.
+- `Formalization/Verification/Comparator/receipts/`: the dated Linux replay and
+  axiom audit.
 - `ARTIFACT_MAP.md`, `BUILD.md`: theorem map and reproducibility instructions.
 
 Lean is pinned to `v4.29.0-rc6` and Mathlib to
@@ -35,6 +37,6 @@ lake build
 python3 comparator/verify_manuscript.py --output tmp/local-check
 ```
 
-See [BUILD.md](BUILD.md) for the pinned Linux Comparator replay and PDF build,
+See [BUILD.md](BUILD.md) for the pinned Linux Comparator replay,
 and [RESULTS.md](Formalization/Verification/Comparator/RESULTS.md) for the
 dated verification record.
