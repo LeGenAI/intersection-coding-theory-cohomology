@@ -1,33 +1,33 @@
-# Building-up constructions of self-dual codes
+# Building-up self-dual codes
 
-Revision artifact for *Formalizing building-up constructions of self-dual
-codes through isotropic lines in Lean*.
+Formal proofs and reproducible computations for
+[*Formalizing building-up constructions of self-dual codes through isotropic lines in Lean*](https://arxiv.org/abs/2604.08485).
 
-Paper: [arXiv:2604.08485](https://arxiv.org/abs/2604.08485). This repository
-contains the formal proofs, computational certificates, and replay records.
+<p align="center">
+  <img src="assets/gf5-building-up.gif" width="960" alt="The paper's exact GF(5) block matrices grow from a self-dual [4,2,2] code to [6,3,4] and [8,4,4]; each new matrix retains its parent in the lower-right blocks.">
+</p>
 
-The public tree follows the focused AFM revision: binary building-up, the
-split q-ary extension, and the universal rank-one normal form. Reconstruction
-drafts and the separate arithmetic/four-coordinate follow-up are retained only
-in the ignored `.internal/` workspace and are not part of this artifact.
+<p align="center"><sub>The actual matrices from Propositions 4.1–4.2, animated one coordinate pair at a time. <a href="assets/render_gf5_chain.py">Animation source</a>.</sub></p>
 
-## Contents
+## Read the construction
 
-- `Formalization/Components/`: paper-facing definitions and completed proofs.
-- `Formalization/Sections/`: section-level Lean entry points.
-- `Formalization/Verification/Comparator/`: exactly 19 independent
-  Challenge/Solution suites containing 181 declarations.
-- `Formalization/Verification/Examples/`: the recursive GF(5) pair and the
-  complete GF(13) repeated realization used in Section 4.
-- `Formalization/Verification/Comparator/receipts/`: the dated Linux replay and
-  axiom audit.
-- `ARTIFACT_MAP.md`, `BUILD.md`: theorem map and reproducibility instructions.
+Over $\mathbb F_5$, the choice $c=2$ satisfies $c^2=-1$. The paper's split boxed construction adds **one generator row and two coordinates** at each step. In the animation, each cell is a pair of field elements. The lower-right blocks stay exactly the same:
 
-Lean is pinned to `v4.29.0-rc6` and Mathlib to
-`1f3cdaa7a7f82a2e521d285b11e261110e1e1962`. Production dependencies contain
-no `sorry`, `admit`, user `axiom`, `sorryAx`, `native_decide`, or
-`implemented_by`. The 181 exact goals use only `propext`, `Quot.sound`, and
-`Classical.choice`; NanoDA is disabled.
+$$
+M_2\;[4,2,2]
+\quad\longrightarrow\quad
+M_3\;[6,3,4]
+\quad\longrightarrow\quad
+M_4\;[8,4,4].
+$$
+
+Delete the first block row and first coordinate pair of $M_4$ to recover $M_3$; repeat to recover $M_2$. The [example data](Formalization/Verification/Examples/applications.json), [checked matrices and weight distributions](Formalization/Verification/Examples/applications_results.json), and [verification script](Formalization/Verification/Examples/check_applications.py) make this chain reproducible.
+
+## Explore the evidence
+
+- **Formal proofs:** [section entry points](Formalization/Sections/All.lean) and the [paper-to-Lean map](ARTIFACT_MAP.md).
+- **Independent replay:** [19 Challenge/Solution suites, 181 declarations, and their Linux receipt](Formalization/Verification/Comparator/RESULTS.md).
+- **Finite examples:** [GF(5) and GF(13) checks](Formalization/Verification/Examples/README.md), including the [repeated GF(13) certificate](Formalization/Verification/Examples/certificates/gf13-repeated-lineage.json).
 
 ## Reproduce
 
@@ -37,6 +37,4 @@ lake build
 python3 comparator/verify_manuscript.py --output tmp/local-check
 ```
 
-See [BUILD.md](BUILD.md) for the pinned Linux Comparator replay,
-and [RESULTS.md](Formalization/Verification/Comparator/RESULTS.md) for the
-dated verification record.
+See [BUILD.md](BUILD.md) for the pinned environment and full Comparator replay.
