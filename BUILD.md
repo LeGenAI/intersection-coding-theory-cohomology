@@ -5,7 +5,6 @@
 - Lean `v4.29.0-rc6`
 - Mathlib `1f3cdaa7a7f82a2e521d285b11e261110e1e1962`
 - Python 3.9 or newer, standard library only
-- Tectonic for the PDFs
 
 From a fresh checkout:
 
@@ -57,13 +56,3 @@ python3 comparator/verify_manuscript.py --output linux-check \
 This replays every JSON suite with NanoDA disabled and checks both Comparator's
 sandbox and Lean's default kernel. The output records input, tool, dependency,
 and log hashes plus all 181 axiom reports.
-
-## PDFs
-
-```sh
-tectonic --keep-intermediates --keep-logs paper.tex
-tectonic --keep-intermediates --keep-logs response_to_referee.tex
-```
-
-The current versioned submission copies are `AFM_buildingup_paper_v5.pdf`
-and `AFM_buildingup_response_to_referee_v4.pdf`.
